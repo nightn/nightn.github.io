@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenCV 图像遍历与颜色缩减 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。
+1. 概述图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV 图像遍历与颜色缩减">
+<meta property="og:url" content="http://yoursite.com/2017/01/21/OpenCV 图像遍历与颜色缩减/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。
+1. 概述图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方">
+<meta property="og:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/94760296-file_1490017405620_17ae0.png">
+<meta property="og:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/29406263-file_1490017405477_1ada.png">
+<meta property="og:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/25494428-file_1490017405949_8fda.png">
+<meta property="og:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/79119290-file_1490017405746_14c2e.png">
+<meta property="og:updated_time" content="2017-03-20T14:26:03.442Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenCV 图像遍历与颜色缩减">
+<meta name="twitter:description" content="图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。
+1. 概述图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方">
+<meta name="twitter:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/94760296-file_1490017405620_17ae0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-OpenCV 图像遍历与颜色缩减" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/21/OpenCV 图像遍历与颜色缩减/" class="article-date">
+  <time datetime="2017-01-21T08:32:00.000Z" itemprop="datePublished">2017-01-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OpenCV/">OpenCV</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OpenCV 图像遍历与颜色缩减
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。</p>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a><strong>1. 概述</strong></h2><p>图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。</p>
+<h2 id="2-图像存储方式"><a href="#2-图像存储方式" class="headerlink" title="2. 图像存储方式"></a><strong>2. 图像存储方式</strong></h2><p>在进行下面的论述之前，先对图像矩阵在内存中的存储方式简单介绍。对于单通道灰度图像：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/94760296-file_1490017405620_17ae0.png" alt=""></p>
+<p>而对于多通道图像来说，矩阵中的列会包含多个子列，子列数与通道数相等，如 BGR 颜色模型的矩阵为：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/29406263-file_1490017405477_1ada.png" alt=""></p>
+<h2 id="3-颜色缩减"><a href="#3-颜色缩减" class="headerlink" title="3. 颜色缩减"></a><strong>3. 颜色缩减</strong></h2><p>何谓颜色缩减？对于元素类型为 uchar 的单通道图像矩阵，每个像素点有 256 个灰度值，但是对于三通道图像，每个像素点的颜色种类达 16777216 种（256 的三次方）。如此多的颜色可能会对算法性能造成严重影响，我们往往只需要颜色的一部分，也能满足要求，因此引入了颜色缩减。</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/25494428-file_1490017405949_8fda.png" alt=""></p>
+<p>如上图所示，左侧为颜色缩减前，右侧为颜色缩减后，数字表示灰度值。可以看出，灰度值 92 到 114 映射为 92；115 到 137 映射为 115，以此类推，左侧 164 种颜色缩减为右侧的 7 种颜色。实现方法也很简单：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//color1输入,color2输出 </span></div><div class="line">color2 = (color1 / <span class="number">23</span>) * <span class="number">23</span>;</div></pre></td></tr></table></figure>
+<p>但是，如果直接对图像的每个像素进行上述除法和乘法，这样效率是很低的。一个较好的办法是事先生成一张颜色缩减的查找表，表中缩减前后的值都明确给定，这样遍历图像时，利用查找表直接对相应像素点进行赋值即可。其优势在于只需读取、无需计算。以下代码生成颜色查找表 color_table：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 生成颜色查找表</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color_table;</div><div class="line"><span class="keyword">int</span> width = <span class="number">20</span>;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</div><div class="line">&#123;</div><div class="line">	color_table.push_back(i / width * width);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-图像遍历"><a href="#4-图像遍历" class="headerlink" title="4. 图像遍历"></a><strong>4. 图像遍历</strong></h2><p>有了颜色查找表后，我们便可以对图像进行遍历并对像素点进行颜色缩减了。我们采用了几种不同的图像遍历方法，为了对比它们的效率，采用 OpenCV 提供的两个简单的计时器函数 getTickCount() 和 getTickFrequency(), 它们分别返回 CPU 走过的时钟周期数和 CPU 一秒的时钟周期数。因此，可以这样来计时（单位：秒）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> time_begin = (<span class="keyword">double</span>)getTickCount();</div><div class="line"><span class="comment">// do something</span></div><div class="line"><span class="keyword">double</span> time_end = (<span class="keyword">double</span>)getTickCount();</div><div class="line"><span class="keyword">double</span> time = (time_end - time_begin) / getTickFrequency();</div></pre></td></tr></table></figure>
+<h3 id="4-1-利用指针遍历"><a href="#4-1-利用指针遍历" class="headerlink" title="4.1 利用指针遍历"></a>4.1 利用指针遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceC</span><span class="params">(Mat&amp; I, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color_table)</span></span></div><div class="line">&#123;</div><div class="line">     <span class="comment">//只接收字符型矩阵</span></div><div class="line">     CV_Assert(I.depth() != <span class="keyword">sizeof</span>(uchar));</div><div class="line">     <span class="keyword">int</span> channels = I.channels(); <span class="comment">//获取图像通道数</span></div><div class="line">     <span class="keyword">int</span> row = I.rows * channels;</div><div class="line">     <span class="keyword">int</span> col = I.cols;</div><div class="line">     uchar* p;</div><div class="line">     <span class="keyword">if</span> (I.isContinuous()) <span class="comment">//判断像素是否连续存储</span></div><div class="line">     &#123;</div><div class="line">           col *= row;</div><div class="line">           row = <span class="number">1</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)</div><div class="line">     &#123;</div><div class="line">           p = I.ptr&lt;uchar&gt;(i);</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)</div><div class="line">           &#123;</div><div class="line">                p[j] = color_table[p[j]];</div><div class="line">           &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> I;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>颜色缩减结果（根据查找表的width设置缩减的程度，在此 width = 20）</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79119290-file_1490017405746_14c2e.png" alt=""></p>
+<p>算法执行时间为 0.0134007 秒。</p>
+<h3 id="4-2-利用迭代器遍历"><a href="#4-2-利用迭代器遍历" class="headerlink" title="4.2 利用迭代器遍历"></a>4.2 利用迭代器遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceIterator</span><span class="params">(Mat&amp; I, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color_table)</span></span></div><div class="line">&#123;</div><div class="line">     <span class="comment">//只接收字符型矩阵</span></div><div class="line">     CV_Assert(I.depth() != <span class="keyword">sizeof</span>(uchar));</div><div class="line">     <span class="keyword">int</span> channels = I.channels();</div><div class="line">     <span class="keyword">switch</span> (channels)</div><div class="line">     &#123;</div><div class="line">     <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">     &#123;</div><div class="line">           MatIterator_&lt;uchar&gt; it, end;</div><div class="line">           <span class="keyword">for</span> (it = I.begin&lt;uchar&gt;(), end = I.end&lt;uchar&gt;(); it != end; it++)</div><div class="line">                *it = color_table[*it];</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">     &#123;</div><div class="line">           MatIterator_&lt;Vec3b&gt; it, end;</div><div class="line">           <span class="keyword">for</span> (it = I.begin&lt;Vec3b&gt;(), end = I.end&lt;Vec3b&gt;(); it != end; it++)</div><div class="line">           &#123;</div><div class="line">                (*it)[<span class="number">0</span>] = color_table[(*it)[<span class="number">0</span>]];</div><div class="line">                (*it)[<span class="number">1</span>] = color_table[(*it)[<span class="number">1</span>]];</div><div class="line">                (*it)[<span class="number">2</span>] = color_table[(*it)[<span class="number">2</span>]];</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> I;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>算法执行时间 0.0693951 秒。用迭代器遍历速度稍慢，但是更加安全。上述代码中，我们首先对图像的通道数进行判断，通道数为 1 时，直接对灰度值赋值；对于三通道彩色图像，每个像素可以看做一个包含三个 uchar 元素的 vector, 在 OpenCV 中用 Vec3b 命名。对于彩色图像，如果我们仅仅使用 uchar 而不是 Vec3b 迭代的话就只能获得蓝色通道的值（BGR模型中的第一个通道）。</p>
+<h3 id="4-3-通过相关返回值的-On-the-fly-地址遍历"><a href="#4-3-通过相关返回值的-On-the-fly-地址遍历" class="headerlink" title="4.3 通过相关返回值的 On-the-fly 地址遍历"></a>4.3 通过相关返回值的 On-the-fly 地址遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceRadomAccess</span><span class="params">(Mat&amp; I, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color_table)</span></span></div><div class="line">&#123;</div><div class="line">     <span class="comment">//只接收字符型矩阵</span></div><div class="line">     CV_Assert(I.depth() != <span class="keyword">sizeof</span>(uchar));</div><div class="line">     <span class="keyword">int</span> channels = I.channels();</div><div class="line">     <span class="keyword">switch</span> (channels)</div><div class="line">     &#123;</div><div class="line">     <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">     &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; I.rows; i++)</div><div class="line">           &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; I.cols; j++)</div><div class="line">                &#123;</div><div class="line">                      I.at&lt;uchar&gt;(i, j) = color_table[I.at&lt;uchar&gt;(i, j)];</div><div class="line">                &#125;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">     &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; I.rows; i++)</div><div class="line">           &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; I.cols; j++)</div><div class="line">                &#123;</div><div class="line">                      I.at&lt;Vec3b&gt;(i, j)[<span class="number">0</span>] = color_table[I.at&lt;Vec3b&gt;(i, j)[<span class="number">0</span>]];</div><div class="line">                      I.at&lt;Vec3b&gt;(i, j)[<span class="number">1</span>] = color_table[I.at&lt;Vec3b&gt;(i, j)[<span class="number">1</span>]];</div><div class="line">                      I.at&lt;Vec3b&gt;(i, j)[<span class="number">2</span>] = color_table[I.at&lt;Vec3b&gt;(i, j)[<span class="number">2</span>]];</div><div class="line">                &#125;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> I;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过 at() 函数获取并更改图像中的元素。事实上，这种方法并不推荐呗用来进行图像扫描。</p>
+<h3 id="4-4-核心函数-LUT-The-Core-Function"><a href="#4-4-核心函数-LUT-The-Core-Function" class="headerlink" title="4.4 核心函数 LUT (The Core Function)"></a>4.4 核心函数 LUT (The Core Function)</h3><p>核心函数 LUT 是最被推荐用于实现批量图像元素查找和更改的方法，它并不需要你自己去扫描图像。我们先建立一个查找表：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat <span class="title">table</span><span class="params">(<span class="number">1</span>, <span class="number">256</span>, CV_8U)</span></span>;</div><div class="line">uchar* p = table.data;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</div><div class="line">	p[i] = color_table[i];</div></pre></td></tr></table></figure>
+<p>然后调用函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//image是输入，image_reduce是输出</span></div><div class="line">LUT(image, table, image_reduce);</div></pre></td></tr></table></figure>
+<h3 id="4-5-结论"><a href="#4-5-结论" class="headerlink" title="4.5 结论"></a>4.5 结论</h3><p>尽量使用 OpenCV 内置函数，调用 LUT 函数可以获得最快的速度，这是因为 OpenCV 库可以通过英特尔线程架构启用多线程，当然，迭代器也是一个不错的选择，优点是安全，缺点是速度较慢，on-the-fly方法不推荐使用。</p>
+<hr>
+<p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/how_to_scan_images/how_to_scan_images.html#howtoscanimagesopencv" target="_blank" rel="external">More</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/21/OpenCV 图像遍历与颜色缩减/" data-id="cj0jpd4zm0007bkf55zl1zopv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器视觉/">机器视觉</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/22/计算机系统漫游/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          计算机系统漫游
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/21/OpenCV Mat 介绍/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">OpenCV Mat 介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Systems/">Computer Systems</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Systems/">Computer Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adb-shell/">adb shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器视觉/">机器视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Computer-Systems/" style="font-size: 10px;">Computer Systems</a> <a href="/tags/OpenCV/" style="font-size: 20px;">OpenCV</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/adb-shell/" style="font-size: 10px;">adb shell</a> <a href="/tags/机器视觉/" style="font-size: 20px;">机器视觉</a> <a href="/tags/计算机基础/" style="font-size: 10px;">计算机基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/21/Android Device Monitor 文件管理的常见问题/">Android Device Monitor 文件管理的常见问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/22/计算机系统漫游/">计算机系统漫游</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/21/OpenCV 图像遍历与颜色缩减/">OpenCV 图像遍历与颜色缩减</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/21/OpenCV Mat 介绍/">OpenCV Mat 介绍</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

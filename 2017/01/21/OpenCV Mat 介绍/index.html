@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenCV Mat 介绍 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 为什么要引入 Mat 图像容器？在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？
+2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV Mat 介绍">
+<meta property="og:url" content="http://yoursite.com/2017/01/21/OpenCV Mat 介绍/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. 为什么要引入 Mat 图像容器？在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？
+2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内">
+<meta property="og:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/61446613-file_1490016922912_2080.png">
+<meta property="og:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/75183952-file_1490016923037_12546.png">
+<meta property="og:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/79319227-file_1490016923144_842f.png">
+<meta property="og:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/21687811-file_1490016923270_7f1.png">
+<meta property="og:updated_time" content="2017-03-20T14:25:44.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenCV Mat 介绍">
+<meta name="twitter:description" content="1. 为什么要引入 Mat 图像容器？在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？
+2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内">
+<meta name="twitter:image" content="http://on2kkr82s.bkt.clouddn.com/17-3-20/61446613-file_1490016922912_2080.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-OpenCV Mat 介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/21/OpenCV Mat 介绍/" class="article-date">
+  <time datetime="2017-01-21T08:19:00.000Z" itemprop="datePublished">2017-01-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OpenCV/">OpenCV</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OpenCV Mat 介绍
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-为什么要引入-Mat-图像容器？"><a href="#1-为什么要引入-Mat-图像容器？" class="headerlink" title="1. 为什么要引入 Mat 图像容器？"></a>1. 为什么要引入 Mat 图像容器？</h2><p>在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？</p>
+<p>2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内存，一旦代码庞大，这便变得非常麻烦且容易出错。OpenCV 2.0 引入新的 C++ 接口，利用个自动内存管理给出了解决方案。</p>
+<h2 id="2-Mat-介绍"><a href="#2-Mat-介绍" class="headerlink" title="2. Mat 介绍"></a>2. Mat 介绍</h2><p>Mat 作为一个类，数据包括两个部分：矩阵头和指向像素矩阵的指针。</p>
+<table>
+<thead>
+<tr>
+<th>数据部分</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>矩阵头</td>
+<td>描述像素矩阵，主要包括矩阵的尺寸、存储方式、存储地址等。矩阵头的大小固定。</td>
+</tr>
+<tr>
+<td>矩阵指针</td>
+<td>矩阵指针所指对象代表了图像本身，其尺寸会根据图像的不同而不同。像素矩阵一般比矩阵头大几个数量级，因此，拷贝图像会产生很大的计算量。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-赋值和拷贝构造函数只拷贝信息头"><a href="#2-1-赋值和拷贝构造函数只拷贝信息头" class="headerlink" title="2.1 赋值和拷贝构造函数只拷贝信息头"></a>2.1 赋值和拷贝构造函数只拷贝信息头</h3><p>为了避免拷贝图像的巨大计算量，OpenCV 采用引用计数机制。即每个 Mat 对象有其自己的矩阵头，但可以共享同一个图像矩阵（即 Mat 对象的矩阵指针指向同一地址）。在 Mat 对象赋值及拷贝构造函数中，只拷贝矩阵头和矩阵指针，不拷贝矩阵本身，这样可以减少很多计算量。</p>
+<p>这样我们会看到，同一个图像矩阵，可能属于多个 Mat 对象，那么当不需要图像矩阵时，哪个 Mat 对象负责清理它呢？正如 C++ 语法中的智能指针，Mat 规定最后一个使用矩阵的对象负责清理，这是根据矩阵的引用计数进行判断的，当引用计数为 0 时，矩阵会被清理。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Mat A; <span class="comment">// A 的引用计数为0</span></div><div class="line">A = imread(<span class="string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span>, CV_LOAD_IMAGE_COLOR);</div><div class="line"><span class="function">Mat <span class="title">B</span><span class="params">(A)</span></span>;  <span class="comment">// A 的引用计数+1，为 2</span></div><div class="line">Mat C = A;  <span class="comment">// A 的引用计数+1，为 3</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"refcount of A: "</span> &lt;&lt; *A.refcount &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">Mat D = imread(<span class="string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span>, CV_LOAD_IMAGE_COLOR);</div><div class="line">C = D; <span class="comment">// C, D 指向同一矩阵，A 的引用计数-1，为2</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"refcount of A: "</span> &lt;&lt; *A.refcount &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"refcount of D: "</span> &lt;&lt; *D.refcount &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61446613-file_1490016922912_2080.png" alt=""></p>
+<h3 id="2-2-使用-clone-或-copyTo-拷贝图像矩阵"><a href="#2-2-使用-clone-或-copyTo-拷贝图像矩阵" class="headerlink" title="2.2 使用 clone() 或 copyTo() 拷贝图像矩阵"></a>2.2 使用 clone() 或 copyTo() 拷贝图像矩阵</h3><p>那么有时候我们的确需要拷贝矩阵本身呢？可以用 Mat 的成员函数 clone() 或者 copyTo()。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Mat im1 =imread(<span class="string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span>,</div><div class="line">CV_LOAD_IMAGE_COLOR);</div><div class="line">Mat im2 = im1.clone(); <span class="comment">//矩阵内容拷贝</span></div><div class="line">Mat im3;</div><div class="line">im1.copyTo(im3);  <span class="comment">//矩阵内容拷贝</span></div></pre></td></tr></table></figure>
+<p>上面的代码中，im1, im2, im3的引用计数都为1，因为它们并没有共享底层矩阵。</p>
+<h2 id="3-使用-Mat"><a href="#3-使用-Mat" class="headerlink" title="3. 使用 Mat"></a>3. 使用 Mat</h2><h3 id="3-1-创建-Mat"><a href="#3-1-创建-Mat" class="headerlink" title="3.1 创建 Mat"></a>3.1 创建 Mat</h3><h4 id="通过构造函数创建："><a href="#通过构造函数创建：" class="headerlink" title="通过构造函数创建："></a>通过构造函数创建：</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mat M(2, 2, CV_8UC3, Scalar(0, 0, 255));</div><div class="line">cout &lt;&lt; "M = " &lt;&lt; endl &lt;&lt; " " &lt;&lt; M &lt;&lt; endl;</div></pre></td></tr></table></figure>
+<p>上述程序创建了 2X2 的像素图像，每个像素有三个通道，CV_8UC3 表示使用 8 位 unsigned char 表示三通道，用 Scalar 进行初始化，值得注意是的，Mat 三通道依次是 BGR，而不是我们熟知的 RGB。OpenCV 也重载了 &lt;&lt; 运算符，因此，直接可以用标准输出对 Mat 对象进行输出，运行结果为：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/75183952-file_1490016923037_12546.png" alt=""></p>
+<h4 id="通过-create-创建："><a href="#通过-create-创建：" class="headerlink" title="通过 create() 创建："></a>通过 create() 创建：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Mat M;</div><div class="line"><span class="comment">//create不能指定初始值, CV_8UC(4)为自定义通道数</span></div><div class="line">M.create(<span class="number">2</span>, <span class="number">2</span>, CV_8UC(<span class="number">4</span>)); </div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"M = "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; M &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79319227-file_1490016923144_842f.png" alt=""></p>
+<p>可以看出，create 并不能设定初始值，元素默认初始化为 205。另外，我们可以使用 CV_8UC(n)自定义n维通道。</p>
+<h4 id="静态函数-zeros-ones-eyes"><a href="#静态函数-zeros-ones-eyes" class="headerlink" title="静态函数 zeros(), ones(), eyes()"></a>静态函数 zeros(), ones(), eyes()</h4><table>
+<thead>
+<tr>
+<th>静态函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zeros()</td>
+<td>零矩阵</td>
+</tr>
+<tr>
+<td>ones()</td>
+<td>全 1 矩阵</td>
+</tr>
+<tr>
+<td>eyes()</td>
+<td>单位矩阵</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-2-格式化输出"><a href="#3-2-格式化输出" class="headerlink" title="3.2 格式化输出"></a>3.2 格式化输出</h3><p>OpenCV 支持多种输出方式，如默认方式、Python 格式、CSV 格式，Numpy 格式以及 C 语言格式。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat <span class="title">M</span><span class="params">(<span class="number">2</span>, <span class="number">3</span>, CV_8UC3)</span></span>;</div><div class="line">randu(M, Scalar::all(<span class="number">0</span>), Scalar::all(<span class="number">255</span>));</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Default fomart: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; M &lt;&lt;<span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Python format: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; format(M, <span class="string">"python"</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"CSV format: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; format(M, <span class="string">"csv"</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Numpy format: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; format(M, <span class="string">"numpy"</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"C format: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; format(M, <span class="string">"c"</span>) &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/21687811-file_1490016923270_7f1.png" alt=""></p>
+<p>其中 randu() 为 M 的元素随机赋值，范围为指定的 0 - 255。</p>
+<hr>
+<p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/mat%20-%20the%20basic%20image%20container/mat%20-%20the%20basic%20image%20container.html#matthebasicimagecontainer" target="_blank" rel="external">More</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/21/OpenCV Mat 介绍/" data-id="cj0jpd4zd0003bkf528c0vqsq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器视觉/">机器视觉</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/21/OpenCV 图像遍历与颜色缩减/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          OpenCV 图像遍历与颜色缩减
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/21/OpenCV 读取、修改、保存图像/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">OpenCV 读取、修改、保存图像</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Systems/">Computer Systems</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Systems/">Computer Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adb-shell/">adb shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器视觉/">机器视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Computer-Systems/" style="font-size: 10px;">Computer Systems</a> <a href="/tags/OpenCV/" style="font-size: 20px;">OpenCV</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/adb-shell/" style="font-size: 10px;">adb shell</a> <a href="/tags/机器视觉/" style="font-size: 20px;">机器视觉</a> <a href="/tags/计算机基础/" style="font-size: 10px;">计算机基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/21/Android Device Monitor 文件管理的常见问题/">Android Device Monitor 文件管理的常见问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/22/计算机系统漫游/">计算机系统漫游</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/21/OpenCV 图像遍历与颜色缩减/">OpenCV 图像遍历与颜色缩减</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/21/OpenCV Mat 介绍/">OpenCV Mat 介绍</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
