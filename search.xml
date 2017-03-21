@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[Android Device Monitor 文件管理的常见问题]]></title>
-      <url>http://yoursite.com/2017/03/21/Android%20Device%20Monitor%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
+      <url>http://nightn.com/2017/03/21/Android%20Device%20Monitor%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<p>Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。</p>
 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>最近在看《第一行代码》（第二版）中关于数据存储方案的介绍。数据的状态分为两种：瞬时状态和持久状态，一般保存在内存中的数据随着活动的关闭，数据也就销毁了，如果我们想保存这些数据，该怎么办呢？书中介绍了三种实现数据持久化的方法，分别是：文件存储，SharedPreference 存储以及数据库存储。</p>
 <p>在学习第一种数据持久化方法文件存储的时候，我们通过 Context 类中的 openFileOutput() 方法创建一个指定了保存路径的 FileOutputStream 对象 out，然后用这个 out 对象去创建一个 OutputStreamWriter 对象，之后再用这个 OutputStreamWriter 对象创建一个 BufferedWriter 对象 writer，我们就是通过这个 writer 的 write() 方法向文件输出流写入我们想要保存的数据的。文件写入数据之后默认保存在 /data/data/(package name)/files 目录下。我们可以通过 Android Studio 中的 Android Device Monitor 去查看，Android Device Monitor 的打开方法如下所示。</p>
@@ -83,7 +83,7 @@
     
     <entry>
       <title><![CDATA[Hello World]]></title>
-      <url>http://yoursite.com/2017/03/21/hello-world/</url>
+      <url>http://nightn.com/2017/03/21/hello-world/</url>
       <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
 </code></pre>
@@ -104,7 +104,7 @@
     
     <entry>
       <title><![CDATA[计算机系统漫游]]></title>
-      <url>http://yoursite.com/2017/01/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
+      <url>http://nightn.com/2017/01/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
       <content type="html"><![CDATA[<p>计算机系统是由硬件和软件系统组成的，它们共同工作来运行应用程序。作为程序员，也需要了解这些组件是如何工作的，以及这些组件是如何影响程序的正确性和性能的。我们从最简单的 hello 程序开始，通过跟踪 hello 程序的生命周期（从被创建，到运行，输出，然终止），来开始对计算机系统的学习。</p>
 <h2 id="1-hello-程序创建"><a href="#1-hello-程序创建" class="headerlink" title="1. hello 程序创建"></a><strong>1. hello 程序创建</strong></h2><p>hello.c</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
@@ -221,7 +221,7 @@
     
     <entry>
       <title><![CDATA[OpenCV 图像遍历与颜色缩减]]></title>
-      <url>http://yoursite.com/2017/01/21/OpenCV%20%E5%9B%BE%E5%83%8F%E9%81%8D%E5%8E%86%E4%B8%8E%E9%A2%9C%E8%89%B2%E7%BC%A9%E5%87%8F/</url>
+      <url>http://nightn.com/2017/01/21/OpenCV%20%E5%9B%BE%E5%83%8F%E9%81%8D%E5%8E%86%E4%B8%8E%E9%A2%9C%E8%89%B2%E7%BC%A9%E5%87%8F/</url>
       <content type="html"><![CDATA[<p>图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。</p>
 <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a><strong>1. 概述</strong></h2><p>图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。</p>
 <h2 id="2-图像存储方式"><a href="#2-图像存储方式" class="headerlink" title="2. 图像存储方式"></a><strong>2. 图像存储方式</strong></h2><p>在进行下面的论述之前，先对图像矩阵在内存中的存储方式简单介绍。对于单通道灰度图像：</p>
@@ -376,7 +376,7 @@ uchar<span class="token operator">*</span> p <span class="token operator">=</spa
     
     <entry>
       <title><![CDATA[OpenCV Mat 介绍]]></title>
-      <url>http://yoursite.com/2017/01/21/OpenCV%20Mat%20%E4%BB%8B%E7%BB%8D/</url>
+      <url>http://nightn.com/2017/01/21/OpenCV%20Mat%20%E4%BB%8B%E7%BB%8D/</url>
       <content type="html"><![CDATA[<h2 id="1-为什么要引入-Mat-图像容器？"><a href="#1-为什么要引入-Mat-图像容器？" class="headerlink" title="1. 为什么要引入 Mat 图像容器？"></a>1. 为什么要引入 Mat 图像容器？</h2><p>在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？</p>
 <p>2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内存，一旦代码庞大，这便变得非常麻烦且容易出错。OpenCV 2.0 引入新的 C++ 接口，利用个自动内存管理给出了解决方案。</p>
 <h2 id="2-Mat-介绍"><a href="#2-Mat-介绍" class="headerlink" title="2. Mat 介绍"></a>2. Mat 介绍</h2><p>Mat 作为一个类，数据包括两个部分：矩阵头和指向像素矩阵的指针。</p>
@@ -490,7 +490,7 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C 
     
     <entry>
       <title><![CDATA[OpenCV 读取、修改、保存图像]]></title>
-      <url>http://yoursite.com/2017/01/21/OpenCV%20%E8%AF%BB%E5%8F%96%E3%80%81%E4%BF%AE%E6%94%B9%E3%80%81%E4%BF%9D%E5%AD%98%E5%9B%BE%E5%83%8F/</url>
+      <url>http://nightn.com/2017/01/21/OpenCV%20%E8%AF%BB%E5%8F%96%E3%80%81%E4%BF%AE%E6%94%B9%E3%80%81%E4%BF%9D%E5%AD%98%E5%9B%BE%E5%83%8F/</url>
       <content type="html"><![CDATA[<p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取，用 imwrite 进行图像保存，用 imshow 进行图像显示。</p>
 <h2 id="1-读取图像"><a href="#1-读取图像" class="headerlink" title="1. 读取图像"></a>1. 读取图像</h2><p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取：</p>
 <pre class=" language-cpp"><code class="language-cpp">Mat image<span class="token punctuation">;</span>
@@ -529,7 +529,7 @@ image <span class="token operator">=</span> <span class="token function">imread<
     
     <entry>
       <title><![CDATA[Qt主界面获取对话框数据]]></title>
-      <url>http://yoursite.com/2016/12/23/Qt%E4%B8%BB%E7%95%8C%E9%9D%A2%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%95%B0%E6%8D%AE/</url>
+      <url>http://nightn.com/2016/12/23/Qt%E4%B8%BB%E7%95%8C%E9%9D%A2%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%95%B0%E6%8D%AE/</url>
       <content type="html"><![CDATA[<p>在编写Qt程序的时候，我们常常需要通过对话框来获取用户的输入数据，比如通过文件对话框获取文件的路径，通过颜色对话框获取用户所选择的颜色，这些对话框的类都是Qt帮我们写好了的，调用相应函数就能直接返回用户的输入，比如颜色对话框QColorDialog中有一个静态函数getColor，我们直接调用该函数，便会弹出颜色对话框，等我们选择好颜色并确定，该函数就会返回一个QColor的对象，这个对象就包含了我们之前所选颜色的RGB值了。</p>
 <p>然而，很多时候，我们需要创建自己的对话框，我们不能调用现成函数来获取用户输入，本文将提供两种方法，通过对话框来获取用户输入的案例。在此之前，我们先讨论一下显示对话框的两个函数，一个是show()，一个是exec()。show() 显示的是非模态窗口，不会阻塞程序的线程，因此如果你的对话框是创建在栈上，跳出作用域之后，对象便销毁了，因此你会发现对话框一闪而过；如果你用new关键字将对话框创建在堆上，跳出作用域之后对象不能被销毁，但是建立在堆上需要考虑及时释放内存的问题，以免造成内存泄漏。但是能够正常显示窗口不代表能够很方便地获取数据，show()不会阻塞线程，因此可能用户还没来得及输入数据，就已经执行之后的代码了。解决这个问题需要用到信号槽机制，具体解决方案会在下文详细讲解。exec()显示的是模态窗口，它开启了一个事件循环，会阻塞程序的线程，函数返回之后，我们直接可以获取对话框的数据。下面考虑这两种不同的对话框显示方式，提供两种不同的获取对话框数据的方法。</p>
 <h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a><strong>方法一</strong></h3><p>首先考虑简单的，使用exec()显示对话框。我们定义了一个主界面的类，叫MainWindow,界面包含一个名为btn的按钮（用于跳出对话框）和一个名为label的标签（用于显示从对话框获取的用户输入）；我们还定义一个对话框类，界面包含一个名为lineEdit的单行文本框（用于接收用户输入)，以及确定和取消按钮（这两个按钮是创建对话框的时候自动生成的）。两个界面如下图：</p>
