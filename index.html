@@ -1,732 +1,1069 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
 
+    <!-- Title -->
+    
+    <title>
+        
+        Hexo
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="John Doe">
+    <meta name="description" content="null">
+    <meta name="keywords" content="null">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Hexo">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Hexo">
+    <meta property="og:description" content="null">
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-Android Device Monitor 文件管理的常见问题" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/21/Android Device Monitor 文件管理的常见问题/" class="article-date">
-  <time datetime="2017-03-21T15:36:06.186Z" itemprop="datePublished">2017-03-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android-Studio/">Android Studio</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/21/Android Device Monitor 文件管理的常见问题/">Android Device Monitor 文件管理的常见问题</a>
-    </h1>
-  
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
 
-      </header>
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Index Module -->
+<div class="material-index mdl-grid">
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>最近在看《第一行代码》（第二版）中关于数据存储方案的介绍。数据的状态分为两种：瞬时状态和持久状态，一般保存在内存中的数据随着活动的关闭，数据也就销毁了，如果我们想保存这些数据，该怎么办呢？书中介绍了三种实现数据持久化的方法，分别是：文件存储，SharedPreference 存储以及数据库存储。</p>
-<p>在学习第一种数据持久化方法文件存储的时候，我们通过 Context 类中的 openFileOutput() 方法创建一个指定了保存路径的 FileOutputStream 对象 out，然后用这个 out 对象去创建一个 OutputStreamWriter 对象，之后再用这个 OutputStreamWriter 对象创建一个 BufferedWriter 对象 writer，我们就是通过这个 writer 的 write() 方法向文件输出流写入我们想要保存的数据的。文件写入数据之后默认保存在 /data/data/(package name)/files 目录下。我们可以通过 Android Studio 中的 Android Device Monitor 去查看，Android Device Monitor 的打开方法如下所示。</p>
-<p><img src="http://img.blog.csdn.net/20170316145505719?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="打开 Android Device Monitor"></p>
-<h2 id="问题1：设备-Offline-File-Explorer-空空如也"><a href="#问题1：设备-Offline-File-Explorer-空空如也" class="headerlink" title="问题1：设备 Offline,  File Explorer 空空如也"></a><strong>问题1：设备 Offline,  File Explorer 空空如也</strong></h2><p>打开 Android Device Monitor 之后，发现里面什么都没有，左边的面板上显示了一台模拟器，但出于 offline 状态，不对呀，我的模拟器命名开着的呀，它正在运行我刚刚写的 app 呢，怎么这里会显示离线状态呢？于是我试着 Google 去找解决方案。</p>
-<p><img src="http://img.blog.csdn.net/20170316145939956?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" File Explorer 不显示文件"></p>
-<p>在 StackOverflow 上我发现了有人和我一样也碰到了这个问题，不过底下的回答寥寥无几，我找到了一个最高赞的答案（其实也就一个赞….），如下图所示，他的意思是他也不明白其中的具体原理，但是他发现如果先打开 Android Device Monitor，然后再运行模拟器，就可以解决这个问题。</p>
-<p><img src="http://img.blog.csdn.net/20170316150034301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="解决 File Explorer 不显示文件（from SO）"></p>
-<p>于是我按照这个方法尝试，先打开 Android Device Monitor，里面什么也没有，然后打开模拟器，随着模拟器的启动，Monitor 左侧面板出现了 offline 的模拟器，然后再相继启动很多服务，最后就显示为 online 了，如下图所示，这样我们就可以通过 Monitor 中的 File Explorer 标签访问模拟器中的文件了。</p>
-<p><img src="http://img.blog.csdn.net/20170316150112791?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" 解决 File Explorer 不显示文件"></p>
-<h2 id="问题2：File-Explorer-中的文件无法访问"><a href="#问题2：File-Explorer-中的文件无法访问" class="headerlink" title="问题2：File Explorer 中的文件无法访问"></a><strong>问题2：File Explorer 中的文件无法访问</strong></h2><p>还记得刚刚说的吗，openFileOutput() 方法生成的文件存放在一个默认路径，即 /data/data/(package name)/files 下。由于我的包名是 com.knightaoko.filepersistencetest，所以在下文的叙述中，大家看到这个陌生的字符串不要惊讶，实际操作下替换成你自己的包名即可。（这期间还碰到个问题，好像 Android Device Monitor 不能和 Instant Run 同时运行，所以在此需要把 Instant Run 功能关闭，怎么关闭大家自行 Google，很简单的。）于是，下一步当然是打开这个路径了，找到 data，点击，没反应，再点击，还是没反应。又遇到问题了，我无法访问 data 目录，通过 Google 搜索，我知道了 File Explorer 中的每个文件和文件夹都是有访问权限的，如下图红框中标识的就是 data 文件夹的访问权限。</p>
-<p><img src="http://img.blog.csdn.net/20170316150235614?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="无权访问"></p>
-<p> 访问权限是 drwxrwx–x，这玩意是什么意思呢？我相信，学过 Linux 的同学肯定一眼就知道这是什么意思。不知道也没关系，听我慢慢道来，这一个字符串一共有 10 个字符，第一个字符表示是文件夹还是目录，如果第 1 个字符是 d，则表示是文件夹。后面 9 个字符可以分为三组，第一组 rwx 表示所有者（user）对文件的访问权限，r 表示可读（read），w 表示可写（write），x 表示可被执行，- 表示没有该权限；第二组 rwx 表示组群（group）对文件的访问权限；第三组 –x 表示其他人（other）对文件的访问权限，可以看到，没有 r 和 w，说明 data 对其他人来说是不可读不可写的，怪不得我们不能打开它呢，那怎么办呢？于是我又网上搜啊搜，发现可以通过一定的方法修改文件的访问权限的，对，这个方法就是 adb shell。</p>
-<p>adb shell 是 Android SDK 中的一个工具，你可以在你的 Android SDK 目录下的 platform-tools 找到它，下图就是我电脑上的该目录：</p>
-<p><img src="http://img.blog.csdn.net/20170316150326458?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="adb 所在目录"></p>
-<p>我们需要将这个目录添加到环境变量，为的是后面在命令行直接调用 adb 中的命令。比如在此我将 D:\AndroidSDK\platform-tools 添加到环境变量（具体怎么添加应该不用手把手教学了吧）后，运行 cmd 命令行，然后输入下面的命令。</p>
-<p><img src="http://img.blog.csdn.net/20170316150358154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="通过 adb shell 获取文件访问权限"></p>
-<ul>
-<li>adb shell 是打开 adb 外壳程序。</li>
-<li>su 是获取 root 权限，只有 root 权限才能修改文件的访问权限。</li>
-<li>底下一堆 chmod 777 是把对应的文件或文件夹的访问权限的后 9 位设置成 rwxrwxrwx，777 就三个二进制 111, 喝起来就是 111111111（9 个 1），即相当于把后 9 位访问权限都置 1，于是就成了 rwxrwxrwx，即所有用户都具有该文件的全部访问权限（妈妈再也不用担心我打不开 data 了…）。我们来看看结果：</li>
+        <!-- Paradox Header -->
+        <!-- Daily pic -->
+<div class="mdl-card mdl-shadow--2dp daily-pic mdl-cell mdl-cell--8-col index-top-block">
+
+    <!-- Pic & Slogan -->
+    <div class="mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/daily_pic.png)">
+        <p class="index-top-block-slogan"><a href="#">
+        
+            
+                Hi, nice to meet you
+            
+        
+        </a></p>
+    </div>
+
+    <!-- Avatar & Name -->
+    <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+        <!-- Author Avatar -->
+        <div id="author-avatar">
+            <img src="/img/avatar.png" width="32px" height="32px" alt="avatar">
+        </div>
+        <div>
+            <strong>John Doe</strong>
+        </div>
+    </div>
+</div>
+
+        <!-- Blog info -->
+<div class="mdl-card mdl-shadow--2dp something-else mdl-cell mdl-cell--8-col mdl-cell--4-col-desktop index-top-block">
+
+    <!-- Search -->
+    
+    <!-- Google -->
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" method="post" action="">
+        <label id="search-label" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent mdl-shadow--4dp" for="search">
+            <i class="material-icons mdl-color-text--white" role="presentation">search</i>
+        </label>
+
+        <form autocomplete="off" id="search-form" method="get" action="//google.com/search" accept-charset="UTF-8" class="mdl-textfield__expandable-holder" target="_blank">
+            <input class="mdl-textfield__input search-input" type="search" name="q" id="search" placeholder="">
+            <label id="search-form-label" class="mdl-textfield__label" for="search"></label>
+
+            <input type="hidden" name="sitesearch" value="http://yoursite.com">
+        </form>
+    </div>
+
+
+
+
+
+
+
+    <!-- LOGO -->
+    <div class="something-else-logo mdl-color--white mdl-color-text--grey-600">
+        <a href="#">
+            <img src="/img/logo.png" alt="logo" />
+        </a>
+    </div>
+
+    <!-- Infomation -->
+    <div class="mdl-card__supporting-text meta meta--fill mdl-color-text--grey-600">
+        <!-- Blog Title -->
+        <div>
+            <strong>Hexo</strong>
+        </div>
+        <div class="section-spacer"></div>
+
+        <!-- Pages -->
+        <button id="show-pages-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">view_carousel</i>
+            <span class="visuallyhidden">Pages</span>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="show-pages-button">
+            
+        </ul>
+
+        <!-- Menu -->
+        <button id="menubtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">more_vert</i>
+            <span class="visuallyhidden">show menu</span>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="menubtn">
+            
+
+            
+
+            
+                <a class="index_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Hexo&url=http://yoursite.com/&pic=&searchPic=false&style=simple" target="_blank">
+                    <li class="mdl-menu__item mdl-js-ripple-effect">
+                        分享到微博
+                    </li>
+                </a>
+            
+
+            
+                <a class="index_share-link" href="https://twitter.com/intent/tweet?text=Hexo&url=http://yoursite.com/&via=John Doe" target="_blank">
+                    <li class="mdl-menu__item mdl-js-ripple-effect">
+                        分享到 Twitter
+                    </li>
+                </a>
+            
+
+            
+                <a class="index_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//index.html" target="_blank">
+                    <li class="mdl-menu__item mdl-js-ripple-effect">
+                        分享到 Facebook
+                    </li>
+                </a>
+            
+
+            
+                <a class="index_share-link" href="https://plus.google.com/share?url=http://yoursite.com/" target="_blank">
+                    <li class="mdl-menu__item mdl-js-ripple-effect">
+                        分享到 Google+
+                    </li>
+                </a>
+            
+
+            
+
+            
+
+            
+        </ul>
+    </div>
+</div>
+
+    
+    <div class="locate-thumbnail-symbol"></div>
+
+    <!-- Pin on top -->
+    
+
+    <!-- Normal Post -->
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/03/21/Android Device Monitor 文件管理的常见问题/">Android Device Monitor 文件管理的常见问题</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/03/21/Android Device Monitor 文件管理的常见问题/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="John Doe's avatar">
+            </div>
+            <div>
+                <strong>John Doe</strong>
+                <span>3月 21, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/Android-Studio/">Android Studio</a>
+            </span>
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/03/21/hello-world/">Hello World</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            Welcome to Hexo
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/03/21/hello-world/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="John Doe's avatar">
+            </div>
+            <div>
+                <strong>John Doe</strong>
+                <span>3月 21, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                
+            </span>
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/01/22/计算机系统漫游/">计算机系统漫游</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            计算机系统是由硬件和软件系统组成的，它们共同工作来运行应用程序。作为程序员，也需要了解这些组件是如何工作的，以及这些组件是如何影响程序的正确性和性能...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/01/22/计算机系统漫游/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="John Doe's avatar">
+            </div>
+            <div>
+                <strong>John Doe</strong>
+                <span>1月 22, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/Computer-Systems/">Computer Systems</a>
+            </span>
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/01/21/OpenCV 图像遍历与颜色缩减/">OpenCV 图像遍历与颜色缩减</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/01/21/OpenCV 图像遍历与颜色缩减/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="John Doe's avatar">
+            </div>
+            <div>
+                <strong>John Doe</strong>
+                <span>1月 21, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/OpenCV/">OpenCV</a>
+            </span>
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/01/21/OpenCV Mat 介绍/">OpenCV Mat 介绍</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/01/21/OpenCV Mat 介绍/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="John Doe's avatar">
+            </div>
+            <div>
+                <strong>John Doe</strong>
+                <span>1月 21, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/OpenCV/">OpenCV</a>
+            </span>
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/01/21/OpenCV 读取、修改、保存图像/">OpenCV 读取、修改、保存图像</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取，用 imwrite 进行图像保存，用 imshow 进行图像显...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/01/21/OpenCV 读取、修改、保存图像/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="John Doe's avatar">
+            </div>
+            <div>
+                <strong>John Doe</strong>
+                <span>1月 21, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/OpenCV/">OpenCV</a>
+            </span>
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+        
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2016/12/23/Qt主界面获取对话框数据/">Qt主界面获取对话框数据</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            在编写Qt程序的时候，我们常常需要通过对话框来获取用户的输入数据，比如通过文件对话框获取文件的路径，通过颜色对话框获取用户所选择的颜色，这些对话框的...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2016/12/23/Qt主界面获取对话框数据/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="John Doe's avatar">
+            </div>
+            <div>
+                <strong>John Doe</strong>
+                <span>12月 23, 2016</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                <a class="post_category-link" href="/categories/Qt/">Qt</a>
+            </span>
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+    
+
+    
+
+    
+        <script>
+    var randomNum;
+
+    var locatePost = $('.locate-thumbnail-symbol').next();
+    for(var i = 0; i < 10; i++) {
+        randomNum = Math.floor(Math.random() * 19 + 1);
+
+        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
+
+        locatePost = locatePost.next();
+    }
+</script>
+
+    
+</div>
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="John Doe's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
 </ul>
-<p><img src="http://img.blog.csdn.net/20170316150537048?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" 修改后的文件访问权限"></p>
-<h2 id="问题3：File-Explorer-中的文件无法-pull（下载）"><a href="#问题3：File-Explorer-中的文件无法-pull（下载）" class="headerlink" title="问题3：File Explorer 中的文件无法 pull（下载）"></a><strong>问题3：File Explorer 中的文件无法 pull（下载）</strong></h2><p>可以看到这些目录都能访问了，可以在包名目录下看到生成的 data 文件了，下一步我们想把这个文件复制到我们的电脑里，怎么操作呢？选中该文件，点击右上角的 pull 图标即可，如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170316150620678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载按钮"></p>
-<p>点击之后，选好保存路径。结果我们发现文件并没有保存下来，在 Console 窗口还提示了错误：</p>
-<p><img src="http://img.blog.csdn.net/20170316150658987?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载出错"></p>
-<p>意思就是拉取文件失败，因为你无权进行该操作。又是一脸懵逼，怎么办？还能怎么办，继续 Google 呗！这里我找了很久，终于发现了解决方案：adb root 。没错，在命令行输入这条语句，完美解决！（注意是在 windows 下的命令行，而不是 adb shell 里，当然前提是你添加了 adb 的目录到你的环境变量里）</p>
-<p><img src="http://img.blog.csdn.net/20170316150811460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="通过 adb root 获取文件下载权限"></p>
-<p>然后我们再来 pull 一下，卧槽，崩溃了，又发现问题了：Failed to pull selection。</p>
-<p><img src="http://img.blog.csdn.net/20170316150850913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载再次出错"></p>
-<p>怎么办？OK，继续 Google，在 StackOverflow 里找到了一个高赞的解决方法：</p>
-<p><img src="http://img.blog.csdn.net/20170316150928820?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重新选择模拟器（from SO）"></p>
-<p>什么意思？重新选择一下 Android Device Monitor 左侧面板的设备即可，没错！就是把下图红框中国的玩意儿点一下。</p>
-<p><img src="http://img.blog.csdn.net/20170316151002632?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重新选择模拟器"></p>
-<p>好了，我们再找到刚刚那个要拷贝的文件，pull 一下，卧槽！！成功了，真是踏破铁鞋无觅处，得来全得靠姑姑（谷歌）。</p>
-<p><img src="http://img.blog.csdn.net/20170316151045304?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载成功"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>总结一下吧，初次使用 Android Device Monitor，本来只是用来辅助学习 SQLite，结果一上午碰到一大堆问题，总算都一一解决了，在此总结一下。</p>
-<ol>
-<li><p><strong>Android Device Monitor 要在模拟器运行之前就打开</strong>，这样才不会出现模拟器设备 offline 的问题。</p>
-</li>
-<li><p>Android Device Monitor 和 Instant Run 貌似有冲突，<strong>在用 Android Device Monitor 时关闭 Instant Run 功能</strong>。我相信还有更好的解决方法，不然打开一个大一点的 APP，不能同时用这两个功能，那多影响效率啊。只是我目前还处于学习阶段，上述方案能解决我当前的问题，不影响我进一步学习，那它就是 OK 的。</p>
-</li>
-<li><p>操作 Android Device Monitor 时，应该默认把你当做其他人（other）对待，所以你对文件的访问权限很受限制。解决方法是在命令行中，<strong>通过在 adb shell 里获取 root 权限，并更改相应文件的访问权限</strong>，当然记得将 adb 所在目录添加进环境变量。</p>
-</li>
-<li><p>能访问了但是不能下载也是很麻烦的事，<strong>通过在命令行运行 adb root 获取文件的下载权限</strong>。</p>
-</li>
-<li><p>通过上述操作之后，就能正常使用 Android Device Monitor 进行文件管理了。但不幸的是，<strong>当你重启模拟器，或启动另一台模拟器时，这些配置又得重新来过</strong>，否则你还是无法访问和下载模拟器中的文件。这个问题的根源在于权限二字，问题不是不能获取权限（通过 adb shell 可以获取 root 权限），而在于获取权限太麻烦了，希望后续版本的 Android Studio 可以直接在 Android Device Monitor 的 GUI 中设置相应获取权限的命令，使得广大 Android 开发者对模拟器中的文件操作更有效率。</p>
-</li>
-<li><p><strong>Google 大法好</strong>。</p>
-</li>
-<li><p>最后还有一点，我目前是跟着《第一行代码》（第二版）学习 Android 开发的，但是作者郭霖老师没有组织读者交流群，所以在学习过程中遇到问题时，要么不知所措，要么大费周折才解决一个问题。如果有志同道合的同学一起交流，那样学习更有效率，遇到问题也能大家一起讨论解决。<strong>不知道大家有没有《第二行代码》学习社群推荐，或者有意向和我一起组建一个这样的学习环境，大家可以在留言区畅所欲言</strong>。</p>
-</li>
-<li><p>PS：本人初出茅庐，开发经验匮乏。如果你发现上文中有不对的地方，还望不吝赐教！</p>
-</li>
-</ol>
 
-      
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/21/Android Device Monitor 文件管理的常见问题/" data-id="cj0jpd4z70001bkf55fdzkgeg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb-shell/">adb shell</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/21/hello-world/" class="article-date">
-  <time datetime="2017-03-21T15:28:53.590Z" itemprop="datePublished">2017-03-21</time>
-</a>
+    <!-- Sidebar Image -->
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/21/hello-world/">Hello World</a>
-    </h1>
-  
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/21/hello-world/" data-id="cj0jpd4zx000dbkf51n4m6gbt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-计算机系统漫游" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/22/计算机系统漫游/" class="article-date">
-  <time datetime="2017-01-22T14:50:00.000Z" itemprop="datePublished">2017-01-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Computer-Systems/">Computer Systems</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/22/计算机系统漫游/">计算机系统漫游</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>计算机系统是由硬件和软件系统组成的，它们共同工作来运行应用程序。作为程序员，也需要了解这些组件是如何工作的，以及这些组件是如何影响程序的正确性和性能的。我们从最简单的 hello 程序开始，通过跟踪 hello 程序的生命周期（从被创建，到运行，输出，然终止），来开始对计算机系统的学习。</p>
-<h2 id="1-hello-程序创建"><a href="#1-hello-程序创建" class="headerlink" title="1. hello 程序创建"></a><strong>1. hello 程序创建</strong></h2><p>hello.c</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"hello, world\n"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>hello 程序的生命周期是从源程序 hello.c 开始的，它实际上是由 0 和 1 组成的位（bit）序列，8 位称为一个字节。根据 ASCII 标准，每个字节表示一个特定的文本字符，如下图所示，hello.c 程序中的每个字符都对应一个单字节。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/66099901-file_1490015480906_21f.png" alt=""></p>
-<p>hello.c 的表示方法说明了一个基本思想：计算机系统中的所有信息，包括磁盘中的文件、存储器中的程序和数据、网络上传的数据，都是一串由 0 和 1 组成的位（bit）序列，区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。</p>
-<h2 id="2-hello-程序编译"><a href="#2-hello-程序编译" class="headerlink" title="2. hello 程序编译"></a><strong>2. hello 程序编译</strong></h2><h3 id="2-1-编译系统"><a href="#2-1-编译系统" class="headerlink" title="2.1 编译系统"></a>2.1 编译系统</h3><p>前面创建的 hello.c 程序是一个高级 C 语言程序，我们能够读懂，但计算机系统不懂。必须把高级语言转化为计算机系统能够执行的低级机器语言指令，得到的是可执行目标文件 hello。从源程序文件 hello.c 到可执行目标文件 hello，编译过程分为四个阶段：预处理阶段、编译阶段、汇编阶段和链接阶段，这四个阶段分别由预处理器、编译器、汇编器和链接器完成，它们一起构成了编译系统。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/43933800-file_1490015481069_ff32.png" alt=""></p>
-<ul>
-<li><strong>预处理阶段</strong>。预处理器根据以 # 字符开头的命令，向源程序添加相应的头文件。如 hello.c 第一行的 #include，预处理器读取系统头文件 stdio.h，并将其直接插入到程序文本，得到 hello.i 文件。</li>
-<li><strong>编译阶段</strong>。编译器将 hello.i 翻译成汇编程序文件 hello.s。</li>
-<li><strong>汇编阶段</strong>。汇编器将汇编程序文件 hello.s 翻译成机器语言指令，并将指令打包成可重定位目标程序，保存在 hello.o 中。hello.o 是二进制文件，而不是文本文件，因此用文本编辑器打开，发现是一堆乱码。</li>
-<li><strong>链接阶段</strong>。hello 程序调用了 printf 函数，这个函数存在于已经编译好的 printf.o 中，链接器负责将 .o 文件合并，得到一个可执行目标文件 hello，可以被加载到内存中，由系统执行。</li>
-</ul>
-<h3 id="2-2-程序员为什么要了解编译系统？"><a href="#2-2-程序员为什么要了解编译系统？" class="headerlink" title="2.2 程序员为什么要了解编译系统？"></a>2.2 程序员为什么要了解编译系统？</h3><ol>
-<li><strong>优化程序性能</strong>。为了在 C 程序中做出好的编码选择，我们确实需要了解一些机器代码以及编译器将不同 C 语句转化为机器代码的方式。例如，一个 switch 语句是否总比一系列 if-then-else 语句高效得多？一个函数调用的开销有多大？while 循环比 for 循环更有效吗？指针引用比数组索引更有效吗？</li>
-<li><strong>理解链接时出现的错误</strong>。一些令人困扰的程序错误往往都与链接器操作有关。</li>
-<li><strong>避免安全漏洞</strong>。缓冲区溢出是造成大多数网络和 Internet 服务器上安全漏洞的主要原因。通过更好地理解编译系统，可以降低这些错误的出现。</li>
-</ol>
-<h2 id="3-hello-程序执行"><a href="#3-hello-程序执行" class="headerlink" title="3 hello 程序执行"></a><strong>3 hello 程序执行</strong></h2><p>此时，hello.c 源程序已经被编译系统翻译成可执行目标文件 hello，存放在磁盘上。在 Linux 系统的外壳（shell）中可以执行 hello。为了理解 hello 执行的时候发生了什么，我们先对一个典型系统的硬件组成进行简单介绍。</p>
-<h3 id="3-1-计算机系统硬件组成"><a href="#3-1-计算机系统硬件组成" class="headerlink" title="3.1 计算机系统硬件组成"></a>3.1 计算机系统硬件组成</h3><p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/83046123-file_1490015481442_490e.png" alt=""></p>
-<p>如图所示，典型系统的硬件组成包括总线、I/O设备、主寸和处理器。</p>
-<ul>
-<li><strong>总线</strong>。总线贯穿整个系统，它携带信息字节并负责在各个部件间传递，每次只传一个字，字的长度成为字长，有的机器字长是 4 个字节（32位），有的是 8 个字节（64位）。</li>
-<li><strong>I/O 设备</strong>。输入/输出设备是系统与外部联系的通道。上图包括 4 个 I/O 设备：作为输入的鼠标和键盘、用于输出的显示器、用于存储的磁盘（可执行文件 hello 存于此），网络也可视作一个 I/O 设备。</li>
-<li><strong>主存</strong>。主存是临时存储设备，在处理器执行程序时，用来存放程序和所需的数据。物理上看，主存是由 DRAM 芯片组成的；逻辑上看，主存是一个线性的字节数组，每个字节都有其唯一的地址。</li>
-<li><strong>处理器</strong>。处理器是执行主存中指令的引擎，其核心是一个字长的程序计数器（PC）。在任何时刻，PC 都指向主存中的某条机器语言指令。ALU 是算术逻辑单元；寄存器文件是一个小的存储设备，由一些 1 字长的寄存器组成，每个寄存器都有唯一的名字。CPU 在指令的要求下可能会执行以下操作：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>加载</th>
-<th>存储</th>
-<th>操作</th>
-<th>跳转</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>把一个字节/字从主存复制到寄存器，覆盖寄存器原来的内容。</td>
-<td>把一个字节/字从寄存器复制到主存的某个位置。</td>
-<td>把两个寄存器的内容复制到ALU，ALU它们进行运算，结果保存到一个寄存器中。</td>
-<td>从指令本身抽取一个字，将其复制到 PC中。（即改变 PC 的地址实现跳转）</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-2-运行-hello-程序"><a href="#3-2-运行-hello-程序" class="headerlink" title="3.2 运行 hello 程序"></a>3.2 运行 hello 程序</h3><p> 首先我们在外壳（shell）输入字符串“./hello”以执行 hello 程序，外壳程序将字符逐一从输入设备读入 CPU 的寄存器，再把它放到主存中。</p>
-<p>键入回车，外壳会执行一系列代码加载 hello，将 hello 的代码和数据从磁盘复制到主存，利用 DMA（直接存储器存取技术），数据可以不通过处理器而直接从磁盘达到主存。</p>
-<p>hello 加载完之后，处理器开始执行 hello 程序中的 main 程序，将“hello. world\n”字符串从主存复制到寄存器文件，再从寄存器文件复制到显示设备，最终显示在屏幕上。</p>
-<h3 id="3-3-高速缓存和存储器层次结构"><a href="#3-3-高速缓存和存储器层次结构" class="headerlink" title="3.3 高速缓存和存储器层次结构"></a>3.3 高速缓存和存储器层次结构</h3><p>看完上面 hello 的执行过程，可以发现，系统花费了大量时间把信息从一个地方传到另一个地方，系统设计者的一个主要目标是使这些复制操作尽可能快地完成。针对处理器与主存之间速度的差异，系统设计者用更小、更快的存储设备，即高速缓存存储器，作为暂时的集结区域，用于存放处理器近期可能会需要的信息。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/58858427-file_1490015481552_c1e1.png" alt=""></p>
-<p>上图展示了一个典型系统的中高速缓存，处理器芯片上的 L1 高速缓存大小可达数万字节，访问速度几乎和访问寄存器文件一样快。还有 L2 ,甚至 L3 高速缓存，随着容量增大，访问速度变慢。高速缓存是用 SRAM （静态随机访问存储器）的硬件技术实现的。有了高速缓存，程序的执行性能可以提高一个数量级。</p>
-<p>实际上，除了在处理器和主存之间插入多级高速缓存，每个计算机系统中还有更复杂的存储器层次结构，如下图所示，这个层次结构从上到下，访问速度越来越慢，容量越来越大，并且每个字节的造价也越来越便宜。L0 为寄存器文件，L1 到 L3 为三级高速缓存，然后是主存、本地磁盘，最后是远程二级存储。存储器层次结构的主要思想是：一层上的存储器是低一层存储器的高速缓存，如寄存器文件是 L1 的高速缓存，L1 是 L2 的高速缓存等。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/8906578-file_1490015481302_7753.png" alt=""></p>
-<h2 id="4-操作系统管理硬件"><a href="#4-操作系统管理硬件" class="headerlink" title="4. 操作系统管理硬件"></a><strong>4. 操作系统管理硬件</strong></h2><p>当我们加载和运行 hello 程序，以及 hello 程序输出时，外壳和 hello 程序都没有直接访问键盘、显示器、磁盘和主存。它们依靠操作系统来管理硬件。操作系统有两个基本功能：（1）防止硬件被失控的应用程序滥用；（2）向应用程序提供了简单一致的机制来控制复制而又大相径庭的硬件设备。操作系统是通过几个基本的抽象概念来实现这两个功能的。</p>
-<ul>
-<li><strong>文件</strong>。是操作系统对 I/O 设备的抽象表示。</li>
-<li><strong>虚拟存储器</strong>。是操作系统对主存和磁盘 I/O 设备的抽象表示。</li>
-<li><strong>进程</strong>。是对处理器、主存和 I/O 设备的抽象表示。</li>
-</ul>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/48144014-file_1490015481189_6c56.png" alt=""></p>
-<h3 id="4-1-进程"><a href="#4-1-进程" class="headerlink" title="4.1 进程"></a>4.1 进程</h3><p>hello 程序运行时，操作系统会提供一个假象，就好像系统上只有这个程序在运行。这是通过进程的概念来实现的，进程是计算机科学中最重要和最成功的概念之一。进程是操作系统对正在运行程序的一种抽象，一个系统可以同时运行多个进程，这种并发运行时通过处理器在进程间的切换（称为上下文切换）实现的。实际上，在任何时刻，单处理器系统都只能执行一个进程的代码。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/3651090-file_1490015481670_80e8.png" alt=""></p>
-<p> 如上图所示，有两个进程：外壳进程和 hello 进程。一开始只有外壳进程在运行，输入“./hello”命令后，系统调用将控制权传递给操作系统，操作系统保存当前外壳进程的上下文，并创建新的 hello 进程及其上下文，将控制权传递给新的 hello 进程。hello 进程终止后，操作系统恢复外壳进程上下文，并将控制权传回给它，外壳进程等待下一个命令输入。</p>
-<h3 id="4-2-线程"><a href="#4-2-线程" class="headerlink" title="4.2 线程"></a>4.2 线程</h3><p>通常我们认为一个进程只有单一控制流，如 hello 进程只有 main 控制流。但是在现代系统中，一个进程可以由多个称为线程的执行单元组成，每个线程都运行在进程的上下文中，并共享同样的代码和全局数据。一般来说，线程比进程更高效，所以多线程之间比多进程之间更容易共享数据。</p>
-<h3 id="4-3-虚拟存储器"><a href="#4-3-虚拟存储器" class="headerlink" title="4.3 虚拟存储器"></a>4.3 虚拟存储器</h3><p>虚拟存储器是一个抽象的概念，它为每个进程提供了一个假象：每个进程都在独占使用主存。每个进程看到的是一致的存储器，称为虚拟地址空间。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/17034796-file_1490015481788_17b.png" alt=""></p>
-<p> 每个进程的虚拟地址空间由大量准确定义的区构成，每个区都有专门的功能。</p>
-<ul>
-<li><strong>程序代码和数据</strong>。代码从一个固定地址开始，接着是数据。代码和数据区是直接按照可执行目标文件（在此是 hello）的内容初始化的。</li>
-<li><strong>堆</strong>。代码和数据区紧跟着是堆，前者运行时规定了大小，后者可以调用 malloc 和 free 在运行时动态扩展和收缩。</li>
-<li><strong>共享库</strong>。地址中间一部分存放着像 C 标准库和数学库这样的共享库的代码和数据的区域。</li>
-<li><strong>栈</strong>。虚拟地址空间顶部的是用户栈，可以动态扩展和收缩。如调用一个函数时，栈会增长，从一个函数返回时，栈会收缩。</li>
-<li><strong>内核虚拟存储器</strong>。是操作系统的一部分，不允许应用程序读写或调用。</li>
-</ul>
-<p>虚拟存储器的运作需要硬件和操作系统之间精密复杂的交互，其基本思想是把一个进程虚拟存储器的内容存储在磁盘上，然后用主存作为磁盘的高速缓存。</p>
-<h3 id="4-4-文件"><a href="#4-4-文件" class="headerlink" title="4.4 文件"></a>4.4 文件</h3><p>文件就是字节序列，仅此而已。每个 I/O 设备，包括磁盘、键盘、显示器，甚至网络，都可以视为文件。它向应用程序提供了一个统一的视角，来看待系统中可能含有的所有各式各样的 I/O 设备。</p>
-<h2 id="5-其他重要主题"><a href="#5-其他重要主题" class="headerlink" title="5. 其他重要主题"></a><strong>5. 其他重要主题</strong></h2><p>在上述计算机系统漫游中，我们得出重要结论：计算机系统不仅仅只是硬件。系统是硬件和软件互相交织的集合体，它们必须共同协作以达到运行应用程序的最终目的。我们来再来讨论几个贯穿计算机系统的重要概念作为结尾。</p>
-<h3 id="5-1-并发和并行"><a href="#5-1-并发和并行" class="headerlink" title="5.1 并发和并行"></a>5.1 并发和并行</h3><p>我们需要计算机做得更多，也需要它运行得更快，怎么办呢？因此引入了并发，并发是一个通用的概念，指一个同时具有多个活动的系统；并行是指用并发使一个系统运行得更快。并行有三个层次，由高到低分别是：线程级并发；指令级并行；单指令多数据并行。</p>
-<ul>
-<li><strong>线程级并发</strong>。在一个进程中执行多个控制流，即多线程。传统上通过线程间的切换实现并行，随着多核处理器和超线程的出现，线程之间的切换变得更加的快速。</li>
-<li><strong>指令级并行</strong>。即处理器可以同时执行多条指令，</li>
-<li><strong>单指令、多数据并行</strong>。允许一条指令产生多个可以并行执行的操作，即 SIMD 并行，如较新的 Intel 和 AMD 处理器并行地对 4 对单精度浮点数做加法的指令。</li>
-</ul>
-<h3 id="5-2-计算机系统中的抽象"><a href="#5-2-计算机系统中的抽象" class="headerlink" title="5.2 计算机系统中的抽象"></a>5.2 计算机系统中的抽象</h3><p>抽象是计算机科学中最为重要的概念之一。例如，在编程中可以为函数提供抽象的接口，程序员无需了解函数内部工作机制就可以使用这些代码。如文件是对 I/O 设备的抽象；虚拟存储器是对主存和磁盘 I/O 的抽象；进程是对一个正在运行的程序的抽象；而虚拟机是对整个计算机（包括操作系统、处理器和程序）的抽象。</p>
-<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6 总结"></a><strong>6 总结</strong></h2><p>由一个 hello 程序的生命周期对整个计算机系统进行了快速的漫游。从中我们知道了，计算机系统是由硬件和软件组成的，共同协作以运行程序。计算机内部的信息实际上是一系列位序列，根据上下文有不同的解释方式。编译系统将源程序经过预处理、编译、汇编和链接四个步骤翻译成可执行目标文件。由于程序运行时，信息常常由一个地方被复制到另一个地方，为了提高传递速度，提出了存储器层次结构，由高到低分别是寄存器文件，L1 高速缓存，L2 高速缓存，L3 高速缓存，主存，磁盘，远程存储器等，由上到下，容量依次变大，但速度越来越慢，每个字节的造价也越来越便宜。</p>
-<p>另外，应用程序并不是直接操纵计算机硬件，而是通过操作系统代为管理，这样可以避免失控的应用程序对系统硬件的滥用，同时为应用程序提供了简单统一的机制来控制复杂多样的硬件。具体是通过进程、虚拟存储器和文件等抽象概念实现的。最后还讨论了三个不同层次的并发机制，并说明了计算机系统中抽象的重要性。</p>
-<hr>
-<p>参考：<a href="http://csapp.cs.cmu.edu/" target="_blank" rel="external">《Computer Systems A Programmer’s Perspective》</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/01/22/计算机系统漫游/" data-id="cj0jpd4zz000fbkf5j8l7c78m" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Systems/">Computer Systems</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-OpenCV 图像遍历与颜色缩减" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/21/OpenCV 图像遍历与颜色缩减/" class="article-date">
-  <time datetime="2017-01-21T08:32:00.000Z" itemprop="datePublished">2017-01-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/OpenCV/">OpenCV</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/21/OpenCV 图像遍历与颜色缩减/">OpenCV 图像遍历与颜色缩减</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。</p>
-<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a><strong>1. 概述</strong></h2><p>图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。</p>
-<h2 id="2-图像存储方式"><a href="#2-图像存储方式" class="headerlink" title="2. 图像存储方式"></a><strong>2. 图像存储方式</strong></h2><p>在进行下面的论述之前，先对图像矩阵在内存中的存储方式简单介绍。对于单通道灰度图像：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/94760296-file_1490017405620_17ae0.png" alt=""></p>
-<p>而对于多通道图像来说，矩阵中的列会包含多个子列，子列数与通道数相等，如 BGR 颜色模型的矩阵为：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/29406263-file_1490017405477_1ada.png" alt=""></p>
-<h2 id="3-颜色缩减"><a href="#3-颜色缩减" class="headerlink" title="3. 颜色缩减"></a><strong>3. 颜色缩减</strong></h2><p>何谓颜色缩减？对于元素类型为 uchar 的单通道图像矩阵，每个像素点有 256 个灰度值，但是对于三通道图像，每个像素点的颜色种类达 16777216 种（256 的三次方）。如此多的颜色可能会对算法性能造成严重影响，我们往往只需要颜色的一部分，也能满足要求，因此引入了颜色缩减。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/25494428-file_1490017405949_8fda.png" alt=""></p>
-<p>如上图所示，左侧为颜色缩减前，右侧为颜色缩减后，数字表示灰度值。可以看出，灰度值 92 到 114 映射为 92；115 到 137 映射为 115，以此类推，左侧 164 种颜色缩减为右侧的 7 种颜色。实现方法也很简单：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//color1输入,color2输出 </span></div><div class="line">color2 = (color1 / <span class="number">23</span>) * <span class="number">23</span>;</div></pre></td></tr></table></figure>
-<p>但是，如果直接对图像的每个像素进行上述除法和乘法，这样效率是很低的。一个较好的办法是事先生成一张颜色缩减的查找表，表中缩减前后的值都明确给定，这样遍历图像时，利用查找表直接对相应像素点进行赋值即可。其优势在于只需读取、无需计算。以下代码生成颜色查找表 color_table：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 生成颜色查找表</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color_table;</div><div class="line"><span class="keyword">int</span> width = <span class="number">20</span>;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</div><div class="line">&#123;</div><div class="line">	color_table.push_back(i / width * width);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="4-图像遍历"><a href="#4-图像遍历" class="headerlink" title="4. 图像遍历"></a><strong>4. 图像遍历</strong></h2><p>有了颜色查找表后，我们便可以对图像进行遍历并对像素点进行颜色缩减了。我们采用了几种不同的图像遍历方法，为了对比它们的效率，采用 OpenCV 提供的两个简单的计时器函数 getTickCount() 和 getTickFrequency(), 它们分别返回 CPU 走过的时钟周期数和 CPU 一秒的时钟周期数。因此，可以这样来计时（单位：秒）：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> time_begin = (<span class="keyword">double</span>)getTickCount();</div><div class="line"><span class="comment">// do something</span></div><div class="line"><span class="keyword">double</span> time_end = (<span class="keyword">double</span>)getTickCount();</div><div class="line"><span class="keyword">double</span> time = (time_end - time_begin) / getTickFrequency();</div></pre></td></tr></table></figure>
-<h3 id="4-1-利用指针遍历"><a href="#4-1-利用指针遍历" class="headerlink" title="4.1 利用指针遍历"></a>4.1 利用指针遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceC</span><span class="params">(Mat&amp; I, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color_table)</span></span></div><div class="line">&#123;</div><div class="line">     <span class="comment">//只接收字符型矩阵</span></div><div class="line">     CV_Assert(I.depth() != <span class="keyword">sizeof</span>(uchar));</div><div class="line">     <span class="keyword">int</span> channels = I.channels(); <span class="comment">//获取图像通道数</span></div><div class="line">     <span class="keyword">int</span> row = I.rows * channels;</div><div class="line">     <span class="keyword">int</span> col = I.cols;</div><div class="line">     uchar* p;</div><div class="line">     <span class="keyword">if</span> (I.isContinuous()) <span class="comment">//判断像素是否连续存储</span></div><div class="line">     &#123;</div><div class="line">           col *= row;</div><div class="line">           row = <span class="number">1</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++)</div><div class="line">     &#123;</div><div class="line">           p = I.ptr&lt;uchar&gt;(i);</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++)</div><div class="line">           &#123;</div><div class="line">                p[j] = color_table[p[j]];</div><div class="line">           &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> I;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>颜色缩减结果（根据查找表的width设置缩减的程度，在此 width = 20）</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79119290-file_1490017405746_14c2e.png" alt=""></p>
-<p>算法执行时间为 0.0134007 秒。</p>
-<h3 id="4-2-利用迭代器遍历"><a href="#4-2-利用迭代器遍历" class="headerlink" title="4.2 利用迭代器遍历"></a>4.2 利用迭代器遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceIterator</span><span class="params">(Mat&amp; I, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color_table)</span></span></div><div class="line">&#123;</div><div class="line">     <span class="comment">//只接收字符型矩阵</span></div><div class="line">     CV_Assert(I.depth() != <span class="keyword">sizeof</span>(uchar));</div><div class="line">     <span class="keyword">int</span> channels = I.channels();</div><div class="line">     <span class="keyword">switch</span> (channels)</div><div class="line">     &#123;</div><div class="line">     <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">     &#123;</div><div class="line">           MatIterator_&lt;uchar&gt; it, end;</div><div class="line">           <span class="keyword">for</span> (it = I.begin&lt;uchar&gt;(), end = I.end&lt;uchar&gt;(); it != end; it++)</div><div class="line">                *it = color_table[*it];</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">     &#123;</div><div class="line">           MatIterator_&lt;Vec3b&gt; it, end;</div><div class="line">           <span class="keyword">for</span> (it = I.begin&lt;Vec3b&gt;(), end = I.end&lt;Vec3b&gt;(); it != end; it++)</div><div class="line">           &#123;</div><div class="line">                (*it)[<span class="number">0</span>] = color_table[(*it)[<span class="number">0</span>]];</div><div class="line">                (*it)[<span class="number">1</span>] = color_table[(*it)[<span class="number">1</span>]];</div><div class="line">                (*it)[<span class="number">2</span>] = color_table[(*it)[<span class="number">2</span>]];</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> I;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>算法执行时间 0.0693951 秒。用迭代器遍历速度稍慢，但是更加安全。上述代码中，我们首先对图像的通道数进行判断，通道数为 1 时，直接对灰度值赋值；对于三通道彩色图像，每个像素可以看做一个包含三个 uchar 元素的 vector, 在 OpenCV 中用 Vec3b 命名。对于彩色图像，如果我们仅仅使用 uchar 而不是 Vec3b 迭代的话就只能获得蓝色通道的值（BGR模型中的第一个通道）。</p>
-<h3 id="4-3-通过相关返回值的-On-the-fly-地址遍历"><a href="#4-3-通过相关返回值的-On-the-fly-地址遍历" class="headerlink" title="4.3 通过相关返回值的 On-the-fly 地址遍历"></a>4.3 通过相关返回值的 On-the-fly 地址遍历</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat&amp; <span class="title">ScanImageAndReduceRadomAccess</span><span class="params">(Mat&amp; I, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color_table)</span></span></div><div class="line">&#123;</div><div class="line">     <span class="comment">//只接收字符型矩阵</span></div><div class="line">     CV_Assert(I.depth() != <span class="keyword">sizeof</span>(uchar));</div><div class="line">     <span class="keyword">int</span> channels = I.channels();</div><div class="line">     <span class="keyword">switch</span> (channels)</div><div class="line">     &#123;</div><div class="line">     <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">     &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; I.rows; i++)</div><div class="line">           &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; I.cols; j++)</div><div class="line">                &#123;</div><div class="line">                      I.at&lt;uchar&gt;(i, j) = color_table[I.at&lt;uchar&gt;(i, j)];</div><div class="line">                &#125;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">     &#123;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; I.rows; i++)</div><div class="line">           &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; I.cols; j++)</div><div class="line">                &#123;</div><div class="line">                      I.at&lt;Vec3b&gt;(i, j)[<span class="number">0</span>] = color_table[I.at&lt;Vec3b&gt;(i, j)[<span class="number">0</span>]];</div><div class="line">                      I.at&lt;Vec3b&gt;(i, j)[<span class="number">1</span>] = color_table[I.at&lt;Vec3b&gt;(i, j)[<span class="number">1</span>]];</div><div class="line">                      I.at&lt;Vec3b&gt;(i, j)[<span class="number">2</span>] = color_table[I.at&lt;Vec3b&gt;(i, j)[<span class="number">2</span>]];</div><div class="line">                &#125;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">return</span> I;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过 at() 函数获取并更改图像中的元素。事实上，这种方法并不推荐呗用来进行图像扫描。</p>
-<h3 id="4-4-核心函数-LUT-The-Core-Function"><a href="#4-4-核心函数-LUT-The-Core-Function" class="headerlink" title="4.4 核心函数 LUT (The Core Function)"></a>4.4 核心函数 LUT (The Core Function)</h3><p>核心函数 LUT 是最被推荐用于实现批量图像元素查找和更改的方法，它并不需要你自己去扫描图像。我们先建立一个查找表：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat <span class="title">table</span><span class="params">(<span class="number">1</span>, <span class="number">256</span>, CV_8U)</span></span>;</div><div class="line">uchar* p = table.data;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</div><div class="line">	p[i] = color_table[i];</div></pre></td></tr></table></figure>
-<p>然后调用函数：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//image是输入，image_reduce是输出</span></div><div class="line">LUT(image, table, image_reduce);</div></pre></td></tr></table></figure>
-<h3 id="4-5-结论"><a href="#4-5-结论" class="headerlink" title="4.5 结论"></a>4.5 结论</h3><p>尽量使用 OpenCV 内置函数，调用 LUT 函数可以获得最快的速度，这是因为 OpenCV 库可以通过英特尔线程架构启用多线程，当然，迭代器也是一个不错的选择，优点是安全，缺点是速度较慢，on-the-fly方法不推荐使用。</p>
-<hr>
-<p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/how_to_scan_images/how_to_scan_images.html#howtoscanimagesopencv" target="_blank" rel="external">More</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/01/21/OpenCV 图像遍历与颜色缩减/" data-id="cj0jpd4zm0007bkf55zl1zopv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器视觉/">机器视觉</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-OpenCV Mat 介绍" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/21/OpenCV Mat 介绍/" class="article-date">
-  <time datetime="2017-01-21T08:19:00.000Z" itemprop="datePublished">2017-01-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/OpenCV/">OpenCV</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/21/OpenCV Mat 介绍/">OpenCV Mat 介绍</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-为什么要引入-Mat-图像容器？"><a href="#1-为什么要引入-Mat-图像容器？" class="headerlink" title="1. 为什么要引入 Mat 图像容器？"></a>1. 为什么要引入 Mat 图像容器？</h2><p>在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？</p>
-<p>2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内存，一旦代码庞大，这便变得非常麻烦且容易出错。OpenCV 2.0 引入新的 C++ 接口，利用个自动内存管理给出了解决方案。</p>
-<h2 id="2-Mat-介绍"><a href="#2-Mat-介绍" class="headerlink" title="2. Mat 介绍"></a>2. Mat 介绍</h2><p>Mat 作为一个类，数据包括两个部分：矩阵头和指向像素矩阵的指针。</p>
-<table>
-<thead>
-<tr>
-<th>数据部分</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>矩阵头</td>
-<td>描述像素矩阵，主要包括矩阵的尺寸、存储方式、存储地址等。矩阵头的大小固定。</td>
-</tr>
-<tr>
-<td>矩阵指针</td>
-<td>矩阵指针所指对象代表了图像本身，其尺寸会根据图像的不同而不同。像素矩阵一般比矩阵头大几个数量级，因此，拷贝图像会产生很大的计算量。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="2-1-赋值和拷贝构造函数只拷贝信息头"><a href="#2-1-赋值和拷贝构造函数只拷贝信息头" class="headerlink" title="2.1 赋值和拷贝构造函数只拷贝信息头"></a>2.1 赋值和拷贝构造函数只拷贝信息头</h3><p>为了避免拷贝图像的巨大计算量，OpenCV 采用引用计数机制。即每个 Mat 对象有其自己的矩阵头，但可以共享同一个图像矩阵（即 Mat 对象的矩阵指针指向同一地址）。在 Mat 对象赋值及拷贝构造函数中，只拷贝矩阵头和矩阵指针，不拷贝矩阵本身，这样可以减少很多计算量。</p>
-<p>这样我们会看到，同一个图像矩阵，可能属于多个 Mat 对象，那么当不需要图像矩阵时，哪个 Mat 对象负责清理它呢？正如 C++ 语法中的智能指针，Mat 规定最后一个使用矩阵的对象负责清理，这是根据矩阵的引用计数进行判断的，当引用计数为 0 时，矩阵会被清理。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Mat A; <span class="comment">// A 的引用计数为0</span></div><div class="line">A = imread(<span class="string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span>, CV_LOAD_IMAGE_COLOR);</div><div class="line"><span class="function">Mat <span class="title">B</span><span class="params">(A)</span></span>;  <span class="comment">// A 的引用计数+1，为 2</span></div><div class="line">Mat C = A;  <span class="comment">// A 的引用计数+1，为 3</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"refcount of A: "</span> &lt;&lt; *A.refcount &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">Mat D = imread(<span class="string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span>, CV_LOAD_IMAGE_COLOR);</div><div class="line">C = D; <span class="comment">// C, D 指向同一矩阵，A 的引用计数-1，为2</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"refcount of A: "</span> &lt;&lt; *A.refcount &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"refcount of D: "</span> &lt;&lt; *D.refcount &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61446613-file_1490016922912_2080.png" alt=""></p>
-<h3 id="2-2-使用-clone-或-copyTo-拷贝图像矩阵"><a href="#2-2-使用-clone-或-copyTo-拷贝图像矩阵" class="headerlink" title="2.2 使用 clone() 或 copyTo() 拷贝图像矩阵"></a>2.2 使用 clone() 或 copyTo() 拷贝图像矩阵</h3><p>那么有时候我们的确需要拷贝矩阵本身呢？可以用 Mat 的成员函数 clone() 或者 copyTo()。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Mat im1 =imread(<span class="string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span>,</div><div class="line">CV_LOAD_IMAGE_COLOR);</div><div class="line">Mat im2 = im1.clone(); <span class="comment">//矩阵内容拷贝</span></div><div class="line">Mat im3;</div><div class="line">im1.copyTo(im3);  <span class="comment">//矩阵内容拷贝</span></div></pre></td></tr></table></figure>
-<p>上面的代码中，im1, im2, im3的引用计数都为1，因为它们并没有共享底层矩阵。</p>
-<h2 id="3-使用-Mat"><a href="#3-使用-Mat" class="headerlink" title="3. 使用 Mat"></a>3. 使用 Mat</h2><h3 id="3-1-创建-Mat"><a href="#3-1-创建-Mat" class="headerlink" title="3.1 创建 Mat"></a>3.1 创建 Mat</h3><h4 id="通过构造函数创建："><a href="#通过构造函数创建：" class="headerlink" title="通过构造函数创建："></a>通过构造函数创建：</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mat M(2, 2, CV_8UC3, Scalar(0, 0, 255));</div><div class="line">cout &lt;&lt; "M = " &lt;&lt; endl &lt;&lt; " " &lt;&lt; M &lt;&lt; endl;</div></pre></td></tr></table></figure>
-<p>上述程序创建了 2X2 的像素图像，每个像素有三个通道，CV_8UC3 表示使用 8 位 unsigned char 表示三通道，用 Scalar 进行初始化，值得注意是的，Mat 三通道依次是 BGR，而不是我们熟知的 RGB。OpenCV 也重载了 &lt;&lt; 运算符，因此，直接可以用标准输出对 Mat 对象进行输出，运行结果为：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/75183952-file_1490016923037_12546.png" alt=""></p>
-<h4 id="通过-create-创建："><a href="#通过-create-创建：" class="headerlink" title="通过 create() 创建："></a>通过 create() 创建：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Mat M;</div><div class="line"><span class="comment">//create不能指定初始值, CV_8UC(4)为自定义通道数</span></div><div class="line">M.create(<span class="number">2</span>, <span class="number">2</span>, CV_8UC(<span class="number">4</span>)); </div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"M = "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; M &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79319227-file_1490016923144_842f.png" alt=""></p>
-<p>可以看出，create 并不能设定初始值，元素默认初始化为 205。另外，我们可以使用 CV_8UC(n)自定义n维通道。</p>
-<h4 id="静态函数-zeros-ones-eyes"><a href="#静态函数-zeros-ones-eyes" class="headerlink" title="静态函数 zeros(), ones(), eyes()"></a>静态函数 zeros(), ones(), eyes()</h4><table>
-<thead>
-<tr>
-<th>静态函数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>zeros()</td>
-<td>零矩阵</td>
-</tr>
-<tr>
-<td>ones()</td>
-<td>全 1 矩阵</td>
-</tr>
-<tr>
-<td>eyes()</td>
-<td>单位矩阵</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-2-格式化输出"><a href="#3-2-格式化输出" class="headerlink" title="3.2 格式化输出"></a>3.2 格式化输出</h3><p>OpenCV 支持多种输出方式，如默认方式、Python 格式、CSV 格式，Numpy 格式以及 C 语言格式。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function">Mat <span class="title">M</span><span class="params">(<span class="number">2</span>, <span class="number">3</span>, CV_8UC3)</span></span>;</div><div class="line">randu(M, Scalar::all(<span class="number">0</span>), Scalar::all(<span class="number">255</span>));</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Default fomart: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; M &lt;&lt;<span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Python format: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; format(M, <span class="string">"python"</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"CSV format: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; format(M, <span class="string">"csv"</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"Numpy format: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; format(M, <span class="string">"numpy"</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"C format: "</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; format(M, <span class="string">"c"</span>) &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/21687811-file_1490016923270_7f1.png" alt=""></p>
-<p>其中 randu() 为 M 的元素随机赋值，范围为指定的 0 - 255。</p>
-<hr>
-<p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/mat%20-%20the%20basic%20image%20container/mat%20-%20the%20basic%20image%20container.html#matthebasicimagecontainer" target="_blank" rel="external">More</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/01/21/OpenCV Mat 介绍/" data-id="cj0jpd4zd0003bkf528c0vqsq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器视觉/">机器视觉</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-OpenCV 读取、修改、保存图像" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/21/OpenCV 读取、修改、保存图像/" class="article-date">
-  <time datetime="2017-01-21T07:52:00.000Z" itemprop="datePublished">2017-01-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/OpenCV/">OpenCV</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/21/OpenCV 读取、修改、保存图像/">OpenCV 读取、修改、保存图像</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取，用 imwrite 进行图像保存，用 imshow 进行图像显示。</p>
-<h2 id="1-读取图像"><a href="#1-读取图像" class="headerlink" title="1. 读取图像"></a>1. 读取图像</h2><p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mat image;</div><div class="line">image = imread(<span class="string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span>, CV_LOAD_IMAGE_COLOR);</div></pre></td></tr></table></figure>
-<h2 id="2-彩色图像转换为灰度图像"><a href="#2-彩色图像转换为灰度图像" class="headerlink" title="2. 彩色图像转换为灰度图像"></a>2. 彩色图像转换为灰度图像</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mat gray_image;</div><div class="line">cvtColor(image, gray_image, CV_BGR2GRAY);</div></pre></td></tr></table></figure>
-<p>第三个参数指定转换类型，在此为 CV_BGR2GRAY</p>
-<h2 id="3-图像保存与显示"><a href="#3-图像保存与显示" class="headerlink" title="3. 图像保存与显示"></a>3. 图像保存与显示</h2><p>我们用 imwrite 进行图像保存，用 imshow 进行图像显示，如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">imwrite(<span class="string">"E:/Code/CPP/OpenCV/Pictures/1_gray.bmp"</span>, gray_image);</div><div class="line">imshow(<span class="string">"image"</span>, image);</div><div class="line">imshow(<span class="string">"gray_image"</span>, gray_image);</div><div class="line">waitKey(<span class="number">0</span>);</div></pre></td></tr></table></figure>
-<hr>
-<p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/introduction/load_save_image/load_save_image.html#load-save-image" target="_blank" rel="external">More</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/01/21/OpenCV 读取、修改、保存图像/" data-id="cj0jpd4zt0009bkf5ryhal493" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器视觉/">机器视觉</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Qt主界面获取对话框数据" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/12/23/Qt主界面获取对话框数据/" class="article-date">
-  <time datetime="2016-12-22T16:26:00.000Z" itemprop="datePublished">2016-12-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Qt/">Qt</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/23/Qt主界面获取对话框数据/">Qt主界面获取对话框数据</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在编写Qt程序的时候，我们常常需要通过对话框来获取用户的输入数据，比如通过文件对话框获取文件的路径，通过颜色对话框获取用户所选择的颜色，这些对话框的类都是Qt帮我们写好了的，调用相应函数就能直接返回用户的输入，比如颜色对话框QColorDialog中有一个静态函数getColor，我们直接调用该函数，便会弹出颜色对话框，等我们选择好颜色并确定，该函数就会返回一个QColor的对象，这个对象就包含了我们之前所选颜色的RGB值了。</p>
-<p>然而，很多时候，我们需要创建自己的对话框，我们不能调用现成函数来获取用户输入，本文将提供两种方法，通过对话框来获取用户输入的案例。在此之前，我们先讨论一下显示对话框的两个函数，一个是show()，一个是exec()。show() 显示的是非模态窗口，不会阻塞程序的线程，因此如果你的对话框是创建在栈上，跳出作用域之后，对象便销毁了，因此你会发现对话框一闪而过；如果你用new关键字将对话框创建在堆上，跳出作用域之后对象不能被销毁，但是建立在堆上需要考虑及时释放内存的问题，以免造成内存泄漏。但是能够正常显示窗口不代表能够很方便地获取数据，show()不会阻塞线程，因此可能用户还没来得及输入数据，就已经执行之后的代码了。解决这个问题需要用到信号槽机制，具体解决方案会在下文详细讲解。exec()显示的是模态窗口，它开启了一个事件循环，会阻塞程序的线程，函数返回之后，我们直接可以获取对话框的数据。下面考虑这两种不同的对话框显示方式，提供两种不同的获取对话框数据的方法。</p>
-<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a><strong>方法一</strong></h3><p>首先考虑简单的，使用exec()显示对话框。我们定义了一个主界面的类，叫MainWindow,界面包含一个名为btn的按钮（用于跳出对话框）和一个名为label的标签（用于显示从对话框获取的用户输入）；我们还定义一个对话框类，界面包含一个名为lineEdit的单行文本框（用于接收用户输入)，以及确定和取消按钮（这两个按钮是创建对话框的时候自动生成的）。两个界面如下图：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61203614-file_1490012608851_7b1e.png" alt="主界面"></p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79032149-file_1490012695609_305e.png" alt="对话框界面"></p>
-<p>关键代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in mainwindow.h</span></div><div class="line"><span class="keyword">class</span> MainWindow : <span class="keyword">public</span> QMainWindow</div><div class="line">&#123;</div><div class="line">    Q_OBJECT</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">MainWindow</span><span class="params">(QWidget *parent = <span class="number">0</span>)</span></span>;</div><div class="line">    ~MainWindow();</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    Ui::MainWindow *ui;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">showDialog</span><span class="params">()</span></span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//in mainwindow.cpp</span></div><div class="line">MainWindow::MainWindow(QWidget *parent) :</div><div class="line">    QMainWindow(parent),</div><div class="line">    ui(<span class="keyword">new</span> Ui::MainWindow)</div><div class="line">&#123;</div><div class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</div><div class="line">    <span class="comment">//“显示对话框”按钮与显示函数建立信号槽关系</span></div><div class="line">    connect(ui-&gt;btn, &amp;QPushButton::clicked, <span class="keyword">this</span>, &amp;MainWindow::showDialog);</div><div class="line">&#125;</div><div class="line">MainWindow::~MainWindow()&#123;<span class="keyword">delete</span> ui;&#125;</div><div class="line"><span class="keyword">void</span> MainWindow::showDialog()</div><div class="line">&#123;</div><div class="line">    Dialog dialog;</div><div class="line">    dialog.exec();</div><div class="line">    ui-&gt;label-&gt;setText(dialog.getinput());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in dialog.h</span></div><div class="line"><span class="keyword">class</span> Dialog : <span class="keyword">public</span> QDialog</div><div class="line">&#123;</div><div class="line">    Q_OBJECT</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Dialog</span><span class="params">(QWidget *parent = <span class="number">0</span>)</span></span>;</div><div class="line">    ~Dialog();</div><div class="line">    <span class="function">QString <span class="title">getinput</span><span class="params">()</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    Ui::Dialog *ui;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//in dialog.cpp</span></div><div class="line">Dialog::Dialog(QWidget *parent) :</div><div class="line">    QDialog(parent),</div><div class="line">    ui(<span class="keyword">new</span> Ui::Dialog)</div><div class="line">&#123;</div><div class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line">Dialog::~Dialog()&#123;<span class="keyword">delete</span> ui;&#125;</div><div class="line">QString Dialog::getinput()</div><div class="line">&#123;</div><div class="line">    QString s = ui-&gt;lineEdit-&gt;text();</div><div class="line">    <span class="keyword">return</span> s;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>代码说明：上面的程序还是比较容易理解的，在mainwindow.h和mainwindow.cpp里，先将btn与showDialog建立联系，在showDialog内部创建Dialog对象，并通过exec()显示，由于exec()会阻碍线程，因此待用户输入数据之后再执行后续获取数据的代码，由于我们想获取的dialog内的数据是私有的，因此在Dialog类定义了一个public的getinput()函数（之前还考虑用友元，感觉被自己蠢哭了），间接获取用户的输入，最后将数据显示在主界面的label上面，达到主界面获取对话框数据的目的。<br>附：<a href="http://on2kkr82s.bkt.clouddn.com/DialogData1.rar" target="_blank" rel="external">方法一源代码</a></p>
-<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a><strong>方法二：</strong></h3><p>上面讨论的是用exec()显示对话框的情况下获取用户输入数据，那如果用show()显示对话框，该如何获取数据呢？由于show()不会开启事件循环，因此如果继续按上面的方法，用户根本来不及输入数据，后续的代码就已经执行了，因此需要用到信号槽机制。思路是这样的：按下对话框的确定按钮后，程序会自动调用QDialog::accept()函数，因此如果我们可以重载accept()函数，在其中发送信号，关联该信号的槽便会响应，我们在槽里面进行数据数据接收。<br>关键代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in mainwindow.h</span></div><div class="line"><span class="keyword">class</span> MainWindow : <span class="keyword">public</span> QMainWindow</div><div class="line">&#123;</div><div class="line">    Q_OBJECT</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">MainWindow</span><span class="params">(QWidget *parent = <span class="number">0</span>)</span></span>;</div><div class="line">    ~MainWindow();</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    Ui::MainWindow *ui;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">showDialog</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">displayData</span><span class="params">(QString data)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">accept</span><span class="params">()</span></span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//in mainwindow.cpp</span></div><div class="line">MainWindow::MainWindow(QWidget *parent) :</div><div class="line">    QMainWindow(parent),</div><div class="line">    ui(<span class="keyword">new</span> Ui::MainWindow)</div><div class="line">&#123;</div><div class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</div><div class="line">    connect(ui-&gt;btn, &amp;QPushButton::clicked, <span class="keyword">this</span>, &amp;MainWindow::showDialog);</div><div class="line">&#125;</div><div class="line">MainWindow::~MainWindow()&#123;<span class="keyword">delete</span> ui;&#125;</div><div class="line"><span class="keyword">void</span> MainWindow::showDialog()</div><div class="line">&#123;</div><div class="line">    Dialog *dialog = <span class="keyword">new</span> Dialog(<span class="keyword">this</span>);</div><div class="line">    connect(dialog, &amp;Dialog::receiveData, <span class="keyword">this</span>, &amp;MainWindow::displayData);</div><div class="line">    dialog-&gt;show();</div><div class="line">&#125;</div><div class="line"><span class="keyword">void</span> MainWindow::displayData(QString data)</div><div class="line">&#123;</div><div class="line">    ui-&gt;label-&gt;setText(data);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in dialog.h</span></div><div class="line"><span class="keyword">class</span> Dialog : <span class="keyword">public</span> QDialog</div><div class="line">&#123;</div><div class="line">    Q_OBJECT</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Dialog</span><span class="params">(QWidget *parent = <span class="number">0</span>)</span></span>;</div><div class="line">    ~Dialog();</div><div class="line">signals:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">receiveData</span><span class="params">(QString s)</span></span>;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    Ui::Dialog *ui;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">accept</span><span class="params">()</span></span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//in dialog.cpp</span></div><div class="line">Dialog::Dialog(QWidget *parent) :</div><div class="line">    QDialog(parent),</div><div class="line">    ui(<span class="keyword">new</span> Ui::Dialog)</div><div class="line">&#123;</div><div class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line">Dialog::~Dialog()&#123;<span class="keyword">delete</span> ui;&#125;</div><div class="line"><span class="keyword">void</span> Dialog::accept() <span class="comment">//重载accept()</span></div><div class="line">&#123;</div><div class="line">    QString data = ui-&gt;lineEdit-&gt;text();</div><div class="line">    <span class="function">emit <span class="title">receiveData</span><span class="params">(data)</span></span>;  <span class="comment">//发送信号给mainwindow</span></div><div class="line">    QDialog::accept();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>代码说明：用户输入数据后，按下确定按钮，程序会自动调用accept()，因此重载了accept()函数，让其将获取的输入数据作为信号（receiveData是一个信号）通过emit发送给主界面，在mainwindow.cpp，我们信号receiveData和槽displayData进行关联，displayData将接收的数据显示在主界面的label上的。总的来说，数据输入后，先调用accept()，accept()将信号（信号上带有数据）发送给displayData，displayData显示数据。通过信号槽机制，我们看到，即使对话框作为非模态窗口显示，即使其稍纵即逝，我们还是能通过特定手段获取用户的输入。<br>附：<a href="http://on2kkr82s.bkt.clouddn.com/DialogData2.rar" target="_blank" rel="external">方法二源代码</a></p>
-<p>运行结果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/57471216-file_1490012700145_1d5f.gif" alt="运行结果"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/23/Qt主界面获取对话框数据/" data-id="cj0jpd4zu000abkf54ro8fmio" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/">Qt</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Systems/">Computer Systems</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Systems/">Computer Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adb-shell/">adb shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器视觉/">机器视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Computer-Systems/" style="font-size: 10px;">Computer Systems</a> <a href="/tags/OpenCV/" style="font-size: 20px;">OpenCV</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/adb-shell/" style="font-size: 10px;">adb shell</a> <a href="/tags/机器视觉/" style="font-size: 20px;">机器视觉</a> <a href="/tags/计算机基础/" style="font-size: 10px;">计算机基础</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2017/03/21/Android Device Monitor 文件管理的常见问题/">Android Device Monitor 文件管理的常见问题</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/21/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/22/计算机系统漫游/">计算机系统漫游</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/21/OpenCV 图像遍历与颜色缩减/">OpenCV 图像遍历与颜色缩减</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/21/OpenCV Mat 介绍/">OpenCV Mat 介绍</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
 </aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Hexo
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
 
 
-<script src="/js/script.js"></script>
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
-  </div>
-</body>
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
 </html>
