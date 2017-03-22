@@ -134,7 +134,7 @@
 
     <style>
       body{
-        background-color: #F5F5F5;
+        background-color: #F2F2F2;
       }
 
       /* blog_info bottom background */
@@ -397,7 +397,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。</p>
+        <p>Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。<br><a id="more"></a></p>
 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>最近在看《第一行代码》（第二版）中关于数据存储方案的介绍。数据的状态分为两种：瞬时状态和持久状态，一般保存在内存中的数据随着活动的关闭，数据也就销毁了，如果我们想保存这些数据，该怎么办呢？书中介绍了三种实现数据持久化的方法，分别是：文件存储，SharedPreference 存储以及数据库存储。</p>
 <p>在学习第一种数据持久化方法文件存储的时候，我们通过 Context 类中的 openFileOutput() 方法创建一个指定了保存路径的 FileOutputStream 对象 out，然后用这个 out 对象去创建一个 OutputStreamWriter 对象，之后再用这个 OutputStreamWriter 对象创建一个 BufferedWriter 对象 writer，我们就是通过这个 writer 的 write() 方法向文件输出流写入我们想要保存的数据的。文件写入数据之后默认保存在 /data/data/(package name)/files 目录下。我们可以通过 Android Studio 中的 Android Device Monitor 去查看，Android Device Monitor 的打开方法如下所示。</p>
 <p><img src="http://img.blog.csdn.net/20170316145505719?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="打开 Android Device Monitor"></p>
