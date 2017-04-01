@@ -410,6 +410,9 @@
 <p>话不多说，先看最终效果吧！</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" style="zoom:20%"></p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/62403252-file_1491061459270_17abc.png" style="zoom:20%"></p>
+<p><a href="http://on2kkr82s.bkt.clouddn.com/Minofo%E9%A2%84%E8%A7%88.mp4" target="_blank" rel="external">点击查看视频预览效果</a></p>
+<p>点击<a href="http://on2kkr82s.bkt.clouddn.com/Minofo%201.0.apk" target="_blank" rel="external">下载 apk</a> 或扫码下载</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/1491063109.png" style="zoom:75%"></p>
 <p>整个开发花了两天时间，期间遇到不少问题，以下便是对整个过程的梳理和总结，希望读者看完后能对 Android 开发有一个初步的认识，然后挥舞起键盘和本子，把灵感用代码一一实现。</p>
 <h2 id="二、如何解析一个-Apk"><a href="#二、如何解析一个-Apk" class="headerlink" title="二、如何解析一个 Apk"></a>二、如何解析一个 Apk</h2><p>开发环境搭建什么的在此不再赘述，我使用的 IDE 是 Android Studio 2.2.3，JDK 版本是 1.8.0。要模仿一个 App，首先需要获取这个 Apk 的一些资源，如图片、布局文件。这个很简单，把下载下来的 Apk 文件后缀名改成 zip直接打开，相当于直接解压，如下图所示。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/8972296-file_1491025659408_2e55.png" style="zoom:80%"></p>
@@ -743,7 +746,7 @@
 <p>通过 View 的 getId() 方法获取当前被点击按钮的 id，然后根据 id 设置相应的点击逻辑，在这里还未加入过多的点击逻辑，但可以先分析一下，开始按钮 begin 点击后应该跳转至一个新的活动（即后面要讲到的用车界面），定位刷新按钮 refresh 点击之后会重新获取当前位置信息，并显示在主界面的地图模块中（地图模块将在下一节实现），所以这两个按钮的点击事件我们先用 TODO 注释占个坑，至于举报按钮 fab，我就不打算去实现它的点击事件了，所以在此加入一个简单的 Toast 提示语句。</p>
 <p>好了，经过上面的开发过程，我们往主界面加入了标题栏、导航栏和悬浮按钮，功能已经基本完善了，下面需要加入地图显示模块，在此之前，我们先预览一下到目前为止的成果吧，如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/9165962-file_1491059740994_c666.png" style="zoom:20%"></p>
-<p>本来想通过一篇博客就把整个过程写完，现在发现前面的部分写得过于详细，以致于才写到一般就已经快 6000 字了。因此开发过程的后续内容再用一篇博客来写吧，</p>
+<p>本来想通过一篇博客就把整个过程写完，现在发现前面的部分写得过于详细，以致于才写到一般就已经快 6000 字了。因此开发过程的后续内容再用一篇博客来写吧！</p>
 
     
 
