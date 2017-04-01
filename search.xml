@@ -4,40 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Android 开发小作：模仿 ofo 共享单车]]></title>
-      <url>http://nightn.com/2017/04/01/Android-%E5%BC%80%E5%8F%91%E5%B0%8F%E4%BD%9C%EF%BC%9A%E6%A8%A1%E4%BB%BF-ofo-%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6/</url>
-      <content type="html"><![CDATA[<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>学习 Android 开发已经一个月了，除了敲书本上的 demo，就只写过一个简易版的浏览器，为了巩固之前所学，我决定开发一个稍微完整点的具有 Material Design 风格的 App。浏览了手机上的 App，发现在 Material Design 风格的软件中，除了 Google 系列的 App，就只有印象笔记和 ofo 共享单车了（其他软件基本都是微信风格）。ofo 共享单车需要引入地图模块，实现起来更加有成就感，因此最终决定模仿 ofo 共享单车（主要是对界面的模仿）。</p>
-<p>整个开发花了两天时间，期间遇到不少问题，以下便是对整个过程的梳理和总结，希望读者看完后能对 Android 开发有一个初步的认识，然后挥舞起键盘和本子，把灵感用代码一一实现。</p>
-<h2 id="二、如何解析一个-Apk"><a href="#二、如何解析一个-Apk" class="headerlink" title="二、如何解析一个 Apk"></a>二、如何解析一个 Apk</h2><p>开发环境搭建什么的在此不再赘述，我使用的 IDE 是 Android Studio 2.2.3，JDK 版本是 1.8.0。要模仿一个 App，首先需要获取这个 Apk 的一些资源，如图片、布局文件。这个很简单，把下载下来的 Apk 文件后缀名改成 zip直接打开，相当于直接解压，如下图所示。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/8972296-file_1491025659408_2e55.png" style="zoom:80%" align="middle"></p>
-<p>其中 res 目录存放的就是一个 App 所有的图片资源和布局文件了，找到其中需要的图片，放到 Android 项目的相应目录即可，下图便是我所选的部分图片资源。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/17743548-file_1491025990799_35a4.png" style="zoom:75%"></p>
-<p>当然，如果深入解析，比如通过 ApkTool 工具，还能获取一个 apk 可读的 AndroidManifest.xml（通过 zip 得到的 AndroidManifest.xml 是乱码的），这样就能查看它的 package name、Activity 组件、所需要的权限等信息了。如果你觉得这些信息还不够用，甚至还可以通过 dex2jar 工具反编译 dex 文件，获得它的 java 源代码，听起来是不是很厉害，不过这些代码中的命名都是经过处理的，基本上也读不懂。如果你想更深入地了解 Android 反编译技术，你可以参考<a href="https://unclechen.github.io/2016/09/07/Android%E5%8F%8D%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" target="_blank" rel="external">这篇文章</a>。</p>
-<p>言归正传，在我们这个项目中，主要用到的只是 apk 中的图片资源，下面就一起来开启开发之旅吧！</p>
-<h2 id="三、主界面开发"><a href="#三、主界面开发" class="headerlink" title="三、主界面开发"></a>三、主界面开发</h2><p>先来观察一下 ofo 共享单车的主界面布局，在下图中，我们可以看到主界面包括三个部分，最上面的标题栏、中间的地图以及底下的三个悬浮按钮，非常的简洁明了。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/39342242-file_1491026792466_94cc.png" style="zoom:20%"></p>
-<p>然后通过点击左上角的导航按钮或者在屏幕上左滑，会从侧边出现一个导航栏，如下图所示，导航栏又分为上下两个部分，上部是</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/85026807-file_1491028277547_5193.png" style="zoom:20%"></p>
-<h3 id="1-标题栏实现"><a href="#1-标题栏实现" class="headerlink" title="1. 标题栏实现"></a>1. 标题栏实现</h3><h3 id="2-导航栏实现"><a href="#2-导航栏实现" class="headerlink" title="2. 导航栏实现"></a>2. 导航栏实现</h3><h3 id="3-悬浮按钮实现"><a href="#3-悬浮按钮实现" class="headerlink" title="3. 悬浮按钮实现"></a>3. 悬浮按钮实现</h3><h3 id="4-嵌入高德地图"><a href="#4-嵌入高德地图" class="headerlink" title="4. 嵌入高德地图"></a>4. 嵌入高德地图</h3><h2 id="四、用车界面开发"><a href="#四、用车界面开发" class="headerlink" title="四、用车界面开发"></a>四、用车界面开发</h2><h3 id="1-界面布局概述"><a href="#1-界面布局概述" class="headerlink" title="1. 界面布局概述"></a>1. 界面布局概述</h3><h3 id="2-远程数据库建立"><a href="#2-远程数据库建立" class="headerlink" title="2. 远程数据库建立"></a>2. 远程数据库建立</h3><h3 id="3-利用-OkHttp-实现网络请求"><a href="#3-利用-OkHttp-实现网络请求" class="headerlink" title="3. 利用 OkHttp 实现网络请求"></a>3. 利用 OkHttp 实现网络请求</h3><h3 id="4-打开第三方软件"><a href="#4-打开第三方软件" class="headerlink" title="4. 打开第三方软件"></a>4. 打开第三方软件</h3><h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><h2 id="六、-下载"><a href="#六、-下载" class="headerlink" title="六、 下载"></a>六、 下载</h2>]]></content>
-      
-        <categories>
-            
-            <category> Android </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Android </tag>
-            
-            <tag> ofo </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[如何创造财富]]></title>
       <url>http://nightn.com/2017/03/25/%E5%A6%82%E4%BD%95%E5%88%9B%E9%80%A0%E8%B4%A2%E5%AF%8C/</url>
       <content type="html"><![CDATA[<p>“<strong>如何创造财富？我认为最好的办法就是自己创业，或者加入创业公司。</strong>” —— Paul·Graham<br><a id="more"></a></p>
