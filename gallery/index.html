@@ -1,207 +1,313 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>gallery | Nightn</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="It always seems impossible until it&apos;s done">
-<meta property="og:type" content="website">
-<meta property="og:title" content="gallery">
-<meta property="og:url" content="http://nightn.com/gallery/index.html">
-<meta property="og:site_name" content="Nightn">
-<meta property="og:description" content="It always seems impossible until it&apos;s done">
-<meta property="og:updated_time" content="2017-03-21T16:15:23.355Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gallery">
-<meta name="twitter:description" content="It always seems impossible until it&apos;s done">
-  
-    <link rel="alternate" href="/atom.xml" title="Nightn" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
 
+    <!-- Title -->
+    
+    <title>
+        
+            gallery | 
+        
+        Nightn
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Nightn">
+    <meta name="description" content="It always seems impossible until it&#39;s done">
+    <meta name="keywords" content="null">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Nightn">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://nightn.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="gallery | Nightn">
+    <meta property="og:description" content="It always seems impossible until it&#39;s done">
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "PingFang SC", "Helvetica Neue", Helvetice, "Source Sans Pro", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F2F2F2;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
 <link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
 
+
+    
+        <!-- Single Gallery Page -->
+        <link rel="stylesheet" href="/css/gallery.min.css">
+
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Nightn</a>
-      </h1>
-      
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1>
+                <a href="/"><strong>Nightn</strong></a> - gallery
+            </h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#footer" class="icon fa-info-circle">
+                            ©&nbsp;Nightn
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main -->
+        <div id="main">
+            
+                
+                    <article class="thumb">
+                        <a href="http://on2kkr82s.bkt.clouddn.com/17-3-20/4106771-file_1489940579803_5392.jpg" class="image lazy" data-original="http://on2kkr82s.bkt.clouddn.com/17-3-20/4106771-file_1489940579803_5392.jpg"><img class="lazy" data-original="http://on2kkr82s.bkt.clouddn.com/17-3-20/4106771-file_1489940579803_5392.jpg" alt="俯瞰浙大" /></a>
+                        <h2>俯瞰浙大</h2>
+                        <p>俯瞰浙大紫金港校区</p>
+                    </article>
+                
+                    <article class="thumb">
+                        <a href="http://on2kkr82s.bkt.clouddn.com/17-3-20/26281726-file_1489940543410_16127.jpg" class="image lazy" data-original="http://on2kkr82s.bkt.clouddn.com/17-3-20/26281726-file_1489940543410_16127.jpg"><img class="lazy" data-original="http://on2kkr82s.bkt.clouddn.com/17-3-20/26281726-file_1489940543410_16127.jpg" alt="工藤新一" /></a>
+                        <h2>工藤新一</h2>
+                        <p>工藤新一</p>
+                    </article>
+                
+                    <article class="thumb">
+                        <a href="http://on2kkr82s.bkt.clouddn.com/17-3-20/56972118-file_1489940533546_14e78.jpg" class="image lazy" data-original="http://on2kkr82s.bkt.clouddn.com/17-3-20/56972118-file_1489940533546_14e78.jpg"><img class="lazy" data-original="http://on2kkr82s.bkt.clouddn.com/17-3-20/56972118-file_1489940533546_14e78.jpg" alt="你的名字" /></a>
+                        <h2>你的名字</h2>
+                        <p>你的名字</p>
+                    </article>
+                
+            
+        </div>
+        <!-- Footer -->
+        <!--
+        <footer id="footer" class="panel">
+          <div class="inner split">
+            <div>
+              <section>
+                <h2>Magna feugiat sed adipiscing</h2>
+                <p>Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum eget quis orci mattis aliquet. Maecenas fringilla et ante at lorem et ipsum. Dolor nulla eu bibendum sapien. Donec non pharetra dui. Nulla consequat, ex ut suscipit rutrum, mi dolor tincidunt erat, et scelerisque turpis ipsum.</p>
+              </section>
+              <section>
+                <h2>Follow me on ...</h2>
+                <ul class="icons">
+                  <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                  <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                  <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                  <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+                  <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                  <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                  <li><a href="#" class="icon fa-telegram"><span class="label">Telegram</span></a></li>
+                </ul>
+              </section>
+              <p class="copyright">
+                &copy; Design: <a href="#">Gallery</a>.
+              </p>
+            </div>
+            <div>
+              <section>
+                <h2>Get in touch</h2>
+                <form method="post" action="#">
+                  <div class="field half first">
+                    <input type="text" name="name" id="name" placeholder="Name" />
+                  </div>
+                  <div class="field half">
+                    <input type="text" name="email" id="email" placeholder="Email" />
+                  </div>
+                  <div class="field">
+                    <textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
+                  </div>
+                  <ul class="actions">
+                    <li><input type="submit" value="Send" class="special" /></li>
+                    <li><input type="reset" value="Reset" /></li>
+                  </ul>
+                </form>
+              </section>
+            </div>
+          </div>
+        </footer>
+        -->
+
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://nightn.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="gallery-undefined" class="article article-type-gallery" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/gallery/index.html" class="article-date">
-  <time datetime="2017-03-21T16:15:23.355Z" itemprop="datePublished">2017-03-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      gallery
-    </h1>
-  
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://nightn.com/gallery/index.html" data-id="cj0z0ck050003n4f56gu843ll" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-  
-</article>
+    <!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/gallery/jquery.poptrox.min.js"></script>
+    <script src="/js/gallery/skel.min.js"></script>
+    <script src="/js/gallery/util.min.js"></script>
+    <script src="/js/gallery/main.min.js"></script>
+    <script src="/js/gallery/jquery.scrollstop.min.js"></script>
+    <script src="/js/lazyload.min.js"></script>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Systems/">Computer Systems</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mind-Explorer/">Mind Explorer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/OpenCV/">OpenCV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Systems/">Computer Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adb-shell/">adb shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ofo/">ofo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/《黑客与画家》/">《黑客与画家》</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/创业/">创业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器视觉/">机器视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机基础/">计算机基础</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/Computer-Systems/" style="font-size: 10px;">Computer Systems</a> <a href="/tags/OpenCV/" style="font-size: 20px;">OpenCV</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/adb-shell/" style="font-size: 10px;">adb shell</a> <a href="/tags/ofo/" style="font-size: 10px;">ofo</a> <a href="/tags/《黑客与画家》/" style="font-size: 10px;">《黑客与画家》</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/机器视觉/" style="font-size: 20px;">机器视觉</a> <a href="/tags/计算机基础/" style="font-size: 10px;">计算机基础</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2017/04/01/Android-开发小作：模仿-ofo-共享单车/">Android 开发小作：模仿 ofo 共享单车</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/25/如何创造财富/">如何创造财富</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/21/Android Device Monitor 文件管理的常见问题/">Android Device Monitor 文件管理的常见问题</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/21/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/22/计算机系统漫游/">计算机系统漫游</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 Nightn<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-  </div>
+    <script type="text/javascript">
+        queue.offer(function(){
+            $('.lazy').lazyload({
+              effect: 'fadeIn',
+              event: 'scrollstop'
+            });
+        })
+    </script>
 </body>
+
+    
 </html>
