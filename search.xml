@@ -4,84 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Android Device Monitor 文件管理的常见问题]]></title>
-      <url>http://nightn.com/2017/04/02/Android%20Device%20Monitor%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
-      <content type="html"><![CDATA[<p>Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。<br><a id="more"></a></p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>最近在看《第一行代码》（第二版）中关于数据存储方案的介绍。数据的状态分为两种：瞬时状态和持久状态，一般保存在内存中的数据随着活动的关闭，数据也就销毁了，如果我们想保存这些数据，该怎么办呢？书中介绍了三种实现数据持久化的方法，分别是：文件存储，SharedPreference 存储以及数据库存储。</p>
-<p>在学习第一种数据持久化方法文件存储的时候，我们通过 Context 类中的 openFileOutput() 方法创建一个指定了保存路径的 FileOutputStream 对象 out，然后用这个 out 对象去创建一个 OutputStreamWriter 对象，之后再用这个 OutputStreamWriter 对象创建一个 BufferedWriter 对象 writer，我们就是通过这个 writer 的 write() 方法向文件输出流写入我们想要保存的数据的。文件写入数据之后默认保存在 /data/data/(package name)/files 目录下。我们可以通过 Android Studio 中的 Android Device Monitor 去查看，Android Device Monitor 的打开方法如下所示。</p>
-<p><img src="http://img.blog.csdn.net/20170316145505719?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="打开 Android Device Monitor"></p>
-<h2 id="问题1：设备-Offline-File-Explorer-空空如也"><a href="#问题1：设备-Offline-File-Explorer-空空如也" class="headerlink" title="问题1：设备 Offline,  File Explorer 空空如也"></a><strong>问题1：设备 Offline,  File Explorer 空空如也</strong></h2><p>打开 Android Device Monitor 之后，发现里面什么都没有，左边的面板上显示了一台模拟器，但出于 offline 状态，不对呀，我的模拟器命名开着的呀，它正在运行我刚刚写的 app 呢，怎么这里会显示离线状态呢？于是我试着 Google 去找解决方案。</p>
-<p><img src="http://img.blog.csdn.net/20170316145939956?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" File Explorer 不显示文件"></p>
-<p>在 StackOverflow 上我发现了有人和我一样也碰到了这个问题，不过底下的回答寥寥无几，我找到了一个最高赞的答案（其实也就一个赞….），如下图所示，他的意思是他也不明白其中的具体原理，但是他发现如果先打开 Android Device Monitor，然后再运行模拟器，就可以解决这个问题。</p>
-<p><img src="http://img.blog.csdn.net/20170316150034301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="解决 File Explorer 不显示文件（from SO）"></p>
-<p>于是我按照这个方法尝试，先打开 Android Device Monitor，里面什么也没有，然后打开模拟器，随着模拟器的启动，Monitor 左侧面板出现了 offline 的模拟器，然后再相继启动很多服务，最后就显示为 online 了，如下图所示，这样我们就可以通过 Monitor 中的 File Explorer 标签访问模拟器中的文件了。</p>
-<p><img src="http://img.blog.csdn.net/20170316150112791?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" 解决 File Explorer 不显示文件"></p>
-<h2 id="问题2：File-Explorer-中的文件无法访问"><a href="#问题2：File-Explorer-中的文件无法访问" class="headerlink" title="问题2：File Explorer 中的文件无法访问"></a><strong>问题2：File Explorer 中的文件无法访问</strong></h2><p>还记得刚刚说的吗，openFileOutput() 方法生成的文件存放在一个默认路径，即 /data/data/(package name)/files 下。由于我的包名是 com.knightaoko.filepersistencetest，所以在下文的叙述中，大家看到这个陌生的字符串不要惊讶，实际操作下替换成你自己的包名即可。（这期间还碰到个问题，好像 Android Device Monitor 不能和 Instant Run 同时运行，所以在此需要把 Instant Run 功能关闭，怎么关闭大家自行 Google，很简单的。）于是，下一步当然是打开这个路径了，找到 data，点击，没反应，再点击，还是没反应。又遇到问题了，我无法访问 data 目录，通过 Google 搜索，我知道了 File Explorer 中的每个文件和文件夹都是有访问权限的，如下图红框中标识的就是 data 文件夹的访问权限。</p>
-<p><img src="http://img.blog.csdn.net/20170316150235614?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="无权访问"></p>
-<p> 访问权限是 drwxrwx–x，这玩意是什么意思呢？我相信，学过 Linux 的同学肯定一眼就知道这是什么意思。不知道也没关系，听我慢慢道来，这一个字符串一共有 10 个字符，第一个字符表示是文件夹还是目录，如果第 1 个字符是 d，则表示是文件夹。后面 9 个字符可以分为三组，第一组 rwx 表示所有者（user）对文件的访问权限，r 表示可读（read），w 表示可写（write），x 表示可被执行，- 表示没有该权限；第二组 rwx 表示组群（group）对文件的访问权限；第三组 –x 表示其他人（other）对文件的访问权限，可以看到，没有 r 和 w，说明 data 对其他人来说是不可读不可写的，怪不得我们不能打开它呢，那怎么办呢？于是我又网上搜啊搜，发现可以通过一定的方法修改文件的访问权限的，对，这个方法就是 adb shell。</p>
-<p>adb shell 是 Android SDK 中的一个工具，你可以在你的 Android SDK 目录下的 platform-tools 找到它，下图就是我电脑上的该目录：</p>
-<p><img src="http://img.blog.csdn.net/20170316150326458?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="adb 所在目录"></p>
-<p>我们需要将这个目录添加到环境变量，为的是后面在命令行直接调用 adb 中的命令。比如在此我将 D:\AndroidSDK\platform-tools 添加到环境变量（具体怎么添加应该不用手把手教学了吧）后，运行 cmd 命令行，然后输入下面的命令。</p>
-<p><img src="http://img.blog.csdn.net/20170316150358154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="通过 adb shell 获取文件访问权限"></p>
-<ul>
-<li>adb shell 是打开 adb 外壳程序。</li>
-<li>su 是获取 root 权限，只有 root 权限才能修改文件的访问权限。</li>
-<li>底下一堆 chmod 777 是把对应的文件或文件夹的访问权限的后 9 位设置成 rwxrwxrwx，777 就三个二进制 111, 喝起来就是 111111111（9 个 1），即相当于把后 9 位访问权限都置 1，于是就成了 rwxrwxrwx，即所有用户都具有该文件的全部访问权限（妈妈再也不用担心我打不开 data 了…）。我们来看看结果：</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20170316150537048?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" 修改后的文件访问权限"></p>
-<h2 id="问题3：File-Explorer-中的文件无法-pull（下载）"><a href="#问题3：File-Explorer-中的文件无法-pull（下载）" class="headerlink" title="问题3：File Explorer 中的文件无法 pull（下载）"></a><strong>问题3：File Explorer 中的文件无法 pull（下载）</strong></h2><p>可以看到这些目录都能访问了，可以在包名目录下看到生成的 data 文件了，下一步我们想把这个文件复制到我们的电脑里，怎么操作呢？选中该文件，点击右上角的 pull 图标即可，如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170316150620678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载按钮"></p>
-<p>点击之后，选好保存路径。结果我们发现文件并没有保存下来，在 Console 窗口还提示了错误：</p>
-<p><img src="http://img.blog.csdn.net/20170316150658987?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载出错"></p>
-<p>意思就是拉取文件失败，因为你无权进行该操作。又是一脸懵逼，怎么办？还能怎么办，继续 Google 呗！这里我找了很久，终于发现了解决方案：adb root 。没错，在命令行输入这条语句，完美解决！（注意是在 windows 下的命令行，而不是 adb shell 里，当然前提是你添加了 adb 的目录到你的环境变量里）</p>
-<p><img src="http://img.blog.csdn.net/20170316150811460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="通过 adb root 获取文件下载权限"></p>
-<p>然后我们再来 pull 一下，卧槽，崩溃了，又发现问题了：Failed to pull selection。</p>
-<p><img src="http://img.blog.csdn.net/20170316150850913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载再次出错"></p>
-<p>怎么办？OK，继续 Google，在 StackOverflow 里找到了一个高赞的解决方法：</p>
-<p><img src="http://img.blog.csdn.net/20170316150928820?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重新选择模拟器（from SO）"></p>
-<p>什么意思？重新选择一下 Android Device Monitor 左侧面板的设备即可，没错！就是把下图红框中国的玩意儿点一下。</p>
-<p><img src="http://img.blog.csdn.net/20170316151002632?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重新选择模拟器"></p>
-<p>好了，我们再找到刚刚那个要拷贝的文件，pull 一下，卧槽！！成功了，真是踏破铁鞋无觅处，得来全得靠姑姑（谷歌）。</p>
-<p><img src="http://img.blog.csdn.net/20170316151045304?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载成功"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>总结一下吧，初次使用 Android Device Monitor，本来只是用来辅助学习 SQLite，结果一上午碰到一大堆问题，总算都一一解决了，在此总结一下。</p>
-<ol>
-<li><p><strong>Android Device Monitor 要在模拟器运行之前就打开</strong>，这样才不会出现模拟器设备 offline 的问题。</p>
-</li>
-<li><p>Android Device Monitor 和 Instant Run 貌似有冲突，<strong>在用 Android Device Monitor 时关闭 Instant Run 功能</strong>。我相信还有更好的解决方法，不然打开一个大一点的 APP，不能同时用这两个功能，那多影响效率啊。只是我目前还处于学习阶段，上述方案能解决我当前的问题，不影响我进一步学习，那它就是 OK 的。</p>
-</li>
-<li><p>操作 Android Device Monitor 时，应该默认把你当做其他人（other）对待，所以你对文件的访问权限很受限制。解决方法是在命令行中，<strong>通过在 adb shell 里获取 root 权限，并更改相应文件的访问权限</strong>，当然记得将 adb 所在目录添加进环境变量。</p>
-</li>
-<li><p>能访问了但是不能下载也是很麻烦的事，<strong>通过在命令行运行 adb root 获取文件的下载权限</strong>。</p>
-</li>
-<li><p>通过上述操作之后，就能正常使用 Android Device Monitor 进行文件管理了。但不幸的是，<strong>当你重启模拟器，或启动另一台模拟器时，这些配置又得重新来过</strong>，否则你还是无法访问和下载模拟器中的文件。这个问题的根源在于权限二字，问题不是不能获取权限（通过 adb shell 可以获取 root 权限），而在于获取权限太麻烦了，希望后续版本的 Android Studio 可以直接在 Android Device Monitor 的 GUI 中设置相应获取权限的命令，使得广大 Android 开发者对模拟器中的文件操作更有效率。</p>
-</li>
-<li><p><strong>Google 大法好</strong>。</p>
-</li>
-<li><p>最后还有一点，我目前是跟着《第一行代码》（第二版）学习 Android 开发的，但是作者郭霖老师没有组织读者交流群，所以在学习过程中遇到问题时，要么不知所措，要么大费周折才解决一个问题。如果有志同道合的同学一起交流，那样学习更有效率，遇到问题也能大家一起讨论解决。<strong>不知道大家有没有《第二行代码》学习社群推荐，或者有意向和我一起组建一个这样的学习环境，大家可以在留言区畅所欲言</strong>。</p>
-</li>
-<li><p>PS：本人初出茅庐，开发经验匮乏。如果你发现上文中有不对的地方，还望不吝赐教！</p>
-</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> Android Studio </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Android Studio </tag>
-            
-            <tag> adb shell </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Android 开发小作：模仿 ofo 共享单车(2)]]></title>
       <url>http://nightn.com/2017/04/02/Android-develop-minofo-2/</url>
       <content type="html"><![CDATA[<p>本文接着上一篇博客：<a href="http://nightn.com/2017/04/01/Android-%E5%BC%80%E5%8F%91%E5%B0%8F%E4%BD%9C%EF%BC%9A%E6%A8%A1%E4%BB%BF-ofo-%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6(1">Android 开发小作：模仿 ofo 共享单车(1)</a>) ，继续记录模仿开发 ofo 共享单车的过程。在上一篇博客中，我们实现了主界面大部分功能的开发，包括标题栏、导航栏和悬浮按钮，实现效果如下：</p>
@@ -992,7 +914,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
     
     <entry>
       <title><![CDATA[如何创造财富]]></title>
-      <url>http://nightn.com/2017/03/25/how%20to%20create%20wealth/</url>
+      <url>http://nightn.com/2017/03/25/how-to-create-wealth/</url>
       <content type="html"><![CDATA[<p>“<strong>如何创造财富？我认为最好的办法就是自己创业，或者加入创业公司。</strong>” —— Paul·Graham<br><a id="more"></a></p>
 <p>「如何创造财富」是《黑客与画家》（Hackers and Painters: Big Ideas from the Computer Age）一书中所讨论的一个章节话题，本书作者 Paul Graham 被誉为「硅谷创业之父」，他在书中提到的观点都十分耐人寻味，甚至让人大开眼界，书的内容并不深奥，不仅仅是写给程序员和创业者的，更是写给普通读者的。本文主要是对「如何创造财富」这一章内容进行总结和讨论。</p>
 <h2 id="《黑客与画家》"><a href="#《黑客与画家》" class="headerlink" title="《黑客与画家》"></a>《黑客与画家》</h2><p>《黑客与画家》是本非常独特的书，作者最大的目的，就是通过这本书让普通读者理解我们所处的这个计算机时代。作者把黑客与画家比较，二者都是怀着一门特殊手艺、有创造天赋的艺术创作者，本书内容包括黑客的成长以及他们看待世界的观点、黑客是如何做出成果（或者说创造财富）进而影响全世界的、黑客所使用的工具（编程语言）和黑客文化。</p>
@@ -1063,8 +985,86 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
     </entry>
     
     <entry>
+      <title><![CDATA[Android Device Monitor 文件管理的常见问题]]></title>
+      <url>http://nightn.com/2017/03/19/Android%20Device%20Monitor%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<p>Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。<br><a id="more"></a></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>最近在看《第一行代码》（第二版）中关于数据存储方案的介绍。数据的状态分为两种：瞬时状态和持久状态，一般保存在内存中的数据随着活动的关闭，数据也就销毁了，如果我们想保存这些数据，该怎么办呢？书中介绍了三种实现数据持久化的方法，分别是：文件存储，SharedPreference 存储以及数据库存储。</p>
+<p>在学习第一种数据持久化方法文件存储的时候，我们通过 Context 类中的 openFileOutput() 方法创建一个指定了保存路径的 FileOutputStream 对象 out，然后用这个 out 对象去创建一个 OutputStreamWriter 对象，之后再用这个 OutputStreamWriter 对象创建一个 BufferedWriter 对象 writer，我们就是通过这个 writer 的 write() 方法向文件输出流写入我们想要保存的数据的。文件写入数据之后默认保存在 /data/data/(package name)/files 目录下。我们可以通过 Android Studio 中的 Android Device Monitor 去查看，Android Device Monitor 的打开方法如下所示。</p>
+<p><img src="http://img.blog.csdn.net/20170316145505719?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="打开 Android Device Monitor"></p>
+<h2 id="问题1：设备-Offline-File-Explorer-空空如也"><a href="#问题1：设备-Offline-File-Explorer-空空如也" class="headerlink" title="问题1：设备 Offline,  File Explorer 空空如也"></a><strong>问题1：设备 Offline,  File Explorer 空空如也</strong></h2><p>打开 Android Device Monitor 之后，发现里面什么都没有，左边的面板上显示了一台模拟器，但出于 offline 状态，不对呀，我的模拟器命名开着的呀，它正在运行我刚刚写的 app 呢，怎么这里会显示离线状态呢？于是我试着 Google 去找解决方案。</p>
+<p><img src="http://img.blog.csdn.net/20170316145939956?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" File Explorer 不显示文件"></p>
+<p>在 StackOverflow 上我发现了有人和我一样也碰到了这个问题，不过底下的回答寥寥无几，我找到了一个最高赞的答案（其实也就一个赞….），如下图所示，他的意思是他也不明白其中的具体原理，但是他发现如果先打开 Android Device Monitor，然后再运行模拟器，就可以解决这个问题。</p>
+<p><img src="http://img.blog.csdn.net/20170316150034301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="解决 File Explorer 不显示文件（from SO）"></p>
+<p>于是我按照这个方法尝试，先打开 Android Device Monitor，里面什么也没有，然后打开模拟器，随着模拟器的启动，Monitor 左侧面板出现了 offline 的模拟器，然后再相继启动很多服务，最后就显示为 online 了，如下图所示，这样我们就可以通过 Monitor 中的 File Explorer 标签访问模拟器中的文件了。</p>
+<p><img src="http://img.blog.csdn.net/20170316150112791?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" 解决 File Explorer 不显示文件"></p>
+<h2 id="问题2：File-Explorer-中的文件无法访问"><a href="#问题2：File-Explorer-中的文件无法访问" class="headerlink" title="问题2：File Explorer 中的文件无法访问"></a><strong>问题2：File Explorer 中的文件无法访问</strong></h2><p>还记得刚刚说的吗，openFileOutput() 方法生成的文件存放在一个默认路径，即 /data/data/(package name)/files 下。由于我的包名是 com.knightaoko.filepersistencetest，所以在下文的叙述中，大家看到这个陌生的字符串不要惊讶，实际操作下替换成你自己的包名即可。（这期间还碰到个问题，好像 Android Device Monitor 不能和 Instant Run 同时运行，所以在此需要把 Instant Run 功能关闭，怎么关闭大家自行 Google，很简单的。）于是，下一步当然是打开这个路径了，找到 data，点击，没反应，再点击，还是没反应。又遇到问题了，我无法访问 data 目录，通过 Google 搜索，我知道了 File Explorer 中的每个文件和文件夹都是有访问权限的，如下图红框中标识的就是 data 文件夹的访问权限。</p>
+<p><img src="http://img.blog.csdn.net/20170316150235614?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="无权访问"></p>
+<p> 访问权限是 drwxrwx–x，这玩意是什么意思呢？我相信，学过 Linux 的同学肯定一眼就知道这是什么意思。不知道也没关系，听我慢慢道来，这一个字符串一共有 10 个字符，第一个字符表示是文件夹还是目录，如果第 1 个字符是 d，则表示是文件夹。后面 9 个字符可以分为三组，第一组 rwx 表示所有者（user）对文件的访问权限，r 表示可读（read），w 表示可写（write），x 表示可被执行，- 表示没有该权限；第二组 rwx 表示组群（group）对文件的访问权限；第三组 –x 表示其他人（other）对文件的访问权限，可以看到，没有 r 和 w，说明 data 对其他人来说是不可读不可写的，怪不得我们不能打开它呢，那怎么办呢？于是我又网上搜啊搜，发现可以通过一定的方法修改文件的访问权限的，对，这个方法就是 adb shell。</p>
+<p>adb shell 是 Android SDK 中的一个工具，你可以在你的 Android SDK 目录下的 platform-tools 找到它，下图就是我电脑上的该目录：</p>
+<p><img src="http://img.blog.csdn.net/20170316150326458?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="adb 所在目录"></p>
+<p>我们需要将这个目录添加到环境变量，为的是后面在命令行直接调用 adb 中的命令。比如在此我将 D:\AndroidSDK\platform-tools 添加到环境变量（具体怎么添加应该不用手把手教学了吧）后，运行 cmd 命令行，然后输入下面的命令。</p>
+<p><img src="http://img.blog.csdn.net/20170316150358154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="通过 adb shell 获取文件访问权限"></p>
+<ul>
+<li>adb shell 是打开 adb 外壳程序。</li>
+<li>su 是获取 root 权限，只有 root 权限才能修改文件的访问权限。</li>
+<li>底下一堆 chmod 777 是把对应的文件或文件夹的访问权限的后 9 位设置成 rwxrwxrwx，777 就三个二进制 111, 喝起来就是 111111111（9 个 1），即相当于把后 9 位访问权限都置 1，于是就成了 rwxrwxrwx，即所有用户都具有该文件的全部访问权限（妈妈再也不用担心我打不开 data 了…）。我们来看看结果：</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20170316150537048?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" 修改后的文件访问权限"></p>
+<h2 id="问题3：File-Explorer-中的文件无法-pull（下载）"><a href="#问题3：File-Explorer-中的文件无法-pull（下载）" class="headerlink" title="问题3：File Explorer 中的文件无法 pull（下载）"></a><strong>问题3：File Explorer 中的文件无法 pull（下载）</strong></h2><p>可以看到这些目录都能访问了，可以在包名目录下看到生成的 data 文件了，下一步我们想把这个文件复制到我们的电脑里，怎么操作呢？选中该文件，点击右上角的 pull 图标即可，如下图所示：</p>
+<p><img src="http://img.blog.csdn.net/20170316150620678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载按钮"></p>
+<p>点击之后，选好保存路径。结果我们发现文件并没有保存下来，在 Console 窗口还提示了错误：</p>
+<p><img src="http://img.blog.csdn.net/20170316150658987?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载出错"></p>
+<p>意思就是拉取文件失败，因为你无权进行该操作。又是一脸懵逼，怎么办？还能怎么办，继续 Google 呗！这里我找了很久，终于发现了解决方案：adb root 。没错，在命令行输入这条语句，完美解决！（注意是在 windows 下的命令行，而不是 adb shell 里，当然前提是你添加了 adb 的目录到你的环境变量里）</p>
+<p><img src="http://img.blog.csdn.net/20170316150811460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="通过 adb root 获取文件下载权限"></p>
+<p>然后我们再来 pull 一下，卧槽，崩溃了，又发现问题了：Failed to pull selection。</p>
+<p><img src="http://img.blog.csdn.net/20170316150850913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载再次出错"></p>
+<p>怎么办？OK，继续 Google，在 StackOverflow 里找到了一个高赞的解决方法：</p>
+<p><img src="http://img.blog.csdn.net/20170316150928820?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重新选择模拟器（from SO）"></p>
+<p>什么意思？重新选择一下 Android Device Monitor 左侧面板的设备即可，没错！就是把下图红框中国的玩意儿点一下。</p>
+<p><img src="http://img.blog.csdn.net/20170316151002632?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重新选择模拟器"></p>
+<p>好了，我们再找到刚刚那个要拷贝的文件，pull 一下，卧槽！！成功了，真是踏破铁鞋无觅处，得来全得靠姑姑（谷歌）。</p>
+<p><img src="http://img.blog.csdn.net/20170316151045304?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载成功"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>总结一下吧，初次使用 Android Device Monitor，本来只是用来辅助学习 SQLite，结果一上午碰到一大堆问题，总算都一一解决了，在此总结一下。</p>
+<ol>
+<li><p><strong>Android Device Monitor 要在模拟器运行之前就打开</strong>，这样才不会出现模拟器设备 offline 的问题。</p>
+</li>
+<li><p>Android Device Monitor 和 Instant Run 貌似有冲突，<strong>在用 Android Device Monitor 时关闭 Instant Run 功能</strong>。我相信还有更好的解决方法，不然打开一个大一点的 APP，不能同时用这两个功能，那多影响效率啊。只是我目前还处于学习阶段，上述方案能解决我当前的问题，不影响我进一步学习，那它就是 OK 的。</p>
+</li>
+<li><p>操作 Android Device Monitor 时，应该默认把你当做其他人（other）对待，所以你对文件的访问权限很受限制。解决方法是在命令行中，<strong>通过在 adb shell 里获取 root 权限，并更改相应文件的访问权限</strong>，当然记得将 adb 所在目录添加进环境变量。</p>
+</li>
+<li><p>能访问了但是不能下载也是很麻烦的事，<strong>通过在命令行运行 adb root 获取文件的下载权限</strong>。</p>
+</li>
+<li><p>通过上述操作之后，就能正常使用 Android Device Monitor 进行文件管理了。但不幸的是，<strong>当你重启模拟器，或启动另一台模拟器时，这些配置又得重新来过</strong>，否则你还是无法访问和下载模拟器中的文件。这个问题的根源在于权限二字，问题不是不能获取权限（通过 adb shell 可以获取 root 权限），而在于获取权限太麻烦了，希望后续版本的 Android Studio 可以直接在 Android Device Monitor 的 GUI 中设置相应获取权限的命令，使得广大 Android 开发者对模拟器中的文件操作更有效率。</p>
+</li>
+<li><p><strong>Google 大法好</strong>。</p>
+</li>
+<li><p>最后还有一点，我目前是跟着《第一行代码》（第二版）学习 Android 开发的，但是作者郭霖老师没有组织读者交流群，所以在学习过程中遇到问题时，要么不知所措，要么大费周折才解决一个问题。如果有志同道合的同学一起交流，那样学习更有效率，遇到问题也能大家一起讨论解决。<strong>不知道大家有没有《第二行代码》学习社群推荐，或者有意向和我一起组建一个这样的学习环境，大家可以在留言区畅所欲言</strong>。</p>
+</li>
+<li><p>PS：本人初出茅庐，开发经验匮乏。如果你发现上文中有不对的地方，还望不吝赐教！</p>
+</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Android Studio </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Android Studio </tag>
+            
+            <tag> adb shell </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[计算机系统漫游]]></title>
-      <url>http://nightn.com/2017/01/22/computer%20system%20roaming/</url>
+      <url>http://nightn.com/2017/01/22/computer-system-roaming/</url>
       <content type="html"><![CDATA[<p>计算机系统是由硬件和软件系统组成的，它们共同工作来运行应用程序。作为程序员，也需要了解这些组件是如何工作的，以及这些组件是如何影响程序的正确性和性能的。我们从最简单的 hello 程序开始，通过跟踪 hello 程序的生命周期（从被创建，到运行，输出，然终止），来开始对计算机系统的学习。<br><a id="more"></a></p>
 <h2 id="1-hello-程序创建"><a href="#1-hello-程序创建" class="headerlink" title="1. hello 程序创建"></a><strong>1. hello 程序创建</strong></h2><p>hello.c</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
@@ -1181,7 +1181,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
     
     <entry>
       <title><![CDATA[OpenCV 图像遍历与颜色缩减]]></title>
-      <url>http://nightn.com/2017/01/21/OpenCV%20traversal%20and%20compression/</url>
+      <url>http://nightn.com/2017/01/21/OpenCV-traversal-and-compression/</url>
       <content type="html"><![CDATA[<p>图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。<br><a id="more"></a></p>
 <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a><strong>1. 概述</strong></h2><p>图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。</p>
 <h2 id="2-图像存储方式"><a href="#2-图像存储方式" class="headerlink" title="2. 图像存储方式"></a><strong>2. 图像存储方式</strong></h2><p>在进行下面的论述之前，先对图像矩阵在内存中的存储方式简单介绍。对于单通道灰度图像：</p>
@@ -1336,7 +1336,7 @@ uchar<span class="token operator">*</span> p <span class="token operator">=</spa
     
     <entry>
       <title><![CDATA[OpenCV Mat 介绍]]></title>
-      <url>http://nightn.com/2017/01/21/OpenCV%20Mat%20introduction/</url>
+      <url>http://nightn.com/2017/01/21/OpenCV-Mat-introduction/</url>
       <content type="html"><![CDATA[<h2 id="1-为什么要引入-Mat-图像容器？"><a href="#1-为什么要引入-Mat-图像容器？" class="headerlink" title="1. 为什么要引入 Mat 图像容器？"></a>1. 为什么要引入 Mat 图像容器？</h2><p>在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？</p>
 <p>2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内存，一旦代码庞大，这便变得非常麻烦且容易出错。OpenCV 2.0 引入新的 C++ 接口，利用个自动内存管理给出了解决方案。</p>
 <h2 id="2-Mat-介绍"><a href="#2-Mat-介绍" class="headerlink" title="2. Mat 介绍"></a>2. Mat 介绍</h2><p>Mat 作为一个类，数据包括两个部分：矩阵头和指向像素矩阵的指针。</p>
@@ -1450,7 +1450,7 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C 
     
     <entry>
       <title><![CDATA[OpenCV 读取、修改、保存图像]]></title>
-      <url>http://nightn.com/2017/01/21/OpenCV%20imread%20imwrite%20imshow/</url>
+      <url>http://nightn.com/2017/01/21/OpenCV-imread-imwrite-imshow/</url>
       <content type="html"><![CDATA[<p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取，用 imwrite 进行图像保存，用 imshow 进行图像显示。<br><a id="more"></a></p>
 <h2 id="1-读取图像"><a href="#1-读取图像" class="headerlink" title="1. 读取图像"></a>1. 读取图像</h2><p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取：</p>
 <pre class=" language-cpp"><code class="language-cpp">Mat image<span class="token punctuation">;</span>
@@ -1489,7 +1489,7 @@ image <span class="token operator">=</span> <span class="token function">imread<
     
     <entry>
       <title><![CDATA[Qt主界面获取对话框数据]]></title>
-      <url>http://nightn.com/2016/12/23/Qt%20communication%20bwteen%20main%20and%20dialog%20box/</url>
+      <url>http://nightn.com/2016/12/23/Qt-communication-bwteen-main-and-dialog-box/</url>
       <content type="html"><![CDATA[<p>在编写Qt程序的时候，我们常常需要通过对话框来获取用户的输入数据，比如通过文件对话框获取文件的路径，通过颜色对话框获取用户所选择的颜色，这些对话框的类都是Qt帮我们写好了的，调用相应函数就能直接返回用户的输入，比如颜色对话框QColorDialog中有一个静态函数getColor，我们直接调用该函数，便会弹出颜色对话框，等我们选择好颜色并确定，该函数就会返回一个QColor的对象，这个对象就包含了我们之前所选颜色的RGB值了。<br><a id="more"></a><br>然而，很多时候，我们需要创建自己的对话框，我们不能调用现成函数来获取用户输入，本文将提供两种方法，通过对话框来获取用户输入的案例。在此之前，我们先讨论一下显示对话框的两个函数，一个是show()，一个是exec()。show() 显示的是非模态窗口，不会阻塞程序的线程，因此如果你的对话框是创建在栈上，跳出作用域之后，对象便销毁了，因此你会发现对话框一闪而过；如果你用new关键字将对话框创建在堆上，跳出作用域之后对象不能被销毁，但是建立在堆上需要考虑及时释放内存的问题，以免造成内存泄漏。但是能够正常显示窗口不代表能够很方便地获取数据，show()不会阻塞线程，因此可能用户还没来得及输入数据，就已经执行之后的代码了。解决这个问题需要用到信号槽机制，具体解决方案会在下文详细讲解。exec()显示的是模态窗口，它开启了一个事件循环，会阻塞程序的线程，函数返回之后，我们直接可以获取对话框的数据。下面考虑这两种不同的对话框显示方式，提供两种不同的获取对话框数据的方法。</p>
 <h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a><strong>方法一</strong></h3><p>首先考虑简单的，使用exec()显示对话框。我们定义了一个主界面的类，叫MainWindow,界面包含一个名为btn的按钮（用于跳出对话框）和一个名为label的标签（用于显示从对话框获取的用户输入）；我们还定义一个对话框类，界面包含一个名为lineEdit的单行文本框（用于接收用户输入)，以及确定和取消按钮（这两个按钮是创建对话框的时候自动生成的）。两个界面如下图：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61203614-file_1490012608851_7b1e.png" alt="主界面"></p>

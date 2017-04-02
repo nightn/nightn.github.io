@@ -10,7 +10,7 @@
     
     <title>
         
-            Android Device Monitor 文件管理的常见问题 | 
+            OpenCV Mat 介绍 | 
         
         Nightn
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Nightn">
     <meta name="description" content="It always seems impossible until it&#39;s done">
-    <meta name="keywords" content="null,Android Studio,adb shell">
+    <meta name="keywords" content="null,机器视觉,OpenCV">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://nightn.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Android Device Monitor 文件管理的常见问题 | Nightn">
+    <meta property="og:title" content="OpenCV Mat 介绍 | Nightn">
     <meta property="og:description" content="It always seems impossible until it&#39;s done">
-    <meta property="og:article:tag" content="Android Studio"> <meta property="og:article:tag" content="adb shell"> 
+    <meta property="og:article:tag" content="机器视觉"> <meta property="og:article:tag" content="OpenCV"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题1：设备-Offline-File-Explorer-空空如也"><span class="post-toc-number">2.</span> <span class="post-toc-text">问题1：设备 Offline,  File Explorer 空空如也</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题2：File-Explorer-中的文件无法访问"><span class="post-toc-number">3.</span> <span class="post-toc-text">问题2：File Explorer 中的文件无法访问</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题3：File-Explorer-中的文件无法-pull（下载）"><span class="post-toc-number">4.</span> <span class="post-toc-text">问题3：File Explorer 中的文件无法 pull（下载）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-为什么要引入-Mat-图像容器？"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 为什么要引入 Mat 图像容器？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Mat-介绍"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Mat 介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-赋值和拷贝构造函数只拷贝信息头"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 赋值和拷贝构造函数只拷贝信息头</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-使用-clone-或-copyTo-拷贝图像矩阵"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 使用 clone() 或 copyTo() 拷贝图像矩阵</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-使用-Mat"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 使用 Mat</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-创建-Mat"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 创建 Mat</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#通过构造函数创建："><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">通过构造函数创建：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#通过-create-创建："><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">通过 create() 创建：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#静态函数-zeros-ones-eyes"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">静态函数 zeros(), ones(), eyes()</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-格式化输出"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 格式化输出</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -270,7 +270,7 @@
         
     
             <p class="article-headline-p">
-                Android Device Monitor 文件管理的常见问题
+                OpenCV Mat 介绍
             </p>
         </div>
 
@@ -289,7 +289,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Nightn</strong>
-        <span>4月 02, 2017</span>
+        <span>1月 21, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -310,7 +310,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADf0lEQVR42u3awW7cMAwE0Pz/T7fXAEW9M6SU3aLPpyDZtaXnA0Nqvn65vl1fCHDgwIEDBw4cOHDg+GCOr/j6/vnn7/55/+fvtuv52x3aveDAgQMHjnscL0pR8JkEKNn88+/368SBAwcOHD/JsdlGXgKflzgrpau94MCBAweOt3K0Tdpmoc8oCSsOHDhw4PhXOGZAswYsGfDhwIEDB47P5EgWmrd2m5KZjyDfPCvFgQMHDhwXAg2f9vOb8x04cODA8d9zzIpc3qrNAm1tiV3tCAcOHDhwHOU4O2jbNF3DBqwtq7OOFgcOHDhwHB0OtgO+tmTmkbtZUceBAwcOHJ/D0Q4NZ+GDZPN5+ayfiwMHDhw4jnKcKntteG7W1CUvIEHHgQMHDhz3OPJ2q/1rEt3eRKs3LSgOHDhw4LjH0X65DRbkzVV+xJWsqghJ4MCBAweOoxyzdqs9Cpq1YbORX9584sCBAweO2xz7EpgvfXN01N7txQvDgQMHDhxHOZItJa1U3mK198/XNlwVDhw4cOC4wJE3VO0S9yWzLeE5PQ4cOHDguMGRl7pZnG42tssDEPvYBA4cOHDguMGxGerluJvIQr42HDhw4MDxXo52DNcW12e4WRPYxiBerAQHDhw4cFzjyJuo/UJbmrZ4F8/CgQMHDhxHOWbHSMljTj3lQGTh+W44cODAgeMCRxs+aAMEs9I4G/blEDhw4MCB4zbH5sgnIc4J2pFie+iFAwcOHDjuccwatlmgYRbC27eRRQuHAwcOHDiOTsPaYdzmW7NAQ16YV8dOOHDgwIHjEMf+wfnAbh/Cm/ENZ6U4cODAgSPmuF0y9wdUs6FhEarAgQMHDhxHOWZLz1u7pLi2m3z+ff2PAg4cOHDgOMrRHh21G25HgW3hb1eFAwcOHDh+kmMTic5pZi/jVDQcBw4cOHDc5jh1UDSLxLXNZE5fjB1x4MCBA8dRjvbK27OkBOYt3+aY6sVrwIEDBw4cRzlmRXQTWWtbsrzVzMeROHDgwIHjNkc+bpsdNbXEp9YWhS1w4MCBA8c1jn0BG5a6UZBuP3zEgQMHDhyfwBGVrnXYboOVQ+DAgQMHjk/mmBXs2ZUcJuUtHw4cOHDguMexH8C1MYX8QCtvIOuwHQ4cOHDguMDRlre86Oag+RFX+0pe3BkHDhw4cBzlcOHAgQMHDhw4cODAgePDrt/Sy1O8L7UlxAAAAABJRU5ErkJggg==">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC10lEQVR42u3aS27DMAwFQN//0u22QFvnkXQQWxqvgsYfjRZl+Ojja8vjwMbGxsbGxsbGxr4l+4iPn+f/vsMfj/nnzPM7/P58fp9kzdjY2Ng7sF/86w+oydacn1MoRb01Y2NjY2/Arhat82uTb/OnJEXuxd2wsbGxsVulKGoSipuCjY2NjX0t+30R0q0LGDY2NvYt2UlAkxSkvLXIy2E1kMLGxsbejd0b9H7288fm29jY2Ng3Y/eGrO8oWkk4NVo5NjY29qLs/Kf/ZAw8bzPK5arXgWFjY2M/kH0esvfCpmpJy4fEvUEyNjY29trso3iUQ/kgJMrbnt6qsLGxsddm501CdVm9++dhUzWcwsbGxl6bXf1xnwRJ+Wg22YKkORkNerGxsbEfy+69BDkJ9PPwqHrtqAPDxsbGXoidPLj3Ck61pPVKIzY2NvZu7Op49WgdeeGpjn7zLcDGxsZem92LafJrJ+C8pL2IqLCxsbE3YE9esunFRslTeuPe8nwbGxsbewl23njk317b3vRe7sHGxsbeh52ETdVWYRI/VQvei1KHjY2NvQE7X1Zv1Doh5YPnZt3GxsbGfiy7OhIovCKTRPbFLc7LJzY2NjZ2UjAmY9d8m/Iw64ICho2Njf1Adj7QzXnVVmGyQTkeGxsbewd2Xq7yMnZVkNQradjY2Ng7sCdB/2Q78kAqKX7RarGxsbEXZU/ipCoy3+JqcYoGCdjY2NgbsJNQ6X1NSHWsW25psLGxsRdlT37u9xaRfM7HAIUhBDY2Nvai7Opx1fCgGg/lZRUbGxt7N/a8SFSvTa66dkOxsbGxd2BPYqbyS5CDwUN1DdjY2Ni7seeFJ4/7e3+/OEvDxsbG3pKdB0z5+dVXeZrxEzY2NjZ2q0nonV99WQcbGxsbuxoq9cKjXiORNEKjVgQbGxt7CXZvWJuUliqm2rok24GNjY29NnufAxsbGxsbGxsbG/s2xzdHgjQ2R6MRdwAAAABJRU5ErkJggg==">
         </ul>
     
 
@@ -322,7 +322,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/adb-shell/">adb shell</a>
+        <a class="post_tag-link" href="/tags/OpenCV/">OpenCV</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/机器视觉/">机器视觉</a>
     </ul>
     
 
@@ -349,7 +349,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Android Device Monitor 文件管理的常见问题&url=http://nightn.com//2017/04/02/Android Device Monitor 文件管理的常见问题/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=OpenCV Mat 介绍&url=http://nightn.com//2017/01/21/OpenCV-Mat-introduction/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -358,7 +358,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Android Device Monitor 文件管理的常见问题&url=http://nightn.com//2017/04/02/Android Device Monitor 文件管理的常见问题/index.html&via=Nightn" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=OpenCV Mat 介绍&url=http://nightn.com//2017/01/21/OpenCV-Mat-introduction/index.html&via=Nightn" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -367,7 +367,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://nightn.com//2017/04/02/Android Device Monitor 文件管理的常见问题/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://nightn.com//2017/01/21/OpenCV-Mat-introduction/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -376,7 +376,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://nightn.com//2017/04/02/Android Device Monitor 文件管理的常见问题/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://nightn.com//2017/01/21/OpenCV-Mat-introduction/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -388,7 +388,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Nightn&title=Android Device Monitor 文件管理的常见问题&summary=It always seems impossible until it&#39;s done&pics=http://nightn.com/img/favicon.png&url=http://nightn.com/2017/04/02/Android Device Monitor 文件管理的常见问题/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Nightn&title=OpenCV Mat 介绍&summary=It always seems impossible until it&#39;s done&pics=http://nightn.com/img/favicon.png&url=http://nightn.com/2017/01/21/OpenCV-Mat-introduction/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -406,62 +406,98 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。<br><a id="more"></a></p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h2><p>最近在看《第一行代码》（第二版）中关于数据存储方案的介绍。数据的状态分为两种：瞬时状态和持久状态，一般保存在内存中的数据随着活动的关闭，数据也就销毁了，如果我们想保存这些数据，该怎么办呢？书中介绍了三种实现数据持久化的方法，分别是：文件存储，SharedPreference 存储以及数据库存储。</p>
-<p>在学习第一种数据持久化方法文件存储的时候，我们通过 Context 类中的 openFileOutput() 方法创建一个指定了保存路径的 FileOutputStream 对象 out，然后用这个 out 对象去创建一个 OutputStreamWriter 对象，之后再用这个 OutputStreamWriter 对象创建一个 BufferedWriter 对象 writer，我们就是通过这个 writer 的 write() 方法向文件输出流写入我们想要保存的数据的。文件写入数据之后默认保存在 /data/data/(package name)/files 目录下。我们可以通过 Android Studio 中的 Android Device Monitor 去查看，Android Device Monitor 的打开方法如下所示。</p>
-<p><img src="http://img.blog.csdn.net/20170316145505719?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="打开 Android Device Monitor"></p>
-<h2 id="问题1：设备-Offline-File-Explorer-空空如也"><a href="#问题1：设备-Offline-File-Explorer-空空如也" class="headerlink" title="问题1：设备 Offline,  File Explorer 空空如也"></a><strong>问题1：设备 Offline,  File Explorer 空空如也</strong></h2><p>打开 Android Device Monitor 之后，发现里面什么都没有，左边的面板上显示了一台模拟器，但出于 offline 状态，不对呀，我的模拟器命名开着的呀，它正在运行我刚刚写的 app 呢，怎么这里会显示离线状态呢？于是我试着 Google 去找解决方案。</p>
-<p><img src="http://img.blog.csdn.net/20170316145939956?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" File Explorer 不显示文件"></p>
-<p>在 StackOverflow 上我发现了有人和我一样也碰到了这个问题，不过底下的回答寥寥无几，我找到了一个最高赞的答案（其实也就一个赞….），如下图所示，他的意思是他也不明白其中的具体原理，但是他发现如果先打开 Android Device Monitor，然后再运行模拟器，就可以解决这个问题。</p>
-<p><img src="http://img.blog.csdn.net/20170316150034301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="解决 File Explorer 不显示文件（from SO）"></p>
-<p>于是我按照这个方法尝试，先打开 Android Device Monitor，里面什么也没有，然后打开模拟器，随着模拟器的启动，Monitor 左侧面板出现了 offline 的模拟器，然后再相继启动很多服务，最后就显示为 online 了，如下图所示，这样我们就可以通过 Monitor 中的 File Explorer 标签访问模拟器中的文件了。</p>
-<p><img src="http://img.blog.csdn.net/20170316150112791?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" 解决 File Explorer 不显示文件"></p>
-<h2 id="问题2：File-Explorer-中的文件无法访问"><a href="#问题2：File-Explorer-中的文件无法访问" class="headerlink" title="问题2：File Explorer 中的文件无法访问"></a><strong>问题2：File Explorer 中的文件无法访问</strong></h2><p>还记得刚刚说的吗，openFileOutput() 方法生成的文件存放在一个默认路径，即 /data/data/(package name)/files 下。由于我的包名是 com.knightaoko.filepersistencetest，所以在下文的叙述中，大家看到这个陌生的字符串不要惊讶，实际操作下替换成你自己的包名即可。（这期间还碰到个问题，好像 Android Device Monitor 不能和 Instant Run 同时运行，所以在此需要把 Instant Run 功能关闭，怎么关闭大家自行 Google，很简单的。）于是，下一步当然是打开这个路径了，找到 data，点击，没反应，再点击，还是没反应。又遇到问题了，我无法访问 data 目录，通过 Google 搜索，我知道了 File Explorer 中的每个文件和文件夹都是有访问权限的，如下图红框中标识的就是 data 文件夹的访问权限。</p>
-<p><img src="http://img.blog.csdn.net/20170316150235614?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="无权访问"></p>
-<p> 访问权限是 drwxrwx–x，这玩意是什么意思呢？我相信，学过 Linux 的同学肯定一眼就知道这是什么意思。不知道也没关系，听我慢慢道来，这一个字符串一共有 10 个字符，第一个字符表示是文件夹还是目录，如果第 1 个字符是 d，则表示是文件夹。后面 9 个字符可以分为三组，第一组 rwx 表示所有者（user）对文件的访问权限，r 表示可读（read），w 表示可写（write），x 表示可被执行，- 表示没有该权限；第二组 rwx 表示组群（group）对文件的访问权限；第三组 –x 表示其他人（other）对文件的访问权限，可以看到，没有 r 和 w，说明 data 对其他人来说是不可读不可写的，怪不得我们不能打开它呢，那怎么办呢？于是我又网上搜啊搜，发现可以通过一定的方法修改文件的访问权限的，对，这个方法就是 adb shell。</p>
-<p>adb shell 是 Android SDK 中的一个工具，你可以在你的 Android SDK 目录下的 platform-tools 找到它，下图就是我电脑上的该目录：</p>
-<p><img src="http://img.blog.csdn.net/20170316150326458?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="adb 所在目录"></p>
-<p>我们需要将这个目录添加到环境变量，为的是后面在命令行直接调用 adb 中的命令。比如在此我将 D:\AndroidSDK\platform-tools 添加到环境变量（具体怎么添加应该不用手把手教学了吧）后，运行 cmd 命令行，然后输入下面的命令。</p>
-<p><img src="http://img.blog.csdn.net/20170316150358154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="通过 adb shell 获取文件访问权限"></p>
-<ul>
-<li>adb shell 是打开 adb 外壳程序。</li>
-<li>su 是获取 root 权限，只有 root 权限才能修改文件的访问权限。</li>
-<li>底下一堆 chmod 777 是把对应的文件或文件夹的访问权限的后 9 位设置成 rwxrwxrwx，777 就三个二进制 111, 喝起来就是 111111111（9 个 1），即相当于把后 9 位访问权限都置 1，于是就成了 rwxrwxrwx，即所有用户都具有该文件的全部访问权限（妈妈再也不用担心我打不开 data 了…）。我们来看看结果：</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20170316150537048?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=" 修改后的文件访问权限"></p>
-<h2 id="问题3：File-Explorer-中的文件无法-pull（下载）"><a href="#问题3：File-Explorer-中的文件无法-pull（下载）" class="headerlink" title="问题3：File Explorer 中的文件无法 pull（下载）"></a><strong>问题3：File Explorer 中的文件无法 pull（下载）</strong></h2><p>可以看到这些目录都能访问了，可以在包名目录下看到生成的 data 文件了，下一步我们想把这个文件复制到我们的电脑里，怎么操作呢？选中该文件，点击右上角的 pull 图标即可，如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170316150620678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载按钮"></p>
-<p>点击之后，选好保存路径。结果我们发现文件并没有保存下来，在 Console 窗口还提示了错误：</p>
-<p><img src="http://img.blog.csdn.net/20170316150658987?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载出错"></p>
-<p>意思就是拉取文件失败，因为你无权进行该操作。又是一脸懵逼，怎么办？还能怎么办，继续 Google 呗！这里我找了很久，终于发现了解决方案：adb root 。没错，在命令行输入这条语句，完美解决！（注意是在 windows 下的命令行，而不是 adb shell 里，当然前提是你添加了 adb 的目录到你的环境变量里）</p>
-<p><img src="http://img.blog.csdn.net/20170316150811460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="通过 adb root 获取文件下载权限"></p>
-<p>然后我们再来 pull 一下，卧槽，崩溃了，又发现问题了：Failed to pull selection。</p>
-<p><img src="http://img.blog.csdn.net/20170316150850913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载再次出错"></p>
-<p>怎么办？OK，继续 Google，在 StackOverflow 里找到了一个高赞的解决方法：</p>
-<p><img src="http://img.blog.csdn.net/20170316150928820?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重新选择模拟器（from SO）"></p>
-<p>什么意思？重新选择一下 Android Device Monitor 左侧面板的设备即可，没错！就是把下图红框中国的玩意儿点一下。</p>
-<p><img src="http://img.blog.csdn.net/20170316151002632?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重新选择模拟器"></p>
-<p>好了，我们再找到刚刚那个要拷贝的文件，pull 一下，卧槽！！成功了，真是踏破铁鞋无觅处，得来全得靠姑姑（谷歌）。</p>
-<p><img src="http://img.blog.csdn.net/20170316151045304?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQva25pZ2h0YW9rbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="文件下载成功"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>总结一下吧，初次使用 Android Device Monitor，本来只是用来辅助学习 SQLite，结果一上午碰到一大堆问题，总算都一一解决了，在此总结一下。</p>
-<ol>
-<li><p><strong>Android Device Monitor 要在模拟器运行之前就打开</strong>，这样才不会出现模拟器设备 offline 的问题。</p>
-</li>
-<li><p>Android Device Monitor 和 Instant Run 貌似有冲突，<strong>在用 Android Device Monitor 时关闭 Instant Run 功能</strong>。我相信还有更好的解决方法，不然打开一个大一点的 APP，不能同时用这两个功能，那多影响效率啊。只是我目前还处于学习阶段，上述方案能解决我当前的问题，不影响我进一步学习，那它就是 OK 的。</p>
-</li>
-<li><p>操作 Android Device Monitor 时，应该默认把你当做其他人（other）对待，所以你对文件的访问权限很受限制。解决方法是在命令行中，<strong>通过在 adb shell 里获取 root 权限，并更改相应文件的访问权限</strong>，当然记得将 adb 所在目录添加进环境变量。</p>
-</li>
-<li><p>能访问了但是不能下载也是很麻烦的事，<strong>通过在命令行运行 adb root 获取文件的下载权限</strong>。</p>
-</li>
-<li><p>通过上述操作之后，就能正常使用 Android Device Monitor 进行文件管理了。但不幸的是，<strong>当你重启模拟器，或启动另一台模拟器时，这些配置又得重新来过</strong>，否则你还是无法访问和下载模拟器中的文件。这个问题的根源在于权限二字，问题不是不能获取权限（通过 adb shell 可以获取 root 权限），而在于获取权限太麻烦了，希望后续版本的 Android Studio 可以直接在 Android Device Monitor 的 GUI 中设置相应获取权限的命令，使得广大 Android 开发者对模拟器中的文件操作更有效率。</p>
-</li>
-<li><p><strong>Google 大法好</strong>。</p>
-</li>
-<li><p>最后还有一点，我目前是跟着《第一行代码》（第二版）学习 Android 开发的，但是作者郭霖老师没有组织读者交流群，所以在学习过程中遇到问题时，要么不知所措，要么大费周折才解决一个问题。如果有志同道合的同学一起交流，那样学习更有效率，遇到问题也能大家一起讨论解决。<strong>不知道大家有没有《第二行代码》学习社群推荐，或者有意向和我一起组建一个这样的学习环境，大家可以在留言区畅所欲言</strong>。</p>
-</li>
-<li><p>PS：本人初出茅庐，开发经验匮乏。如果你发现上文中有不对的地方，还望不吝赐教！</p>
-</li>
-</ol>
+        <h2 id="1-为什么要引入-Mat-图像容器？"><a href="#1-为什么要引入-Mat-图像容器？" class="headerlink" title="1. 为什么要引入 Mat 图像容器？"></a>1. 为什么要引入 Mat 图像容器？</h2><p>在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？</p>
+<p>2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内存，一旦代码庞大，这便变得非常麻烦且容易出错。OpenCV 2.0 引入新的 C++ 接口，利用个自动内存管理给出了解决方案。</p>
+<h2 id="2-Mat-介绍"><a href="#2-Mat-介绍" class="headerlink" title="2. Mat 介绍"></a>2. Mat 介绍</h2><p>Mat 作为一个类，数据包括两个部分：矩阵头和指向像素矩阵的指针。</p>
+<table>
+<thead>
+<tr>
+<th>数据部分</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>矩阵头</td>
+<td>描述像素矩阵，主要包括矩阵的尺寸、存储方式、存储地址等。矩阵头的大小固定。</td>
+</tr>
+<tr>
+<td>矩阵指针</td>
+<td>矩阵指针所指对象代表了图像本身，其尺寸会根据图像的不同而不同。像素矩阵一般比矩阵头大几个数量级，因此，拷贝图像会产生很大的计算量。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-赋值和拷贝构造函数只拷贝信息头"><a href="#2-1-赋值和拷贝构造函数只拷贝信息头" class="headerlink" title="2.1 赋值和拷贝构造函数只拷贝信息头"></a>2.1 赋值和拷贝构造函数只拷贝信息头</h3><p>为了避免拷贝图像的巨大计算量，OpenCV 采用引用计数机制。即每个 Mat 对象有其自己的矩阵头，但可以共享同一个图像矩阵（即 Mat 对象的矩阵指针指向同一地址）。在 Mat 对象赋值及拷贝构造函数中，只拷贝矩阵头和矩阵指针，不拷贝矩阵本身，这样可以减少很多计算量。</p>
+<p>这样我们会看到，同一个图像矩阵，可能属于多个 Mat 对象，那么当不需要图像矩阵时，哪个 Mat 对象负责清理它呢？正如 C++ 语法中的智能指针，Mat 规定最后一个使用矩阵的对象负责清理，这是根据矩阵的引用计数进行判断的，当引用计数为 0 时，矩阵会被清理。</p>
+<pre class=" language-cpp"><code class="language-cpp">Mat A<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// A 的引用计数为0</span>
+A <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span> CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Mat <span class="token function">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// A 的引用计数+1，为 2</span>
+Mat C <span class="token operator">=</span> A<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// A 的引用计数+1，为 3</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"refcount of A: "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>A<span class="token punctuation">.</span>refcount <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+Mat D <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span> CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+C <span class="token operator">=</span> D<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// C, D 指向同一矩阵，A 的引用计数-1，为2</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"refcount of A: "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>A<span class="token punctuation">.</span>refcount <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"refcount of D: "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>D<span class="token punctuation">.</span>refcount <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+</code></pre>
+<p>运行结果：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61446613-file_1490016922912_2080.png" alt=""></p>
+<h3 id="2-2-使用-clone-或-copyTo-拷贝图像矩阵"><a href="#2-2-使用-clone-或-copyTo-拷贝图像矩阵" class="headerlink" title="2.2 使用 clone() 或 copyTo() 拷贝图像矩阵"></a>2.2 使用 clone() 或 copyTo() 拷贝图像矩阵</h3><p>那么有时候我们的确需要拷贝矩阵本身呢？可以用 Mat 的成员函数 clone() 或者 copyTo()。</p>
+<pre class=" language-cpp"><code class="language-cpp">Mat im1 <span class="token operator">=</span><span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span>
+CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Mat im2 <span class="token operator">=</span> im1<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//矩阵内容拷贝</span>
+Mat im3<span class="token punctuation">;</span>
+im1<span class="token punctuation">.</span><span class="token function">copyTo</span><span class="token punctuation">(</span>im3<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//矩阵内容拷贝</span>
+</code></pre>
+<p>上面的代码中，im1, im2, im3的引用计数都为1，因为它们并没有共享底层矩阵。</p>
+<h2 id="3-使用-Mat"><a href="#3-使用-Mat" class="headerlink" title="3. 使用 Mat"></a>3. 使用 Mat</h2><h3 id="3-1-创建-Mat"><a href="#3-1-创建-Mat" class="headerlink" title="3.1 创建 Mat"></a>3.1 创建 Mat</h3><h4 id="通过构造函数创建："><a href="#通过构造函数创建：" class="headerlink" title="通过构造函数创建："></a>通过构造函数创建：</h4><pre class=" language-cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">,</span> <span class="token function">Scalar</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"M = "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+</code></pre>
+<p>上述程序创建了 2X2 的像素图像，每个像素有三个通道，CV_8UC3 表示使用 8 位 unsigned char 表示三通道，用 Scalar 进行初始化，值得注意是的，Mat 三通道依次是 BGR，而不是我们熟知的 RGB。OpenCV 也重载了 &lt;&lt; 运算符，因此，直接可以用标准输出对 Mat 对象进行输出，运行结果为：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/75183952-file_1490016923037_12546.png" alt=""></p>
+<h4 id="通过-create-创建："><a href="#通过-create-创建：" class="headerlink" title="通过 create() 创建："></a>通过 create() 创建：</h4><pre class=" language-cpp"><code class="language-cpp">Mat M<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//create不能指定初始值, CV_8UC(4)为自定义通道数</span>
+M<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token function">CV_8UC</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"M = "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+</code></pre>
+<p>运行结果：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79319227-file_1490016923144_842f.png" alt=""></p>
+<p>可以看出，create 并不能设定初始值，元素默认初始化为 205。另外，我们可以使用 CV_8UC(n)自定义n维通道。</p>
+<h4 id="静态函数-zeros-ones-eyes"><a href="#静态函数-zeros-ones-eyes" class="headerlink" title="静态函数 zeros(), ones(), eyes()"></a>静态函数 zeros(), ones(), eyes()</h4><table>
+<thead>
+<tr>
+<th>静态函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zeros()</td>
+<td>零矩阵</td>
+</tr>
+<tr>
+<td>ones()</td>
+<td>全 1 矩阵</td>
+</tr>
+<tr>
+<td>eyes()</td>
+<td>单位矩阵</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-2-格式化输出"><a href="#3-2-格式化输出" class="headerlink" title="3.2 格式化输出"></a>3.2 格式化输出</h3><p>OpenCV 支持多种输出方式，如默认方式、Python 格式、CSV 格式，Numpy 格式以及 C 语言格式。</p>
+<pre class=" language-cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">randu</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> Scalar<span class="token operator">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Scalar<span class="token operator">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Default fomart: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Python format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"python"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"CSV format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"csv"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Numpy format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"numpy"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+</code></pre>
+<p>运行结果：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/21687811-file_1490016923270_7f1.png" alt=""></p>
+<p>其中 randu() 为 M 的元素随机赋值，范围为指定的 0 - 255。</p>
+<hr>
+<p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/mat%20-%20the%20basic%20image%20container/mat%20-%20the%20basic%20image%20container.html#matthebasicimagecontainer" target="_blank" rel="external">More</a></p>
 
     
 
@@ -530,7 +566,7 @@
 <script>
     $('.btn_click_load').click(function() {  //click to load comments
         var disqus_config = function () {
-            this.page.url = 'http://nightn.com/2017/04/02/Android Device Monitor 文件管理的常见问题/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.url = 'http://nightn.com/2017/01/21/OpenCV-Mat-introduction/index.html';  // Replace PAGE_URL with your page's canonical URL variable
             this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
         };
         (function() { // DON'T EDIT BELOW THIS LINE
@@ -560,13 +596,21 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2017/01/21/OpenCV-traversal-and-compression/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/04/02/Android-develop-minofo-2/" id="post_nav-older" class="next-content">
+        <a href="/2017/01/21/OpenCV-imread-imwrite-imshow/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -667,7 +711,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
