@@ -409,7 +409,7 @@
         <p>记录了开发一个完整 Android 软件 Minofo 的整个过程，本系列博客包括两篇，本文是第一篇，主要内容包括如何解析一个 App，Toolbar 标题栏，NavigationView 导航栏以及悬浮按钮的实现，从而完成 Minofo 主界面的开发。本文提供 <a href="http://on2kkr82s.bkt.clouddn.com/Minofo%281%29.pdf" target="_blank" rel="external">PDF 版本</a>可供查阅及下载。<br><a id="more"></a></p>
 <p><a href="http://nightn.com/2017/04/01/Android-develop-minofo-1/">Android 开发小作：Minofo(1)</a></p>
 <p><a href="http://nightn.com/2017/04/02/Android-develop-minofo-2/">Android 开发小作：Minofo(2)</a></p>
-<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>学习 Android 开发已经一个月了，除了敲书本上的 demo，就只写过一个简易版的浏览器，为了巩固之前所学，我决定开发一个稍微完整点的具有 Material Design 风格的 App。浏览了手机上的 App，发现在 Material Design 风格的软件中，除了 Google 系列的 App，就只有印象笔记和 ofo 共享单车了（其他软件基本都是微信风格）。ofo 共享单车需要引入地图模块，实现起来更加有成就感，因此最终决定模仿 ofo 共享单车（主要是对界面的模仿）。</p>
+<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a><strong>一、简介</strong></h2><p>学习 Android 开发已经一个月了，除了敲书本上的 demo，就只写过一个简易版的浏览器，为了巩固之前所学，我决定开发一个稍微完整点的具有 Material Design 风格的 App。浏览了手机上的 App，发现在 Material Design 风格的软件中，除了 Google 系列的 App，就只有印象笔记和 ofo 共享单车了（其他软件基本都是微信风格）。ofo 共享单车需要引入地图模块，实现起来更加有成就感，因此最终决定模仿 ofo 共享单车（主要是对界面的模仿）。</p>
 <p>整个开发花了两天时间，期间遇到不少问题，以下便是对整个过程的梳理和总结，希望读者看完后能对 Android 开发有一个初步的认识，然后挥舞起键盘和本子，把灵感用代码一一实现。</p>
 <p>话不多说，先看最终效果吧！</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" height="512"></p>
@@ -425,18 +425,18 @@
 <li><strong>Github 源码</strong>：<a href="https://github.com/nightn/minofo" target="_blank" rel="external">https://github.com/nightn/minofo</a></li>
 <li><strong>声明</strong>：本产品用作分享与学习，若转载请注明出处，勿作任何商业用途。</li>
 </ol>
-<h2 id="二、如何解析一个-Apk"><a href="#二、如何解析一个-Apk" class="headerlink" title="二、如何解析一个 Apk"></a>二、如何解析一个 Apk</h2><p>开发环境搭建什么的在此不再赘述，我使用的 IDE 是 Android Studio 2.2.3，JDK 版本是 1.8.0。要模仿一个 App，首先需要获取这个 Apk 的一些资源，如图片、布局文件。这个很简单，把下载下来的 Apk 文件后缀名改成 zip直接打开，相当于直接解压，如下图所示。</p>
+<h2 id="二、如何解析一个-Apk"><a href="#二、如何解析一个-Apk" class="headerlink" title="二、如何解析一个 Apk"></a><strong>二、如何解析一个 Apk</strong></h2><p>开发环境搭建什么的在此不再赘述，我使用的 IDE 是 Android Studio 2.2.3，JDK 版本是 1.8.0。要模仿一个 App，首先需要获取这个 Apk 的一些资源，如图片、布局文件。这个很简单，把下载下来的 Apk 文件后缀名改成 zip直接打开，相当于直接解压，如下图所示。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/8972296-file_1491025659408_2e55.png" width="416"></p>
 <p>其中 res 目录存放的就是一个 App 所有的图片资源和布局文件了，找到其中需要的图片，放到 Android 项目的相应目录即可，下图便是我所选的部分图片资源。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/17743548-file_1491025990799_35a4.png" width="552"></p>
 <p>当然，如果深入解析，比如通过 ApkTool 工具，还能获取一个 apk 可读的 AndroidManifest.xml（通过 zip 得到的 AndroidManifest.xml 是乱码的），这样就能查看它的 package name、Activity 组件、所需要的权限等信息了。如果你觉得这些信息还不够用，甚至还可以通过 dex2jar 工具反编译 dex 文件，获得它的 java 源代码，听起来是不是很厉害，不过这些代码中的命名都是经过处理的，基本上也读不懂。如果你想更深入地了解 Android 反编译技术，你可以参考<a href="https://unclechen.github.io/2016/09/07/Android%E5%8F%8D%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" target="_blank" rel="external">这篇文章</a>。</p>
 <p>言归正传，在我们这个项目中，主要用到的只是 apk 中的图片资源，下面就一起来开启开发之旅吧！</p>
-<h2 id="三、主界面开发"><a href="#三、主界面开发" class="headerlink" title="三、主界面开发"></a>三、主界面开发</h2><p>先来观察一下 ofo 共享单车的主界面布局，在下图中，我们可以看到主界面包括三个部分，最上面的<strong>标题栏</strong>、中间的<strong>地图模块</strong>以及底下的三个<strong>悬浮按钮</strong>，非常的简洁明了。</p>
+<h2 id="三、主界面开发"><a href="#三、主界面开发" class="headerlink" title="三、主界面开发"></a><strong>三、主界面开发</strong></h2><p>先来观察一下 ofo 共享单车的主界面布局，在下图中，我们可以看到主界面包括三个部分，最上面的<strong>标题栏</strong>、中间的<strong>地图模块</strong>以及底下的三个<strong>悬浮按钮</strong>，非常的简洁明了。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/39342242-file_1491026792466_94cc.png" height="512"></p>
 <p>然后通过点击左上角的导航按钮或者在屏幕上左滑，会从侧边出现一个<strong>导航栏</strong>，如下图所示，导航栏又分为上下两个部分，上部是导航栏的标题，下部是导航栏的菜单，菜单中的每一项都是一个 item。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/85026807-file_1491028277547_5193.png" height="512"></p>
 <p>从上面的分析来看，可以将主界面分为四个部分：标题栏、导航栏、悬浮按钮以及地图模块。下面对每个部分的进行分析和实现。</p>
-<h3 id="1-标题栏实现"><a href="#1-标题栏实现" class="headerlink" title="1. 标题栏实现"></a>1. 标题栏实现</h3><p>分析了这么多，从这开始就要真正动手写代码了。在 Android Studio 中新建项目，既然是精简版的 ofo，那就取名为 Minofo 吧，记得将之前解析 apk 包得到的图片资源拷贝到项目的 res/drawable-xxhdpi 目录下，准备好之后就可以编写 activity_main.xml 布局文件了。在此之前我们先分析一下 ofo 共享单车的标题栏。</p>
+<h3 id="1-标题栏实现"><a href="#1-标题栏实现" class="headerlink" title="1. 标题栏实现"></a><strong>1. 标题栏实现</strong></h3><p>分析了这么多，从这开始就要真正动手写代码了。在 Android Studio 中新建项目，既然是精简版的 ofo，那就取名为 Minofo 吧，记得将之前解析 apk 包得到的图片资源拷贝到项目的 res/drawable-xxhdpi 目录下，准备好之后就可以编写 activity_main.xml 布局文件了。在此之前我们先分析一下 ofo 共享单车的标题栏。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/22587366-file_1491038456776_11bf0.png" width="360"></p>
 <p>可以看到标题栏和我们写 Android 程序常见的标题栏有很大区别，默认生成的标题栏是这样的：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/50077240-file_1491038459222_126d0.png" width="360"></p>
@@ -529,7 +529,7 @@
 <p>相比之前，标题栏上多了通知按钮，并且点击该按钮，会提示“活动中心正在建设中”。这样一来我们的标题栏就实现了。什么，你说这一小节有点水？哦对，标题栏还有导航栏入口按钮还没加呢，不过别着急，我们在介绍导航栏部分时再添加。对了，我们先把 app 的图标设置成 ofo 共享单车的样子，在 AndroidManifest.xml 通过设置 icon 和 roundIcon 属性，将 app 的图标改掉。效果如下：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/80804800-file_1491042178250_8a4b.png" width="160"></p>
 <p>你问这图片资源哪里来的？当然是之前解析 apk 得到的。好了，标题栏部分叙述完毕，开始实现导航栏部分吧。</p>
-<h3 id="2-导航栏实现"><a href="#2-导航栏实现" class="headerlink" title="2. 导航栏实现"></a>2. 导航栏实现</h3><p>导航栏是 Material Design 的一大特色，Google 开发的很多应用都有导航栏，比如最近比较火的<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.translate&amp;hl=zh-CN" target="_blank" rel="external">谷歌翻译</a>：</p>
+<h3 id="2-导航栏实现"><a href="#2-导航栏实现" class="headerlink" title="2. 导航栏实现"></a><strong>2. 导航栏实现</strong></h3><p>导航栏是 Material Design 的一大特色，Google 开发的很多应用都有导航栏，比如最近比较火的<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.translate&amp;hl=zh-CN" target="_blank" rel="external">谷歌翻译</a>：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/82835733-file_1491044738927_11391.png" height="512"></p>
 <p>再比如向来都不火的<a href="http://nightn.com">我的个人网站</a>：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/66632090-file_1491044742768_17460.png" height="512"></p>
@@ -688,7 +688,7 @@
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>简单分析一下上述代码，先根据布局 id 获取 NavigationView 实例，然后设置监听事件，任何一个按钮被点击，都会通过 closeDrawers() 方法关闭导航栏。至于对于点击具体 item 执行什么事件，这是后续讨论的事情了。至此，导航栏部分已经全部实现。接下来实现主界面的三个悬浮按钮。</p>
-<h3 id="3-悬浮按钮实现"><a href="#3-悬浮按钮实现" class="headerlink" title="3. 悬浮按钮实现"></a>3. 悬浮按钮实现</h3><p>观察 ofo 共享单车主界面，底下有三个按钮，它们都是悬浮在地图上面的，我们称之为悬浮按钮，悬浮按钮可以通过 Design Support 库提供的 FloatingActionButton 实现，用于之前我们已经引入了 Design Support 依赖库，在此我们直接可以使用 FloatingActionButton。</p>
+<h3 id="3-悬浮按钮实现"><a href="#3-悬浮按钮实现" class="headerlink" title="3. 悬浮按钮实现"></a><strong>3. 悬浮按钮实现</strong></h3><p>观察 ofo 共享单车主界面，底下有三个按钮，它们都是悬浮在地图上面的，我们称之为悬浮按钮，悬浮按钮可以通过 Design Support 库提供的 FloatingActionButton 实现，用于之前我们已经引入了 Design Support 依赖库，在此我们直接可以使用 FloatingActionButton。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/44290926-file_1491054983229_14957.png" width="288"></p>
 <p>修改 activity_main.xml 文件，在之前定义的 DrawerLayout 中的第一个子布局 FrameLayout 中加入 3 个 FloatingActionButton，代码如下：</p>
 <pre class=" language-xml"><code class="language-xml">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.FloatingActionButton</span>
