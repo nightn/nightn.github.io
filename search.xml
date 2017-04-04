@@ -10,26 +10,26 @@
 <p><a href="http://nightn.com/2017/04/01/Android-develop-minofo-1/">Android 开发小作：Minofo(1)</a></p>
 <p><a href="http://nightn.com/2017/04/02/Android-develop-minofo-2/">Android 开发小作：Minofo(2)</a></p>
 <p>本文接着上一篇博客：<a href="http://nightn.com/2017/04/01/Android-develop-minofo-1/">Android 开发小作：Minofo(1)</a> ，继续记录 Minofo 的开发过程。在上一篇博客中，我们实现了主界面大部分功能的开发，包括标题栏、导航栏和悬浮按钮，实现效果如下：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/9165962-file_1491059740994_c666.png" style="zoom:20%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/9165962-file_1491059740994_c666.png" height="512"></p>
 <p>在本篇博客中，将继续完善主界面，在主界面中添加地图模块。另外还有开发用车界面，用车界面还包括了整个软件的核心功能，即根据输入的车票号，获取对应密码。在此，我们在服务器端建立简单的模拟数据库，然后在 App 中通过网络库获取相应的密码，并显示在用车界面。让我们先从地图模块开始吧。</p>
 <h2 id="一、主界面嵌入高德地图"><a href="#一、主界面嵌入高德地图" class="headerlink" title="一、主界面嵌入高德地图"></a>一、主界面嵌入高德地图</h2><p>ofo 共享单车的地图模块具有显示当前区域地图、实时定位以及显示周边小黄车分布的功能，其中最后一个功能是 4 月份刚增加上去的，我不打算去实现（事实上，没有原始数据，想实现也实现不了）。因此，地图模块需要实现的功能包括地图显示和实时定位，这个比较简单，调用第三方地图 API 可以实现。纵观各大地图 API 产商：谷歌地图、百度地图、高德地图和腾讯地图等等。谷歌地图国内不能用，网上推荐百度地图和高德地图的比较多，而且郭霖老师在《第二行代码》中用的也是百度地图 API。因此一开始用百度地图 API，申请了 Key，下好了依赖库，但是出现了一堆问题，搜索了很久也没能解决，而且百度地图 API 文档也说得不清不楚，真的怀疑这些文档都是让实习生写的。折腾了一个晚上加一个上午还是没能解决，最终决定用高德地图的 API，下面总结一下使用高德地图 API 的流程吧。</p>
 <h3 id="1-下载并安装高德地图开发包"><a href="#1-下载并安装高德地图开发包" class="headerlink" title="1. 下载并安装高德地图开发包"></a>1. 下载并安装高德地图开发包</h3><p>首先需要下载并安装高德地图开发包，进入<a href="https://lbs.amap.com/" target="_blank" rel="external">高德开放平台</a>注册一个个人开发者用户。由于我们既需要地图功能有需要定位功能，因此我们要下载两个 SDK：<code>Android 地图 SDK</code> 和 <code>Android 定位 SDK</code>。下载入口在首页的「开发与支持」菜单下面，如下图所示：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/39311616-file_1491109531523_10f35.jpg" style="zoom:60%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/39311616-file_1491109531523_10f35.jpg" width="480"></p>
 <p>进入下载界面后，都选择「一键下载」，然后我们获得了两个 zip 压缩包，接下来从压缩包取出我们需要的东西。定位 SDK 比较简单，只需要定位的 jar 依赖库就可以了；地图 SDK 包含了很多功能： 2D 地图、3D 地图和搜索功能，我们只需要 3D 地图模块就可以了，3D 地图中除了包含 jar 包以外，还有很多针对不同平台的 so 文件，这些都是我们需要的。最后我们得到了<strong>两个 jar 包</strong>和<strong>一堆 so 文件</strong> ，如下图所示（当然如果你需要用到 2D 地图或者搜索功能，也可以将相应的开发包取出来）。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/58652916-file_1491110197283_146e4.png" style="zoom:80%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/58652916-file_1491110197283_146e4.png" width="412"></p>
 <p>开发包都准备好了，现在将它们添加到项目里吧。将 jar 包复制到项目的 app/libs 目录。并在 app/src/main 目录下新建 jniLibs 文件夹，将之前提取出的 so 文件复制到 jniLibs 文件夹内，最终效果如下：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/36622865-file_1491110723218_11158.jpg" style="zoom:80%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/36622865-file_1491110723218_11158.jpg" width="360"></p>
 <p>最后同步一下项目，使 Android Studio 意识到我们导入了新的包了，点击同步按钮即可：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/61507718-file_1491110962145_5073.jpg"></p>
 <h3 id="2-获取高德-Key"><a href="#2-获取高德-Key" class="headerlink" title="2. 获取高德 Key"></a>2. 获取高德 Key</h3><p>有了高德的 SDK 还是不够的，还需要获取高德 Key 并配置好项目才能真正的使用高德地图 API。进入高德控制台界面，创建新应用。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/90016116-file_1491111319844_82d8.png" style="zoom:50%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/90016116-file_1491111319844_82d8.png" width="400"></p>
 <p>创建好应用之后，需要为它添加 Key，在添加 Key 界面，<strong>注意 PackageName 要与你项目的包名对应才行</strong>。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/72511001-file_1491111884907_11fbc.png" style="zoom:50%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/72511001-file_1491111884907_11fbc.png" width="550"></p>
 <p>另外还需要填写 App 发布版和调试版的安全码 SHA1，为了简单起见，我们在这里只去获取调试版的 SHA1，然后将两个 SHA1 都填写成调试版的 SHA1，如果之后想修改发布版的 SHA1 也是可以的（发布版的 SHA1 获取方法可以<a href="http://lbs.amap.com/faq/top/hot-questions/249" target="_blank" rel="external">参考这里</a>）。</p>
 <p>下面开始获取调试版 SHA1，这个非常简单。在 Android Studio 界面右上角点击 Gradle，然后在跳出的 Gradle projects 面板中双击 :app/Tasks/android/signingReport，如下图所示：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/22654-file_1491112346524_6353.png" style="zoom:80%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/22654-file_1491112346524_6353.png" width="300"></p>
 <p>然后在输出窗口便可以看到调试版的 SHA1 了，用这个 SHA1 便可以获得高德地图的 Key 了。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/92465191-file_1491112579070_f6fb.jpg" style="zoom:80%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/92465191-file_1491112579070_f6fb.jpg" width="500"></p>
 <h3 id="3-配置-AndroidManifest-xml"><a href="#3-配置-AndroidManifest-xml" class="headerlink" title="3. 配置 AndroidManifest.xml"></a>3. 配置 AndroidManifest.xml</h3><p>最后配置好 AndroidManifest.xml 文件。首先进行<strong>权限声明</strong>：</p>
 <pre class=" language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- 用于进行网络定位 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.ACCESS_COARSE_LOCATION<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
@@ -79,9 +79,9 @@ mapView <span class="token operator">=</span> <span class="token punctuation">(<
 mapView<span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>这样就成功在我们的 App 中添加并初始化了一个地图了，没错，就是这么简单。运行一下试试吧。<strong>注意！！引入高德地图之后如果还在模拟器里面调试，会出现闪退现象！</strong>这个问题我折腾了好久啊，一直以为是我自己的代码出了问题。因此在这里特别强调，<strong>引入高德地图之后，最好用真机调试</strong>。什么，你是 iPhone 用户，没有 Android 真机？那可能要尝试用不同的模拟器试试看了，有知道解决方案的同学可以在评论里和大家分享一下。我用的机型是荣耀 V8，项目完美运行：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/863080-file_1491114787026_12f91.png" style="zoom:20%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/863080-file_1491114787026_12f91.png" width="288"></p>
 <p>由于只调用了一个 MapView.onCreate() 方法，因此创建出的地图默认是北京的地图，而且地图中定位蓝点也没有。为了让地图的功能更丰富，我们需要引入 AMap 类和 MyLocationStyle 类，AMap 类是地图控制器，用来管理地图的很多属性；而 MyLocationStyle 类是地图的定位风格属性，包括设置定位模式（连续定位还是单次定位）、连续定位的时间间隔、定位蓝点的样式等等。之后我们还要用到 UiSettings 类，它是用于控制地图界面小工具的显示隐藏的。为了可以更形象的理解高德地图中各个主要类是如何控制地图显示的，我将自己的理解表示成一张图，如下所示：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/94701186-file_1491120235392_12e48.png" style="zoom:70%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/94701186-file_1491120235392_12e48.png" width="500"></p>
 <p>其中，AMap 是管理地图各种属性的主要控制器，但它并不是直接管理的，而是通过它的下级（注意，不是子类）来管理具体的属性，就像人类社会一样，在代码中也能体现出明确的分工。图上只画出了 AMap 管理的 MyLocationStyle 类和 UiSettings 类，其中 MyLocationStyle 类是管理定位风格的，如定位模式，连续定位间隔、定位蓝点的样式等；而 UiSettings 是控制地图上小工具的显示的，如缩放按钮、指南针、比例尺的显示与隐藏，高德地图 logo 的位置（这个 logo　是不能隐藏的）以及地图是否可以旋转等。既然明确了它们之间的逻辑关系，那么就开始编写代码吧，修改 MainActivity.java，先定义一个名为 aMap 类型为 AMap 的全局变量，在 onCreate() 方法中添加如下代码：</p>
 <pre class=" language-java"><code class="language-java">        <span class="token comment" spellcheck="true">//初始化地图控制器对象aMap</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>aMap <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -103,7 +103,7 @@ mapView<span class="token punctuation">.</span><span class="token function">onCr
         aMap<span class="token punctuation">.</span><span class="token function">showIndoorMap</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//显示室内地图</span>
 </code></pre>
 <p>首先判断 aMap 是否为空，如果为空则将地图显示控件 mapView 交由 aMap 管理。然后新建 MyLocationStyle 对象，设置定位模式为单次定位，之所以不设置成连续定位，是因为我们打算通过主界面左下角的那个定位刷新的悬浮按钮来刷新定位，如果设置成连续定位，那么我们不手动刷新，地图也会自己不停的定位，这是我们不愿意看到的，更是用户不愿意看到的（GPS 多费电啊~）。然后设置定位点的显示图标，由于 myLocationIcon 接收的是 BitmapDescriptor 类型的参数，因此这里不能直接传 R.drawable.map_marker，而是通过 BitmapDescriptorFactory 类的 fromResource 方法将其转换为 BitmapDescriptor 类型。之后的两条语句是设置精度圆的样式，什么是精度圆，这两句话有什么作用，看看下图你就知道了（下图是不加这两条语句时定位点的显示效果）：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/17900221-file_1491122105579_10d2c.png" style="zoom:50%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/17900221-file_1491122105579_10d2c.png" width="300"></p>
 <p>定位蓝点周围那一圈紫色的区域便是精度圆，默认是带有精度圆的。但是 ofo 共享单车的点位蓝点是不带精度圆的，因此我们就是通过上述两条语句，将精度圆的边框颜色和圆形区域颜色都设置为透明，以达到 ofo 共享单车上的效果。设置好 MyLocationStyle 的属性之后，将其加载到 aMap 中，并设置为允许显示。最后将地图缩放级别定义为 17 级，设置允许使用室内地图（室内地图很强大）。</p>
 <p>经过上述设置之后如果直接运行的话，你会发现<strong>你被定位到非洲尼日利亚西南部某片神秘的不知名的大西洋海域</strong>（别问我是怎么知道的，说多了都是泪啊）。我猜想这是由于 app 的权限不够，虽然在 AndroidManifest.xml 中声明了权限，但有些权限进行运行时权限处理的，因此我们需要在 onCreate() 方法中加入一段申请权限的代码，只有用户同意了这些权限，才能继续操作。</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//运行时权限</span>
@@ -126,9 +126,9 @@ mapView<span class="token punctuation">.</span><span class="token function">onCr
         <span class="token punctuation">}</span>
 </code></pre>
 <p>现在我们再来运行一下，运行之后首先跳出申请权限对话框：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/84891585-file_1491123447191_14795.png" style="zoom:30%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/84891585-file_1491123447191_14795.png" width="400"></p>
 <p>都点击允许之后便出现了主界面，此时可以看到，点位蓝点的位置就是你当前的定位，你可以移动、缩放地图，也可以查看室内地图。如下图所示，左图显示了我当前所处的位置，右图显示的是室内地图。</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/70293263-file_1491124150844_1507c.png" style="zoom:60%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/70293263-file_1491124150844_1507c.png" height="512"></p>
 <p>虽然地图模块已经显示成功了，而且可以准确定位，但是这实现了单次定位，如果我们移动了位置，想再次定位就要重启启动软件才行。因此，需要像 ofo 共享单车一样，点击左下角的刷新按钮便能够更新点位，下面这一节就来讲述怎么实现这一功能吧。</p>
 <h3 id="5-实现点击定位"><a href="#5-实现点击定位" class="headerlink" title="5. 实现点击定位"></a>5. 实现点击定位</h3><p>为了实现定位功能，我们需要使用两个类：AMapLocationClient 类和 AMapLocationClientOption 类。你可以把前者叫做定位客户端，后者叫做定位客户端设置，还需要一个 Marker 类，用于标记地图上的某个点。新建三个全局变量：</p>
 <pre class=" language-java"><code class="language-java">AMapLocationClient mLocationClient <span class="token operator">=</span> null<span class="token punctuation">;</span>
@@ -324,7 +324,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span>
 </code></pre>
 <p>别看上面的代码有 100 行，其实这种 xml 文件是非常好理解的，不过是各种控件搭积木式的拼凑而已。简单分析一下，最外层是一个线性布局，将之前定义的 toolbar 标题栏直接拿过来用就好了，然后主体又是一个线性布局，里面就是 TextView、ImageView、EditView 和 Button 的简单组合而已，最底下的手电筒按钮是一个简单的 FloatingActionButton，悬浮按钮的用法在上一篇博客讲过。预览一下效果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/9531359-file_1491128630463_f0f0.png" style="zoom:100%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/9531359-file_1491128630463_f0f0.png" height="512"></p>
 <p>下面建立「主活动」和「用车活动」的联系，点击用车按钮，便跳出用车界面。实现很简单，用显式 Intent 即可，修改用车按钮的点击事件回调函数：</p>
 <pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">switch</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -370,7 +370,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>在回调函数中，先判断输入框是否为空，如果不为空，则改变按钮的样式；然后判断输入框字符长度，根据长度给出相应提示，最大长度为 8 位，效果如下图所示：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/93288955-file_1491131253416_a479.png" style="zoom:70%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/93288955-file_1491131253416_a479.png" width="600"></p>
 <h3 id="2-Output-面板"><a href="#2-Output-面板" class="headerlink" title="2. Output 面板"></a>2. Output 面板</h3><p>用车界面的输入面板已经实现好了，下面要实现输入车牌之后，跳转到密码显示面板，即 Output 面板，这个面板要新建一个活动吗？当然不用，我们只要对 Input 面板进行适当修改，利用控件的 visibility 属性控制其可见性就能够实现了。通过在 activity_usebike.xml 中将输入框和按钮所对应的线性布局隐藏，以及隐藏小电筒按钮。用如下代码取而代之，即可实现 Output 面板。</p>
 <pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span>
             <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/show_code_linear<span class="token punctuation">"</span></span>
@@ -427,9 +427,9 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span>
 </code></pre>
 <p>预览效果如下：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/26235861-file_1491131983827_1665d.png" style="zoom:100%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/26235861-file_1491131983827_1665d.png" width="360"></p>
 <h2 id="三、用-OkHttp-获取服务器数据"><a href="#三、用-OkHttp-获取服务器数据" class="headerlink" title="三、用 OkHttp 获取服务器数据"></a>三、用 OkHttp 获取服务器数据</h2><p>用车界面制作完毕，下一步是根据用户在 Input 面板中输入的车牌，从服务器获取车牌对应的密码，然后显示在 Output 面板中。当然，这里的服务器可不是 ofo 共享单车的服务器，是我自己建的服务器，其实就是一个虚拟主机而已。可以事先在服务器端放置好模拟数据，这里我也不用什么 JSON 数据格式了，直接自定义数据格式为 <code>`密码</code>+<code>:</code>+<code>车牌号</code>+<code>;</code>。如下图所示：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/70925715-file_1491135279665_9de3.jpg" style="zoom:80%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/70925715-file_1491135279665_9de3.jpg" width="400"></p>
 <p>然后在 UsebikeActivity 中为 codeCheck 按钮注册点击事件监听器，另外在类中定义一个 copy() 方法，用于将字符串复制到剪切板。</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//确定按钮监听器</span>
         checkCode<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">View<span class="token punctuation">.</span>OnClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -512,15 +512,15 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
     <span class="token punctuation">}</span>
 </code></pre>
 <p>逻辑非常明了：若输入框中的字符个数小于 4，则跳出相应提示，并 return。否则，访问服务器获取数据，并在这些数据中寻找与输入车牌号相对应的密码，若找到，则显示到 Output 面板；若没有找到，则复制车牌号到剪贴板，并跳转至 ofo 共享单车（若手机上没有安装 ofo 共享单车，也会跳出相应提示）。最终实现效果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" style="zoom:20%"></p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/62403252-file_1491061459270_17abc.png" style="zoom:20%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" height="512"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/62403252-file_1491061459270_17abc.png" height="512"></p>
 <p>视频预览效果：</p>
 <video src="http://on2kkr82s.bkt.clouddn.com/Minofo%E9%A2%84%E8%A7%88.mp4" width="288" height="512" controls="controls">Your browser does not support the video tag.</video>
 
 
 
 <h2 id="四、下载及声明"><a href="#四、下载及声明" class="headerlink" title="四、下载及声明"></a>四、下载及声明</h2><p>1 <strong>Apk 下载</strong>：点击<a href="http://on2kkr82s.bkt.clouddn.com/Minofo%201.0.apk" target="_blank" rel="external">下载 apk</a> 或扫码下载：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/1491063109.png" style="zoom:75%"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/1491063109.png" width="225"></p>
 <p>2 <strong>Github 源码</strong>：<a href="https://github.com/nightn/minofo" target="_blank" rel="external">https://github.com/nightn/minofo</a></p>
 <p>3 <strong>声明</strong>：本产品用作分享与学习，若转载请注明出处，勿作任何商业用途。</p>
 ]]></content>
