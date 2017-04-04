@@ -552,9 +552,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" style="zoom:20%"></p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/62403252-file_1491061459270_17abc.png" style="zoom:20%"></p>
 <p><a href="http://on2kkr82s.bkt.clouddn.com/Minofo%E9%A2%84%E8%A7%88.mp4" target="_blank" rel="external">点击查看视频预览效果</a></p>
-<video src="http://on2kkr82s.bkt.clouddn.com/Minofo%E9%A2%84%E8%A7%88.mp4" controls="controls">
-
-
+<p><video src="http://on2kkr82s.bkt.clouddn.com/Minofo%E9%A2%84%E8%A7%88.mp4" width="288" height="512" controls="controls">Your browser does not support the video tag.<video></video></video></p>
 <ol>
 <li><strong>Apk 下载</strong>：点击<a href="http://on2kkr82s.bkt.clouddn.com/Minofo%201.0.apk" target="_blank" rel="external">下载 apk</a> 或扫码下载</li>
 </ol>
@@ -894,7 +892,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 <p>好了，经过上面的开发过程，我们往主界面加入了标题栏、导航栏和悬浮按钮，功能已经基本完善了，下面需要加入地图显示模块，在此之前，我们先预览一下到目前为止的成果吧，如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/9165962-file_1491059740994_c666.png" style="zoom:20%"></p>
 <p>本来想通过一篇博客就把整个过程写完，现在发现前面的部分写得过于详细，以致于才写到一半就已经快 6000 字了。因此我将开发过程的后续内容又写了一篇 7000 字的博客，内容非常详尽，请参考<a href="http://nightn.com/2017/04/02/Android-develop-minofo-2/">Android 开发小作：Minofo(2)</a> 这篇文章吧！</p>
-</video>]]></content>
+]]></content>
       
         <categories>
             
