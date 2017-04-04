@@ -622,10 +622,8 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token function">setSupportActionBar</span><span class="token punctuation">(</span>toolbar<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 </code></pre>
-<p>通过 Toolbar 的 id 创建实例，然后将实例传入 setSupportActionBar() 方法，使得 toolbar 具有和 ActionBar 一样的功能。但这样一来，标题栏会多出一个应用的名称：Minofo，这不是我们想要的效果，因为我们已经用了一张图片作为标题栏的标题了。因此，为了隐藏这个额外的标题 Minofo，我一气之下干脆 app_name 都不要了（如果你有更好的方法，请联系我）:</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>app_name<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span>
+<p>通过 Toolbar 的 id 创建实例，然后将实例传入 setSupportActionBar() 方法，使得 toolbar 具有和 ActionBar 一样的功能。但这样一来，标题栏会多出一个应用的名称：Minofo，这不是我们想要的效果，因为我们已经用了一张图片作为标题栏的标题了。为此，需要在 onCreate() 方法的 setSupportActionBar(toolbar) 后面增加一条语句：（多亏了<a href="http://my.csdn.net/Monkey_LZL" target="_blank" rel="external">刘忠良</a>同学提供的思路。之前我的方法是将 app_name 设置成空字符串，这样虽然隐藏了标题，但 APP 的名字也没有了，所以不可取）</p>
+<pre class=" language-java"><code class="language-java">        <span class="token function">getSupportActionBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//隐藏标题栏上的标题</span>
 </code></pre>
 <p>最后，我们来看看运行效果。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/54140191-file_1491041589916_101f1.png" style="zoom:25%"></p>
