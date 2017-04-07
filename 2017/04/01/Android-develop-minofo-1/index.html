@@ -187,8 +187,7 @@
 
     <!-- Custom Head -->
     
-<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
 
 
     
@@ -442,7 +441,7 @@
 <p>可以看到标题栏和我们写 Android 程序常见的标题栏有很大区别，默认生成的标题栏是这样的：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/50077240-file_1491038459222_126d0.png" width="360"></p>
 <p>这差距有点大啊，没关系，我们慢慢来实现。ofo 共享单车的标题栏从左到右分别是导航栏入口按钮、标题和右侧的活动中心入口按钮。而目前我们的标题栏是默认是由 ActionBar 控件实现的，ActionBar 不能实现很多 Material Design 的效果，而且 Google 也不建议开发者使用 ActionBar 了。因此我们使用 Toolbar 来实现标题栏。为了修改掉默认的 ActionBar，我们需要更改主题，主题是在 AndroidManifest.xml 文件中指定的，打开该文件，可以看到，theme 现在的值是 AppTheme。</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
         <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@mipmap/ic_launcher<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@string/app_name<span class="token punctuation">"</span></span>
@@ -451,15 +450,15 @@
         <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@style/AppTheme<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         ...
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>AppTheme 只是主题的代号，我们要找到它所对应的定义。打开 res/values/styles.xml 文件：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>AppTheme<span class="token punctuation">"</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Theme.AppCompat.Light.DarkActionBar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>AppTheme<span class="token punctuation">"</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Theme.AppCompat.Light.DarkActionBar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
         <span class="token number">...</span>
 </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>在这里指定了 AppTheme 的 parent 是 Theme.AppCompat.Light.DarkActionBar，DarkActionBar 就是默认的深色 ActionBar 主题，我们准备用 Toolbar 取代 ActionBar，在这里不需要 ActionBar，</p>
 <p>因此将 parent 指定为 <strong>Theme.AppCompat.Light.NoActionBar</strong> 。现在 ActionBar 不见了，我们开始添加 Toolbar，修改 activity_main.xml 如下：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FrameLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
              <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">"</span></span>
              <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
@@ -477,9 +476,9 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>android.support.v7.widget.Toolbar</span><span class="token punctuation">></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>FrameLayout</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>简单分析一下上述 xml 代码，我们定义了一个帧布局 FrameLayout，在其中添加了一个 Toolbar 作为标题栏，由于 Toolbar 是由 appcompat-v7 提供的，不是自带的，因此我们需要使用它的全名，然后指定了这个 Toolbar 的 id 为 toolbar，宽度跟随父控件，高度定义为 ActionBar 的默认高度，并且指定了其背景，这里的 bg_top 是一张白底的图片，底部有一条阴影效果。然后在 Toolbar 里面，包含了一张图片，图片用 ImageView 显示，大小跟随图片的内容，这张图就是之前从 ofo 共享单车解析得到的标题栏图片。写完 toolbar 之后，还需要在 MainActivity.java 中的 onCreate() 方法中修改，如下：</p>
-<pre class="line-numbers language-java"><code class="language-java"> <span class="token annotation punctuation">@Override</span>
+<pre class=" language-java"><code class="language-java"> <span class="token annotation punctuation">@Override</span>
     <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -487,14 +486,14 @@
         Toolbar toolbar <span class="token operator">=</span> <span class="token punctuation">(</span>Toolbar<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>toolbar<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">setSupportActionBar</span><span class="token punctuation">(</span>toolbar<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>通过 Toolbar 的 id 创建实例，然后将实例传入 setSupportActionBar() 方法，使得 toolbar 具有和 ActionBar 一样的功能。但这样一来，标题栏会多出一个应用的名称：Minofo，这不是我们想要的效果，因为我们已经用了一张图片作为标题栏的标题了。为此，需要在 onCreate() 方法的 setSupportActionBar(toolbar) 后面增加一条语句：（多亏了<a href="http://my.csdn.net/Monkey_LZL" target="_blank" rel="external">刘忠良</a>同学提供的思路。之前我的方法是将 app_name 设置成空字符串，这样虽然隐藏了标题，但 APP 的名字也没有了，所以不可取）</p>
-<pre class="line-numbers language-java"><code class="language-java">        <span class="token function">getSupportActionBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//隐藏标题栏上的标题</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class=" language-java"><code class="language-java">        <span class="token function">getSupportActionBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//隐藏标题栏上的标题</span>
+</code></pre>
 <p>最后，我们来看看运行效果。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/54140191-file_1491041589916_101f1.png" width="360"></p>
 <p>效果还可以，不过标题栏上单单一个标题有点单调，下面把右侧的活动中心入口写写。右击 res 目录，选择 <code>New</code> — <code>Directory</code> 新建一个名为 menu 的目录，然后在 menu 目录添加一个 Menu resourse file， 名为 toolbar_action.xml，这个文件就是用来在 toolbar 上放置一些动作按钮的，当然在此我们只需要一个通知按钮就可以了，编写代码如下：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>menu</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span>
@@ -503,9 +502,9 @@
         <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>活动中心<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>showAsAction</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>always<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>menu 中只有一个 item，设置相应的 id，icon 和 title，此处 showAsAction 设置成 always 的意思是让该 item 一直显示在 Toolbar 中，而不会显示在菜单中，如果屏幕空间不够就隐藏掉（就算是隐藏掉也不显示在菜单中，就是这么刚烈）。接下来要重写菜单被创建时的回调方法 onCreateOptionsMenu()，然后定义菜单的响应事件，就是按下这个菜单后会执行什么。在 MainActivity.java 中的 MainActivity 类中添加如下两个方法：</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 重写「菜单创建时的回调方法」</span>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 重写「菜单创建时的回调方法」</span>
 <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">onCreateOptionsMenu</span><span class="token punctuation">(</span>Menu menu<span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 通过布局文件tool_action.xml创建Menu对象</span>
   <span class="token function">getMenuInflater</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>menu<span class="token punctuation">.</span>toolbar_action<span class="token punctuation">,</span> menu<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -524,7 +523,7 @@
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>onCreateOptionsMenu() 会在菜单创建时调用，主要是让之前定义的菜单显示出来，onOptionsItemSelected() 在菜单的某一项被选中时调用，然后执行响应逻辑，比如跳转到另外一个活动、跳出一个对话框等。此处为简单起见，跳出一个 Toast 提示，来看一下运行效果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/26915667-file_1491049432391_869a.png" width="288"></p>
 <p>相比之前，标题栏上多了通知按钮，并且点击该按钮，会提示“活动中心正在建设中”。这样一来我们的标题栏就实现了。什么，你说这一小节有点水？哦对，标题栏还有导航栏入口按钮还没加呢，不过别着急，我们在介绍导航栏部分时再添加。对了，我们先把 app 的图标设置成 ofo 共享单车的样子，在 AndroidManifest.xml 通过设置 icon 和 roundIcon 属性，将 app 的图标改掉。效果如下：</p>
@@ -536,7 +535,7 @@
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/66632090-file_1491044742768_17460.png" width="288"></p>
 <p>它们无一不是采用了 Material 的设计风格，使得无论是 app 还是网站都更加出色。那下面我们就开始根据 ofo 共享单车，来实现一个 Material 风格的导航栏吧。</p>
 <p>别看导航栏看起来好像很复杂，我们借助 Google 提供的工具，实现起来还是不难的，没错，就是用 Google 提供的 DrawerLayout 控件，DrawerLayout 作为一个布局，允许在其中放入两个子布局，第一个是主界面的内容，第二个就是可以滑动的导航栏菜单的内容，因此我们将之前的帧布局作为 DrawerLayout 的第一个子布局，另外，为了先预览一下 DrawerLayout 的效果，第二个子布局就用一个简单的 TextView 占个位，修改 activity_main.xml：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.v4.widget.DrawerLayout</span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">"</span></span>
@@ -557,11 +556,11 @@
         <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>40dp<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>android.support.v4.widget.DrawerLayout</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>可以看到，DrawerLayout 包含了两个控件，第一个 FrameLayout 就是之前所定义的，第二个是一个简单的文本显示控件。值得注意的地方是：（1）layout_gravity 属性必须要设置，它指定了导航栏出现的方式，如果未指定，那么导航栏就会直接把你的主界面覆盖掉，这里定义为 start 指的是根据系统语言（从左往右还是从右往左）判断导航栏菜单出现的方式，一般是从左往右出现。（2）background 的颜色设置为白色，如果不设置的话，默认是一种半透明的颜色。运行一下，看看 DrawerLayout 的效果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/38136287-file_1491051190569_6c01.gif" alt=""></p>
 <p>通过从左往右滑动屏幕，即可调出导航栏。但是如果只有通过滑动屏幕才能调出导航栏的话，那么会出现很多用户根本不知道这个功能的现象，因此我们需要在 Toolbar 上加入一个导航栏入口按钮，这样就有两种方式调出导航栏了，修改 MainActivity.java 如下：</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> DrawerLayout mDrawerLayout<span class="token punctuation">;</span>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> DrawerLayout mDrawerLayout<span class="token punctuation">;</span>
 
 <span class="token annotation punctuation">@Override</span>
 <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -589,20 +588,20 @@
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>这样一来标题栏最左侧便多出了一个导航栏入口按钮了，通过点击该按钮也能调出导航栏。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/94831995-file_1491052359504_bac9.png" width="360"></p>
 <p>导航栏的功能已经实现，下面便是往里面添加具体内容了，观察 ofo 共享单车的导航栏，如下图所示.</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/51385252-file_1491052575357_f9ec.png" width="288"></p>
 <p>这个部分可以通过 Design Support 库提供的 NavigationView 控件来实现，另外由于这里还出现了圆形的头像，因此还需要一个图片圆形化的工具：CircleImageView。为了使用这两个控件，我们需要添加依赖库，在 app/build.gradle 中的 dependencies 闭包中添加依赖库：</p>
-<pre class="line-numbers language-gr"><code class="language-gr">dependencies{
+<pre class=" language-gr"><code class="language-gr">dependencies{
   compile 'com.android.support:design:24.2.1'
   compile 'de.hdodenhof:circleimageview:2.1.0'
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>当然，support 的具体版本依据你的 appcompat-v7 的版本确定，第三方库你也可以去开原网站查看最新版本。添加好依赖库，同步成功后，就可以开始完善导航栏的内容了。</p>
 <p>在 res/menu 目录下新建 menu resource file，命名为 nav.xml，作为导航栏的 body，修改 nav.xml 的内容如下：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>menu</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>group</span> <span class="token attr-name"><span class="token namespace">android:</span>checkableBehavior</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>single<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span>
@@ -635,9 +634,9 @@
             <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>关于<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>group</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>然后添加导航栏的 header 部分，在 res/layout 目录下新建 layout resource file，命名为 header.xml，修改内容如下：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RelativeLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
                 <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
                 <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>100dp<span class="token punctuation">"</span></span>
@@ -664,10 +663,10 @@
         <span class="token punctuation">/></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RelativeLayout</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>这部分用了一个相对布局，作为导航栏的 header，布局包括一个圆形头像，头像尺寸设为固定值；还包括一个昵称，设置好文字的内容，尺寸和颜色等信息。</p>
 <p>导航栏的 body 和 header 都准备好，接下来将他们添加到 DrawerLayout 的第二个子布局，修改 activity_main.xml，用如下代码取代之前定义的 TextView。</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.NavigationView</span>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.NavigationView</span>
         <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/nav_view<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
@@ -675,11 +674,11 @@
         <span class="token attr-name"><span class="token namespace">app:</span>menu</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@menu/nav<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>headerLayout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@layout/header<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>?attr/colorPrimary<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>现在已经能够成功显示导航栏的内容了，效果如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/25792579-file_1491054292385_9671.png" width="288"></p>
 <p>光有界面是不够的，导航栏里的 item 要能够点击并执行点什么才行。修改 MainActivity.java 中的代码，在 onCreate() 方法中加入以下代码：</p>
-<pre class="line-numbers language-java"><code class="language-java">NavigationView navView <span class="token operator">=</span> <span class="token punctuation">(</span>NavigationView<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>nav_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class=" language-java"><code class="language-java">NavigationView navView <span class="token operator">=</span> <span class="token punctuation">(</span>NavigationView<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>nav_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
         navView<span class="token punctuation">.</span><span class="token function">setNavigationItemSelectedListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NavigationView<span class="token punctuation">.</span>OnNavigationItemSelectedListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token annotation punctuation">@Override</span>
             <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">onNavigationItemSelected</span><span class="token punctuation">(</span>MenuItem item<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -687,12 +686,12 @@
                 <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>简单分析一下上述代码，先根据布局 id 获取 NavigationView 实例，然后设置监听事件，任何一个按钮被点击，都会通过 closeDrawers() 方法关闭导航栏。至于对于点击具体 item 执行什么事件，这是后续讨论的事情了。至此，导航栏部分已经全部实现。接下来实现主界面的三个悬浮按钮。</p>
 <h3 id="3-悬浮按钮实现"><a href="#3-悬浮按钮实现" class="headerlink" title="3. 悬浮按钮实现"></a><strong>3. 悬浮按钮实现</strong></h3><p>观察 ofo 共享单车主界面，底下有三个按钮，它们都是悬浮在地图上面的，我们称之为悬浮按钮，悬浮按钮可以通过 Design Support 库提供的 FloatingActionButton 实现，用于之前我们已经引入了 Design Support 依赖库，在此我们直接可以使用 FloatingActionButton。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/44290926-file_1491054983229_14957.png" width="288"></p>
 <p>修改 activity_main.xml 文件，在之前定义的 DrawerLayout 中的第一个子布局 FrameLayout 中加入 3 个 FloatingActionButton，代码如下：</p>
-<pre class="line-numbers language-xml"><code class="language-xml">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.FloatingActionButton</span>
+<pre class=" language-xml"><code class="language-xml">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.FloatingActionButton</span>
             <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/fab<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
@@ -721,19 +720,19 @@
             <span class="token attr-name"><span class="token namespace">android:</span>src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@drawable/ridenow<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">app:</span>elevation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>8dp<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>scaleType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>除了用于设置布局位置的 layout_gravity 属性，三个悬浮按钮的属性基本差不多。另外需要注意到是 scaleType 属性需要设置为 center，这样才能保证图片将悬浮按钮铺满。然后我们为这三个悬浮按钮注册监听事件。由于按钮比较多，我们就不打算让每个按钮都去实现一遍监听事件，而是让 MainActivity 类实现 View.OnClickListener 接口，然后重写接口中的 onClick() 方法，在方法中通过判断按钮的 id 来设置对应按钮的点击事件。</p>
 <p>在 onCreate() 方法中为三个悬浮按钮注册点击事件监听器：</p>
-<pre class="line-numbers language-java"><code class="language-java">        <span class="token comment" spellcheck="true">// 悬浮按钮注册监听器</span>
+<pre class=" language-java"><code class="language-java">        <span class="token comment" spellcheck="true">// 悬浮按钮注册监听器</span>
         begin <span class="token operator">=</span> <span class="token punctuation">(</span>FloatingActionButton<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>begin<span class="token punctuation">)</span><span class="token punctuation">;</span>
         refresh <span class="token operator">=</span> <span class="token punctuation">(</span>FloatingActionButton<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>refresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
         fab <span class="token operator">=</span> <span class="token punctuation">(</span>FloatingActionButton<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fab<span class="token punctuation">)</span><span class="token punctuation">;</span>
         begin<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         refresh<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         fab<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>此处的 this 指的是 MainActivity，因为 MainActivity 类 implements 了 View.OnClickListener 接口，因此它具备了监听点击事件的能力，之后要做的便于重写接口中的 onClick 方法，在 MainActivity 类中添加如下代码：</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token keyword">switch</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">case</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>begin<span class="token operator">:</span><span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">//TODO 开始按钮点击事件</span>
@@ -752,7 +751,7 @@
       <span class="token keyword">break</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>通过 View 的 getId() 方法获取当前被点击按钮的 id，然后根据 id 设置相应的点击逻辑，在这里还未加入过多的点击逻辑，但可以先分析一下，开始按钮 begin 点击后应该跳转至一个新的活动（即后面要讲到的用车界面），定位刷新按钮 refresh 点击之后会重新获取当前位置信息，并显示在主界面的地图模块中（地图模块将在下一节实现），所以这两个按钮的点击事件我们先用 TODO 注释占个坑，至于举报按钮 fab，我就不打算去实现它的点击事件了，所以在此加入一个简单的 Toast 提示语句。</p>
 <p>好了，经过上面的开发过程，我们往主界面加入了标题栏、导航栏和悬浮按钮，功能已经基本完善了，下面需要加入地图显示模块，在此之前，我们先预览一下到目前为止的成果吧，如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/9165962-file_1491059740994_c666.png" width="600"></p>

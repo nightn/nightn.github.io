@@ -187,8 +187,7 @@
 
     <!-- Custom Head -->
     
-<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
 
 
     
@@ -432,7 +431,7 @@
 <p>然后在输出窗口便可以看到调试版的 SHA1 了，用这个 SHA1 便可以获得高德地图的 Key 了。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/92465191-file_1491112579070_f6fb.jpg" width="500"></p>
 <h3 id="3-配置-AndroidManifest-xml"><a href="#3-配置-AndroidManifest-xml" class="headerlink" title="3. 配置 AndroidManifest.xml"></a><strong>3. 配置 AndroidManifest.xml</strong></h3><p>最后配置好 AndroidManifest.xml 文件。首先进行<strong>权限声明</strong>：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- 用于进行网络定位 --></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- 用于进行网络定位 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.ACCESS_COARSE_LOCATION<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
     <span class="token comment" spellcheck="true">&lt;!-- 用于访问GPS定位 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.ACCESS_FINE_LOCATION<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
@@ -457,34 +456,34 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.ACCESS_COARSE_LOCATION<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.MOUNT_UNMOUNT_FILESYSTEMS<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.WAKE_LOCK<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>然后在 applicaiton 标签中<strong>设置高德 Key</strong> 和<strong>定位服务</strong>：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.amap.api.v2.apikey<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>key<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.amap.api.v2.apikey<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>key<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 //此处的 key 就是之前你自己申请的那个
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>meta-data</span><span class="token punctuation">></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>service</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.amap.api.location.APSService<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>service</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>好了，至此高德地图开发包的配置就已经完成了，下面就可以在项目中正常使用了。</p>
 <h3 id="4-使用高德地图"><a href="#4-使用高德地图" class="headerlink" title="4. 使用高德地图"></a><strong>4. 使用高德地图</strong></h3><p>首先在主界面的布局文件中添加地图控件，打开 activity_main.xml，在之前定义的 FrameLayout 布局中加入如下代码：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.amap.api.maps.MapView</span>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.amap.api.maps.MapView</span>
             <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/map_view<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>这就是一个高德地图的地图显示控件 MapView，然后在 MainActivity.java 中定义一个名为 mapView 的 MapView 对象，在 onCreate 方法中通过 findViewById 找到布局中的 MapView 控件，并调用 mapView.onCreate() 方法初始化地图。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//高德地图</span>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//高德地图</span>
 mapView <span class="token operator">=</span> <span class="token punctuation">(</span>MapView<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>map_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//在activity执行onCreate时执行mMapView.onCreate(saveInsatenceState)，创建地图</span>
 mapView<span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>这样就成功在我们的 App 中添加并初始化了一个地图了，没错，就是这么简单。运行一下试试吧。<strong>注意！！引入高德地图之后如果还在模拟器里面调试，会出现闪退现象！</strong>这个问题我折腾了好久啊，一直以为是我自己的代码出了问题。因此在这里特别强调，<strong>引入高德地图之后，最好用真机调试</strong>。什么，你是 iPhone 用户，没有 Android 真机？那可能要尝试用不同的模拟器试试看了，有知道解决方案的同学可以在评论里和大家分享一下。我用的机型是荣耀 V8，项目完美运行：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/863080-file_1491114787026_12f91.png" width="288"></p>
 <p>由于只调用了一个 MapView.onCreate() 方法，因此创建出的地图默认是北京的地图，而且地图中定位蓝点也没有。为了让地图的功能更丰富，我们需要引入 AMap 类和 MyLocationStyle 类，AMap 类是地图控制器，用来管理地图的很多属性；而 MyLocationStyle 类是地图的定位风格属性，包括设置定位模式（连续定位还是单次定位）、连续定位的时间间隔、定位蓝点的样式等等。之后我们还要用到 UiSettings 类，它是用于控制地图界面小工具的显示隐藏的。为了可以更形象的理解高德地图中各个主要类是如何控制地图显示的，我将自己的理解表示成一张图，如下所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/94701186-file_1491120235392_12e48.png" width="500"></p>
 <p>其中，AMap 是管理地图各种属性的主要控制器，但它并不是直接管理的，而是通过它的下级（注意，不是子类）来管理具体的属性，就像人类社会一样，在代码中也能体现出明确的分工。图上只画出了 AMap 管理的 MyLocationStyle 类和 UiSettings 类，其中 MyLocationStyle 类是管理定位风格的，如定位模式，连续定位间隔、定位蓝点的样式等；而 UiSettings 是控制地图上小工具的显示的，如缩放按钮、指南针、比例尺的显示与隐藏，高德地图 logo 的位置（这个 logo　是不能隐藏的）以及地图是否可以旋转等。既然明确了它们之间的逻辑关系，那么就开始编写代码吧，修改 MainActivity.java，先定义一个名为 aMap 类型为 AMap 的全局变量，在 onCreate() 方法中添加如下代码：</p>
-<pre class="line-numbers language-java"><code class="language-java">        <span class="token comment" spellcheck="true">//初始化地图控制器对象aMap</span>
+<pre class=" language-java"><code class="language-java">        <span class="token comment" spellcheck="true">//初始化地图控制器对象aMap</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>aMap <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
             aMap <span class="token operator">=</span> mapView<span class="token punctuation">.</span><span class="token function">getMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//将mapView交给地图控制器管理</span>
         <span class="token punctuation">}</span>
@@ -502,12 +501,12 @@ mapView<span class="token punctuation">.</span><span class="token function">onCr
         aMap<span class="token punctuation">.</span><span class="token function">setMyLocationEnabled</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         aMap<span class="token punctuation">.</span><span class="token function">moveCamera</span><span class="token punctuation">(</span>CameraUpdateFactory<span class="token punctuation">.</span><span class="token function">zoomTo</span><span class="token punctuation">(</span><span class="token number">17</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//设置缩放级别为17</span>
         aMap<span class="token punctuation">.</span><span class="token function">showIndoorMap</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//显示室内地图</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>首先判断 aMap 是否为空，如果为空则将地图显示控件 mapView 交由 aMap 管理。然后新建 MyLocationStyle 对象，设置定位模式为单次定位，之所以不设置成连续定位，是因为我们打算通过主界面左下角的那个定位刷新的悬浮按钮来刷新定位，如果设置成连续定位，那么我们不手动刷新，地图也会自己不停的定位，这是我们不愿意看到的，更是用户不愿意看到的（GPS 多费电啊~）。然后设置定位点的显示图标，由于 myLocationIcon 接收的是 BitmapDescriptor 类型的参数，因此这里不能直接传 R.drawable.map_marker，而是通过 BitmapDescriptorFactory 类的 fromResource 方法将其转换为 BitmapDescriptor 类型。之后的两条语句是设置精度圆的样式，什么是精度圆，这两句话有什么作用，看看下图你就知道了（下图是不加这两条语句时定位点的显示效果）：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/17900221-file_1491122105579_10d2c.png" width="300"></p>
 <p>定位蓝点周围那一圈紫色的区域便是精度圆，默认是带有精度圆的。但是 ofo 共享单车的点位蓝点是不带精度圆的，因此我们就是通过上述两条语句，将精度圆的边框颜色和圆形区域颜色都设置为透明，以达到 ofo 共享单车上的效果。设置好 MyLocationStyle 的属性之后，将其加载到 aMap 中，并设置为允许显示。最后将地图缩放级别定义为 17 级，设置允许使用室内地图（室内地图很强大）。</p>
 <p>经过上述设置之后如果直接运行的话，你会发现<strong>你被定位到非洲尼日利亚西南部某片神秘的不知名的大西洋海域</strong>（别问我是怎么知道的，说多了都是泪啊）。我猜想这是由于 app 的权限不够，虽然在 AndroidManifest.xml 中声明了权限，但有些权限进行运行时权限处理的，因此我们需要在 onCreate() 方法中加入一段申请权限的代码，只有用户同意了这些权限，才能继续操作。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//运行时权限</span>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//运行时权限</span>
         List<span class="token operator">&lt;</span>String<span class="token operator">></span> permissionList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>ContextCompat<span class="token punctuation">.</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>MainActivity<span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">,</span> Manifest<span class="token punctuation">.</span>
                 permission<span class="token punctuation">.</span>ACCESS_FINE_LOCATION<span class="token punctuation">)</span> <span class="token operator">!=</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -525,19 +524,19 @@ mapView<span class="token punctuation">.</span><span class="token function">onCr
             String<span class="token punctuation">[</span><span class="token punctuation">]</span> permissions <span class="token operator">=</span> permissionList<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span>permissionList<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             ActivityCompat<span class="token punctuation">.</span><span class="token function">requestPermissions</span><span class="token punctuation">(</span>MainActivity<span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>现在我们再来运行一下，运行之后首先跳出申请权限对话框：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/84891585-file_1491123447191_14795.png" width="400"></p>
 <p>都点击允许之后便出现了主界面，此时可以看到，点位蓝点的位置就是你当前的定位，你可以移动、缩放地图，也可以查看室内地图。如下图所示，左图显示了我当前所处的位置，右图显示的是室内地图。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/70293263-file_1491124150844_1507c.png" width="600"></p>
 <p>虽然地图模块已经显示成功了，而且可以准确定位，但是这实现了单次定位，如果我们移动了位置，想再次定位就要重启启动软件才行。因此，需要像 ofo 共享单车一样，点击左下角的刷新按钮便能够更新点位，下面这一节就来讲述怎么实现这一功能吧。</p>
 <h3 id="5-实现点击定位"><a href="#5-实现点击定位" class="headerlink" title="5. 实现点击定位"></a><strong>5. 实现点击定位</strong></h3><p>为了实现定位功能，我们需要使用两个类：AMapLocationClient 类和 AMapLocationClientOption 类。你可以把前者叫做定位客户端，后者叫做定位客户端设置，还需要一个 Marker 类，用于标记地图上的某个点。新建三个全局变量：</p>
-<pre class="line-numbers language-java"><code class="language-java">AMapLocationClient mLocationClient <span class="token operator">=</span> null<span class="token punctuation">;</span>
+<pre class=" language-java"><code class="language-java">AMapLocationClient mLocationClient <span class="token operator">=</span> null<span class="token punctuation">;</span>
 AMapLocationClientOption mLocationOption <span class="token operator">=</span> null<span class="token punctuation">;</span>
 Marker locationMarker <span class="token operator">=</span> null<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>然后在 onCrate() 方法中添加如下代码：</p>
-<pre class="line-numbers language-java"><code class="language-java">mLocationClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AMapLocationClient</span><span class="token punctuation">(</span><span class="token function">getApplicationContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class=" language-java"><code class="language-java">mLocationClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AMapLocationClient</span><span class="token punctuation">(</span><span class="token function">getApplicationContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         mLocationOption <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AMapLocationClientOption</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         mLocationOption<span class="token punctuation">.</span><span class="token function">setOnceLocation</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//设置为单次定位模式</span>
         mLocationOption<span class="token punctuation">.</span><span class="token function">setNeedAddress</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//返回地址描述</span>
@@ -564,12 +563,12 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>程序的逻辑比较简单，注释都标明了语句的具体作用。需要注意的是这里为定位客户端注册了一个定位监听器，在监听器执行的代码便是获取当前经纬度，并用一个 marker 表示当前经纬度，显示在地图上。那么如何触发这个监听器呢？这个问题问得好，下面这条语句就可以触发：</p>
-<pre class="line-numbers language-java"><code class="language-java">mLocationClient<span class="token punctuation">.</span><span class="token function">startLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class=" language-java"><code class="language-java">mLocationClient<span class="token punctuation">.</span><span class="token function">startLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>那么将这句代码放到哪里呢？当然是放到刷新按钮的点击事件的毁掉函数中呀，如下所示：</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">switch</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">//...</span>
             <span class="token keyword">case</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>refresh<span class="token operator">:</span><span class="token punctuation">{</span>
@@ -580,11 +579,11 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
             <span class="token comment" spellcheck="true">//...</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>这样一来，便实现了点击定位功能了。不过在此要注意两个细节。</p>
 <p><strong>（1）及时销毁对象</strong></p>
 <p>之前定义的 mapView 和 mLocationClient 都没有在主活动结束时进行销毁，因此我们要重写活动的一些回调方法，最后一个方法是保存地图缓存。</p>
-<pre class="line-numbers language-java"><code class="language-java"> <span class="token annotation punctuation">@Override</span>
+<pre class=" language-java"><code class="language-java"> <span class="token annotation punctuation">@Override</span>
     <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         mapView<span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -608,21 +607,21 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span><span class="token punctuation">;</span>
         mapView<span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p><strong>（2）调整地图 UI</strong></p>
 <p>在之前运行的结果中，可以发现地图界面右下角还保留着默认的缩放按钮，举报按钮就覆盖在它的上面，强迫症患者怎么能容忍这种事情发生呢，赶紧把缩放按钮隐藏掉。</p>
 <p>怎么隐藏呢？还记得之前说过的 UiSettings 类吗，没错，就是用它来设置地图 UI 的。新建名为 mUiSettings 类型为 UiSettings 的对象，并在 onCreate() 中添加如下代码：</p>
-<pre class="line-numbers language-java"><code class="language-java">       <span class="token comment" spellcheck="true">//控件交互</span>
+<pre class=" language-java"><code class="language-java">       <span class="token comment" spellcheck="true">//控件交互</span>
         mUiSettings <span class="token operator">=</span> aMap<span class="token punctuation">.</span><span class="token function">getUiSettings</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setZoomControlsEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//缩放按钮的显示与隐藏</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setCompassEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//指南针的显示与隐藏</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setScaleControlsEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//比例尺的显示与隐藏</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setLogoPosition</span><span class="token punctuation">(</span>AMapOptions<span class="token punctuation">.</span>LOGO_POSITION_BOTTOM_LEFT<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//         设置LOGO位置</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setRotateGesturesEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//禁止旋转</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>代码比较简单，就不多加解析了，看注释吧。好了，地图模块大功告成，点击刷新按钮便可实现更新定位功能了。</p>
 <h2 id="二、用车界面开发"><a href="#二、用车界面开发" class="headerlink" title="二、用车界面开发"></a><strong>二、用车界面开发</strong></h2><h3 id="1-Input-面板"><a href="#1-Input-面板" class="headerlink" title="1. Input 面板"></a><strong>1. Input 面板</strong></h3><p>地图功能实现之后，主界面的功能就已经都达到预期目标了，接下来开发用车界面。我们新建一个活动，叫作 UsebikeActivity，在生成的 activity_usebike.xml 中添加如下代码：</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
               <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">"</span></span>
               <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
@@ -723,11 +722,11 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token attr-name"><span class="token namespace">android:</span>scaleType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>visibility</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>visible<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>别看上面的代码有 100 行，其实这种 xml 文件是非常好理解的，不过是各种控件搭积木式的拼凑而已。简单分析一下，最外层是一个线性布局，将之前定义的 toolbar 标题栏直接拿过来用就好了，然后主体又是一个线性布局，里面就是 TextView、ImageView、EditView 和 Button 的简单组合而已，最底下的手电筒按钮是一个简单的 FloatingActionButton，悬浮按钮的用法在上一篇博客讲过。预览一下效果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/9531359-file_1491128630463_f0f0.png" width="288"></p>
 <p>下面建立「主活动」和「用车活动」的联系，点击用车按钮，便跳出用车界面。实现很简单，用显式 Intent 即可，修改用车按钮的点击事件回调函数：</p>
-<pre class="line-numbers language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">switch</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">case</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>begin<span class="token operator">:</span><span class="token punctuation">{</span>
                 <span class="token comment" spellcheck="true">//TODO 开始按钮点击事件</span>
@@ -739,10 +738,10 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
             <span class="token comment" spellcheck="true">//...</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>非常简单，两句代码搞定。这样通过点击主界面的「立即用车」，就能跳转到用车界面了，不过还有些细节要注意。</p>
 <p>在用车界面中，EditText 内容有变化时，底下的 TextView 提示和右边的 Button 也要发生相应变化。在 UsebikeActivity 中为 codeEdit （就是车牌的输入框）注册内容变化事件的监听器。其中 checkCode 是输入框右边的 Button，codeHint 是输入框下方的 TextView，用于密码提示（原谅我拙计的命名方式，连我自己都搞不清了）。这些控件都需要事先通过 findViewById()  从布局中找到，这些过程就省略了。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//codeEdit输入发生变化的监听器</span>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//codeEdit输入发生变化的监听器</span>
         codeEdit<span class="token punctuation">.</span><span class="token function">addTextChangedListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">TextWatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token annotation punctuation">@Override</span>
             <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">beforeTextChanged</span><span class="token punctuation">(</span>CharSequence s<span class="token punctuation">,</span> <span class="token keyword">int</span> start<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">,</span> <span class="token keyword">int</span> after<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -769,11 +768,11 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>在回调函数中，先判断输入框是否为空，如果不为空，则改变按钮的样式；然后判断输入框字符长度，根据长度给出相应提示，最大长度为 8 位，效果如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/93288955-file_1491131253416_a479.png" width="600"></p>
 <h3 id="2-Output-面板"><a href="#2-Output-面板" class="headerlink" title="2. Output 面板"></a><strong>2. Output 面板</strong></h3><p>用车界面的输入面板已经实现好了，下面要实现输入车牌之后，跳转到密码显示面板，即 Output 面板，这个面板要新建一个活动吗？当然不用，我们只要对 Input 面板进行适当修改，利用控件的 visibility 属性控制其可见性就能够实现了。通过在 activity_usebike.xml 中将输入框和按钮所对应的线性布局隐藏，以及隐藏小电筒按钮。用如下代码取而代之，即可实现 Output 面板。</p>
-<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span>
             <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/show_code_linear<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
@@ -826,13 +825,13 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
                 <span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#40320D<span class="token punctuation">"</span></span>
                 <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>30sp<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>预览效果如下：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/26235861-file_1491131983827_1665d.png" width="300"></p>
 <h2 id="三、用-OkHttp-获取服务器数据"><a href="#三、用-OkHttp-获取服务器数据" class="headerlink" title="三、用 OkHttp 获取服务器数据"></a><strong>三、用 OkHttp 获取服务器数据</strong></h2><p>用车界面制作完毕，下一步是根据用户在 Input 面板中输入的车牌，从服务器获取车牌对应的密码，然后显示在 Output 面板中。当然，这里的服务器可不是 ofo 共享单车的服务器，是我自己建的服务器，其实就是一个虚拟主机而已。可以事先在服务器端放置好模拟数据，这里我也不用什么 JSON 数据格式了，直接自定义数据格式为 <code>`密码</code>+<code>:</code>+<code>车牌号</code>+<code>;</code>。如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/70925715-file_1491135279665_9de3.jpg" width="400"></p>
 <p>然后在 UsebikeActivity 中为 codeCheck 按钮注册点击事件监听器，另外在类中定义一个 copy() 方法，用于将字符串复制到剪切板。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//确定按钮监听器</span>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//确定按钮监听器</span>
         checkCode<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">View<span class="token punctuation">.</span>OnClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token annotation punctuation">@Override</span>
             <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -903,15 +902,15 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
                 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//复制文字到剪贴板</span>
+</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//复制文字到剪贴板</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">copy</span><span class="token punctuation">(</span>String content<span class="token punctuation">,</span> Context context<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         ClipboardManager clipboard <span class="token operator">=</span> <span class="token punctuation">(</span>ClipboardManager<span class="token punctuation">)</span>context<span class="token punctuation">.</span><span class="token function">getSystemService</span><span class="token punctuation">(</span>Context<span class="token punctuation">.</span>CLIPBOARD_SERVICE<span class="token punctuation">)</span><span class="token punctuation">;</span>
         ClipData clip <span class="token operator">=</span> ClipData<span class="token punctuation">.</span><span class="token function">newPlainText</span><span class="token punctuation">(</span><span class="token string">"label"</span><span class="token punctuation">,</span> content<span class="token punctuation">)</span><span class="token punctuation">;</span>
         clipboard<span class="token punctuation">.</span><span class="token function">setPrimaryClip</span><span class="token punctuation">(</span>clip<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>逻辑非常明了：若输入框中的字符个数小于 4，则跳出相应提示，并 return。否则，访问服务器获取数据，并在这些数据中寻找与输入车牌号相对应的密码，若找到，则显示到 Output 面板；若没有找到，则复制车牌号到剪贴板，并跳转至 ofo 共享单车（若手机上没有安装 ofo 共享单车，也会跳出相应提示）。最终实现效果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" width="600"></p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/62403252-file_1491061459270_17abc.png" width="600"></p>

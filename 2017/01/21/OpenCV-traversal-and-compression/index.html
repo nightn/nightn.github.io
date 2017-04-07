@@ -187,8 +187,7 @@
 
     <!-- Custom Head -->
     
-<link rel="stylesheet" href="/css/prism-dark.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
 
 
     
@@ -416,25 +415,25 @@
 <h2 id="3-颜色缩减"><a href="#3-颜色缩减" class="headerlink" title="3. 颜色缩减"></a><strong>3. 颜色缩减</strong></h2><p>何谓颜色缩减？对于元素类型为 uchar 的单通道图像矩阵，每个像素点有 256 个灰度值，但是对于三通道图像，每个像素点的颜色种类达 16777216 种（256 的三次方）。如此多的颜色可能会对算法性能造成严重影响，我们往往只需要颜色的一部分，也能满足要求，因此引入了颜色缩减。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/25494428-file_1490017405949_8fda.png" alt=""></p>
 <p>如上图所示，左侧为颜色缩减前，右侧为颜色缩减后，数字表示灰度值。可以看出，灰度值 92 到 114 映射为 92；115 到 137 映射为 115，以此类推，左侧 164 种颜色缩减为右侧的 7 种颜色。实现方法也很简单：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//color1输入,color2输出 </span>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//color1输入,color2输出 </span>
 color2 <span class="token operator">=</span> <span class="token punctuation">(</span>color1 <span class="token operator">/</span> <span class="token number">23</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">23</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</code></pre>
 <p>但是，如果直接对图像的每个像素进行上述除法和乘法，这样效率是很低的。一个较好的办法是事先生成一张颜色缩减的查找表，表中缩减前后的值都明确给定，这样遍历图像时，利用查找表直接对相应像素点进行赋值即可。其优势在于只需读取、无需计算。以下代码生成颜色查找表 color_table：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 生成颜色查找表</span>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 生成颜色查找表</span>
 vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">;</span>
 <span class="token keyword">int</span> width <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     color_table<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i <span class="token operator">/</span> width <span class="token operator">*</span> width<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <h2 id="4-图像遍历"><a href="#4-图像遍历" class="headerlink" title="4. 图像遍历"></a><strong>4. 图像遍历</strong></h2><p>有了颜色查找表后，我们便可以对图像进行遍历并对像素点进行颜色缩减了。我们采用了几种不同的图像遍历方法，为了对比它们的效率，采用 OpenCV 提供的两个简单的计时器函数 getTickCount() 和 getTickFrequency(), 它们分别返回 CPU 走过的时钟周期数和 CPU 一秒的时钟周期数。因此，可以这样来计时（单位：秒）：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">double</span> time_begin <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">double</span> time_begin <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// do something</span>
 <span class="token keyword">double</span> time_end <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">double</span> time <span class="token operator">=</span> <span class="token punctuation">(</span>time_end <span class="token operator">-</span> time_begin<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token function">getTickFrequency</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="4-1-利用指针遍历"><a href="#4-1-利用指针遍历" class="headerlink" title="4.1 利用指针遍历"></a>4.1 利用指针遍历</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceC</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="4-1-利用指针遍历"><a href="#4-1-利用指针遍历" class="headerlink" title="4.1 利用指针遍历"></a>4.1 利用指针遍历</h3><pre class=" language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceC</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
      <span class="token comment" spellcheck="true">//只接收字符型矩阵</span>
      <span class="token function">CV_Assert</span><span class="token punctuation">(</span>I<span class="token punctuation">.</span><span class="token function">depth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>uchar<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -457,11 +456,11 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
      <span class="token punctuation">}</span>
      <span class="token keyword">return</span> I<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>颜色缩减结果（根据查找表的width设置缩减的程度，在此 width = 20）</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79119290-file_1490017405746_14c2e.png" alt=""></p>
 <p>算法执行时间为 0.0134007 秒。</p>
-<h3 id="4-2-利用迭代器遍历"><a href="#4-2-利用迭代器遍历" class="headerlink" title="4.2 利用迭代器遍历"></a>4.2 利用迭代器遍历</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceIterator</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
+<h3 id="4-2-利用迭代器遍历"><a href="#4-2-利用迭代器遍历" class="headerlink" title="4.2 利用迭代器遍历"></a>4.2 利用迭代器遍历</h3><pre class=" language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceIterator</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
      <span class="token comment" spellcheck="true">//只接收字符型矩阵</span>
      <span class="token function">CV_Assert</span><span class="token punctuation">(</span>I<span class="token punctuation">.</span><span class="token function">depth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>uchar<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -489,9 +488,9 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
      <span class="token punctuation">}</span>
      <span class="token keyword">return</span> I<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>算法执行时间 0.0693951 秒。用迭代器遍历速度稍慢，但是更加安全。上述代码中，我们首先对图像的通道数进行判断，通道数为 1 时，直接对灰度值赋值；对于三通道彩色图像，每个像素可以看做一个包含三个 uchar 元素的 vector, 在 OpenCV 中用 Vec3b 命名。对于彩色图像，如果我们仅仅使用 uchar 而不是 Vec3b 迭代的话就只能获得蓝色通道的值（BGR模型中的第一个通道）。</p>
-<h3 id="4-3-通过相关返回值的-On-the-fly-地址遍历"><a href="#4-3-通过相关返回值的-On-the-fly-地址遍历" class="headerlink" title="4.3 通过相关返回值的 On-the-fly 地址遍历"></a>4.3 通过相关返回值的 On-the-fly 地址遍历</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceRadomAccess</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
+<h3 id="4-3-通过相关返回值的-On-the-fly-地址遍历"><a href="#4-3-通过相关返回值的-On-the-fly-地址遍历" class="headerlink" title="4.3 通过相关返回值的 On-the-fly 地址遍历"></a>4.3 通过相关返回值的 On-the-fly 地址遍历</h3><pre class=" language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceRadomAccess</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
      <span class="token comment" spellcheck="true">//只接收字符型矩阵</span>
      <span class="token function">CV_Assert</span><span class="token punctuation">(</span>I<span class="token punctuation">.</span><span class="token function">depth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>uchar<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -525,18 +524,18 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
      <span class="token punctuation">}</span>
      <span class="token keyword">return</span> I<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>通过 at() 函数获取并更改图像中的元素。事实上，这种方法并不推荐呗用来进行图像扫描。</p>
 <h3 id="4-4-核心函数-LUT-The-Core-Function"><a href="#4-4-核心函数-LUT-The-Core-Function" class="headerlink" title="4.4 核心函数 LUT (The Core Function)"></a>4.4 核心函数 LUT (The Core Function)</h3><p>核心函数 LUT 是最被推荐用于实现批量图像元素查找和更改的方法，它并不需要你自己去扫描图像。我们先建立一个查找表：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">Mat <span class="token function">table</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> CV_8U<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class=" language-cpp"><code class="language-cpp">Mat <span class="token function">table</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> CV_8U<span class="token punctuation">)</span><span class="token punctuation">;</span>
 uchar<span class="token operator">*</span> p <span class="token operator">=</span> table<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
     p<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> color_table<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>然后调用函数：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//image是输入，image_reduce是输出</span>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//image是输入，image_reduce是输出</span>
 <span class="token function">LUT</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> table<span class="token punctuation">,</span> image_reduce<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</code></pre>
 <h3 id="4-5-结论"><a href="#4-5-结论" class="headerlink" title="4.5 结论"></a>4.5 结论</h3><p>尽量使用 OpenCV 内置函数，调用 LUT 函数可以获得最快的速度，这是因为 OpenCV 库可以通过英特尔线程架构启用多线程，当然，迭代器也是一个不错的选择，优点是安全，缺点是速度较慢，on-the-fly方法不推荐使用。</p>
 <hr>
 <p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/how_to_scan_images/how_to_scan_images.html#howtoscanimagesopencv" target="_blank" rel="external">More</a></p>
