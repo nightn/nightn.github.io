@@ -187,7 +187,8 @@
 
     <!-- Custom Head -->
     
-<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -411,7 +412,7 @@
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61203614-file_1490012608851_7b1e.png" alt="主界面"></p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79032149-file_1490012695609_305e.png" alt="对话框界面"></p>
 <p>关键代码如下：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in mainwindow.h</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in mainwindow.h</span>
 <span class="token keyword">class</span> <span class="token class-name">MainWindow</span> <span class="token operator">:</span> <span class="token keyword">public</span> QMainWindow
 <span class="token punctuation">{</span>
     Q_OBJECT
@@ -439,8 +440,8 @@ MainWindow<span class="token operator">::</span><span class="token operator">~</
     dialog<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     ui<span class="token operator">-</span><span class="token operator">></span>label<span class="token operator">-</span><span class="token operator">></span><span class="token function">setText</span><span class="token punctuation">(</span>dialog<span class="token punctuation">.</span><span class="token function">getinput</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in dialog.h</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in dialog.h</span>
 <span class="token keyword">class</span> <span class="token class-name">Dialog</span> <span class="token operator">:</span> <span class="token keyword">public</span> QDialog
 <span class="token punctuation">{</span>
     Q_OBJECT
@@ -465,10 +466,10 @@ QString Dialog<span class="token operator">::</span><span class="token function"
     QString s <span class="token operator">=</span> ui<span class="token operator">-</span><span class="token operator">></span>lineEdit<span class="token operator">-</span><span class="token operator">></span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> s<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码说明：上面的程序还是比较容易理解的，在mainwindow.h和mainwindow.cpp里，先将btn与showDialog建立联系，在showDialog内部创建Dialog对象，并通过exec()显示，由于exec()会阻碍线程，因此待用户输入数据之后再执行后续获取数据的代码，由于我们想获取的dialog内的数据是私有的，因此在Dialog类定义了一个public的getinput()函数（之前还考虑用友元，感觉被自己蠢哭了），间接获取用户的输入，最后将数据显示在主界面的label上面，达到主界面获取对话框数据的目的。<br>附：<a href="http://on2kkr82s.bkt.clouddn.com/DialogData1.rar" target="_blank" rel="external">方法一源代码</a></p>
 <h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a><strong>方法二：</strong></h3><p>上面讨论的是用exec()显示对话框的情况下获取用户输入数据，那如果用show()显示对话框，该如何获取数据呢？由于show()不会开启事件循环，因此如果继续按上面的方法，用户根本来不及输入数据，后续的代码就已经执行了，因此需要用到信号槽机制。思路是这样的：按下对话框的确定按钮后，程序会自动调用QDialog::accept()函数，因此如果我们可以重载accept()函数，在其中发送信号，关联该信号的槽便会响应，我们在槽里面进行数据数据接收。<br>关键代码如下：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in mainwindow.h</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in mainwindow.h</span>
 <span class="token keyword">class</span> <span class="token class-name">MainWindow</span> <span class="token operator">:</span> <span class="token keyword">public</span> QMainWindow
 <span class="token punctuation">{</span>
     Q_OBJECT
@@ -501,8 +502,8 @@ MainWindow<span class="token operator">::</span><span class="token operator">~</
 <span class="token punctuation">{</span>
     ui<span class="token operator">-</span><span class="token operator">></span>label<span class="token operator">-</span><span class="token operator">></span><span class="token function">setText</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in dialog.h</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in dialog.h</span>
 <span class="token keyword">class</span> <span class="token class-name">Dialog</span> <span class="token operator">:</span> <span class="token keyword">public</span> QDialog
 <span class="token punctuation">{</span>
     Q_OBJECT
@@ -530,7 +531,7 @@ Dialog<span class="token operator">::</span><span class="token operator">~</span
     emit <span class="token function">receiveData</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//发送信号给mainwindow</span>
     QDialog<span class="token operator">::</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码说明：用户输入数据后，按下确定按钮，程序会自动调用accept()，因此重载了accept()函数，让其将获取的输入数据作为信号（receiveData是一个信号）通过emit发送给主界面，在mainwindow.cpp，我们信号receiveData和槽displayData进行关联，displayData将接收的数据显示在主界面的label上的。总的来说，数据输入后，先调用accept()，accept()将信号（信号上带有数据）发送给displayData，displayData显示数据。通过信号槽机制，我们看到，即使对话框作为非模态窗口显示，即使其稍纵即逝，我们还是能通过特定手段获取用户的输入。<br>附：<a href="http://on2kkr82s.bkt.clouddn.com/DialogData2.rar" target="_blank" rel="external">方法二源代码</a></p>
 <p>运行结果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/57471216-file_1490012700145_1d5f.gif" alt="运行结果"></p>

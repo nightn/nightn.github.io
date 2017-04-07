@@ -187,7 +187,8 @@
 
     <!-- Custom Head -->
     
-<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -408,19 +409,19 @@
     
         <p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取，用 imwrite 进行图像保存，用 imshow 进行图像显示。<br><a id="more"></a></p>
 <h2 id="1-读取图像"><a href="#1-读取图像" class="headerlink" title="1. 读取图像"></a>1. 读取图像</h2><p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取：</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat image<span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp">Mat image<span class="token punctuation">;</span>
 image <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span> CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h2 id="2-彩色图像转换为灰度图像"><a href="#2-彩色图像转换为灰度图像" class="headerlink" title="2. 彩色图像转换为灰度图像"></a>2. 彩色图像转换为灰度图像</h2><pre class=" language-cpp"><code class="language-cpp">Mat gray_image<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="2-彩色图像转换为灰度图像"><a href="#2-彩色图像转换为灰度图像" class="headerlink" title="2. 彩色图像转换为灰度图像"></a>2. 彩色图像转换为灰度图像</h2><pre class="line-numbers language-cpp"><code class="language-cpp">Mat gray_image<span class="token punctuation">;</span>
 <span class="token function">cvtColor</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> gray_image<span class="token punctuation">,</span> CV_BGR2GRAY<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>第三个参数指定转换类型，在此为 CV_BGR2GRAY</p>
 <h2 id="3-图像保存与显示"><a href="#3-图像保存与显示" class="headerlink" title="3. 图像保存与显示"></a>3. 图像保存与显示</h2><p>我们用 imwrite 进行图像保存，用 imshow 进行图像显示，如：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token function">imwrite</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1_gray.bmp"</span><span class="token punctuation">,</span> gray_image<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">imwrite</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1_gray.bmp"</span><span class="token punctuation">,</span> gray_image<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"image"</span><span class="token punctuation">,</span> image<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"gray_image"</span><span class="token punctuation">,</span> gray_image<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/introduction/load_save_image/load_save_image.html#load-save-image" target="_blank" rel="external">More</a></p>
 

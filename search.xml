@@ -31,7 +31,7 @@
 <p>然后在输出窗口便可以看到调试版的 SHA1 了，用这个 SHA1 便可以获得高德地图的 Key 了。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/92465191-file_1491112579070_f6fb.jpg" width="500"></p>
 <h3 id="3-配置-AndroidManifest-xml"><a href="#3-配置-AndroidManifest-xml" class="headerlink" title="3. 配置 AndroidManifest.xml"></a><strong>3. 配置 AndroidManifest.xml</strong></h3><p>最后配置好 AndroidManifest.xml 文件。首先进行<strong>权限声明</strong>：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- 用于进行网络定位 --></span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- 用于进行网络定位 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.ACCESS_COARSE_LOCATION<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
     <span class="token comment" spellcheck="true">&lt;!-- 用于访问GPS定位 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.ACCESS_FINE_LOCATION<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
@@ -56,34 +56,34 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.ACCESS_COARSE_LOCATION<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.MOUNT_UNMOUNT_FILESYSTEMS<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>android.permission.WAKE_LOCK<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后在 applicaiton 标签中<strong>设置高德 Key</strong> 和<strong>定位服务</strong>：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.amap.api.v2.apikey<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>key<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.amap.api.v2.apikey<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>key<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 //此处的 key 就是之前你自己申请的那个
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>meta-data</span><span class="token punctuation">></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>service</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.amap.api.location.APSService<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>service</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>好了，至此高德地图开发包的配置就已经完成了，下面就可以在项目中正常使用了。</p>
 <h3 id="4-使用高德地图"><a href="#4-使用高德地图" class="headerlink" title="4. 使用高德地图"></a><strong>4. 使用高德地图</strong></h3><p>首先在主界面的布局文件中添加地图控件，打开 activity_main.xml，在之前定义的 FrameLayout 布局中加入如下代码：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.amap.api.maps.MapView</span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.amap.api.maps.MapView</span>
             <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/map_view<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这就是一个高德地图的地图显示控件 MapView，然后在 MainActivity.java 中定义一个名为 mapView 的 MapView 对象，在 onCreate 方法中通过 findViewById 找到布局中的 MapView 控件，并调用 mapView.onCreate() 方法初始化地图。</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//高德地图</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//高德地图</span>
 mapView <span class="token operator">=</span> <span class="token punctuation">(</span>MapView<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>map_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//在activity执行onCreate时执行mMapView.onCreate(saveInsatenceState)，创建地图</span>
 mapView<span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样就成功在我们的 App 中添加并初始化了一个地图了，没错，就是这么简单。运行一下试试吧。<strong>注意！！引入高德地图之后如果还在模拟器里面调试，会出现闪退现象！</strong>这个问题我折腾了好久啊，一直以为是我自己的代码出了问题。因此在这里特别强调，<strong>引入高德地图之后，最好用真机调试</strong>。什么，你是 iPhone 用户，没有 Android 真机？那可能要尝试用不同的模拟器试试看了，有知道解决方案的同学可以在评论里和大家分享一下。我用的机型是荣耀 V8，项目完美运行：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/863080-file_1491114787026_12f91.png" width="288"></p>
 <p>由于只调用了一个 MapView.onCreate() 方法，因此创建出的地图默认是北京的地图，而且地图中定位蓝点也没有。为了让地图的功能更丰富，我们需要引入 AMap 类和 MyLocationStyle 类，AMap 类是地图控制器，用来管理地图的很多属性；而 MyLocationStyle 类是地图的定位风格属性，包括设置定位模式（连续定位还是单次定位）、连续定位的时间间隔、定位蓝点的样式等等。之后我们还要用到 UiSettings 类，它是用于控制地图界面小工具的显示隐藏的。为了可以更形象的理解高德地图中各个主要类是如何控制地图显示的，我将自己的理解表示成一张图，如下所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/94701186-file_1491120235392_12e48.png" width="500"></p>
 <p>其中，AMap 是管理地图各种属性的主要控制器，但它并不是直接管理的，而是通过它的下级（注意，不是子类）来管理具体的属性，就像人类社会一样，在代码中也能体现出明确的分工。图上只画出了 AMap 管理的 MyLocationStyle 类和 UiSettings 类，其中 MyLocationStyle 类是管理定位风格的，如定位模式，连续定位间隔、定位蓝点的样式等；而 UiSettings 是控制地图上小工具的显示的，如缩放按钮、指南针、比例尺的显示与隐藏，高德地图 logo 的位置（这个 logo　是不能隐藏的）以及地图是否可以旋转等。既然明确了它们之间的逻辑关系，那么就开始编写代码吧，修改 MainActivity.java，先定义一个名为 aMap 类型为 AMap 的全局变量，在 onCreate() 方法中添加如下代码：</p>
-<pre class=" language-java"><code class="language-java">        <span class="token comment" spellcheck="true">//初始化地图控制器对象aMap</span>
+<pre class="line-numbers language-java"><code class="language-java">        <span class="token comment" spellcheck="true">//初始化地图控制器对象aMap</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>aMap <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
             aMap <span class="token operator">=</span> mapView<span class="token punctuation">.</span><span class="token function">getMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//将mapView交给地图控制器管理</span>
         <span class="token punctuation">}</span>
@@ -101,12 +101,12 @@ mapView<span class="token punctuation">.</span><span class="token function">onCr
         aMap<span class="token punctuation">.</span><span class="token function">setMyLocationEnabled</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         aMap<span class="token punctuation">.</span><span class="token function">moveCamera</span><span class="token punctuation">(</span>CameraUpdateFactory<span class="token punctuation">.</span><span class="token function">zoomTo</span><span class="token punctuation">(</span><span class="token number">17</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//设置缩放级别为17</span>
         aMap<span class="token punctuation">.</span><span class="token function">showIndoorMap</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//显示室内地图</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>首先判断 aMap 是否为空，如果为空则将地图显示控件 mapView 交由 aMap 管理。然后新建 MyLocationStyle 对象，设置定位模式为单次定位，之所以不设置成连续定位，是因为我们打算通过主界面左下角的那个定位刷新的悬浮按钮来刷新定位，如果设置成连续定位，那么我们不手动刷新，地图也会自己不停的定位，这是我们不愿意看到的，更是用户不愿意看到的（GPS 多费电啊~）。然后设置定位点的显示图标，由于 myLocationIcon 接收的是 BitmapDescriptor 类型的参数，因此这里不能直接传 R.drawable.map_marker，而是通过 BitmapDescriptorFactory 类的 fromResource 方法将其转换为 BitmapDescriptor 类型。之后的两条语句是设置精度圆的样式，什么是精度圆，这两句话有什么作用，看看下图你就知道了（下图是不加这两条语句时定位点的显示效果）：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/17900221-file_1491122105579_10d2c.png" width="300"></p>
 <p>定位蓝点周围那一圈紫色的区域便是精度圆，默认是带有精度圆的。但是 ofo 共享单车的点位蓝点是不带精度圆的，因此我们就是通过上述两条语句，将精度圆的边框颜色和圆形区域颜色都设置为透明，以达到 ofo 共享单车上的效果。设置好 MyLocationStyle 的属性之后，将其加载到 aMap 中，并设置为允许显示。最后将地图缩放级别定义为 17 级，设置允许使用室内地图（室内地图很强大）。</p>
 <p>经过上述设置之后如果直接运行的话，你会发现<strong>你被定位到非洲尼日利亚西南部某片神秘的不知名的大西洋海域</strong>（别问我是怎么知道的，说多了都是泪啊）。我猜想这是由于 app 的权限不够，虽然在 AndroidManifest.xml 中声明了权限，但有些权限进行运行时权限处理的，因此我们需要在 onCreate() 方法中加入一段申请权限的代码，只有用户同意了这些权限，才能继续操作。</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//运行时权限</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//运行时权限</span>
         List<span class="token operator">&lt;</span>String<span class="token operator">></span> permissionList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>ContextCompat<span class="token punctuation">.</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>MainActivity<span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">,</span> Manifest<span class="token punctuation">.</span>
                 permission<span class="token punctuation">.</span>ACCESS_FINE_LOCATION<span class="token punctuation">)</span> <span class="token operator">!=</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -124,19 +124,19 @@ mapView<span class="token punctuation">.</span><span class="token function">onCr
             String<span class="token punctuation">[</span><span class="token punctuation">]</span> permissions <span class="token operator">=</span> permissionList<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span>permissionList<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             ActivityCompat<span class="token punctuation">.</span><span class="token function">requestPermissions</span><span class="token punctuation">(</span>MainActivity<span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>现在我们再来运行一下，运行之后首先跳出申请权限对话框：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/84891585-file_1491123447191_14795.png" width="400"></p>
 <p>都点击允许之后便出现了主界面，此时可以看到，点位蓝点的位置就是你当前的定位，你可以移动、缩放地图，也可以查看室内地图。如下图所示，左图显示了我当前所处的位置，右图显示的是室内地图。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/70293263-file_1491124150844_1507c.png" width="600"></p>
 <p>虽然地图模块已经显示成功了，而且可以准确定位，但是这实现了单次定位，如果我们移动了位置，想再次定位就要重启启动软件才行。因此，需要像 ofo 共享单车一样，点击左下角的刷新按钮便能够更新点位，下面这一节就来讲述怎么实现这一功能吧。</p>
 <h3 id="5-实现点击定位"><a href="#5-实现点击定位" class="headerlink" title="5. 实现点击定位"></a><strong>5. 实现点击定位</strong></h3><p>为了实现定位功能，我们需要使用两个类：AMapLocationClient 类和 AMapLocationClientOption 类。你可以把前者叫做定位客户端，后者叫做定位客户端设置，还需要一个 Marker 类，用于标记地图上的某个点。新建三个全局变量：</p>
-<pre class=" language-java"><code class="language-java">AMapLocationClient mLocationClient <span class="token operator">=</span> null<span class="token punctuation">;</span>
+<pre class="line-numbers language-java"><code class="language-java">AMapLocationClient mLocationClient <span class="token operator">=</span> null<span class="token punctuation">;</span>
 AMapLocationClientOption mLocationOption <span class="token operator">=</span> null<span class="token punctuation">;</span>
 Marker locationMarker <span class="token operator">=</span> null<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>然后在 onCrate() 方法中添加如下代码：</p>
-<pre class=" language-java"><code class="language-java">mLocationClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AMapLocationClient</span><span class="token punctuation">(</span><span class="token function">getApplicationContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java"><code class="language-java">mLocationClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AMapLocationClient</span><span class="token punctuation">(</span><span class="token function">getApplicationContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         mLocationOption <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AMapLocationClientOption</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         mLocationOption<span class="token punctuation">.</span><span class="token function">setOnceLocation</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//设置为单次定位模式</span>
         mLocationOption<span class="token punctuation">.</span><span class="token function">setNeedAddress</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//返回地址描述</span>
@@ -163,12 +163,12 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>程序的逻辑比较简单，注释都标明了语句的具体作用。需要注意的是这里为定位客户端注册了一个定位监听器，在监听器执行的代码便是获取当前经纬度，并用一个 marker 表示当前经纬度，显示在地图上。那么如何触发这个监听器呢？这个问题问得好，下面这条语句就可以触发：</p>
-<pre class=" language-java"><code class="language-java">mLocationClient<span class="token punctuation">.</span><span class="token function">startLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java">mLocationClient<span class="token punctuation">.</span><span class="token function">startLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>那么将这句代码放到哪里呢？当然是放到刷新按钮的点击事件的毁掉函数中呀，如下所示：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">switch</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">//...</span>
             <span class="token keyword">case</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>refresh<span class="token operator">:</span><span class="token punctuation">{</span>
@@ -179,11 +179,11 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
             <span class="token comment" spellcheck="true">//...</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样一来，便实现了点击定位功能了。不过在此要注意两个细节。</p>
 <p><strong>（1）及时销毁对象</strong></p>
 <p>之前定义的 mapView 和 mLocationClient 都没有在主活动结束时进行销毁，因此我们要重写活动的一些回调方法，最后一个方法是保存地图缓存。</p>
-<pre class=" language-java"><code class="language-java"> <span class="token annotation punctuation">@Override</span>
+<pre class="line-numbers language-java"><code class="language-java"> <span class="token annotation punctuation">@Override</span>
     <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         mapView<span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -207,21 +207,21 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span><span class="token punctuation">;</span>
         mapView<span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>（2）调整地图 UI</strong></p>
 <p>在之前运行的结果中，可以发现地图界面右下角还保留着默认的缩放按钮，举报按钮就覆盖在它的上面，强迫症患者怎么能容忍这种事情发生呢，赶紧把缩放按钮隐藏掉。</p>
 <p>怎么隐藏呢？还记得之前说过的 UiSettings 类吗，没错，就是用它来设置地图 UI 的。新建名为 mUiSettings 类型为 UiSettings 的对象，并在 onCreate() 中添加如下代码：</p>
-<pre class=" language-java"><code class="language-java">       <span class="token comment" spellcheck="true">//控件交互</span>
+<pre class="line-numbers language-java"><code class="language-java">       <span class="token comment" spellcheck="true">//控件交互</span>
         mUiSettings <span class="token operator">=</span> aMap<span class="token punctuation">.</span><span class="token function">getUiSettings</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setZoomControlsEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//缩放按钮的显示与隐藏</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setCompassEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//指南针的显示与隐藏</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setScaleControlsEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//比例尺的显示与隐藏</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setLogoPosition</span><span class="token punctuation">(</span>AMapOptions<span class="token punctuation">.</span>LOGO_POSITION_BOTTOM_LEFT<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//         设置LOGO位置</span>
         mUiSettings<span class="token punctuation">.</span><span class="token function">setRotateGesturesEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//禁止旋转</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码比较简单，就不多加解析了，看注释吧。好了，地图模块大功告成，点击刷新按钮便可实现更新定位功能了。</p>
 <h2 id="二、用车界面开发"><a href="#二、用车界面开发" class="headerlink" title="二、用车界面开发"></a><strong>二、用车界面开发</strong></h2><h3 id="1-Input-面板"><a href="#1-Input-面板" class="headerlink" title="1. Input 面板"></a><strong>1. Input 面板</strong></h3><p>地图功能实现之后，主界面的功能就已经都达到预期目标了，接下来开发用车界面。我们新建一个活动，叫作 UsebikeActivity，在生成的 activity_usebike.xml 中添加如下代码：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
               <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">"</span></span>
               <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
@@ -322,11 +322,11 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token attr-name"><span class="token namespace">android:</span>scaleType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>visibility</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>visible<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span> 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>别看上面的代码有 100 行，其实这种 xml 文件是非常好理解的，不过是各种控件搭积木式的拼凑而已。简单分析一下，最外层是一个线性布局，将之前定义的 toolbar 标题栏直接拿过来用就好了，然后主体又是一个线性布局，里面就是 TextView、ImageView、EditView 和 Button 的简单组合而已，最底下的手电筒按钮是一个简单的 FloatingActionButton，悬浮按钮的用法在上一篇博客讲过。预览一下效果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/9531359-file_1491128630463_f0f0.png" width="288"></p>
 <p>下面建立「主活动」和「用车活动」的联系，点击用车按钮，便跳出用车界面。实现很简单，用显式 Intent 即可，修改用车按钮的点击事件回调函数：</p>
-<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">switch</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">case</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>begin<span class="token operator">:</span><span class="token punctuation">{</span>
                 <span class="token comment" spellcheck="true">//TODO 开始按钮点击事件</span>
@@ -338,10 +338,10 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
             <span class="token comment" spellcheck="true">//...</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>非常简单，两句代码搞定。这样通过点击主界面的「立即用车」，就能跳转到用车界面了，不过还有些细节要注意。</p>
 <p>在用车界面中，EditText 内容有变化时，底下的 TextView 提示和右边的 Button 也要发生相应变化。在 UsebikeActivity 中为 codeEdit （就是车牌的输入框）注册内容变化事件的监听器。其中 checkCode 是输入框右边的 Button，codeHint 是输入框下方的 TextView，用于密码提示（原谅我拙计的命名方式，连我自己都搞不清了）。这些控件都需要事先通过 findViewById()  从布局中找到，这些过程就省略了。</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//codeEdit输入发生变化的监听器</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//codeEdit输入发生变化的监听器</span>
         codeEdit<span class="token punctuation">.</span><span class="token function">addTextChangedListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">TextWatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token annotation punctuation">@Override</span>
             <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">beforeTextChanged</span><span class="token punctuation">(</span>CharSequence s<span class="token punctuation">,</span> <span class="token keyword">int</span> start<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">,</span> <span class="token keyword">int</span> after<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -368,11 +368,11 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在回调函数中，先判断输入框是否为空，如果不为空，则改变按钮的样式；然后判断输入框字符长度，根据长度给出相应提示，最大长度为 8 位，效果如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/93288955-file_1491131253416_a479.png" width="600"></p>
 <h3 id="2-Output-面板"><a href="#2-Output-面板" class="headerlink" title="2. Output 面板"></a><strong>2. Output 面板</strong></h3><p>用车界面的输入面板已经实现好了，下面要实现输入车牌之后，跳转到密码显示面板，即 Output 面板，这个面板要新建一个活动吗？当然不用，我们只要对 Input 面板进行适当修改，利用控件的 visibility 属性控制其可见性就能够实现了。通过在 activity_usebike.xml 中将输入框和按钮所对应的线性布局隐藏，以及隐藏小电筒按钮。用如下代码取而代之，即可实现 Output 面板。</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span>
             <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/show_code_linear<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
@@ -425,13 +425,13 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
                 <span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#40320D<span class="token punctuation">"</span></span>
                 <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>30sp<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>预览效果如下：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/26235861-file_1491131983827_1665d.png" width="300"></p>
 <h2 id="三、用-OkHttp-获取服务器数据"><a href="#三、用-OkHttp-获取服务器数据" class="headerlink" title="三、用 OkHttp 获取服务器数据"></a><strong>三、用 OkHttp 获取服务器数据</strong></h2><p>用车界面制作完毕，下一步是根据用户在 Input 面板中输入的车牌，从服务器获取车牌对应的密码，然后显示在 Output 面板中。当然，这里的服务器可不是 ofo 共享单车的服务器，是我自己建的服务器，其实就是一个虚拟主机而已。可以事先在服务器端放置好模拟数据，这里我也不用什么 JSON 数据格式了，直接自定义数据格式为 <code>`密码</code>+<code>:</code>+<code>车牌号</code>+<code>;</code>。如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-2/70925715-file_1491135279665_9de3.jpg" width="400"></p>
 <p>然后在 UsebikeActivity 中为 codeCheck 按钮注册点击事件监听器，另外在类中定义一个 copy() 方法，用于将字符串复制到剪切板。</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//确定按钮监听器</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//确定按钮监听器</span>
         checkCode<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">View<span class="token punctuation">.</span>OnClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token annotation punctuation">@Override</span>
             <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -502,15 +502,15 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
                 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//复制文字到剪贴板</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//复制文字到剪贴板</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">copy</span><span class="token punctuation">(</span>String content<span class="token punctuation">,</span> Context context<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         ClipboardManager clipboard <span class="token operator">=</span> <span class="token punctuation">(</span>ClipboardManager<span class="token punctuation">)</span>context<span class="token punctuation">.</span><span class="token function">getSystemService</span><span class="token punctuation">(</span>Context<span class="token punctuation">.</span>CLIPBOARD_SERVICE<span class="token punctuation">)</span><span class="token punctuation">;</span>
         ClipData clip <span class="token operator">=</span> ClipData<span class="token punctuation">.</span><span class="token function">newPlainText</span><span class="token punctuation">(</span><span class="token string">"label"</span><span class="token punctuation">,</span> content<span class="token punctuation">)</span><span class="token punctuation">;</span>
         clipboard<span class="token punctuation">.</span><span class="token function">setPrimaryClip</span><span class="token punctuation">(</span>clip<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>逻辑非常明了：若输入框中的字符个数小于 4，则跳出相应提示，并 return。否则，访问服务器获取数据，并在这些数据中寻找与输入车牌号相对应的密码，若找到，则显示到 Output 面板；若没有找到，则复制车牌号到剪贴板，并跳转至 ofo 共享单车（若手机上没有安装 ofo 共享单车，也会跳出相应提示）。最终实现效果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" width="600"></p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/62403252-file_1491061459270_17abc.png" width="600"></p>
@@ -552,7 +552,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 <h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a><strong>一、简介</strong></h2><p>学习 Android 开发已经一个月了，除了敲书本上的 demo，就只写过一个简易版的浏览器，为了巩固之前所学，我决定开发一个稍微完整点的具有 Material Design 风格的 App。浏览了手机上的 App，发现在 Material Design 风格的软件中，除了 Google 系列的 App，就只有印象笔记和 ofo 共享单车了（其他软件基本都是微信风格）。ofo 共享单车需要引入地图模块，实现起来更加有成就感，因此最终决定模仿 ofo 共享单车（主要是对界面的模仿）。</p>
 <p>整个开发花了两天时间，期间遇到不少问题，以下便是对整个过程的梳理和总结，希望读者看完后能对 Android 开发有一个初步的认识，然后挥舞起键盘和本子，把灵感用代码一一实现。</p>
 <p>话不多说，先看最终效果吧！</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" width="600"></p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/28019592-file_1491061455901_17cb0.png" alt=""></p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/62403252-file_1491061459270_17abc.png" width="600"></p>
 <p>视频预览效果：</p>
 <video src="http://on2kkr82s.bkt.clouddn.com/Minofo%E9%A2%84%E8%A7%88.mp4" width="288" height="512" controls="controls">Your browser does not support the video tag.</video>
@@ -581,7 +581,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 <p>可以看到标题栏和我们写 Android 程序常见的标题栏有很大区别，默认生成的标题栏是这样的：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/50077240-file_1491038459222_126d0.png" width="360"></p>
 <p>这差距有点大啊，没关系，我们慢慢来实现。ofo 共享单车的标题栏从左到右分别是导航栏入口按钮、标题和右侧的活动中心入口按钮。而目前我们的标题栏是默认是由 ActionBar 控件实现的，ActionBar 不能实现很多 Material Design 的效果，而且 Google 也不建议开发者使用 ActionBar 了。因此我们使用 Toolbar 来实现标题栏。为了修改掉默认的 ActionBar，我们需要更改主题，主题是在 AndroidManifest.xml 文件中指定的，打开该文件，可以看到，theme 现在的值是 AppTheme。</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
         <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@mipmap/ic_launcher<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@string/app_name<span class="token punctuation">"</span></span>
@@ -590,15 +590,15 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@style/AppTheme<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         ...
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>AppTheme 只是主题的代号，我们要找到它所对应的定义。打开 res/values/styles.xml 文件：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>AppTheme<span class="token punctuation">"</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Theme.AppCompat.Light.DarkActionBar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>AppTheme<span class="token punctuation">"</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Theme.AppCompat.Light.DarkActionBar<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style language-css">
         <span class="token number">...</span>
 </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>在这里指定了 AppTheme 的 parent 是 Theme.AppCompat.Light.DarkActionBar，DarkActionBar 就是默认的深色 ActionBar 主题，我们准备用 Toolbar 取代 ActionBar，在这里不需要 ActionBar，</p>
 <p>因此将 parent 指定为 <strong>Theme.AppCompat.Light.NoActionBar</strong> 。现在 ActionBar 不见了，我们开始添加 Toolbar，修改 activity_main.xml 如下：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FrameLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
              <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">"</span></span>
              <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
@@ -616,9 +616,9 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>android.support.v7.widget.Toolbar</span><span class="token punctuation">></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>FrameLayout</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>简单分析一下上述 xml 代码，我们定义了一个帧布局 FrameLayout，在其中添加了一个 Toolbar 作为标题栏，由于 Toolbar 是由 appcompat-v7 提供的，不是自带的，因此我们需要使用它的全名，然后指定了这个 Toolbar 的 id 为 toolbar，宽度跟随父控件，高度定义为 ActionBar 的默认高度，并且指定了其背景，这里的 bg_top 是一张白底的图片，底部有一条阴影效果。然后在 Toolbar 里面，包含了一张图片，图片用 ImageView 显示，大小跟随图片的内容，这张图就是之前从 ofo 共享单车解析得到的标题栏图片。写完 toolbar 之后，还需要在 MainActivity.java 中的 onCreate() 方法中修改，如下：</p>
-<pre class=" language-java"><code class="language-java"> <span class="token annotation punctuation">@Override</span>
+<pre class="line-numbers language-java"><code class="language-java"> <span class="token annotation punctuation">@Override</span>
     <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -626,14 +626,14 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         Toolbar toolbar <span class="token operator">=</span> <span class="token punctuation">(</span>Toolbar<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>toolbar<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">setSupportActionBar</span><span class="token punctuation">(</span>toolbar<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通过 Toolbar 的 id 创建实例，然后将实例传入 setSupportActionBar() 方法，使得 toolbar 具有和 ActionBar 一样的功能。但这样一来，标题栏会多出一个应用的名称：Minofo，这不是我们想要的效果，因为我们已经用了一张图片作为标题栏的标题了。为此，需要在 onCreate() 方法的 setSupportActionBar(toolbar) 后面增加一条语句：（多亏了<a href="http://my.csdn.net/Monkey_LZL" target="_blank" rel="external">刘忠良</a>同学提供的思路。之前我的方法是将 app_name 设置成空字符串，这样虽然隐藏了标题，但 APP 的名字也没有了，所以不可取）</p>
-<pre class=" language-java"><code class="language-java">        <span class="token function">getSupportActionBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//隐藏标题栏上的标题</span>
-</code></pre>
+<pre class="line-numbers language-java"><code class="language-java">        <span class="token function">getSupportActionBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//隐藏标题栏上的标题</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>最后，我们来看看运行效果。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/54140191-file_1491041589916_101f1.png" width="360"></p>
 <p>效果还可以，不过标题栏上单单一个标题有点单调，下面把右侧的活动中心入口写写。右击 res 目录，选择 <code>New</code> — <code>Directory</code> 新建一个名为 menu 的目录，然后在 menu 目录添加一个 Menu resourse file， 名为 toolbar_action.xml，这个文件就是用来在 toolbar 上放置一些动作按钮的，当然在此我们只需要一个通知按钮就可以了，编写代码如下：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>menu</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span>
@@ -642,9 +642,9 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>活动中心<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>showAsAction</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>always<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>menu 中只有一个 item，设置相应的 id，icon 和 title，此处 showAsAction 设置成 always 的意思是让该 item 一直显示在 Toolbar 中，而不会显示在菜单中，如果屏幕空间不够就隐藏掉（就算是隐藏掉也不显示在菜单中，就是这么刚烈）。接下来要重写菜单被创建时的回调方法 onCreateOptionsMenu()，然后定义菜单的响应事件，就是按下这个菜单后会执行什么。在 MainActivity.java 中的 MainActivity 类中添加如下两个方法：</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 重写「菜单创建时的回调方法」</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 重写「菜单创建时的回调方法」</span>
 <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">onCreateOptionsMenu</span><span class="token punctuation">(</span>Menu menu<span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// 通过布局文件tool_action.xml创建Menu对象</span>
   <span class="token function">getMenuInflater</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>menu<span class="token punctuation">.</span>toolbar_action<span class="token punctuation">,</span> menu<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -663,7 +663,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>onCreateOptionsMenu() 会在菜单创建时调用，主要是让之前定义的菜单显示出来，onOptionsItemSelected() 在菜单的某一项被选中时调用，然后执行响应逻辑，比如跳转到另外一个活动、跳出一个对话框等。此处为简单起见，跳出一个 Toast 提示，来看一下运行效果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/26915667-file_1491049432391_869a.png" width="288"></p>
 <p>相比之前，标题栏上多了通知按钮，并且点击该按钮，会提示“活动中心正在建设中”。这样一来我们的标题栏就实现了。什么，你说这一小节有点水？哦对，标题栏还有导航栏入口按钮还没加呢，不过别着急，我们在介绍导航栏部分时再添加。对了，我们先把 app 的图标设置成 ofo 共享单车的样子，在 AndroidManifest.xml 通过设置 icon 和 roundIcon 属性，将 app 的图标改掉。效果如下：</p>
@@ -675,7 +675,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/66632090-file_1491044742768_17460.png" width="288"></p>
 <p>它们无一不是采用了 Material 的设计风格，使得无论是 app 还是网站都更加出色。那下面我们就开始根据 ofo 共享单车，来实现一个 Material 风格的导航栏吧。</p>
 <p>别看导航栏看起来好像很复杂，我们借助 Google 提供的工具，实现起来还是不难的，没错，就是用 Google 提供的 DrawerLayout 控件，DrawerLayout 作为一个布局，允许在其中放入两个子布局，第一个是主界面的内容，第二个就是可以滑动的导航栏菜单的内容，因此我们将之前的帧布局作为 DrawerLayout 的第一个子布局，另外，为了先预览一下 DrawerLayout 的效果，第二个子布局就用一个简单的 TextView 占个位，修改 activity_main.xml：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.v4.widget.DrawerLayout</span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">"</span></span>
@@ -696,11 +696,11 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>40dp<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>android.support.v4.widget.DrawerLayout</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以看到，DrawerLayout 包含了两个控件，第一个 FrameLayout 就是之前所定义的，第二个是一个简单的文本显示控件。值得注意的地方是：（1）layout_gravity 属性必须要设置，它指定了导航栏出现的方式，如果未指定，那么导航栏就会直接把你的主界面覆盖掉，这里定义为 start 指的是根据系统语言（从左往右还是从右往左）判断导航栏菜单出现的方式，一般是从左往右出现。（2）background 的颜色设置为白色，如果不设置的话，默认是一种半透明的颜色。运行一下，看看 DrawerLayout 的效果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/38136287-file_1491051190569_6c01.gif" alt=""></p>
 <p>通过从左往右滑动屏幕，即可调出导航栏。但是如果只有通过滑动屏幕才能调出导航栏的话，那么会出现很多用户根本不知道这个功能的现象，因此我们需要在 Toolbar 上加入一个导航栏入口按钮，这样就有两种方式调出导航栏了，修改 MainActivity.java 如下：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> DrawerLayout mDrawerLayout<span class="token punctuation">;</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> DrawerLayout mDrawerLayout<span class="token punctuation">;</span>
 
 <span class="token annotation punctuation">@Override</span>
 <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>Bundle savedInstanceState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -728,20 +728,20 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样一来标题栏最左侧便多出了一个导航栏入口按钮了，通过点击该按钮也能调出导航栏。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/94831995-file_1491052359504_bac9.png" width="360"></p>
 <p>导航栏的功能已经实现，下面便是往里面添加具体内容了，观察 ofo 共享单车的导航栏，如下图所示.</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/51385252-file_1491052575357_f9ec.png" width="288"></p>
 <p>这个部分可以通过 Design Support 库提供的 NavigationView 控件来实现，另外由于这里还出现了圆形的头像，因此还需要一个图片圆形化的工具：CircleImageView。为了使用这两个控件，我们需要添加依赖库，在 app/build.gradle 中的 dependencies 闭包中添加依赖库：</p>
-<pre class=" language-gr"><code class="language-gr">dependencies{
+<pre class="line-numbers language-gr"><code class="language-gr">dependencies{
   compile 'com.android.support:design:24.2.1'
   compile 'de.hdodenhof:circleimageview:2.1.0'
 }
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当然，support 的具体版本依据你的 appcompat-v7 的版本确定，第三方库你也可以去开原网站查看最新版本。添加好依赖库，同步成功后，就可以开始完善导航栏的内容了。</p>
 <p>在 res/menu 目录下新建 menu resource file，命名为 nav.xml，作为导航栏的 body，修改 nav.xml 的内容如下：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>menu</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>group</span> <span class="token attr-name"><span class="token namespace">android:</span>checkableBehavior</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>single<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span>
@@ -774,9 +774,9 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
             <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>关于<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>group</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后添加导航栏的 header 部分，在 res/layout 目录下新建 layout resource file，命名为 header.xml，修改内容如下：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RelativeLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
                 <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
                 <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>100dp<span class="token punctuation">"</span></span>
@@ -803,10 +803,10 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token punctuation">/></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RelativeLayout</span><span class="token punctuation">></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这部分用了一个相对布局，作为导航栏的 header，布局包括一个圆形头像，头像尺寸设为固定值；还包括一个昵称，设置好文字的内容，尺寸和颜色等信息。</p>
 <p>导航栏的 body 和 header 都准备好，接下来将他们添加到 DrawerLayout 的第二个子布局，修改 activity_main.xml，用如下代码取代之前定义的 TextView。</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.NavigationView</span>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.NavigationView</span>
         <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/nav_view<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span>
@@ -814,11 +814,11 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
         <span class="token attr-name"><span class="token namespace">app:</span>menu</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@menu/nav<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>headerLayout</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@layout/header<span class="token punctuation">"</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>?attr/colorPrimary<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>现在已经能够成功显示导航栏的内容了，效果如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/25792579-file_1491054292385_9671.png" width="288"></p>
 <p>光有界面是不够的，导航栏里的 item 要能够点击并执行点什么才行。修改 MainActivity.java 中的代码，在 onCreate() 方法中加入以下代码：</p>
-<pre class=" language-java"><code class="language-java">NavigationView navView <span class="token operator">=</span> <span class="token punctuation">(</span>NavigationView<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>nav_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java"><code class="language-java">NavigationView navView <span class="token operator">=</span> <span class="token punctuation">(</span>NavigationView<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>nav_view<span class="token punctuation">)</span><span class="token punctuation">;</span>
         navView<span class="token punctuation">.</span><span class="token function">setNavigationItemSelectedListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">NavigationView<span class="token punctuation">.</span>OnNavigationItemSelectedListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token annotation punctuation">@Override</span>
             <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">onNavigationItemSelected</span><span class="token punctuation">(</span>MenuItem item<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -826,12 +826,12 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
                 <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>简单分析一下上述代码，先根据布局 id 获取 NavigationView 实例，然后设置监听事件，任何一个按钮被点击，都会通过 closeDrawers() 方法关闭导航栏。至于对于点击具体 item 执行什么事件，这是后续讨论的事情了。至此，导航栏部分已经全部实现。接下来实现主界面的三个悬浮按钮。</p>
 <h3 id="3-悬浮按钮实现"><a href="#3-悬浮按钮实现" class="headerlink" title="3. 悬浮按钮实现"></a><strong>3. 悬浮按钮实现</strong></h3><p>观察 ofo 共享单车主界面，底下有三个按钮，它们都是悬浮在地图上面的，我们称之为悬浮按钮，悬浮按钮可以通过 Design Support 库提供的 FloatingActionButton 实现，用于之前我们已经引入了 Design Support 依赖库，在此我们直接可以使用 FloatingActionButton。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/44290926-file_1491054983229_14957.png" width="288"></p>
 <p>修改 activity_main.xml 文件，在之前定义的 DrawerLayout 中的第一个子布局 FrameLayout 中加入 3 个 FloatingActionButton，代码如下：</p>
-<pre class=" language-xml"><code class="language-xml">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.FloatingActionButton</span>
+<pre class="line-numbers language-xml"><code class="language-xml">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>android.support.design.widget.FloatingActionButton</span>
             <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@+id/fab<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span>
@@ -860,19 +860,19 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
             <span class="token attr-name"><span class="token namespace">android:</span>src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>@drawable/ridenow<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">app:</span>elevation</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>8dp<span class="token punctuation">"</span></span>
             <span class="token attr-name"><span class="token namespace">android:</span>scaleType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>除了用于设置布局位置的 layout_gravity 属性，三个悬浮按钮的属性基本差不多。另外需要注意到是 scaleType 属性需要设置为 center，这样才能保证图片将悬浮按钮铺满。然后我们为这三个悬浮按钮注册监听事件。由于按钮比较多，我们就不打算让每个按钮都去实现一遍监听事件，而是让 MainActivity 类实现 View.OnClickListener 接口，然后重写接口中的 onClick() 方法，在方法中通过判断按钮的 id 来设置对应按钮的点击事件。</p>
 <p>在 onCreate() 方法中为三个悬浮按钮注册点击事件监听器：</p>
-<pre class=" language-java"><code class="language-java">        <span class="token comment" spellcheck="true">// 悬浮按钮注册监听器</span>
+<pre class="line-numbers language-java"><code class="language-java">        <span class="token comment" spellcheck="true">// 悬浮按钮注册监听器</span>
         begin <span class="token operator">=</span> <span class="token punctuation">(</span>FloatingActionButton<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>begin<span class="token punctuation">)</span><span class="token punctuation">;</span>
         refresh <span class="token operator">=</span> <span class="token punctuation">(</span>FloatingActionButton<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>refresh<span class="token punctuation">)</span><span class="token punctuation">;</span>
         fab <span class="token operator">=</span> <span class="token punctuation">(</span>FloatingActionButton<span class="token punctuation">)</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fab<span class="token punctuation">)</span><span class="token punctuation">;</span>
         begin<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         refresh<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         fab<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此处的 this 指的是 MainActivity，因为 MainActivity 类 implements 了 View.OnClickListener 接口，因此它具备了监听点击事件的能力，之后要做的便于重写接口中的 onClick 方法，在 MainActivity 类中添加如下代码：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span>View v<span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token keyword">switch</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">case</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>begin<span class="token operator">:</span><span class="token punctuation">{</span>
       <span class="token comment" spellcheck="true">//TODO 开始按钮点击事件</span>
@@ -891,7 +891,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
       <span class="token keyword">break</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通过 View 的 getId() 方法获取当前被点击按钮的 id，然后根据 id 设置相应的点击逻辑，在这里还未加入过多的点击逻辑，但可以先分析一下，开始按钮 begin 点击后应该跳转至一个新的活动（即后面要讲到的用车界面），定位刷新按钮 refresh 点击之后会重新获取当前位置信息，并显示在主界面的地图模块中（地图模块将在下一节实现），所以这两个按钮的点击事件我们先用 TODO 注释占个坑，至于举报按钮 fab，我就不打算去实现它的点击事件了，所以在此加入一个简单的 Toast 提示语句。</p>
 <p>好了，经过上面的开发过程，我们往主界面加入了标题栏、导航栏和悬浮按钮，功能已经基本完善了，下面需要加入地图显示模块，在此之前，我们先预览一下到目前为止的成果吧，如下图所示：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-4-1/9165962-file_1491059740994_c666.png" width="600"></p>
@@ -970,17 +970,17 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
       <title><![CDATA[Hello World]]></title>
       <url>http://nightn.com/2017/03/21/hello-world/</url>
       <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. <a id="more"></a>Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
-</code></pre>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
-</code></pre>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo server
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
-</code></pre>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo generate
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
-</code></pre>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo deploy
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 ]]></content>
       
@@ -1070,13 +1070,13 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
       <url>http://nightn.com/2017/01/22/computer-system-roaming/</url>
       <content type="html"><![CDATA[<p>计算机系统是由硬件和软件系统组成的，它们共同工作来运行应用程序。作为程序员，也需要了解这些组件是如何工作的，以及这些组件是如何影响程序的正确性和性能的。我们从最简单的 hello 程序开始，通过跟踪 hello 程序的生命周期（从被创建，到运行，输出，然终止），来开始对计算机系统的学习。<br><a id="more"></a></p>
 <h2 id="1-hello-程序创建"><a href="#1-hello-程序创建" class="headerlink" title="1. hello 程序创建"></a><strong>1. hello 程序创建</strong></h2><p>hello.c</p>
-<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"hello, world\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>hello 程序的生命周期是从源程序 hello.c 开始的，它实际上是由 0 和 1 组成的位（bit）序列，8 位称为一个字节。根据 ASCII 标准，每个字节表示一个特定的文本字符，如下图所示，hello.c 程序中的每个字符都对应一个单字节。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/66099901-file_1490015480906_21f.png" alt=""></p>
 <p>hello.c 的表示方法说明了一个基本思想：计算机系统中的所有信息，包括磁盘中的文件、存储器中的程序和数据、网络上传的数据，都是一串由 0 和 1 组成的位（bit）序列，区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。</p>
@@ -1194,25 +1194,25 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 <h2 id="3-颜色缩减"><a href="#3-颜色缩减" class="headerlink" title="3. 颜色缩减"></a><strong>3. 颜色缩减</strong></h2><p>何谓颜色缩减？对于元素类型为 uchar 的单通道图像矩阵，每个像素点有 256 个灰度值，但是对于三通道图像，每个像素点的颜色种类达 16777216 种（256 的三次方）。如此多的颜色可能会对算法性能造成严重影响，我们往往只需要颜色的一部分，也能满足要求，因此引入了颜色缩减。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/25494428-file_1490017405949_8fda.png" alt=""></p>
 <p>如上图所示，左侧为颜色缩减前，右侧为颜色缩减后，数字表示灰度值。可以看出，灰度值 92 到 114 映射为 92；115 到 137 映射为 115，以此类推，左侧 164 种颜色缩减为右侧的 7 种颜色。实现方法也很简单：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//color1输入,color2输出 </span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//color1输入,color2输出 </span>
 color2 <span class="token operator">=</span> <span class="token punctuation">(</span>color1 <span class="token operator">/</span> <span class="token number">23</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">23</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>但是，如果直接对图像的每个像素进行上述除法和乘法，这样效率是很低的。一个较好的办法是事先生成一张颜色缩减的查找表，表中缩减前后的值都明确给定，这样遍历图像时，利用查找表直接对相应像素点进行赋值即可。其优势在于只需读取、无需计算。以下代码生成颜色查找表 color_table：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 生成颜色查找表</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 生成颜色查找表</span>
 vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">;</span>
 <span class="token keyword">int</span> width <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     color_table<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i <span class="token operator">/</span> width <span class="token operator">*</span> width<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="4-图像遍历"><a href="#4-图像遍历" class="headerlink" title="4. 图像遍历"></a><strong>4. 图像遍历</strong></h2><p>有了颜色查找表后，我们便可以对图像进行遍历并对像素点进行颜色缩减了。我们采用了几种不同的图像遍历方法，为了对比它们的效率，采用 OpenCV 提供的两个简单的计时器函数 getTickCount() 和 getTickFrequency(), 它们分别返回 CPU 走过的时钟周期数和 CPU 一秒的时钟周期数。因此，可以这样来计时（单位：秒）：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">double</span> time_begin <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">double</span> time_begin <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// do something</span>
 <span class="token keyword">double</span> time_end <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">double</span> time <span class="token operator">=</span> <span class="token punctuation">(</span>time_end <span class="token operator">-</span> time_begin<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token function">getTickFrequency</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h3 id="4-1-利用指针遍历"><a href="#4-1-利用指针遍历" class="headerlink" title="4.1 利用指针遍历"></a>4.1 利用指针遍历</h3><pre class=" language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceC</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-1-利用指针遍历"><a href="#4-1-利用指针遍历" class="headerlink" title="4.1 利用指针遍历"></a>4.1 利用指针遍历</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceC</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
      <span class="token comment" spellcheck="true">//只接收字符型矩阵</span>
      <span class="token function">CV_Assert</span><span class="token punctuation">(</span>I<span class="token punctuation">.</span><span class="token function">depth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>uchar<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1235,11 +1235,11 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
      <span class="token punctuation">}</span>
      <span class="token keyword">return</span> I<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>颜色缩减结果（根据查找表的width设置缩减的程度，在此 width = 20）</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79119290-file_1490017405746_14c2e.png" alt=""></p>
 <p>算法执行时间为 0.0134007 秒。</p>
-<h3 id="4-2-利用迭代器遍历"><a href="#4-2-利用迭代器遍历" class="headerlink" title="4.2 利用迭代器遍历"></a>4.2 利用迭代器遍历</h3><pre class=" language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceIterator</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
+<h3 id="4-2-利用迭代器遍历"><a href="#4-2-利用迭代器遍历" class="headerlink" title="4.2 利用迭代器遍历"></a>4.2 利用迭代器遍历</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceIterator</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
      <span class="token comment" spellcheck="true">//只接收字符型矩阵</span>
      <span class="token function">CV_Assert</span><span class="token punctuation">(</span>I<span class="token punctuation">.</span><span class="token function">depth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>uchar<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1267,9 +1267,9 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
      <span class="token punctuation">}</span>
      <span class="token keyword">return</span> I<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>算法执行时间 0.0693951 秒。用迭代器遍历速度稍慢，但是更加安全。上述代码中，我们首先对图像的通道数进行判断，通道数为 1 时，直接对灰度值赋值；对于三通道彩色图像，每个像素可以看做一个包含三个 uchar 元素的 vector, 在 OpenCV 中用 Vec3b 命名。对于彩色图像，如果我们仅仅使用 uchar 而不是 Vec3b 迭代的话就只能获得蓝色通道的值（BGR模型中的第一个通道）。</p>
-<h3 id="4-3-通过相关返回值的-On-the-fly-地址遍历"><a href="#4-3-通过相关返回值的-On-the-fly-地址遍历" class="headerlink" title="4.3 通过相关返回值的 On-the-fly 地址遍历"></a>4.3 通过相关返回值的 On-the-fly 地址遍历</h3><pre class=" language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceRadomAccess</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
+<h3 id="4-3-通过相关返回值的-On-the-fly-地址遍历"><a href="#4-3-通过相关返回值的-On-the-fly-地址遍历" class="headerlink" title="4.3 通过相关返回值的 On-the-fly 地址遍历"></a>4.3 通过相关返回值的 On-the-fly 地址遍历</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Mat<span class="token operator">&amp;</span> <span class="token function">ScanImageAndReduceRadomAccess</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> I<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> color_table<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
      <span class="token comment" spellcheck="true">//只接收字符型矩阵</span>
      <span class="token function">CV_Assert</span><span class="token punctuation">(</span>I<span class="token punctuation">.</span><span class="token function">depth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>uchar<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1303,18 +1303,18 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
      <span class="token punctuation">}</span>
      <span class="token keyword">return</span> I<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通过 at() 函数获取并更改图像中的元素。事实上，这种方法并不推荐呗用来进行图像扫描。</p>
 <h3 id="4-4-核心函数-LUT-The-Core-Function"><a href="#4-4-核心函数-LUT-The-Core-Function" class="headerlink" title="4.4 核心函数 LUT (The Core Function)"></a>4.4 核心函数 LUT (The Core Function)</h3><p>核心函数 LUT 是最被推荐用于实现批量图像元素查找和更改的方法，它并不需要你自己去扫描图像。我们先建立一个查找表：</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat <span class="token function">table</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> CV_8U<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp">Mat <span class="token function">table</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> CV_8U<span class="token punctuation">)</span><span class="token punctuation">;</span>
 uchar<span class="token operator">*</span> p <span class="token operator">=</span> table<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
     p<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> color_table<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后调用函数：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//image是输入，image_reduce是输出</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//image是输入，image_reduce是输出</span>
 <span class="token function">LUT</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> table<span class="token punctuation">,</span> image_reduce<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="4-5-结论"><a href="#4-5-结论" class="headerlink" title="4.5 结论"></a>4.5 结论</h3><p>尽量使用 OpenCV 内置函数，调用 LUT 函数可以获得最快的速度，这是因为 OpenCV 库可以通过英特尔线程架构启用多线程，当然，迭代器也是一个不错的选择，优点是安全，缺点是速度较慢，on-the-fly方法不推荐使用。</p>
 <hr>
 <p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/how_to_scan_images/how_to_scan_images.html#howtoscanimagesopencv" target="_blank" rel="external">More</a></p>
@@ -1363,7 +1363,7 @@ uchar<span class="token operator">*</span> p <span class="token operator">=</spa
 </table>
 <h3 id="2-1-赋值和拷贝构造函数只拷贝信息头"><a href="#2-1-赋值和拷贝构造函数只拷贝信息头" class="headerlink" title="2.1 赋值和拷贝构造函数只拷贝信息头"></a>2.1 赋值和拷贝构造函数只拷贝信息头</h3><p>为了避免拷贝图像的巨大计算量，OpenCV 采用引用计数机制。即每个 Mat 对象有其自己的矩阵头，但可以共享同一个图像矩阵（即 Mat 对象的矩阵指针指向同一地址）。在 Mat 对象赋值及拷贝构造函数中，只拷贝矩阵头和矩阵指针，不拷贝矩阵本身，这样可以减少很多计算量。</p>
 <p>这样我们会看到，同一个图像矩阵，可能属于多个 Mat 对象，那么当不需要图像矩阵时，哪个 Mat 对象负责清理它呢？正如 C++ 语法中的智能指针，Mat 规定最后一个使用矩阵的对象负责清理，这是根据矩阵的引用计数进行判断的，当引用计数为 0 时，矩阵会被清理。</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat A<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// A 的引用计数为0</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp">Mat A<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// A 的引用计数为0</span>
 A <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span> CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
 Mat <span class="token function">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// A 的引用计数+1，为 2</span>
 Mat C <span class="token operator">=</span> A<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// A 的引用计数+1，为 3</span>
@@ -1372,27 +1372,27 @@ Mat D <span class="token operator">=</span> <span class="token function">imread<
 C <span class="token operator">=</span> D<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// C, D 指向同一矩阵，A 的引用计数-1，为2</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"refcount of A: "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>A<span class="token punctuation">.</span>refcount <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"refcount of D: "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>D<span class="token punctuation">.</span>refcount <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61446613-file_1490016922912_2080.png" alt=""></p>
 <h3 id="2-2-使用-clone-或-copyTo-拷贝图像矩阵"><a href="#2-2-使用-clone-或-copyTo-拷贝图像矩阵" class="headerlink" title="2.2 使用 clone() 或 copyTo() 拷贝图像矩阵"></a>2.2 使用 clone() 或 copyTo() 拷贝图像矩阵</h3><p>那么有时候我们的确需要拷贝矩阵本身呢？可以用 Mat 的成员函数 clone() 或者 copyTo()。</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat im1 <span class="token operator">=</span><span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp">Mat im1 <span class="token operator">=</span><span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span>
 CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
 Mat im2 <span class="token operator">=</span> im1<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//矩阵内容拷贝</span>
 Mat im3<span class="token punctuation">;</span>
 im1<span class="token punctuation">.</span><span class="token function">copyTo</span><span class="token punctuation">(</span>im3<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//矩阵内容拷贝</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的代码中，im1, im2, im3的引用计数都为1，因为它们并没有共享底层矩阵。</p>
-<h2 id="3-使用-Mat"><a href="#3-使用-Mat" class="headerlink" title="3. 使用 Mat"></a>3. 使用 Mat</h2><h3 id="3-1-创建-Mat"><a href="#3-1-创建-Mat" class="headerlink" title="3.1 创建 Mat"></a>3.1 创建 Mat</h3><h4 id="通过构造函数创建："><a href="#通过构造函数创建：" class="headerlink" title="通过构造函数创建："></a>通过构造函数创建：</h4><pre class=" language-cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">,</span> <span class="token function">Scalar</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<h2 id="3-使用-Mat"><a href="#3-使用-Mat" class="headerlink" title="3. 使用 Mat"></a>3. 使用 Mat</h2><h3 id="3-1-创建-Mat"><a href="#3-1-创建-Mat" class="headerlink" title="3.1 创建 Mat"></a>3.1 创建 Mat</h3><h4 id="通过构造函数创建："><a href="#通过构造函数创建：" class="headerlink" title="通过构造函数创建："></a>通过构造函数创建：</h4><pre class="line-numbers language-cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">,</span> <span class="token function">Scalar</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"M = "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>上述程序创建了 2X2 的像素图像，每个像素有三个通道，CV_8UC3 表示使用 8 位 unsigned char 表示三通道，用 Scalar 进行初始化，值得注意是的，Mat 三通道依次是 BGR，而不是我们熟知的 RGB。OpenCV 也重载了 &lt;&lt; 运算符，因此，直接可以用标准输出对 Mat 对象进行输出，运行结果为：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/75183952-file_1490016923037_12546.png" alt=""></p>
-<h4 id="通过-create-创建："><a href="#通过-create-创建：" class="headerlink" title="通过 create() 创建："></a>通过 create() 创建：</h4><pre class=" language-cpp"><code class="language-cpp">Mat M<span class="token punctuation">;</span>
+<h4 id="通过-create-创建："><a href="#通过-create-创建：" class="headerlink" title="通过 create() 创建："></a>通过 create() 创建：</h4><pre class="line-numbers language-cpp"><code class="language-cpp">Mat M<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//create不能指定初始值, CV_8UC(4)为自定义通道数</span>
 M<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token function">CV_8UC</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"M = "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79319227-file_1490016923144_842f.png" alt=""></p>
 <p>可以看出，create 并不能设定初始值，元素默认初始化为 205。另外，我们可以使用 CV_8UC(n)自定义n维通道。</p>
@@ -1419,14 +1419,14 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token string">"M 
 </tbody>
 </table>
 <h3 id="3-2-格式化输出"><a href="#3-2-格式化输出" class="headerlink" title="3.2 格式化输出"></a>3.2 格式化输出</h3><p>OpenCV 支持多种输出方式，如默认方式、Python 格式、CSV 格式，Numpy 格式以及 C 语言格式。</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">randu</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> Scalar<span class="token operator">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Scalar<span class="token operator">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Default fomart: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Python format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"python"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"CSV format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"csv"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Numpy format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"numpy"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行结果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/21687811-file_1490016923270_7f1.png" alt=""></p>
 <p>其中 randu() 为 M 的元素随机赋值，范围为指定的 0 - 255。</p>
@@ -1456,19 +1456,19 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C 
       <url>http://nightn.com/2017/01/21/OpenCV-imread-imwrite-imshow/</url>
       <content type="html"><![CDATA[<p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取，用 imwrite 进行图像保存，用 imshow 进行图像显示。<br><a id="more"></a></p>
 <h2 id="1-读取图像"><a href="#1-读取图像" class="headerlink" title="1. 读取图像"></a>1. 读取图像</h2><p>OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取：</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat image<span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp">Mat image<span class="token punctuation">;</span>
 image <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span> CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h2 id="2-彩色图像转换为灰度图像"><a href="#2-彩色图像转换为灰度图像" class="headerlink" title="2. 彩色图像转换为灰度图像"></a>2. 彩色图像转换为灰度图像</h2><pre class=" language-cpp"><code class="language-cpp">Mat gray_image<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="2-彩色图像转换为灰度图像"><a href="#2-彩色图像转换为灰度图像" class="headerlink" title="2. 彩色图像转换为灰度图像"></a>2. 彩色图像转换为灰度图像</h2><pre class="line-numbers language-cpp"><code class="language-cpp">Mat gray_image<span class="token punctuation">;</span>
 <span class="token function">cvtColor</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> gray_image<span class="token punctuation">,</span> CV_BGR2GRAY<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>第三个参数指定转换类型，在此为 CV_BGR2GRAY</p>
 <h2 id="3-图像保存与显示"><a href="#3-图像保存与显示" class="headerlink" title="3. 图像保存与显示"></a>3. 图像保存与显示</h2><p>我们用 imwrite 进行图像保存，用 imshow 进行图像显示，如：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token function">imwrite</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1_gray.bmp"</span><span class="token punctuation">,</span> gray_image<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">imwrite</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1_gray.bmp"</span><span class="token punctuation">,</span> gray_image<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"image"</span><span class="token punctuation">,</span> image<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"gray_image"</span><span class="token punctuation">,</span> gray_image<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/introduction/load_save_image/load_save_image.html#load-save-image" target="_blank" rel="external">More</a></p>
 ]]></content>
@@ -1498,7 +1498,7 @@ image <span class="token operator">=</span> <span class="token function">imread<
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61203614-file_1490012608851_7b1e.png" alt="主界面"></p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79032149-file_1490012695609_305e.png" alt="对话框界面"></p>
 <p>关键代码如下：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in mainwindow.h</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in mainwindow.h</span>
 <span class="token keyword">class</span> <span class="token class-name">MainWindow</span> <span class="token operator">:</span> <span class="token keyword">public</span> QMainWindow
 <span class="token punctuation">{</span>
     Q_OBJECT
@@ -1526,8 +1526,8 @@ MainWindow<span class="token operator">::</span><span class="token operator">~</
     dialog<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     ui<span class="token operator">-</span><span class="token operator">></span>label<span class="token operator">-</span><span class="token operator">></span><span class="token function">setText</span><span class="token punctuation">(</span>dialog<span class="token punctuation">.</span><span class="token function">getinput</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in dialog.h</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in dialog.h</span>
 <span class="token keyword">class</span> <span class="token class-name">Dialog</span> <span class="token operator">:</span> <span class="token keyword">public</span> QDialog
 <span class="token punctuation">{</span>
     Q_OBJECT
@@ -1552,10 +1552,10 @@ QString Dialog<span class="token operator">::</span><span class="token function"
     QString s <span class="token operator">=</span> ui<span class="token operator">-</span><span class="token operator">></span>lineEdit<span class="token operator">-</span><span class="token operator">></span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> s<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码说明：上面的程序还是比较容易理解的，在mainwindow.h和mainwindow.cpp里，先将btn与showDialog建立联系，在showDialog内部创建Dialog对象，并通过exec()显示，由于exec()会阻碍线程，因此待用户输入数据之后再执行后续获取数据的代码，由于我们想获取的dialog内的数据是私有的，因此在Dialog类定义了一个public的getinput()函数（之前还考虑用友元，感觉被自己蠢哭了），间接获取用户的输入，最后将数据显示在主界面的label上面，达到主界面获取对话框数据的目的。<br>附：<a href="http://on2kkr82s.bkt.clouddn.com/DialogData1.rar" target="_blank" rel="external">方法一源代码</a></p>
 <h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a><strong>方法二：</strong></h3><p>上面讨论的是用exec()显示对话框的情况下获取用户输入数据，那如果用show()显示对话框，该如何获取数据呢？由于show()不会开启事件循环，因此如果继续按上面的方法，用户根本来不及输入数据，后续的代码就已经执行了，因此需要用到信号槽机制。思路是这样的：按下对话框的确定按钮后，程序会自动调用QDialog::accept()函数，因此如果我们可以重载accept()函数，在其中发送信号，关联该信号的槽便会响应，我们在槽里面进行数据数据接收。<br>关键代码如下：</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in mainwindow.h</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in mainwindow.h</span>
 <span class="token keyword">class</span> <span class="token class-name">MainWindow</span> <span class="token operator">:</span> <span class="token keyword">public</span> QMainWindow
 <span class="token punctuation">{</span>
     Q_OBJECT
@@ -1588,8 +1588,8 @@ MainWindow<span class="token operator">::</span><span class="token operator">~</
 <span class="token punctuation">{</span>
     ui<span class="token operator">-</span><span class="token operator">></span>label<span class="token operator">-</span><span class="token operator">></span><span class="token function">setText</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in dialog.h</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//in dialog.h</span>
 <span class="token keyword">class</span> <span class="token class-name">Dialog</span> <span class="token operator">:</span> <span class="token keyword">public</span> QDialog
 <span class="token punctuation">{</span>
     Q_OBJECT
@@ -1617,7 +1617,7 @@ Dialog<span class="token operator">::</span><span class="token operator">~</span
     emit <span class="token function">receiveData</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//发送信号给mainwindow</span>
     QDialog<span class="token operator">::</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>代码说明：用户输入数据后，按下确定按钮，程序会自动调用accept()，因此重载了accept()函数，让其将获取的输入数据作为信号（receiveData是一个信号）通过emit发送给主界面，在mainwindow.cpp，我们信号receiveData和槽displayData进行关联，displayData将接收的数据显示在主界面的label上的。总的来说，数据输入后，先调用accept()，accept()将信号（信号上带有数据）发送给displayData，displayData显示数据。通过信号槽机制，我们看到，即使对话框作为非模态窗口显示，即使其稍纵即逝，我们还是能通过特定手段获取用户的输入。<br>附：<a href="http://on2kkr82s.bkt.clouddn.com/DialogData2.rar" target="_blank" rel="external">方法二源代码</a></p>
 <p>运行结果：</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/57471216-file_1490012700145_1d5f.gif" alt="运行结果"></p>

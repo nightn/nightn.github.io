@@ -187,7 +187,8 @@
 
     <!-- Custom Head -->
     
-<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -408,13 +409,13 @@
     
         <p>计算机系统是由硬件和软件系统组成的，它们共同工作来运行应用程序。作为程序员，也需要了解这些组件是如何工作的，以及这些组件是如何影响程序的正确性和性能的。我们从最简单的 hello 程序开始，通过跟踪 hello 程序的生命周期（从被创建，到运行，输出，然终止），来开始对计算机系统的学习。<br><a id="more"></a></p>
 <h2 id="1-hello-程序创建"><a href="#1-hello-程序创建" class="headerlink" title="1. hello 程序创建"></a><strong>1. hello 程序创建</strong></h2><p>hello.c</p>
-<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"hello, world\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>hello 程序的生命周期是从源程序 hello.c 开始的，它实际上是由 0 和 1 组成的位（bit）序列，8 位称为一个字节。根据 ASCII 标准，每个字节表示一个特定的文本字符，如下图所示，hello.c 程序中的每个字符都对应一个单字节。</p>
 <p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/66099901-file_1490015480906_21f.png" alt=""></p>
 <p>hello.c 的表示方法说明了一个基本思想：计算机系统中的所有信息，包括磁盘中的文件、存储器中的程序和数据、网络上传的数据，都是一串由 0 和 1 组成的位（bit）序列，区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文。</p>
