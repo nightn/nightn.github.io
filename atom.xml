@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Nightn</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://nightn.com/"/>
+  <updated>2017-04-05T01:56:02.449Z</updated>
+  <id>http://nightn.com/</id>
+  
+  <author>
+    <name>Nightn</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android 开发小作：Minofo(2)</title>
+    <link href="http://nightn.com/2017/04/02/Android-develop-minofo-2/"/>
+    <id>http://nightn.com/2017/04/02/Android-develop-minofo-2/</id>
+    <published>2017-04-02T01:42:22.000Z</published>
+    <updated>2017-04-05T01:56:02.449Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文作为 Minofo 开发的第二篇文章，详细介绍了 高德地图 API 的使用，包括地图 SDK 和定位 SDK 的用法，实现了 Minofo 的地图模块。另外还介绍了用车面板的实现以及利用 OkHttp 从服务器获取数据的方法，进而完成 Minofo 的开发。本文提供 &lt;a href=&quot;http://on2kkr82s.bkt.clouddn.com/Minofo%282%29.pdf&quot;&gt;PDF 版本&lt;/a&gt;可供查阅及下载。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://nightn.com/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://nightn.com/tags/Android/"/>
+    
+      <category term="ofo" scheme="http://nightn.com/tags/ofo/"/>
+    
+      <category term="高德地图" scheme="http://nightn.com/tags/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android 开发小作：Minofo(1)</title>
+    <link href="http://nightn.com/2017/04/01/Android-develop-minofo-1/"/>
+    <id>http://nightn.com/2017/04/01/Android-develop-minofo-1/</id>
+    <published>2017-04-01T04:35:59.000Z</published>
+    <updated>2017-04-07T03:21:11.076Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录了开发一个完整 Android 软件 Minofo 的整个过程，本系列博客包括两篇，本文是第一篇，主要内容包括如何解析一个 App，Toolbar 标题栏，NavigationView 导航栏以及悬浮按钮的实现，从而完成 Minofo 主界面的开发。本文提供 &lt;a href=&quot;http://on2kkr82s.bkt.clouddn.com/Minofo%281%29.pdf&quot;&gt;PDF 版本&lt;/a&gt;可供查阅及下载。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://nightn.com/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://nightn.com/tags/Android/"/>
+    
+      <category term="ofo" scheme="http://nightn.com/tags/ofo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何创造财富</title>
+    <link href="http://nightn.com/2017/03/25/how-to-create-wealth/"/>
+    <id>http://nightn.com/2017/03/25/how-to-create-wealth/</id>
+    <published>2017-03-25T06:31:30.000Z</published>
+    <updated>2017-04-02T14:33:25.214Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;“&lt;strong&gt;如何创造财富？我认为最好的办法就是自己创业，或者加入创业公司。&lt;/strong&gt;” —— Paul·Graham&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Mind Explorer" scheme="http://nightn.com/categories/Mind-Explorer/"/>
+    
+    
+      <category term="《黑客与画家》" scheme="http://nightn.com/tags/%E3%80%8A%E9%BB%91%E5%AE%A2%E4%B8%8E%E7%94%BB%E5%AE%B6%E3%80%8B/"/>
+    
+      <category term="创业" scheme="http://nightn.com/tags/%E5%88%9B%E4%B8%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://nightn.com/2017/03/21/hello-world/"/>
+    <id>http://nightn.com/2017/03/21/hello-world/</id>
+    <published>2017-03-21T15:28:53.590Z</published>
+    <updated>2017-03-22T10:08:49.114Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post.
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android Device Monitor 文件管理的常见问题</title>
+    <link href="http://nightn.com/2017/03/19/Android-Device-Monitor-common-problems/"/>
+    <id>http://nightn.com/2017/03/19/Android-Device-Monitor-common-problems/</id>
+    <published>2017-03-19T11:31:35.000Z</published>
+    <updated>2017-04-02T14:30:55.978Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android Studio" scheme="http://nightn.com/categories/Android-Studio/"/>
+    
+    
+      <category term="Android Studio" scheme="http://nightn.com/tags/Android-Studio/"/>
+    
+      <category term="adb shell" scheme="http://nightn.com/tags/adb-shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机系统漫游</title>
+    <link href="http://nightn.com/2017/01/22/computer-system-roaming/"/>
+    <id>http://nightn.com/2017/01/22/computer-system-roaming/</id>
+    <published>2017-01-22T14:50:00.000Z</published>
+    <updated>2017-04-02T14:32:54.982Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;计算机系统是由硬件和软件系统组成的，它们共同工作来运行应用程序。作为程序员，也需要了解这些组件是如何工作的，以及这些组件是如何影响程序的正确性和性能的。我们从最简单的 hello 程序开始，通过跟踪 hello 程序的生命周期（从被创建，到运行，输出，然终止），来开始对计算机系统的学习。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Computer Systems" scheme="http://nightn.com/categories/Computer-Systems/"/>
+    
+    
+      <category term="Computer Systems" scheme="http://nightn.com/tags/Computer-Systems/"/>
+    
+      <category term="计算机基础" scheme="http://nightn.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenCV 图像遍历与颜色缩减</title>
+    <link href="http://nightn.com/2017/01/21/OpenCV-traversal-and-compression/"/>
+    <id>http://nightn.com/2017/01/21/OpenCV-traversal-and-compression/</id>
+    <published>2017-01-21T08:32:00.000Z</published>
+    <updated>2017-04-02T14:34:36.105Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;图像处理的基础是对图像每一个像素点的遍历，即图像扫描。在本节中，将介绍几种不同的图像遍历方式，为了对比不同方法的效率，我们不是单纯的遍历，而是对图像做更多的处理。在此，我们测试的是一种简单的颜色缩减方法。为了比较不同遍历算法的运行时间，你还将看到 OpenCV 中计时函数的用法。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="OpenCV" scheme="http://nightn.com/categories/OpenCV/"/>
+    
+    
+      <category term="机器视觉" scheme="http://nightn.com/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/"/>
+    
+      <category term="OpenCV" scheme="http://nightn.com/tags/OpenCV/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenCV Mat 介绍</title>
+    <link href="http://nightn.com/2017/01/21/OpenCV-Mat-introduction/"/>
+    <id>http://nightn.com/2017/01/21/OpenCV-Mat-introduction/</id>
+    <published>2017-01-21T08:19:00.000Z</published>
+    <updated>2017-04-02T14:34:15.932Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-为什么要引入-Mat-图像容器？&quot;&gt;&lt;a href=&quot;#1-为什么要引入-Mat-图像容器？&quot; class=&quot;headerlink&quot; title=&quot;1. 为什么要引入 Mat 图像容器？&quot;&gt;&lt;/a&gt;1. 为什么要引入 Mat 图像容器？&lt;/h2&gt;&lt;p&gt;在计算机
+    
+    </summary>
+    
+      <category term="OpenCV" scheme="http://nightn.com/categories/OpenCV/"/>
+    
+    
+      <category term="机器视觉" scheme="http://nightn.com/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/"/>
+    
+      <category term="OpenCV" scheme="http://nightn.com/tags/OpenCV/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenCV 读取、修改、保存图像</title>
+    <link href="http://nightn.com/2017/01/21/OpenCV-imread-imwrite-imshow/"/>
+    <id>http://nightn.com/2017/01/21/OpenCV-imread-imwrite-imshow/</id>
+    <published>2017-01-21T07:52:00.000Z</published>
+    <updated>2017-04-02T14:33:50.547Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;OpenCV 图像保存格式之一为 cv::Mat, 常用 imread 进行图像读取，用 imwrite 进行图像保存，用 imshow 进行图像显示。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="OpenCV" scheme="http://nightn.com/categories/OpenCV/"/>
+    
+    
+      <category term="机器视觉" scheme="http://nightn.com/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/"/>
+    
+      <category term="OpenCV" scheme="http://nightn.com/tags/OpenCV/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Qt主界面获取对话框数据</title>
+    <link href="http://nightn.com/2016/12/23/Qt-communication-bwteen-main-and-dialog-box/"/>
+    <id>http://nightn.com/2016/12/23/Qt-communication-bwteen-main-and-dialog-box/</id>
+    <published>2016-12-22T16:26:00.000Z</published>
+    <updated>2017-04-02T14:34:55.178Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在编写Qt程序的时候，我们常常需要通过对话框来获取用户的输入数据，比如通过文件对话框获取文件的路径，通过颜色对话框获取用户所选择的颜色，这些对话框的类都是Qt帮我们写好了的，调用相应函数就能直接返回用户的输入，比如颜色对话框QColorDialog中有一个静态函数getColor，我们直接调用该函数，便会弹出颜色对话框，等我们选择好颜色并确定，该函数就会返回一个QColor的对象，这个对象就包含了我们之前所选颜色的RGB值了。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Qt" scheme="http://nightn.com/categories/Qt/"/>
+    
+    
+      <category term="Qt" scheme="http://nightn.com/tags/Qt/"/>
+    
+      <category term="C++" scheme="http://nightn.com/tags/C/"/>
+    
+  </entry>
+  
+</feed>
