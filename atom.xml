@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://nightn.com/"/>
-  <updated>2017-04-05T01:56:02.449Z</updated>
+  <updated>2017-04-16T05:42:18.993Z</updated>
   <id>http://nightn.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CloudViewer</title>
+    <link href="http://nightn.com/2017/04/15/cloudviewer/"/>
+    <id>http://nightn.com/2017/04/15/cloudviewer/</id>
+    <published>2017-04-15T14:39:25.000Z</published>
+    <updated>2017-04-16T05:42:18.993Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;CloudViewer-简介&quot;&gt;&lt;a href=&quot;#CloudViewer-简介&quot; class=&quot;headerlink&quot; title=&quot;CloudViewer 简介&quot;&gt;&lt;/a&gt;CloudViewer 简介&lt;/h2&gt;&lt;p&gt;CloudViewer （点云可视化软件）是
+    
+    </summary>
+    
+      <category term="Qt" scheme="http://nightn.com/categories/Qt/"/>
+    
+    
+      <category term="CloudViewer" scheme="http://nightn.com/tags/CloudViewer/"/>
+    
+      <category term="Qt" scheme="http://nightn.com/tags/Qt/"/>
+    
+      <category term="PCL" scheme="http://nightn.com/tags/PCL/"/>
+    
+      <category term="点云" scheme="http://nightn.com/tags/%E7%82%B9%E4%BA%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 开发小作：Minofo(2)</title>
