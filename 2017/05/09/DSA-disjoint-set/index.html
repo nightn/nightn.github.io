@@ -10,7 +10,7 @@
     
     <title>
         
-            OpenCV Mat 介绍 | 
+            数据结构学习笔记：不相交集 | 
         
         Nightn
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Nightn">
     <meta name="description" content="It always seems impossible until it&#39;s done">
-    <meta name="keywords" content="null,机器视觉,OpenCV">
+    <meta name="keywords" content="null,Date Structure,Disjoint Set">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://nightn.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="OpenCV Mat 介绍 | Nightn">
+    <meta property="og:title" content="数据结构学习笔记：不相交集 | Nightn">
     <meta property="og:description" content="It always seems impossible until it&#39;s done">
-    <meta property="og:article:tag" content="机器视觉"> <meta property="og:article:tag" content="OpenCV"> 
+    <meta property="og:article:tag" content="Date Structure"> <meta property="og:article:tag" content="Disjoint Set"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-为什么要引入-Mat-图像容器？"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 为什么要引入 Mat 图像容器？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Mat-介绍"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Mat 介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-赋值和拷贝构造函数只拷贝信息头"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 赋值和拷贝构造函数只拷贝信息头</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-使用-clone-或-copyTo-拷贝图像矩阵"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 使用 clone() 或 copyTo() 拷贝图像矩阵</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-使用-Mat"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 使用 Mat</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-1-创建-Mat"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1 创建 Mat</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#通过构造函数创建："><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">通过构造函数创建：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#通过-create-创建："><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">通过 create() 创建：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#静态函数-zeros-ones-eyes"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">静态函数 zeros(), ones(), eyes()</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-格式化输出"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2 格式化输出</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-等价关系"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 等价关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-动态等价问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 动态等价问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-基础知识"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">2.1 基础知识</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2-一维数组"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">2.2 一维数组</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3-单链表"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">2.3 单链表</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-最基本的实现"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 最基本的实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-改进-Union"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. 改进 Union</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-改进-Find-—-路径压缩"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. 改进 Find — 路径压缩</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -270,7 +270,7 @@
         
     
             <p class="article-headline-p">
-                OpenCV Mat 介绍
+                数据结构学习笔记：不相交集
             </p>
         </div>
 
@@ -289,7 +289,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Nightn</strong>
-        <span>1月 21, 2017</span>
+        <span>5月 09, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -310,7 +310,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC10lEQVR42u3aS27DMAwFQN//0u22QFvnkXQQWxqvgsYfjRZl+Ojja8vjwMbGxsbGxsbGxr4l+4iPn+f/vsMfj/nnzPM7/P58fp9kzdjY2Ng7sF/86w+oydacn1MoRb01Y2NjY2/Arhat82uTb/OnJEXuxd2wsbGxsVulKGoSipuCjY2NjX0t+30R0q0LGDY2NvYt2UlAkxSkvLXIy2E1kMLGxsbejd0b9H7288fm29jY2Ng3Y/eGrO8oWkk4NVo5NjY29qLs/Kf/ZAw8bzPK5arXgWFjY2M/kH0esvfCpmpJy4fEvUEyNjY29trso3iUQ/kgJMrbnt6qsLGxsddm501CdVm9++dhUzWcwsbGxl6bXf1xnwRJ+Wg22YKkORkNerGxsbEfy+69BDkJ9PPwqHrtqAPDxsbGXoidPLj3Ck61pPVKIzY2NvZu7Op49WgdeeGpjn7zLcDGxsZem92LafJrJ+C8pL2IqLCxsbE3YE9esunFRslTeuPe8nwbGxsbewl23njk317b3vRe7sHGxsbeh52ETdVWYRI/VQvei1KHjY2NvQE7X1Zv1Doh5YPnZt3GxsbGfiy7OhIovCKTRPbFLc7LJzY2NjZ2UjAmY9d8m/Iw64ICho2Njf1Adj7QzXnVVmGyQTkeGxsbewd2Xq7yMnZVkNQradjY2Ng7sCdB/2Q78kAqKX7RarGxsbEXZU/ipCoy3+JqcYoGCdjY2NgbsJNQ6X1NSHWsW25psLGxsRdlT37u9xaRfM7HAIUhBDY2Nvai7Opx1fCgGg/lZRUbGxt7N/a8SFSvTa66dkOxsbGxd2BPYqbyS5CDwUN1DdjY2Ni7seeFJ4/7e3+/OEvDxsbG3pKdB0z5+dVXeZrxEzY2NjZ2q0nonV99WQcbGxsbuxoq9cKjXiORNEKjVgQbGxt7CXZvWJuUliqm2rok24GNjY29NnufAxsbGxsbGxsbG/s2xzdHgjQ2R6MRdwAAAABJRU5ErkJggg==">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACcUlEQVR42u3aQXLbMBAEQP7/08kDEtEzWICSVc2TqkyRaB2w68Fef776uvDw8PDw8PDw8D6Md8XXq/v/84Lbv94/5/5d92vDw8PDe5L3w1b77yNi2P2d+T3F2vDw8PAe5OWbdbusdnNfWxseHh7eZ/KSAlC0vy++hYeHh/fdvLXIIG/Q8fDw8D6Zl7y+DReSwtC27AezFjw8PLyY1x6APfn5Ded7eHh4eLe8xcGmcvtuxw62DV3h4eHhHeDl7XISueaxbPKWZHChzlrw8PDwtvLWSMlRVhtb5D8QHh4e3rt4SQSQLz0fAlhruOvCgIeHh3eANz/UnwQKeXmI/gHAw8PDO8xrN+tJScjflRShIqXGw8PDO8Cbb/ptxLAr/qhHB/Dw8PDGvHaEdG3RuwrAhjACDw8Pb8y7b53XQoE6Phg39Hh4eHhP8pKv/TBYvzQ0MCkhdUqNh4eHt5XXHvnnIUVbVBZHrNZaajw8PLwBbzLktNYKX8GVlyg8PDy8d/Harb+NG5Kfo8XUM2V4eHh4m3jbHropkpgULTw8PLzneUk0sDYukAcfUdPcjg7g4eHhbeW1Aeuk1c4LRtvc4+Hh4T3JWzuqXxs2zTHJGMHLJ+Ph4eEd5uWHWPmWPVniWmONh4eH9ySvvfKQYu3AbEP4i4eHh3eYd8VXe39eTtpWe5S14OHh4W3i5cHBZCmTuKF4Dh4eHt6DvF2DVpNmug0j8PDw8H4LrziOKgPiPLTFw8PD+y28drNeY0yGCfDw8PCe5K2FEUnIm4QXB4eu8PDw8A7w1o6y8ki3baYnowZ4eHh4p3nfd+Hh4eHh4eHh4X3A9ReLEqCUnoXO+QAAAABJRU5ErkJggg==">
         </ul>
     
 
@@ -322,7 +322,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/OpenCV/">OpenCV</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/机器视觉/">机器视觉</a>
+        <a class="post_tag-link" href="/tags/Date-Structure/">Date Structure</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Disjoint-Set/">Disjoint Set</a>
     </ul>
     
 
@@ -349,7 +349,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=OpenCV Mat 介绍&url=http://nightn.com//2017/01/21/OpenCV-Mat-introduction/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=数据结构学习笔记：不相交集&url=http://nightn.com//2017/05/09/DSA-disjoint-set/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -358,7 +358,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=OpenCV Mat 介绍&url=http://nightn.com//2017/01/21/OpenCV-Mat-introduction/index.html&via=Nightn" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=数据结构学习笔记：不相交集&url=http://nightn.com//2017/05/09/DSA-disjoint-set/index.html&via=Nightn" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -367,7 +367,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://nightn.com//2017/01/21/OpenCV-Mat-introduction/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://nightn.com//2017/05/09/DSA-disjoint-set/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -376,7 +376,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://nightn.com//2017/01/21/OpenCV-Mat-introduction/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://nightn.com//2017/05/09/DSA-disjoint-set/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -388,7 +388,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Nightn&title=OpenCV Mat 介绍&summary=It always seems impossible until it&#39;s done&pics=http://nightn.com/img/favicon.png&url=http://nightn.com/2017/01/21/OpenCV-Mat-introduction/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Nightn&title=数据结构学习笔记：不相交集&summary=It always seems impossible until it&#39;s done&pics=http://nightn.com/img/favicon.png&url=http://nightn.com/2017/05/09/DSA-disjoint-set/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -406,98 +406,110 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="1-为什么要引入-Mat-图像容器？"><a href="#1-为什么要引入-Mat-图像容器？" class="headerlink" title="1. 为什么要引入 Mat 图像容器？"></a>1. 为什么要引入 Mat 图像容器？</h2><p>在计算机看来，一幅图像对应的是矩阵，矩阵包含了所有像素点的强度值。获取并存储这些像素值，可以使计算机图像处理简化为数值矩阵及描述矩阵信息的处理。OpenCV 是如何存储图像的呢？</p>
-<p>2001年 OpenCV 刚出现的时候，是基于 C 语言接口而建的。为了在内存中存放图像，当时采用名为 IplImage 的 C 语言结构体。这种方法的最大弊端是：用户必须手动管理内存，一旦代码庞大，这便变得非常麻烦且容易出错。OpenCV 2.0 引入新的 C++ 接口，利用个自动内存管理给出了解决方案。</p>
-<h2 id="2-Mat-介绍"><a href="#2-Mat-介绍" class="headerlink" title="2. Mat 介绍"></a>2. Mat 介绍</h2><p>Mat 作为一个类，数据包括两个部分：矩阵头和指向像素矩阵的指针。</p>
-<table>
-<thead>
-<tr>
-<th>数据部分</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>矩阵头</td>
-<td>描述像素矩阵，主要包括矩阵的尺寸、存储方式、存储地址等。矩阵头的大小固定。</td>
-</tr>
-<tr>
-<td>矩阵指针</td>
-<td>矩阵指针所指对象代表了图像本身，其尺寸会根据图像的不同而不同。像素矩阵一般比矩阵头大几个数量级，因此，拷贝图像会产生很大的计算量。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="2-1-赋值和拷贝构造函数只拷贝信息头"><a href="#2-1-赋值和拷贝构造函数只拷贝信息头" class="headerlink" title="2.1 赋值和拷贝构造函数只拷贝信息头"></a>2.1 赋值和拷贝构造函数只拷贝信息头</h3><p>为了避免拷贝图像的巨大计算量，OpenCV 采用引用计数机制。即每个 Mat 对象有其自己的矩阵头，但可以共享同一个图像矩阵（即 Mat 对象的矩阵指针指向同一地址）。在 Mat 对象赋值及拷贝构造函数中，只拷贝矩阵头和矩阵指针，不拷贝矩阵本身，这样可以减少很多计算量。</p>
-<p>这样我们会看到，同一个图像矩阵，可能属于多个 Mat 对象，那么当不需要图像矩阵时，哪个 Mat 对象负责清理它呢？正如 C++ 语法中的智能指针，Mat 规定最后一个使用矩阵的对象负责清理，这是根据矩阵的引用计数进行判断的，当引用计数为 0 时，矩阵会被清理。</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat A<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// A 的引用计数为0</span>
-A <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span> CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
-Mat <span class="token function">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// A 的引用计数+1，为 2</span>
-Mat C <span class="token operator">=</span> A<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// A 的引用计数+1，为 3</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"refcount of A: "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>A<span class="token punctuation">.</span>refcount <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-Mat D <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span> CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
-C <span class="token operator">=</span> D<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// C, D 指向同一矩阵，A 的引用计数-1，为2</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"refcount of A: "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>A<span class="token punctuation">.</span>refcount <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"refcount of D: "</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>D<span class="token punctuation">.</span>refcount <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        <p>不相交集（Disjoint Set）是一种用于解决等价问题的非常有效的数据结构，具有性能优越、实现简单等特点。本文介绍了等价问题、不相交集等概念，并叙述了 Union/Find 算法的实现与优化。</p>
+<a id="more"></a>
+<h2 id="1-等价关系"><a href="#1-等价关系" class="headerlink" title="1. 等价关系"></a>1. 等价关系</h2><p>等价关系必须满足 3 个条件：</p>
+<ul>
+<li><code>自反性</code>：a 属于 S 集，a 与其本身等价；</li>
+<li><code>对称性</code>：a 等价 b，那么 b 等价 a；</li>
+<li><code>传递性</code>：a 等价 b， b 等价 c，那么 a 等价 c。</li>
+</ul>
+<p>如<code>电路连通</code> 是一种等价关系；而 <code>≥</code>  不是等价关系，因为它满足自反性和传递性，但不满足对称性。</p>
+<h2 id="2-动态等价问题"><a href="#2-动态等价问题" class="headerlink" title="2. 动态等价问题"></a>2. 动态等价问题</h2><p>问题来了，我们如何用数据结构表示一个等价问题？</p>
+<p>最容易想到的是<strong>二维数组</strong>，N 个元素的集，就需要 N X N 大小的二维数组来存放元素之间的等价关系，虽然这样在访问某两个元素是否等价的时候，通过常数时间即可完成。但我们考虑一个简单的例子，一个存放了 5 个元素的集 {a1, a2, a3, a4, a5}，为了表示这个集中各元素的等价关系，我们就需要构建一个 5 X 5 大小的二维数组，且不说这 O($N^2$) 的空间复杂度，这种表示法很难直接表示出等价关系的传递性，什么意思呢？假如 a1~a2, a3~a4, a5~a1, a4~a2, 根据等价性可以很直观的看出，这个集中的所有元素两两等价，但如果将这种等价关系存储在二维数组中，还能够这么直观的表示出来吗？</p>
+<h4 id="2-1-基础知识"><a href="#2-1-基础知识" class="headerlink" title="2.1 基础知识"></a>2.1 基础知识</h4><p>在等价问题中，二维数组是不可行的。因此引入<strong>等价类</strong>的概念。</p>
+<p><code>等价类</code> ：等价类是全集 S 的一个子集，一个等价类中的所有元素都满足等价关系。</p>
+<p>有了等价类的概念，我们不需要再用二维数组表示元素之间是否等价了，而是<strong>通过判断两个元素是否属于同一个等价类，来判断它们是否等价</strong>。 假设全集 S 中包含 N 个元素，且一开始这 N 个元素相互之间都不等价，即每一个元素都单独属于一个等价类。对于任意等价类 $S_i$ 和 $S_j$，都有 $S_i \bigcap S_j = \emptyset$，因此称整个 S 集为<strong>不相交集（Disjoint Set）</strong>。不相交集中允许两种运算：Find 和 Union。</p>
+<ul>
+<li><p><strong>Find</strong></p>
+<p>Find 接收一个给定的元素，返回该元素所属的等价类的名字。</p>
+</li>
+<li><p><strong>Union</strong></p>
+<p>Union 是添加等价关系，比如添加等价关系 a~b，<strong>由等价关系的传递性可知，一旦添加了 a~b，那么 a, b所属等价类的所有元素都满足等价关系。即 a 所属的等价类和 b 所属的等价类合二为一</strong>。因此， Union 接收两个元素，首先分别找到这两个元素所属的等价类，若属于同一等价类，即 a 和 b 已经具有等价关系了，那么就不操作；若属于不同等价类，则将两个等价类合并为一个等价类。合并的方式有 Union-by-size 和 Union-by-height (rank) ，具体将在下文展开。</p>
+</li>
+</ul>
+<p>在前文中，我们引入了不相交集中等价类的概念，又介绍了不相交集中的两种运算 Find 和 Union，此外，我们还观察到：</p>
+<ol>
+<li>判断两个元素是否等价，是根据它们是否属于同一个等价类，而不是比较它们的值。我们并不关心元素的值是什么（它仅仅起到区分元素的作用），因此，将不相交集中的所有元素编号 1 到 N，并按需排列。</li>
+<li>等价类的名字不重要，重要的是能够进行比较即可。“等价类1”==“等价类1” 和 “阿猫等价类”==“阿猫等价类” 本质上没有任何区别。</li>
+</ol>
+<h4 id="2-2-一维数组"><a href="#2-2-一维数组" class="headerlink" title="2.2 一维数组"></a>2.2 一维数组</h4><p>有了上面的基础知识后，是时候考虑用什么样的数据结构来实现不相交集了。首先想到的是一维数组，对于一个包含 N 个元素的不相交集 S，用一个大小为 N 的一维数组表示，数组的下标表示是哪一个元素，而存放的内容是该元素所属的等价类的名称。这样一来，Find 就是根据下标找数组存放的内容，时间复杂度为 $O(1)$，但是将两个等价类进行 Union 的话，则需要遍历整个数组，将对应的等价类名称进行修改，时间复杂度为 $O(N)$。</p>
+<h4 id="2-3-单链表"><a href="#2-3-单链表" class="headerlink" title="2.3 单链表"></a>2.3 单链表</h4><p>考虑将每一个等价类单独存放在一个链表中，这样一来，Union 就只需要将两个链表合并，Union 的时间复杂度为 $O(1)$，但是每次 Find 的话，就需要遍历所有链表。</p>
+<h2 id="3-最基本的实现"><a href="#3-最基本的实现" class="headerlink" title="3. 最基本的实现"></a>3. 最基本的实现</h2><p>我们将每一个等价类表示为一颗树，树的每个元素有相同的根，根就可以用来命名等价类。树中的每个元素都需要一个父指针，指向其父节点，指向 0 表示该元素就是根。用一维数组来表示不相交集。</p>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> NumSets 128</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> DisjSet<span class="token punctuation">[</span>NumSets <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> SetType<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> ElementType<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">)</span><span class="token punctuation">;</span>
+SetType <span class="token function">Find</span><span class="token punctuation">(</span>ElementType X<span class="token punctuation">,</span> DisjSet S<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">SetUnion</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">,</span> SetType root1<span class="token punctuation">,</span> SetType root2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//初始化不相交集</span>
+<span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> NumSets<span class="token punctuation">;</span> i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        S<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>运行结果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/61446613-file_1490016922912_2080.png" alt=""></p>
-<h3 id="2-2-使用-clone-或-copyTo-拷贝图像矩阵"><a href="#2-2-使用-clone-或-copyTo-拷贝图像矩阵" class="headerlink" title="2.2 使用 clone() 或 copyTo() 拷贝图像矩阵"></a>2.2 使用 clone() 或 copyTo() 拷贝图像矩阵</h3><p>那么有时候我们的确需要拷贝矩阵本身呢？可以用 Mat 的成员函数 clone() 或者 copyTo()。</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat im1 <span class="token operator">=</span><span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"E:/Code/CPP/OpenCV/Pictures/1.bmp"</span><span class="token punctuation">,</span>
-CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
-Mat im2 <span class="token operator">=</span> im1<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//矩阵内容拷贝</span>
-Mat im3<span class="token punctuation">;</span>
-im1<span class="token punctuation">.</span><span class="token function">copyTo</span><span class="token punctuation">(</span>im3<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//矩阵内容拷贝</span>
+<p>初始化时，另所有的元素都指向 0，即每个元素都是根，并单独构成一棵树。Union 非常简单，只需要把一个树根作为另一个树根的根即可，在此，我们将 root2 连接到 root1 上：</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Stupid</span>
+<span class="token keyword">void</span> <span class="token function">SetUnion</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">,</span> SetType root1<span class="token punctuation">,</span> SetType root2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    S<span class="token punctuation">[</span>root2<span class="token punctuation">]</span> <span class="token operator">=</span> root1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>上面的代码中，im1, im2, im3的引用计数都为1，因为它们并没有共享底层矩阵。</p>
-<h2 id="3-使用-Mat"><a href="#3-使用-Mat" class="headerlink" title="3. 使用 Mat"></a>3. 使用 Mat</h2><h3 id="3-1-创建-Mat"><a href="#3-1-创建-Mat" class="headerlink" title="3.1 创建 Mat"></a>3.1 创建 Mat</h3><h4 id="通过构造函数创建："><a href="#通过构造函数创建：" class="headerlink" title="通过构造函数创建："></a>通过构造函数创建：</h4><pre class=" language-cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">,</span> <span class="token function">Scalar</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"M = "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<p>至于 Find，给定一个元素，每次寻找它的父节点，直到找到该元素的根，即该元素所属的等价类，Find 可以用递归和迭代两种方式实现。</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Find by iteration</span>
+SetType <span class="token function">Find</span><span class="token punctuation">(</span>ElementType X<span class="token punctuation">,</span> DisjSet S<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>S<span class="token punctuation">[</span>X<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        X <span class="token operator">=</span> S<span class="token punctuation">[</span>X<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> X<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>上述程序创建了 2X2 的像素图像，每个像素有三个通道，CV_8UC3 表示使用 8 位 unsigned char 表示三通道，用 Scalar 进行初始化，值得注意是的，Mat 三通道依次是 BGR，而不是我们熟知的 RGB。OpenCV 也重载了 &lt;&lt; 运算符，因此，直接可以用标准输出对 Mat 对象进行输出，运行结果为：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/75183952-file_1490016923037_12546.png" alt=""></p>
-<h4 id="通过-create-创建："><a href="#通过-create-创建：" class="headerlink" title="通过 create() 创建："></a>通过 create() 创建：</h4><pre class=" language-cpp"><code class="language-cpp">Mat M<span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//create不能指定初始值, CV_8UC(4)为自定义通道数</span>
-M<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token function">CV_8UC</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"M = "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<p>以上是不相交集的最基本实现。Find 的时间复杂度是 $O(h)$，其中 h 是树的深度，按照上述 Union，最坏情况树的深度会达到 N-1，即最坏情况下，Find 的时间复杂度是 $O(N)$。以下分别从 Union 和 Find 两个角度来改进基本实现。</p>
+<h2 id="4-改进-Union"><a href="#4-改进-Union" class="headerlink" title="4. 改进 Union"></a>4. 改进 Union</h2><p>之前的 Union 非常笨拙，每次都是将 root2 作为 root1 的子树，考虑如下代码：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> NumSets<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">SetUnion</span><span class="token punctuation">(</span>S<span class="token punctuation">,</span> <span class="token function">Find</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> S<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Find</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> S<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 </code></pre>
-<p>运行结果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/79319227-file_1490016923144_842f.png" alt=""></p>
-<p>可以看出，create 并不能设定初始值，元素默认初始化为 205。另外，我们可以使用 CV_8UC(n)自定义n维通道。</p>
-<h4 id="静态函数-zeros-ones-eyes"><a href="#静态函数-zeros-ones-eyes" class="headerlink" title="静态函数 zeros(), ones(), eyes()"></a>静态函数 zeros(), ones(), eyes()</h4><table>
-<thead>
-<tr>
-<th>静态函数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>zeros()</td>
-<td>零矩阵</td>
-</tr>
-<tr>
-<td>ones()</td>
-<td>全 1 矩阵</td>
-</tr>
-<tr>
-<td>eyes()</td>
-<td>单位矩阵</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-2-格式化输出"><a href="#3-2-格式化输出" class="headerlink" title="3.2 格式化输出"></a>3.2 格式化输出</h3><p>OpenCV 支持多种输出方式，如默认方式、Python 格式、CSV 格式，Numpy 格式以及 C 语言格式。</p>
-<pre class=" language-cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">randu</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> Scalar<span class="token operator">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Scalar<span class="token operator">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Default fomart: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Python format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"python"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"CSV format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"csv"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Numpy format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"numpy"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C format: "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>M<span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<p>通过一系列的 SetUnion，S 变成了一棵深度为 N-1 的树，最坏情况下，单次 Find 的时间复杂度为 $O(N)$。为了优化这一问题，提出 <strong>Union-by-size</strong>，即不再是简单的将后一棵树连到前一棵树，而是<strong>总将尺寸更小的树作为子树</strong>。为了追踪树的尺寸（即树包含的元素的个数），不再将树根的值设置为 0，而是将其<strong>设置为 -size</strong>。同样执行上述 Union 代码，改进前后 Union 对比：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-5-9/31641600-file_1494333521106_6e4b.png" width="500"></p>
+<p>实现代码如下：</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">//初始化不相交集</span>
+<span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> NumSets<span class="token punctuation">;</span> i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        S<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 初始化为-1，表示一开始每棵树都只有一个元素</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// Smart Union: Union-by-size</span>
+<span class="token keyword">void</span> <span class="token function">SetUnion</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">,</span> SetType root1<span class="token punctuation">,</span> SetType root2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root1 <span class="token operator">></span> root2<span class="token punctuation">)</span><span class="token punctuation">{</span>        <span class="token comment" spellcheck="true">//root1作为子树</span>
+        S<span class="token punctuation">[</span>root2<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> S<span class="token punctuation">[</span>root1<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//更新父树的size</span>
+        S<span class="token punctuation">[</span>root1<span class="token punctuation">]</span> <span class="token operator">=</span> root2<span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">{</span>                      <span class="token comment" spellcheck="true">//root2作为子树</span>
+        S<span class="token punctuation">[</span>root1<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> S<span class="token punctuation">[</span>root2<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//更新父树的size</span>
+        S<span class="token punctuation">[</span>root2<span class="token punctuation">]</span> <span class="token operator">=</span> root1<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>运行结果：</p>
-<p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/21687811-file_1490016923270_7f1.png" alt=""></p>
-<p>其中 randu() 为 M 的元素随机赋值，范围为指定的 0 - 255。</p>
-<hr>
-<p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/mat%20-%20the%20basic%20image%20container/mat%20-%20the%20basic%20image%20container.html#matthebasicimagecontainer" target="_blank" rel="external">More</a></p>
+<p>这样一来，所有树的深度都不会超过 $log N$，Find 的时间复杂度为 $O(log N)$ 。</p>
+<p>另一种是 <strong>Union-by-height</strong>，只是对 Union-by-size 的简单修改，<strong>每次 Union 都将高度更小的树作为子树</strong>，同理，树根存放的是树高 height 的负值，实现代码也比较简单，便不再详述。</p>
+<h2 id="5-改进-Find-—-路径压缩"><a href="#5-改进-Find-—-路径压缩" class="headerlink" title="5. 改进 Find — 路径压缩"></a>5. 改进 Find — 路径压缩</h2><p>虽然机智地改进了 Union 的算法，但是最坏情况还是很容易发生。一方面，我们还想要进一步优化 Union/Find 算法，另一方面，Union 已经没有改进余地了，那怎么办？当然是改进 Find 了！限制算法性能的最大瓶颈是：在 Union 的过程中，树的平衡性很容易被打破。这样一来，树就很快倾向于最糟糕的情况，既然如此，那我们就在每次 Find 的时候调整树的平衡性，这种聪明的调整叫做<strong>路径压缩（Path Compression）</strong>。</p>
+<p>假如我们执行 Find(X)，路径压缩的效果就是，从 X 到根节点这一路径上的每一个节点，我们都将它的父节点设置为根节点。修改 Find 函数如下：</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Find by recursion with path compression</span>
+SetType <span class="token function">Find2</span><span class="token punctuation">(</span>ElementType X<span class="token punctuation">,</span> DisjSet S<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>S<span class="token punctuation">[</span>X<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> X<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> S<span class="token punctuation">[</span>X<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">Find</span><span class="token punctuation">(</span>S<span class="token punctuation">[</span>X<span class="token punctuation">]</span><span class="token punctuation">,</span> S<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>值得注意的是，Path compression 和 Union-by-height 并不兼容，因为路径压缩会改变树的高度，这样导致每次重新计算树的高度都很麻烦，一个解决方案是，不去重新计算它。这样一来，每棵树存储的就不是它实际的高度了，而是估计的高度，我们称之为秩（Rank），这样一来，当你一看到 Union-by-rank ，就知道是怎么一回事了吧。</p>
 
     
 
@@ -566,7 +578,7 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C 
 <script>
     $('.btn_click_load').click(function() {  //click to load comments
         var disqus_config = function () {
-            this.page.url = 'http://nightn.com/2017/01/21/OpenCV-Mat-introduction/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.url = 'http://nightn.com/2017/05/09/DSA-disjoint-set/index.html';  // Replace PAGE_URL with your page's canonical URL variable
             this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
         };
         (function() { // DON'T EDIT BELOW THIS LINE
@@ -596,21 +608,13 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token string">"C 
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/01/21/OpenCV-traversal-and-compression/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/01/21/OpenCV-imread-imwrite-imshow/" id="post_nav-older" class="next-content">
+        <a href="/2017/04/15/cloudviewer/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

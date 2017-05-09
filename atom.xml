@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://nightn.com/"/>
-  <updated>2017-04-16T06:39:42.198Z</updated>
+  <updated>2017-05-09T12:41:17.742Z</updated>
   <id>http://nightn.com/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据结构学习笔记：不相交集</title>
+    <link href="http://nightn.com/2017/05/09/DSA-disjoint-set/"/>
+    <id>http://nightn.com/2017/05/09/DSA-disjoint-set/</id>
+    <published>2017-05-09T12:21:24.000Z</published>
+    <updated>2017-05-09T12:41:17.742Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不相交集（Disjoint Set）是一种用于解决等价问题的非常有效的数据结构，具有性能优越、实现简单等特点。本文介绍了等价问题、不相交集等概念，并叙述了 Union/Find 算法的实现与优化。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DSA" scheme="http://nightn.com/categories/DSA/"/>
+    
+    
+      <category term="Date Structure" scheme="http://nightn.com/tags/Date-Structure/"/>
+    
+      <category term="Disjoint Set" scheme="http://nightn.com/tags/Disjoint-Set/"/>
+    
+  </entry>
   
   <entry>
     <title>CloudViewer</title>

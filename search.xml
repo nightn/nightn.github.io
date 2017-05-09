@@ -4,6 +4,132 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记：不相交集]]></title>
+      <url>http://nightn.com/2017/05/09/DSA-disjoint-set/</url>
+      <content type="html"><![CDATA[<p>不相交集（Disjoint Set）是一种用于解决等价问题的非常有效的数据结构，具有性能优越、实现简单等特点。本文介绍了等价问题、不相交集等概念，并叙述了 Union/Find 算法的实现与优化。</p>
+<a id="more"></a>
+<h2 id="1-等价关系"><a href="#1-等价关系" class="headerlink" title="1. 等价关系"></a>1. 等价关系</h2><p>等价关系必须满足 3 个条件：</p>
+<ul>
+<li><code>自反性</code>：a 属于 S 集，a 与其本身等价；</li>
+<li><code>对称性</code>：a 等价 b，那么 b 等价 a；</li>
+<li><code>传递性</code>：a 等价 b， b 等价 c，那么 a 等价 c。</li>
+</ul>
+<p>如<code>电路连通</code> 是一种等价关系；而 <code>≥</code>  不是等价关系，因为它满足自反性和传递性，但不满足对称性。</p>
+<h2 id="2-动态等价问题"><a href="#2-动态等价问题" class="headerlink" title="2. 动态等价问题"></a>2. 动态等价问题</h2><p>问题来了，我们如何用数据结构表示一个等价问题？</p>
+<p>最容易想到的是<strong>二维数组</strong>，N 个元素的集，就需要 N X N 大小的二维数组来存放元素之间的等价关系，虽然这样在访问某两个元素是否等价的时候，通过常数时间即可完成。但我们考虑一个简单的例子，一个存放了 5 个元素的集 {a1, a2, a3, a4, a5}，为了表示这个集中各元素的等价关系，我们就需要构建一个 5 X 5 大小的二维数组，且不说这 O($N^2$) 的空间复杂度，这种表示法很难直接表示出等价关系的传递性，什么意思呢？假如 a1~a2, a3~a4, a5~a1, a4~a2, 根据等价性可以很直观的看出，这个集中的所有元素两两等价，但如果将这种等价关系存储在二维数组中，还能够这么直观的表示出来吗？</p>
+<h4 id="2-1-基础知识"><a href="#2-1-基础知识" class="headerlink" title="2.1 基础知识"></a>2.1 基础知识</h4><p>在等价问题中，二维数组是不可行的。因此引入<strong>等价类</strong>的概念。</p>
+<p><code>等价类</code> ：等价类是全集 S 的一个子集，一个等价类中的所有元素都满足等价关系。</p>
+<p>有了等价类的概念，我们不需要再用二维数组表示元素之间是否等价了，而是<strong>通过判断两个元素是否属于同一个等价类，来判断它们是否等价</strong>。 假设全集 S 中包含 N 个元素，且一开始这 N 个元素相互之间都不等价，即每一个元素都单独属于一个等价类。对于任意等价类 $S_i$ 和 $S_j$，都有 $S_i \bigcap S_j = \emptyset$，因此称整个 S 集为<strong>不相交集（Disjoint Set）</strong>。不相交集中允许两种运算：Find 和 Union。</p>
+<ul>
+<li><p><strong>Find</strong></p>
+<p>Find 接收一个给定的元素，返回该元素所属的等价类的名字。</p>
+</li>
+<li><p><strong>Union</strong></p>
+<p>Union 是添加等价关系，比如添加等价关系 a~b，<strong>由等价关系的传递性可知，一旦添加了 a~b，那么 a, b所属等价类的所有元素都满足等价关系。即 a 所属的等价类和 b 所属的等价类合二为一</strong>。因此， Union 接收两个元素，首先分别找到这两个元素所属的等价类，若属于同一等价类，即 a 和 b 已经具有等价关系了，那么就不操作；若属于不同等价类，则将两个等价类合并为一个等价类。合并的方式有 Union-by-size 和 Union-by-height (rank) ，具体将在下文展开。</p>
+</li>
+</ul>
+<p>在前文中，我们引入了不相交集中等价类的概念，又介绍了不相交集中的两种运算 Find 和 Union，此外，我们还观察到：</p>
+<ol>
+<li>判断两个元素是否等价，是根据它们是否属于同一个等价类，而不是比较它们的值。我们并不关心元素的值是什么（它仅仅起到区分元素的作用），因此，将不相交集中的所有元素编号 1 到 N，并按需排列。</li>
+<li>等价类的名字不重要，重要的是能够进行比较即可。“等价类1”==“等价类1” 和 “阿猫等价类”==“阿猫等价类” 本质上没有任何区别。</li>
+</ol>
+<h4 id="2-2-一维数组"><a href="#2-2-一维数组" class="headerlink" title="2.2 一维数组"></a>2.2 一维数组</h4><p>有了上面的基础知识后，是时候考虑用什么样的数据结构来实现不相交集了。首先想到的是一维数组，对于一个包含 N 个元素的不相交集 S，用一个大小为 N 的一维数组表示，数组的下标表示是哪一个元素，而存放的内容是该元素所属的等价类的名称。这样一来，Find 就是根据下标找数组存放的内容，时间复杂度为 $O(1)$，但是将两个等价类进行 Union 的话，则需要遍历整个数组，将对应的等价类名称进行修改，时间复杂度为 $O(N)$。</p>
+<h4 id="2-3-单链表"><a href="#2-3-单链表" class="headerlink" title="2.3 单链表"></a>2.3 单链表</h4><p>考虑将每一个等价类单独存放在一个链表中，这样一来，Union 就只需要将两个链表合并，Union 的时间复杂度为 $O(1)$，但是每次 Find 的话，就需要遍历所有链表。</p>
+<h2 id="3-最基本的实现"><a href="#3-最基本的实现" class="headerlink" title="3. 最基本的实现"></a>3. 最基本的实现</h2><p>我们将每一个等价类表示为一颗树，树的每个元素有相同的根，根就可以用来命名等价类。树中的每个元素都需要一个父指针，指向其父节点，指向 0 表示该元素就是根。用一维数组来表示不相交集。</p>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> NumSets 128</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> DisjSet<span class="token punctuation">[</span>NumSets <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> SetType<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> ElementType<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">)</span><span class="token punctuation">;</span>
+SetType <span class="token function">Find</span><span class="token punctuation">(</span>ElementType X<span class="token punctuation">,</span> DisjSet S<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">SetUnion</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">,</span> SetType root1<span class="token punctuation">,</span> SetType root2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//初始化不相交集</span>
+<span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> NumSets<span class="token punctuation">;</span> i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        S<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>初始化时，另所有的元素都指向 0，即每个元素都是根，并单独构成一棵树。Union 非常简单，只需要把一个树根作为另一个树根的根即可，在此，我们将 root2 连接到 root1 上：</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Stupid</span>
+<span class="token keyword">void</span> <span class="token function">SetUnion</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">,</span> SetType root1<span class="token punctuation">,</span> SetType root2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    S<span class="token punctuation">[</span>root2<span class="token punctuation">]</span> <span class="token operator">=</span> root1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>至于 Find，给定一个元素，每次寻找它的父节点，直到找到该元素的根，即该元素所属的等价类，Find 可以用递归和迭代两种方式实现。</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Find by iteration</span>
+SetType <span class="token function">Find</span><span class="token punctuation">(</span>ElementType X<span class="token punctuation">,</span> DisjSet S<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>S<span class="token punctuation">[</span>X<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        X <span class="token operator">=</span> S<span class="token punctuation">[</span>X<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> X<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>以上是不相交集的最基本实现。Find 的时间复杂度是 $O(h)$，其中 h 是树的深度，按照上述 Union，最坏情况树的深度会达到 N-1，即最坏情况下，Find 的时间复杂度是 $O(N)$。以下分别从 Union 和 Find 两个角度来改进基本实现。</p>
+<h2 id="4-改进-Union"><a href="#4-改进-Union" class="headerlink" title="4. 改进 Union"></a>4. 改进 Union</h2><p>之前的 Union 非常笨拙，每次都是将 root2 作为 root1 的子树，考虑如下代码：</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> NumSets<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">SetUnion</span><span class="token punctuation">(</span>S<span class="token punctuation">,</span> <span class="token function">Find</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> S<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Find</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> S<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<p>通过一系列的 SetUnion，S 变成了一棵深度为 N-1 的树，最坏情况下，单次 Find 的时间复杂度为 $O(N)$。为了优化这一问题，提出 <strong>Union-by-size</strong>，即不再是简单的将后一棵树连到前一棵树，而是<strong>总将尺寸更小的树作为子树</strong>。为了追踪树的尺寸（即树包含的元素的个数），不再将树根的值设置为 0，而是将其<strong>设置为 -size</strong>。同样执行上述 Union 代码，改进前后 Union 对比：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-5-9/31641600-file_1494333521106_6e4b.png" width="500"></p>
+<p>实现代码如下：</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">//初始化不相交集</span>
+<span class="token keyword">void</span> <span class="token function">Initialize</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> NumSets<span class="token punctuation">;</span> i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        S<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 初始化为-1，表示一开始每棵树都只有一个元素</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// Smart Union: Union-by-size</span>
+<span class="token keyword">void</span> <span class="token function">SetUnion</span><span class="token punctuation">(</span>DisjSet S<span class="token punctuation">,</span> SetType root1<span class="token punctuation">,</span> SetType root2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root1 <span class="token operator">></span> root2<span class="token punctuation">)</span><span class="token punctuation">{</span>        <span class="token comment" spellcheck="true">//root1作为子树</span>
+        S<span class="token punctuation">[</span>root2<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> S<span class="token punctuation">[</span>root1<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//更新父树的size</span>
+        S<span class="token punctuation">[</span>root1<span class="token punctuation">]</span> <span class="token operator">=</span> root2<span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">{</span>                      <span class="token comment" spellcheck="true">//root2作为子树</span>
+        S<span class="token punctuation">[</span>root1<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> S<span class="token punctuation">[</span>root2<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//更新父树的size</span>
+        S<span class="token punctuation">[</span>root2<span class="token punctuation">]</span> <span class="token operator">=</span> root1<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>这样一来，所有树的深度都不会超过 $log N$，Find 的时间复杂度为 $O(log N)$ 。</p>
+<p>另一种是 <strong>Union-by-height</strong>，只是对 Union-by-size 的简单修改，<strong>每次 Union 都将高度更小的树作为子树</strong>，同理，树根存放的是树高 height 的负值，实现代码也比较简单，便不再详述。</p>
+<h2 id="5-改进-Find-—-路径压缩"><a href="#5-改进-Find-—-路径压缩" class="headerlink" title="5. 改进 Find — 路径压缩"></a>5. 改进 Find — 路径压缩</h2><p>虽然机智地改进了 Union 的算法，但是最坏情况还是很容易发生。一方面，我们还想要进一步优化 Union/Find 算法，另一方面，Union 已经没有改进余地了，那怎么办？当然是改进 Find 了！限制算法性能的最大瓶颈是：在 Union 的过程中，树的平衡性很容易被打破。这样一来，树就很快倾向于最糟糕的情况，既然如此，那我们就在每次 Find 的时候调整树的平衡性，这种聪明的调整叫做<strong>路径压缩（Path Compression）</strong>。</p>
+<p>假如我们执行 Find(X)，路径压缩的效果就是，从 X 到根节点这一路径上的每一个节点，我们都将它的父节点设置为根节点。修改 Find 函数如下：</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Find by recursion with path compression</span>
+SetType <span class="token function">Find2</span><span class="token punctuation">(</span>ElementType X<span class="token punctuation">,</span> DisjSet S<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>S<span class="token punctuation">[</span>X<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> X<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> S<span class="token punctuation">[</span>X<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">Find</span><span class="token punctuation">(</span>S<span class="token punctuation">[</span>X<span class="token punctuation">]</span><span class="token punctuation">,</span> S<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>值得注意的是，Path compression 和 Union-by-height 并不兼容，因为路径压缩会改变树的高度，这样导致每次重新计算树的高度都很麻烦，一个解决方案是，不去重新计算它。这样一来，每棵树存储的就不是它实际的高度了，而是估计的高度，我们称之为秩（Rank），这样一来，当你一看到 Union-by-rank ，就知道是怎么一回事了吧。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> DSA </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Date Structure </tag>
+            
+            <tag> Disjoint Set </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[CloudViewer]]></title>
       <url>http://nightn.com/2017/04/15/cloudviewer/</url>
       <content type="html"><![CDATA[<h2 id="CloudViewer-简介"><a href="#CloudViewer-简介" class="headerlink" title="CloudViewer 简介"></a>CloudViewer 简介</h2><p>CloudViewer （点云可视化软件）是一款面向三维点云数据处理、点云开发专业人员及爱好者的三维点云可视化软件，该软件具备以下功能：</p>
