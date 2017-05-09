@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://nightn.com/"/>
-  <updated>2017-05-09T13:03:59.879Z</updated>
+  <updated>2017-05-09T13:11:35.398Z</updated>
   <id>http://nightn.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://nightn.com/2017/05/09/DSA-disjoint-set/"/>
     <id>http://nightn.com/2017/05/09/DSA-disjoint-set/</id>
     <published>2017-05-09T12:21:24.000Z</published>
-    <updated>2017-05-09T13:03:59.879Z</updated>
+    <updated>2017-05-09T13:11:35.398Z</updated>
     
     <summary type="html">
     
@@ -30,9 +30,10 @@ tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]
 });
 &lt;/script&gt;
 
-&lt;script type=&quot;text/javascript&quot; async src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
-
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
 &lt;/script&gt;
+
+
 
 
 
