@@ -6,13 +6,7 @@
     <entry>
       <title><![CDATA[数据结构学习笔记：不相交集]]></title>
       <url>http://nightn.com/2017/05/09/DSA-disjoint-set/</url>
-      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
