@@ -137,6 +137,7 @@
 </li>
 </ul>
 <p>因此，对于基本有序的输入，插入排序算法的执行效率较快；而倾向于无序的输入，插入排序并不令人满意。</p>
+<h2 id="2-希尔排序"><a href="#2-希尔排序" class="headerlink" title="2. 希尔排序"></a>2. 希尔排序</h2><p>未完待续……</p>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
 tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
