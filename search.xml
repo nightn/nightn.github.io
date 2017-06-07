@@ -4,6 +4,168 @@
   
     
     <entry>
+      <title><![CDATA[数据结构学习笔记：排序算法]]></title>
+      <url>http://nightn.com/2017/06/07/DSA-sorting/</url>
+      <content type="html"><![CDATA[<p>本文对常见排序算法进行了总结，如插入排序、希尔排序、桶排序、快速排序等。对于每个排序算法，给出它的概述、简单实现及复杂度分析。</p>
+<a id="more"></a>
+<h2 id="1-插入排序"><a href="#1-插入排序" class="headerlink" title="1. 插入排序"></a>1. 插入排序</h2><h3 id="1-1-插入排序概述"><a href="#1-1-插入排序概述" class="headerlink" title="1.1 插入排序概述"></a>1.1 插入排序概述</h3><p><strong>插入排序（Insertion Sort）</strong>是一种非常简单的排序方法，对于大小为 N 的数组，考虑初始状态为单独的第一个元素，之后每次插入一个元素，使得子数组总处于排序好的状态，这样，经过 N-1 次插入，整个数组将处于有序状态。下表以一个简单的例子来描述插入排序的过程。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">A[0]</th>
+<th style="text-align:center">A[1]</th>
+<th style="text-align:center">A[2]</th>
+<th style="text-align:center">A[3]</th>
+<th style="text-align:center">A[4]</th>
+<th style="text-align:center">移动次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始序列</td>
+<td style="text-align:center"><strong>42</strong></td>
+<td style="text-align:center">31</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">17</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">/</td>
+</tr>
+<tr>
+<td>第 1 次插入</td>
+<td style="text-align:center"><strong>31</strong></td>
+<td style="text-align:center"><strong>42</strong></td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">17</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td>第 2 次插入</td>
+<td style="text-align:center"><strong>31</strong></td>
+<td style="text-align:center"><strong>42</strong></td>
+<td style="text-align:center"><strong>50</strong></td>
+<td style="text-align:center">17</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td>第 3 次插入</td>
+<td style="text-align:center"><strong>17</strong></td>
+<td style="text-align:center"><strong>31</strong></td>
+<td style="text-align:center"><strong>42</strong></td>
+<td style="text-align:center"><strong>50</strong></td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td>第 4 次插入</td>
+<td style="text-align:center"><strong>17</strong></td>
+<td style="text-align:center"><strong>20</strong></td>
+<td style="text-align:center"><strong>31</strong></td>
+<td style="text-align:center"><strong>42</strong></td>
+<td style="text-align:center"><strong>50</strong></td>
+<td style="text-align:center">3</td>
+</tr>
+</tbody>
+</table>
+<p>表中对一个大小 N = 5 的数组进行插入排序，初始状态认为只有第一个元素 42 处于排序好的状态，第 1 次将 31 插入子序列，由于插入后，子序列将不再处于有序状态，因此需要进行元素交换，在此交换 1 次即可；然后进行第 2 次，第 3 次插入，每次都对当前子序列进行排序（表中粗体部分表示当前已经排序好的序列），以此类推，直到第 N - 1 次（在此是第 4 次）插入，整个序列都将排好序。</p>
+<h3 id="1-2-插入排序实现"><a href="#1-2-插入排序实现" class="headerlink" title="1.2 插入排序实现"></a>1.2 插入排序实现</h3><p>插入排序的实现也非常简单，在此以 C 语言为例，对大小为 N 的数组进行排序，代码如下。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">InsertionSort_swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> N<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> N<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> A<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> A<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">int</span> temp <span class="token operator">=</span> A<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                A<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> A<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                  A<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>外层 for 循环表示从第 1 次到 第 N-1 次插入，内层 for 循环表示对于每一次插入，都将新元素与原有元素进行比较，如果前者较小，则往前移动一位，直至达到有序状态。</p>
+<p>上述实现虽然简单易懂，但只要仔细观察，就能发现仍有改进的余地。内层 for 循环我们通过 3 次赋值来实现相邻元素的交换，而事实上，对于新插入的元素，我们只是把当做一个比较的基准，我们不应该在每一次比较后都对这一基准进行移动，以避免显示的元素交换。因此，我们有了如下的实现。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">InsertionSort</span><span class="token punctuation">(</span><span class="token keyword">int</span> A<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> N<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> N<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token keyword">int</span> temp <span class="token operator">=</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token keyword">int</span> j<span class="token punctuation">;</span>
+          <span class="token keyword">for</span><span class="token punctuation">(</span>j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> temp <span class="token operator">&lt;</span> A<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+              A<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> A<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          A<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>改进之后，避免了繁琐的元素交换。在本机测试中，算法的性能也得到提升。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Algorithm</th>
+<th style="text-align:center">InsertionSort_swap</th>
+<th style="text-align:center">InsertionSort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">N = 20000</td>
+<td style="text-align:center">0.410 s</td>
+<td style="text-align:center">0.269 s</td>
+</tr>
+<tr>
+<td style="text-align:center">N = 50000</td>
+<td style="text-align:center">2.443 s</td>
+<td style="text-align:center">1.570 s</td>
+</tr>
+<tr>
+<td style="text-align:center">N = 100000</td>
+<td style="text-align:center">9.675 s</td>
+<td style="text-align:center">6.123 s</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-3-插入排序分析"><a href="#1-3-插入排序分析" class="headerlink" title="1.3 插入排序分析"></a>1.3 插入排序分析</h3><p>从 <strong>InsertionSort_swap</strong> 和 <strong>InsertionSort</strong> 的对比中，可以看到不使用显示交换时，算法性能的提升。另外还可以看到，随着 N 的增加，算法耗时并不是线性增长的，基本上是呈现 $N^2$ 的增长趋势（如：N 从 50000 到 100000，规模变成原来的 2 倍，而耗时变成原来的 6.123 / 1.570 = 3.9 倍）。<strong>而事实上，插入排序的时间复杂度的确是 $O(N^2)$，</strong> 以下进行简单分析。</p>
+<ul>
+<li><p><strong>Worst-case</strong></p>
+<p>对于 <strong>InsertionSort</strong> ，需要插入 N - 1 次，<strong>考虑最坏情况（即逆序列）</strong>，第 $i$ 次插入需要进行 $i+1$ 次赋值，因此总赋值次数为：</p>
+<p>$$\sum_{i=2}^Ni=2+3+4+…+N=\Theta(N^2)$$</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Best-case</strong></p>
+<p>对于最优情况（即排好序的序列），每次插入都不需要移动元素，即不会进入内层 for 循环，因此其时间复杂度为 $O(N)$。</p>
+</li>
+<li><p><strong>Average-case</strong></p>
+<p>而一般情况下，插入排序的平均时间复杂度为 $\Theta(N^2)$。</p>
+</li>
+</ul>
+<p>因此，对于基本有序的输入，插入排序算法的执行效率较快；而倾向于无序的输入，插入排序并不令人满意。</p>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+]]></content>
+      
+        <categories>
+            
+            <category> DSA </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Date Structure </tag>
+            
+            <tag> Sorting </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[数据结构学习笔记：不相交集]]></title>
       <url>http://nightn.com/2017/05/09/DSA-disjoint-set/</url>
       <content type="html"><![CDATA[<p>不相交集（Disjoint Set）是一种用于解决等价问题的非常有效的数据结构，具有性能优越、实现简单等特点。本文介绍了等价问题、不相交集等概念，并叙述了 Union/Find 算法的实现与优化。</p>
@@ -1352,7 +1514,7 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
 </ol>
 <h2 id="3-hello-程序执行"><a href="#3-hello-程序执行" class="headerlink" title="3 hello 程序执行"></a><strong>3 hello 程序执行</strong></h2><p>此时，hello.c 源程序已经被编译系统翻译成可执行目标文件 hello，存放在磁盘上。在 Linux 系统的外壳（shell）中可以执行 hello。为了理解 hello 执行的时候发生了什么，我们先对一个典型系统的硬件组成进行简单介绍。</p>
 <h3 id="3-1-计算机系统硬件组成"><a href="#3-1-计算机系统硬件组成" class="headerlink" title="3.1 计算机系统硬件组成"></a>3.1 计算机系统硬件组成</h3><p><img src="http://on2kkr82s.bkt.clouddn.com/17-3-20/83046123-file_1490015481442_490e.png" alt=""></p>
-<p>如图所示，典型系统的硬件组成包括总线、I/O设备、主寸和处理器。</p>
+<p>如图所示，典型系统的硬件组成包括总线、I/O设备、主存和处理器。</p>
 <ul>
 <li><strong>总线</strong>。总线贯穿整个系统，它携带信息字节并负责在各个部件间传递，每次只传一个字，字的长度成为字长，有的机器字长是 4 个字节（32位），有的是 8 个字节（64位）。</li>
 <li><strong>I/O 设备</strong>。输入/输出设备是系统与外部联系的通道。上图包括 4 个 I/O 设备：作为输入的鼠标和键盘、用于输出的显示器、用于存储的磁盘（可执行文件 hello 存于此），网络也可视作一个 I/O 设备。</li>
