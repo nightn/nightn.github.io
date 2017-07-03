@@ -412,9 +412,9 @@ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
         
         <tags>
             
-            <tag> CloudViewer </tag>
-            
             <tag> Qt </tag>
+            
+            <tag> CloudViewer </tag>
             
             <tag> PCL </tag>
             
