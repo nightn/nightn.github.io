@@ -242,22 +242,22 @@ $mapControl<span class="token punctuation">.</span><span class="token function">
 <p><strong>Tip5 合理使用 JQuery 可以极大精简你的代码</strong></p>
 </blockquote>
 <h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>以上便是「从地图类型切换控件谈 JS 代码优化」的全部内容，后续如果有更加简单高效的实现方式，再进行补充，也欢迎大家提出自己的思路。以下将优化过程中用到的 Tip 进行总结：</p>
-<ol>
-<li><p><strong>Tip 1 解耦 HTML/CSS</strong></p>
+<ul>
+<li><p>Tip 1 解耦 HTML/CSS</p>
 <p>在使用 JavaScript 修改元素样式的时候，尽量修改元素的样式类，而不是直接修改样式本身。</p>
 </li>
-<li><p><strong>Tip 2 使用事件委托</strong></p>
+<li><p>Tip 2 使用事件委托</p>
 <p>如果要为多个并列的元素分别添加类似的事件处理程序，可以考虑利用事件委托，将事件处理程序添加到这些并列元素的父元素上。</p>
 </li>
-<li><p><strong>Tip3 HTML 自定义特性</strong></p>
+<li><p>Tip3 HTML 自定义特性</p>
 <p>我们可以自定义 HTML 元素的特性，自定义的特性一般以 data- 开头，统一采用小写。原生 DOM 元素的 getAttribute() 方法也能获取元素的自定义特性。</p>
 </li>
-<li><p><strong>Tip4 避免属性的全局查找</strong></p>
+<li><p>Tip4 避免属性的全局查找</p>
 <p>如果经常需要用到元素的某一个属性，为了避免每一次调用时都进行一次查找，可以用一个局部变量将该属性进行缓存。避免使用 with，因为 with 会加长作用域链，使得属性的查找变慢。</p>
 </li>
-<li><p><strong>Tip5 合理使用 JQuery 可以极大精简你的代码</strong></p>
+<li><p>Tip5 合理使用 JQuery 可以极大精简你的代码</p>
 </li>
-</ol>
+</ul>
 <hr>
 <p>原文地址：<a href="http://nightn.com/2017/11/28/js-optimize-maptype-demo">http://nightn.com/2017/11/28/js-optimize-maptype-demo</a></p>
 ]]></content>
