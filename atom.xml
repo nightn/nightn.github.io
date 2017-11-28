@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://nightn.com/"/>
-  <updated>2017-11-28T15:42:46.748Z</updated>
+  <updated>2017-11-28T15:47:23.153Z</updated>
   <id>http://nightn.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://nightn.com/2017/11/28/js-optimize-maptype-demo/"/>
     <id>http://nightn.com/2017/11/28/js-optimize-maptype-demo/</id>
     <published>2017-11-28T13:17:50.000Z</published>
-    <updated>2017-11-28T15:42:46.748Z</updated>
+    <updated>2017-11-28T15:47:23.153Z</updated>
     
     <summary type="html">
     
@@ -101,9 +101,9 @@
       <category term="Qt" scheme="http://nightn.com/categories/Qt/"/>
     
     
-      <category term="Qt" scheme="http://nightn.com/tags/Qt/"/>
-    
       <category term="CloudViewer" scheme="http://nightn.com/tags/CloudViewer/"/>
+    
+      <category term="Qt" scheme="http://nightn.com/tags/Qt/"/>
     
       <category term="PCL" scheme="http://nightn.com/tags/PCL/"/>
     
