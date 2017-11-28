@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            从地图类型切换控件谈JS代码优化 | 
+        
+        Nightn
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Nightn">
+    <meta name="description" content="It always seems impossible until it&#39;s done">
+    <meta name="keywords" content="null,JavaScript,百度地图,JS事件,JQuery">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Nightn">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://nightn.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="从地图类型切换控件谈JS代码优化 | Nightn">
+    <meta property="og:description" content="It always seems impossible until it&#39;s done">
+    <meta property="og:article:tag" content="JavaScript"> <meta property="og:article:tag" content="百度地图"> <meta property="og:article:tag" content="JS事件"> <meta property="og:article:tag" content="JQuery"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "PingFang SC", "Helvetica Neue", Helvetice, "Source Sans Pro", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F2F2F2;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、实现"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-百度-API-内部实现"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. 百度 API 内部实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-自定义实现"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. 自定义实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、改进"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-降低-HTML-与-CSS-的耦合"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. 降低 HTML 与 CSS 的耦合</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-使用事件委托"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. 使用事件委托</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-自定义-HTML-特性"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3. 自定义 HTML 特性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-使用-JQuery-改进元素查找"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4. 使用 JQuery 改进元素查找</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、总结</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                从地图类型切换控件谈JS代码优化
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/kaito.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Nightn</strong>
+        <span>11月 28, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0UlEQVR42u3aSXLDMAwEQP//084DUnFmQDmRyebJ5UVCKwcEy+N55HlgY2NjY2NjY2Nj35L9iM/rX/306S+h/PCd71f4/rqOGRsbG3trdhvc63Db0HPMUszY2NjYB7CT26x/f5YIV2LAxsbGxm5LglkKTCLBxsbGxr6WnfPyu+RUbGxsbOxZgyYpGF43j2YjhH/upWFjY2Pfnj1rzf/v6z+db2NjY2PfmN2epHn07iHuMHJsbGzsTdl5cDkyKULa1Z886WJjY2OfyV5JJLPhblJmtKPiX97HxsbGPoCdj1HzJv46oE1ydS8NGxsb+8PZ+dC3HRvMSohZK6oe9GJjY2NvzU5unIeYN5JmyalY38TGxsbemp0XEvnt87CihZtrm0rY2NjYG7Hz8qAd5c4eTTu0KKLFxsbG3prdlhOz0mWWkFbWibCxsbHPYeeNm7wgaUPPC5JhUsTGxsbelN2uyCQPaCXN5OmtXS3CxsbG3pU9ayqtY1YWevI0iY2NjX0mO2n9P+OThNimqPbK2NjY2Cew2/HqeiGRtJxWVoWiUgQbGxt7I3byL/5KumrXLvOSI8djY2Nj78puh7KzwUC+uNnyhsuX2NjY2Bux20DXE1I7oM0fNDY2NvaZ7DaBteVB3cQvF30uWL7ExsbG/nB22+KflR95W79gxIMBbGxs7NPY62VJ+9v84bbNJmxsbOwz2e3yTdv6b0fL6+UKNjY29jnstuG+PqCdJba8+MHGxsY+gd2evD2UP9Z2lDtLh9jY2Ni7stvEkI91k6Ilfz9fwbxgUwkbGxv7A9mzoiIHr7SxkvcvHg9gY2Njfyw7adC0ySZPlm1CrdMtNjY2NvbLsNoW0kpB0v4ZsLGxsbHbke1s9NteIR9gYGNjY5/DnqWWdvkmuUIyyk3GxtjY2NjnsNulxjyltbBZWfL2+TY2Njb2jdnnHGxsbGxsbGxsbOzbnC/0Q+KVl+padQAAAABJRU5ErkJggg==">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/JQuery/">JQuery</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/JS事件/">JS事件</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/JavaScript/">JavaScript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/百度地图/">百度地图</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=从地图类型切换控件谈JS代码优化&url=http://nightn.com//2017/11/28/js-optimize-maptype-demo/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=从地图类型切换控件谈JS代码优化&url=http://nightn.com//2017/11/28/js-optimize-maptype-demo/index.html&via=Nightn" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://nightn.com//2017/11/28/js-optimize-maptype-demo/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://nightn.com//2017/11/28/js-optimize-maptype-demo/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Nightn&title=从地图类型切换控件谈JS代码优化&summary=It always seems impossible until it&#39;s done&pics=http://nightn.com/img/favicon.png&url=http://nightn.com/2017/11/28/js-optimize-maptype-demo/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>本文以 JavaScript 开发自定义百度地图类型切换控件为主线，记录了控件从实现到一步步优化过程中的思考与总结，其中不少关于 JavaScript 代码优化的 tip 在很多场合都很实用。主要知识点包括：HTML 与 CSS 之间的松耦合、JS 的事件委托、HTML 自定义特性、DOM 节点访问及遍历、JQuery 常用方法的使用及百度地图 API 的调用等。这些都是比较基础的知识点，在此尽可能完整的记录，以便今后查阅及完善。</p>
+<a id="more"></a>
+<h2 id="一、实现"><a href="#一、实现" class="headerlink" title="一、实现"></a>一、实现</h2><h3 id="1-百度-API-内部实现"><a href="#1-百度-API-内部实现" class="headerlink" title="1. 百度 API 内部实现"></a>1. 百度 API 内部实现</h3><p>百度地图 JS 版本 API 引入及地图初始化可以参考<a href="http://developer.baidu.com/map/jsdemo.htm#a1_2" target="_blank" rel="external">百度地图API示例</a> ，在此不再赘述，给出基本的地图展示及内置地图类型切换控件的代码，如下：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 地图初始化</span>
+  <span class="token keyword">var</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BMap<span class="token punctuation">.</span>Map</span><span class="token punctuation">(</span><span class="token string">'map'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  map<span class="token punctuation">.</span><span class="token function">centerAndZoom</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BMap<span class="token punctuation">.</span>Point</span><span class="token punctuation">(</span><span class="token number">116.404</span><span class="token punctuation">,</span> <span class="token number">39.915</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 添加地图切换控件</span>
+  map<span class="token punctuation">.</span><span class="token function">addControl</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BMap<span class="token punctuation">.</span>MapTypeControl</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    mapTypes<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      BMAP_NORMAL_MAP<span class="token punctuation">,</span>
+      BMAP_HYBRID_MAP
+    <span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>实现效果如下：</p>
+<p><img src="http://on2kkr82s.bkt.clouddn.com/17-11-28/42778500.jpg" width="400"></p>
+<p>虽然可以实现基本的地图类型切换，但关于自定义样式和控件显示位置上有很多限制，因此以下提供地图类型切换控件的自定义实现。</p>
+<h3 id="2-自定义实现"><a href="#2-自定义实现" class="headerlink" title="2. 自定义实现"></a>2. 自定义实现</h3><p>自定义实现将新增一个 div 控件元素，并将其添加到地图之上，自定义控件包括「地图」、「卫星」、「混合」三种地图类型的切换。</p>
+<p>HTML 代码：</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>map-control<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ctrl1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>地图<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ctrl2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>卫星<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ctrl3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>混合<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>CSS 样式：</p>
+<pre class=" language-css"><code class="language-css"><span class="token selector"><span class="token id">#map-control</span> </span><span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">120</span>px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">30</span>px<span class="token punctuation">;</span>
+  <span class="token property">line-height</span><span class="token punctuation">:</span> <span class="token number">30</span>px<span class="token punctuation">;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> <span class="token number">10</span>px<span class="token punctuation">;</span>
+  <span class="token property">right</span><span class="token punctuation">:</span> <span class="token number">10</span>px<span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span>px solid <span class="token hexcode">#8EA8E0</span><span class="token punctuation">;</span>
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">4</span>px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#FFF</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token id">#map-control</span> > div </span><span class="token punctuation">{</span>
+  <span class="token property">flex</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token id">#ctrl1</span> </span><span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode">#FFF</span><span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#8EA8E0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>map-control 采用 flext 的布局，让三个子 div 横向均匀分布；另外，position 属性采用 absolute，使其位于地图上方。在此，将 ctrl1 块的样式初始化为激活状态。<strong>第 1 版的 JS 代码如下</strong>：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> ctrl1 <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'ctrl1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ctrl2 <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'ctrl2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ctrl3 <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'ctrl3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+* Version 1
+* 为三个子元素分别添加 DOM2 级事件处理程序，处理样式及地图切换
+*/</span>
+ctrl1<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 去除其他两个子元素的激活样式</span>
+  ctrl2<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#000'</span><span class="token punctuation">;</span>
+  ctrl2<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  ctrl3<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#000'</span><span class="token punctuation">;</span>
+  ctrl3<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 为当前元素添加激活样式</span>
+  ctrl1<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  ctrl1<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#8EA8E0'</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 地图类型切换</span>
+  map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_NORMAL_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ctrl2<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 去除其他两个子元素的激活样式</span>
+  ctrl1<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#000'</span><span class="token punctuation">;</span>
+  ctrl1<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  ctrl3<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#000'</span><span class="token punctuation">;</span>
+  ctrl3<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 为当前元素添加激活样式</span>
+  ctrl2<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  ctrl2<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#8EA8E0'</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 地图类型切换</span>
+  map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_SATELLITE_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ctrl3<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 去除其他两个子元素的激活样式</span>
+  ctrl1<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#000'</span><span class="token punctuation">;</span>
+  ctrl1<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  ctrl2<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#000'</span><span class="token punctuation">;</span>
+  ctrl2<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 为当前元素添加激活样式</span>
+  ctrl3<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token string">'#FFF'</span><span class="token punctuation">;</span>
+  ctrl3<span class="token punctuation">.</span>style<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token string">'#8EA8E0'</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// 地图类型切换</span>
+  map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_HYBRID_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>上述程序完全能够实现地图类型的切换效果，但是存在很多问题：</p>
+<ul>
+<li><strong>HTML 与 CSS 耦合严重</strong>。利用 JS 对每个元素的样式进行直接修改是很不可取的，一方面导致代码冗余，另一方面如果有一处需要修改，那其余地方都得修改。（如现在需要将元素激活时的背景元素从蓝色改变为绿色，那么就得修改三个事件处理程序的语句）。</li>
+<li><strong>事件处理程序繁多，扩展性差</strong>。可以看到，上述每一个子元素都添加了一个事件处理程序，代码复用性差的同时，也提高了程序运行时的内存占用。</li>
+<li>其他问题下文论述。</li>
+</ul>
+<p>针对以上实现存在的问题，以下提出逐步改进方案。</p>
+<h2 id="二、改进"><a href="#二、改进" class="headerlink" title="二、改进"></a>二、改进</h2><h3 id="1-降低-HTML-与-CSS-的耦合"><a href="#1-降低-HTML-与-CSS-的耦合" class="headerlink" title="1. 降低 HTML 与 CSS 的耦合"></a>1. 降低 HTML 与 CSS 的耦合</h3><p>低耦合是软件设计的基本原则，为了降低 HTML  和 CSS 的耦合，我们引入一个新的 CSS 类：current，它表示当前选中元素的样式：</p>
+<pre class=" language-css"><code class="language-css"><span class="token selector"><span class="token id">#map-control</span> <span class="token class">.current</span> </span><span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode">#FFF</span><span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#8EA8E0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>第 2 版 JS 代码如下</strong>：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">/**
+* Version 2
+* 利用 current 样式类，降低 HTML 和 CSS 的耦合
+*/</span>
+ctrl1<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  ctrl2<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ctrl3<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ctrl1<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_NORMAL_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ctrl2<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  ctrl1<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ctrl3<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ctrl2<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_SATELLITE_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ctrl3<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  ctrl1<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ctrl2<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ctrl3<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_HYBRID_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>通过以上改进，我们将样式与元素相分离，若要修改激活元素的样式，只需要修改 current 样式类即可。</p>
+<blockquote>
+<p><strong>Tip 1 解耦 HTML/CSS</strong></p>
+<p>在使用 JavaScript 修改元素样式的时候，尽量修改元素的样式类，而不是直接修改样式本身。</p>
+</blockquote>
+<h3 id="2-使用事件委托"><a href="#2-使用事件委托" class="headerlink" title="2. 使用事件委托"></a>2. 使用事件委托</h3><p>以上代码还可以进一步改进。我们知道在 DOM 事件冒泡的过程中，事件的触发是从当前元素逐级往上传递，因此当我们需要监听很多子元素事件的时候，实际上只监听其父元素的事件即可，当然需要在父元素的事件处理程序中对当前点击的子元素进行具体的判断。这样一来可以减少事件处理程序的数量，提供代码复用和内存利用率。这种方法就叫作事件委托。</p>
+<p><strong>第 3 版 js 代码如下</strong>：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">/**
+* Version 3
+* 使用事件委托，减少事件处理程序数目
+*/</span>
+<span class="token keyword">var</span> mapControl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'map-control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+mapControl<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> child <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>firstElementChild<span class="token punctuation">;</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span>child <span class="token operator">!==</span> <span class="token keyword">this</span><span class="token punctuation">.</span>lastElementChild<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    child<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    child <span class="token operator">=</span> child<span class="token punctuation">.</span>nextElementSibling<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  child<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">switch</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">'ctrl1'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_NORMAL_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">case</span> <span class="token string">'ctrl2'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_SATELLITE_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">case</span> <span class="token string">'ctrl3'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>BMAP_HYBRID_MAP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>第 3 版代码看起来比第 2 版还要复杂，但它的思路是非常简单的。在父元素 mapControl 添加一个事件处理函数，该函数有一个事件对象 event，它记录当前被点击元素的一些属性以及本次事件的一些属性，利用我们可以通过 event.target 获取到当前点击的元素。在事件处理函数内部，我们首先遍历了 mapControl 的子元素，并将它们的样式类 current 都移除掉（原生 JS 遍历确实有点麻烦，在这里用 do-while 循环应该更好），然后通过 event.target 获取当前点击的元素，并将样式类 current 添加到该元素，以上完成了点击时的样式切换。</p>
+<p>接下来是点击后的地图类型切换了，在此利用 event.target.id 属性确定当前点击的是哪一个元素，然后再设置对应的地图类型。总的来说，利用事件委托可以将事件处理程序的数目降到最少，提高代码复用。</p>
+<blockquote>
+<p><strong>Tip 2 使用事件委托</strong></p>
+<p>如果要为多个并列的元素分别添加类似的事件处理程序，可以考虑利用事件委托，将事件处理程序添加到这些并列元素的父元素上。</p>
+</blockquote>
+<h3 id="3-自定义-HTML-特性"><a href="#3-自定义-HTML-特性" class="headerlink" title="3. 自定义 HTML 特性"></a>3. 自定义 HTML 特性</h3><p>以上 switch 语句看起来很不优雅，代码量很大，看起来很尴尬。为此我们引入一个 mapTypeArr 的数组，并为 mapControl 元素下的每一个 div 添加一个自定义属性，从而不再需要 id 属性。</p>
+<p>更新后的 HTML 代码如下：</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>map-control<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">data-maptype</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>current<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>地图<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">data-maptype</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>卫星<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">data-maptype</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>混合<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+</code></pre>
+<p><strong>第 4 版 js 代码如下</strong>：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">/**
+* Version 4
+* 利用 HTML 自定义特性，避免 switch
+ */</span>
+<span class="token keyword">var</span> mapControl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'map-control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> mapTypeArr <span class="token operator">=</span> <span class="token punctuation">[</span>BMAP_NORMAL_MAP<span class="token punctuation">,</span> BMAP_SATELLITE_MAP<span class="token punctuation">,</span> BMAP_HYBRID_MAP<span class="token punctuation">]</span><span class="token punctuation">;</span>
+mapControl<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> child <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>firstElementChild<span class="token punctuation">;</span>
+  <span class="token keyword">var</span> target <span class="token operator">=</span> event<span class="token punctuation">.</span>target<span class="token punctuation">;</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span>child <span class="token operator">!==</span> <span class="token keyword">this</span><span class="token punctuation">.</span>lastElementChild<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    child<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    child <span class="token operator">=</span> child<span class="token punctuation">.</span>nextElementSibling<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  child<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  target<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>mapTypeArr<span class="token punctuation">[</span><span class="token function">parseInt</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">'data-maptype'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>第 4 版代码同第 3 版相比，通过自定义的 HTML 特性和一个 mapTypeArr 数组，优化了 setMapType() 相关语句。</p>
+<blockquote>
+<p><strong>Tip3 HTML 自定义特性</strong></p>
+<p>我们可以自定义 HTML 元素的特性，自定义的特性一般以 data- 开头，统一采用小写。原生 DOM 元素的 getAttribute() 方法也能获取元素的自定义特性。</p>
+</blockquote>
+<p>另外可以注意到一个细节，event.target 使用了多次，为了提高程序性能，我们用了一个局部变量 target 将 event.target 保存起来，避免属性的全局查找。</p>
+<blockquote>
+<p><strong>Tip4 避免属性的全局查找</strong></p>
+<p>如果经常需要用到元素的某一个属性，为了避免每一次调用时都进行一次查找，可以用一个局部变量将该属性进行缓存。避免使用 with，因为 with 会加长作用域链，使得属性的查找变慢。</p>
+</blockquote>
+<h3 id="4-使用-JQuery-改进元素查找"><a href="#4-使用-JQuery-改进元素查找" class="headerlink" title="4. 使用 JQuery 改进元素查找"></a>4. 使用 JQuery 改进元素查找</h3><p>从第 4 版 js 代码可以看到，程序依然比较冗长的原因主要是在元素的遍历部分。为此，我们使用 JQuery 改进元素的查找。</p>
+<p><strong>第 5 版 js 代码如下</strong>：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">/**
+* Version 5
+* 使用 jquery 改进元素查找
+*/</span>
+<span class="token keyword">var</span> $mapControl <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#map-control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> mapTypeArr <span class="token operator">=</span> <span class="token punctuation">[</span>BMAP_NORMAL_MAP<span class="token punctuation">,</span> BMAP_SATELLITE_MAP<span class="token punctuation">,</span> BMAP_HYBRID_MAP<span class="token punctuation">]</span><span class="token punctuation">;</span>
+$mapControl<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> $target <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  $target<span class="token punctuation">.</span><span class="token function">addClass</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">siblings</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">removeClass</span><span class="token punctuation">(</span><span class="token string">'current'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  map<span class="token punctuation">.</span><span class="token function">setMapType</span><span class="token punctuation">(</span>mapTypeArr<span class="token punctuation">[</span>$target<span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">'data-maptype'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>使用了 JQuery 后，地图类型切换控件的实现变得非常的精简。通过事件对象 event 获取当前当前的元素，并将其转换为 JQuery 元素对象，并利用 JQuery 的链式编程方法，用一条语句激活当前元素的样式，并去除其他元素的样式。最后设置地图类型。虽然 JQuery 性能不一定比得上原生 JS，但可以极大的简化代码量，这在很多场合是非常用帮助的。</p>
+<blockquote>
+<p><strong>Tip5 合理使用 JQuery 可以极大精简你的代码</strong></p>
+</blockquote>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>以上便是「从地图类型切换控件谈 JS 代码优化」的全部内容，后续如果有更加简单高效的实现方式，再进行补充，也欢迎大家提出自己的思路。以下将优化过程中用到的 Tip 进行总结：</p>
+<ul>
+<li><p><strong>Tip 1 解耦 HTML/CSS</strong></p>
+<p>在使用 JavaScript 修改元素样式的时候，尽量修改元素的样式类，而不是直接修改样式本身。</p>
+</li>
+<li><p><strong>Tip 2 使用事件委托</strong></p>
+<p>如果要为多个并列的元素分别添加类似的事件处理程序，可以考虑利用事件委托，将事件处理程序添加到这些并列元素的父元素上。</p>
+</li>
+<li><p><strong>Tip3 HTML 自定义特性</strong></p>
+<p>我们可以自定义 HTML 元素的特性，自定义的特性一般以 data- 开头，统一采用小写。原生 DOM 元素的 getAttribute() 方法也能获取元素的自定义特性。</p>
+</li>
+<li><p><strong>Tip4 避免属性的全局查找</strong></p>
+<p>如果经常需要用到元素的某一个属性，为了避免每一次调用时都进行一次查找，可以用一个局部变量将该属性进行缓存。避免使用 with，因为 with 会加长作用域链，使得属性的查找变慢。</p>
+</li>
+<li><p><strong>Tip5 合理使用 JQuery 可以极大精简你的代码</strong></p>
+</li>
+</ul>
+<hr>
+<p>原文地址：<a href="http://nightn.com/2017/11/28/js-optimize-maptype-demo">http://nightn.com/2017/11/28/js-optimize-maptype-demo</a></p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+    <!-- 使用 DISQUS_CLICK -->
+    <div id="disqus-comment">	
+        <div id="disqus_thread"></div>
+<!-- include js -->
+<script src="/js/ripple.js"></script>
+
+<!-- add animation -->
+<style>
+        .ripple-container {
+        }
+        .ripple-container .ripple{
+            background-color: rgba(255,255,255,0.4);
+            animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+		.disqus_click_btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 10px 20px;
+            border:0;
+            font-size: 14px;
+            cursor: pointer
+        }
+</style>
+	
+<!-- add data-ripple attribute -->
+<div class="btn_click_load"> 
+    <button class="disqus_click_btn" data-ripple>阅读评论 「请确保 disq.us &amp; disquscdn.com &amp; disqus.com 可以正常加载」</button>
+</div>
+	
+<script>
+    // add effect to elements
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function(element){
+        // find all elements and attach effect
+        new RippleEffect(element); // element is instance of javascript element node
+    });
+</script>
+
+<script>
+    $('.btn_click_load').click(function() {  //click to load comments
+        var disqus_config = function () {
+            this.page.url = 'http://nightn.com/2017/11/28/js-optimize-maptype-demo/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//nightn.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+  	
+
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/07/DSA-sorting/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/kaito.png" alt="Nightn's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        nightn.dev@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/nightn" target="_blank" title="Github">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">cloud</i>
+                        
+                        Github
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="Mailto:nightn.dev@gmail.com" target="_blank" title="Email me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Android-Studio/">Android Studio<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Computer-Systems/">Computer Systems<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DSA/">DSA<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/JavaScript/">JavaScript<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Mind-Explorer/">Mind Explorer<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/OpenCV/">OpenCV<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Qt/">Qt<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/gallery" title="图库">
+                
+                    <i class="material-icons sidebar-material-icons">insert_photo</i>
+                
+                图库
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">label</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/links" title="友情链接">
+                
+                    <i class="material-icons sidebar-material-icons">touch_app</i>
+                
+                友情链接
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/nightn" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+		
+		<div>
+			<!--Copyright-->
+			<div id="copyright">
+				Copyright&nbsp;©&nbsp;
+				<script type="text/javascript">
+					var fd = new Date();
+					document.write(fd.getFullYear());
+				</script>
+				&nbsp;Nightn's Blog
+			</div>
+			<div>
+
+					<div>
+					<center>
+						本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
+						你是第 <span id="busuanzi_value_site_uv"></span> 个来到的小伙伴
+					</center>
+					</div>
+					<div>
+					<center>
+						本博客采用<a style="text-decoration:none" rel="license" href="http://nightn.com/creative-commons"> 知识共享协议 署名-非商业性使用-相同方式共享 3.0 未本地化版本 </a>进行许可
+					</center>
+					</div>
+			</div>
+		</div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+    <script>
+    var searchFunc = function(path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: 'xml',
+            success: function( xmlResponse ) {
+                // get the contents from search data
+                var datas = $( 'entry', xmlResponse ).map(function() {
+                    return {
+                        title: $( 'title', this ).text(),
+                        content: $('content',this).text(),
+                        url: $( 'url' , this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function() {
+                    var str='<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = '';
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function(data) {
+                        var isMatch = true;
+                        var content_index = [];
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g,'').toLowerCase();
+                        var data_url = data.url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if(data_title !== '' && data_content !== '') {
+                            keywords.forEach(function(keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if( index_title < 0 && index_content < 0 ) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += '<li><a href="'+ data_url +'" class="search-result-title" target="_blank">'+ data_title;
+                            var content = data.content.trim().replace(/<[^>]+>/g, '');
+                            if (first_occur >= 0) {
+                                // cut out characters
+                                var start = first_occur - 6;
+                                var end = first_occur + 6;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 10;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, 'gi');
+                                    match_content = match_content.replace(regS, '<em class="search-keyword">'+keyword+'</em>');
+                                })
+                                str += '<p class="search-result">' + match_content + '...</p>' +'</a>';
+                            }
+                        }
+                    });
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    }
+</script>
+
+
+    <script>
+        var inputArea = document.querySelector('#search');
+        var getSearchFile = function() {
+            var path = 'search.xml';
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        if(inputArea) {
+            inputArea.onfocus = function() {
+                getSearchFile();
+            }
+        }
+    </script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+        </body>
+    
+</html>

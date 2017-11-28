@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://nightn.com/"/>
-  <updated>2017-06-07T09:05:12.920Z</updated>
+  <updated>2017-11-28T15:42:46.748Z</updated>
   <id>http://nightn.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从地图类型切换控件谈JS代码优化</title>
+    <link href="http://nightn.com/2017/11/28/js-optimize-maptype-demo/"/>
+    <id>http://nightn.com/2017/11/28/js-optimize-maptype-demo/</id>
+    <published>2017-11-28T13:17:50.000Z</published>
+    <updated>2017-11-28T15:42:46.748Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文以 JavaScript 开发自定义百度地图类型切换控件为主线，记录了控件从实现到一步步优化过程中的思考与总结，其中不少关于 JavaScript 代码优化的 tip 在很多场合都很实用。主要知识点包括：HTML 与 CSS 之间的松耦合、JS 的事件委托、HTML 自定义特性、DOM 节点访问及遍历、JQuery 常用方法的使用及百度地图 API 的调用等。这些都是比较基础的知识点，在此尽可能完整的记录，以便今后查阅及完善。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://nightn.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://nightn.com/tags/JavaScript/"/>
+    
+      <category term="百度地图" scheme="http://nightn.com/tags/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE/"/>
+    
+      <category term="JS事件" scheme="http://nightn.com/tags/JS%E4%BA%8B%E4%BB%B6/"/>
+    
+      <category term="JQuery" scheme="http://nightn.com/tags/JQuery/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构学习笔记：排序算法</title>
@@ -75,9 +101,9 @@
       <category term="Qt" scheme="http://nightn.com/categories/Qt/"/>
     
     
-      <category term="CloudViewer" scheme="http://nightn.com/tags/CloudViewer/"/>
-    
       <category term="Qt" scheme="http://nightn.com/tags/Qt/"/>
+    
+      <category term="CloudViewer" scheme="http://nightn.com/tags/CloudViewer/"/>
     
       <category term="PCL" scheme="http://nightn.com/tags/PCL/"/>
     
