@@ -952,7 +952,7 @@ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 <h2 id="CloudViewer-下载及声明"><a href="#CloudViewer-下载及声明" class="headerlink" title="CloudViewer 下载及声明"></a>CloudViewer 下载及声明</h2><ol>
 <li><strong>软件下载</strong>：<a href="http://on2kkr82s.bkt.clouddn.com/CloudViewer.rar" target="_blank" rel="external">CloudViewer 下载</a> （软件大小 23.7 MB，目前仅支持 Windows 系统)。</li>
 <li><strong>Github 源码</strong>：<a href="https://github.com/nightn/CloudViewer" target="_blank" rel="external">https://github.com/nightn/CloudViewer</a> （欢迎 Star 和 Fork）</li>
-<li><strong>使用手册</strong>：<a href="http://www.nightn.com/cloudviewer" target="_blank" rel="external">http://www.nightn.com/cloudviewer</a></li>
+<li><strong>使用手册</strong>：<a href="http://nightn.com/2017/04/15/cloudviewer">http://nightn.com/2017/04/15/cloudviewer</a></li>
 <li><strong>开发环境</strong>：CloudViewer 是用 Windows 10 (64 位) 系统下的 Mircosoft Visual Studio Professional 2013，结合使用 Qt 5.7.0 (64 位) 及 PCL 1.8.0 (64 位) 等开源库进行开发的。</li>
 <li><strong>资源使用</strong>：软件所使用的图片资源均来源于 <a href="http://www.easyicon.net" target="_blank" rel="external">www.easyicon.net</a>。</li>
 <li><strong>声明</strong>：本软件用作分享与学习，若转载请注明出处，勿作任何商业用途。</li>
