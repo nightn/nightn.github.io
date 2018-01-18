@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://nightn.com/"/>
-  <updated>2017-11-28T15:49:58.033Z</updated>
+  <updated>2018-01-18T11:48:35.509Z</updated>
   <id>http://nightn.com/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Gulp for beginners(译)</title>
+    <link href="http://nightn.com/2018/01/18/gulp-for-beginners/"/>
+    <id>http://nightn.com/2018/01/18/gulp-for-beginners/</id>
+    <published>2018-01-18T11:14:56.000Z</published>
+    <updated>2018-01-18T11:48:35.509Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Gulp 是优化项目、提高开发效率的一个非常有用的工具，尤其适用于前端领域。它有非常多的插件，可以实现很多自动化的功能，如创建本地 web 服务器、开发过程中文件修改实时刷新浏览器、对 Sass 或 LESS 进行实时编译、优化资源文件（如拼接压缩 CSS, JS 文件，压缩图片等）。本文翻译自 Zell Liew 的 &lt;a href=&quot;https://css-tricks.com/gulp-for-beginners/&quot;&gt;Gulp for Beginners&lt;/a&gt; 一文，原文为英文，采用意译，部分有改动。文章略长，但对快速了解如何使用 Gulp 非常有帮助。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Front End" scheme="http://nightn.com/categories/Front-End/"/>
+    
+    
+      <category term="Gulp" scheme="http://nightn.com/tags/Gulp/"/>
+    
+      <category term="前端工程化" scheme="http://nightn.com/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/"/>
+    
+      <category term="Node.js" scheme="http://nightn.com/tags/Node-js/"/>
+    
+  </entry>
   
   <entry>
     <title>从地图类型切换控件谈JS代码优化</title>

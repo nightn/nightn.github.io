@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Gulp for beginners(译) | 
+        
+        Nightn
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Nightn">
+    <meta name="description" content="It always seems impossible until it&#39;s done">
+    <meta name="keywords" content="null,Gulp,前端工程化,Node.js">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Nightn">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://nightn.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Gulp for beginners(译) | Nightn">
+    <meta property="og:description" content="It always seems impossible until it&#39;s done">
+    <meta property="og:article:tag" content="Gulp"> <meta property="og:article:tag" content="前端工程化"> <meta property="og:article:tag" content="Node.js"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "PingFang SC", "Helvetica Neue", Helvetice, "Source Sans Pro", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F2F2F2;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么使用-Gulp"><span class="post-toc-number">1.</span> <span class="post-toc-text">为什么使用 Gulp</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总体概述"><span class="post-toc-number">2.</span> <span class="post-toc-text">总体概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装-Gulp"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装 Gulp</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建-Gulp-项目"><span class="post-toc-number">4.</span> <span class="post-toc-text">创建 Gulp 项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义文件目录结构"><span class="post-toc-number">5.</span> <span class="post-toc-text">定义文件目录结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建第一个-Gulp-任务"><span class="post-toc-number">6.</span> <span class="post-toc-text">创建第一个 Gulp 任务</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#利用-Gulp-来预编译"><span class="post-toc-number">7.</span> <span class="post-toc-text">利用 Gulp 来预编译</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Globbing-in-Node"><span class="post-toc-number">8.</span> <span class="post-toc-text">Globbing in Node</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#观察（Watching）-sass-文件的变化"><span class="post-toc-number">9.</span> <span class="post-toc-text">观察（Watching） sass 文件的变化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通过-Browser-Sync-实现浏览器同步刷新"><span class="post-toc-number">10.</span> <span class="post-toc-text">通过 Browser Sync 实现浏览器同步刷新</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优化-CSS-和-JavaScript-文件"><span class="post-toc-number">11.</span> <span class="post-toc-text">优化 CSS 和 JavaScript 文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优化图片"><span class="post-toc-number">12.</span> <span class="post-toc-text">优化图片</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复制字体目录到-dist"><span class="post-toc-number">13.</span> <span class="post-toc-text">复制字体目录到 dist</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Gulp for beginners(译)
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/kaito.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Nightn</strong>
+        <span>1月 18, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACX0lEQVR42u3aMXLDMAwEQP//00mbRsoBoCiOZ1VpHEXmsiDhIz4/X3198PDw8PDw8PDwDuN94iv/r6sn/35ydX/1SeEb8fDw8Lbw/llqLwZ9P8QEluMLY8PDw8PbyKsO634DSIabbCr52PDw8PBO5vWm4+ln8PDw8E7mXS3l+ZvzzQYPDw/vZF51oNVgd3K/KWvBw8PDi3n5IdP++63ne3h4eHgBr9zS1GoCyBsFXu4pw8PDwwt4+UJ8Rc23k15Em48HDw8PbyfvHnC/cN9vAJMWq6RBofCLAQ8PD28p776A7pW/vXJ5MtF4eHh4+3nzwjcPI/LJLbcs4OHh4T3MyyOG3oI+YVRheHh4eHt4SUTbiy16V76RFDoj8PDw8Jby5gt3L5Ctxh/5JoGHh4f3NG8SzuYRRq9wfyRrwcPDw1vEy8vlSaSbt7f2Snk8PDy8d3n563pRRV6IJzEHHh4e3k5ePrheJNEr2XsBLh4eHt67vGobax4uTBq2mk1XeHh4eA/wqodSyXRMtoRemyweHh7eHl617akXQFSL5upGgoeHh7efV41NJ7FsbyIKb8PDw8N7lZc8WW0ISCar12SAh4eH9y4vZ1cnospe0HSFh4eHt5Q3iXQncW31r4XCHQ8PD+9h3mRRrk7EvECP3oyHh4e3hVctkSeL+Lx0xsPDwzuHV12g86ii2p7Va/PCw8PDO5+XN05VWwEWt6vi4eHhHcZLWqbmB2OFHwB4eHh4G3m9I6tejPvP4h5MBB4eHt67vF4EUPjKOKh9JIzAw8PDW8r7vgsPDw8PDw8PD++A6xdYyu055qJhfAAAAABJRU5ErkJggg==">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/Gulp/">Gulp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Node-js/">Node.js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/前端工程化/">前端工程化</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Gulp for beginners(译)&url=http://nightn.com//2018/01/18/gulp-for-beginners/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Gulp for beginners(译)&url=http://nightn.com//2018/01/18/gulp-for-beginners/index.html&via=Nightn" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://nightn.com//2018/01/18/gulp-for-beginners/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://nightn.com//2018/01/18/gulp-for-beginners/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Nightn&title=Gulp for beginners(译)&summary=It always seems impossible until it&#39;s done&pics=http://nightn.com/img/favicon.png&url=http://nightn.com/2018/01/18/gulp-for-beginners/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Gulp 是优化项目、提高开发效率的一个非常有用的工具，尤其适用于前端领域。它有非常多的插件，可以实现很多自动化的功能，如创建本地 web 服务器、开发过程中文件修改实时刷新浏览器、对 Sass 或 LESS 进行实时编译、优化资源文件（如拼接压缩 CSS, JS 文件，压缩图片等）。本文翻译自 Zell Liew 的 <a href="https://css-tricks.com/gulp-for-beginners/" target="_blank" rel="external">Gulp for Beginners</a> 一文，原文为英文，采用意译，部分有改动。文章略长，但对快速了解如何使用 Gulp 非常有帮助。</p>
+<a id="more"></a>
+<p>Gulp 常用于管理 web 开发过程中的多个任务，经常用在以下这些前端任务：</p>
+<ul>
+<li>创建 web 服务器</li>
+<li>当源码文件保存时，自动刷新浏览器</li>
+<li>使用诸如 Sass 或 LESS 的预编译器</li>
+<li>优化资源文件，如 CSS, JavaScript 和图片</li>
+</ul>
+<p>以上只是 Gulp 的一部分。如果你深入了解，甚至可以用 Gulp 构建一个静态网站生成器。总之，Gulp 非常强大，如果你想创建一套自定义的构建流程，那么你必须学会如何使用 Gulp。</p>
+<p>这篇文件介绍了 Gulp 的基础知识，看完之后你就可以更深入的探索 Gulp。</p>
+<p>在我们详细介绍如何使用 Gulp 之前，我们先聊一聊相比于其他类似的工具，为什么我们会选择 Gulp。</p>
+<h3 id="为什么使用-Gulp"><a href="#为什么使用-Gulp" class="headerlink" title="为什么使用 Gulp"></a>为什么使用 Gulp</h3><p>诸如 Gulp 的工具都被称为「构建工具」，因为它们可以运行多个任务来构建一个网站。目前最流行的构建工具就是 Gulp 和 Grunt。当然，除此之外还有其他的构建工具，如 Broccoli 致力于资源文件的编译。</p>
+<p>已经有非常多的文件阐述了 Grunt 和 Gulp 的区别，以及解释为什么用这个而不是那个。最大的不同是你如何用它们来配置你的工作流。比起 Grunt，Gulp 的配置更加短小和简单，并且 Gulp 运行得更快。</p>
+<p>现在让我们开始用 Gulp 来构建工作流吧。</p>
+<h3 id="总体概述"><a href="#总体概述" class="headerlink" title="总体概述"></a>总体概述</h3><p>通过跟着这篇文章进行操作，最后你将自己完成一个工作流的构建，主要包括以下任务：</p>
+<ul>
+<li>创建 web 服务器</li>
+<li>将 Sass 编译为 CSS</li>
+<li>保存源码文件的同时刷新浏览器</li>
+<li>优化生产环境下的资源文件，如 CSS, JS, fonts, images</li>
+</ul>
+<p>你也会学到如果将多个不同的任务链接成一个容易理解和执行的简短命令。</p>
+<p>首先在你的电脑上安装 Gulp</p>
+<h3 id="安装-Gulp"><a href="#安装-Gulp" class="headerlink" title="安装 Gulp"></a>安装 Gulp</h3><p>安装 Gulp 之前，确保你的电脑已经安装好了 Node.js。如果还没有安装 Node.js，到 <a href="https://nodejs.org/" target="_blank" rel="external">Node 官网</a> 上下载并安装。</p>
+<p>装好 Node.js 后，就可以在命令行中通过以下命令安装 Gulp。</p>
+<pre class=" language-shell"><code class="language-shell">npm install gulp -g
+</code></pre>
+<h3 id="创建-Gulp-项目"><a href="#创建-Gulp-项目" class="headerlink" title="创建 Gulp 项目"></a>创建 Gulp 项目</h3><p>首先创建一个名为 <code>project</code> 的文件夹作为我们项目的根目录，并在命令行中跳转到该目录下，执行 <code>npm init</code> 命令来初始化项目。</p>
+<pre class=" language-shell"><code class="language-shell">npm init
+</code></pre>
+<p>运行以上命令后，要求输入项目的基本参数，如项目名称、版本、描述、主入口、测试脚本、作者、许可等，我们可以暂时默认，因为这些参数最终可以在生成的 <code>package.json</code> 中进行配置，执行结果如下图：</p>
+<p><img src="./img/npm-init.png" alt=""></p>
+<blockquote>
+<p><code>package.json</code> 是所有 npm 项目的配置文件，它描述了项目的基本信息，更重要的是，它还记录了该项目依赖的第三方模块，我们在 github 上下载的其他人的项目，我们必须要执行 <code>npm install</code> 命令后才能正常运行项目，其实这个命令就是根据当前项目的 <code>package.js</code> ，下载所有的依赖模块，放到 <code>/node_modules</code> 中，有了这些依赖模块，项目才能正常运行。</p>
+</blockquote>
+<p>自动创建好 <code>package.json</code> 后，就可以安装项目的依赖包了，既然这是一个 Gulp 项目，那首先要安装 Gulp 到项目（之前安装的是全局环境）。执行以下命令：</p>
+<pre class=" language-shell"><code class="language-shell">npm install gulp --save-dev
+</code></pre>
+<p>安装完后，你会发现在项目根目录中会出现一个 <code>node_modules</code> 文件夹，这个文件夹就存放着我们项目依赖的所有第三方模块（包括刚刚装好的 gulp）。另外你还会发现 <code>package.jsaon</code> 也发生了变化，在 <code>devDependencies</code> 属性中，出现了 <code>gulp</code> 及其版本。如下图所示：</p>
+<p><img src="./img/install-gulp.png" alt=""></p>
+<blockquote>
+<p>有人可能会奇怪，为什么我只是安装了 <code>gulp</code> ，而 node_modules 文件夹中会出现那么多第三方模块。其实这并不奇怪，<code>gulp</code> 也是一个 npm 项目，它也有它的 <code>package.json</code> 文件，里面记录着 <code>gulp</code> 所依赖的第三方模块，为了使用 <code>gulp</code> 当然也需要这些模块了。那 <code>gulp</code> 所依赖的第三方包又依赖其他的包呢？答案是 npm 会递归地下载所有的依赖模块。这就是 node_modules 文件夹中有这么多依赖包的原因。</p>
+</blockquote>
+<p>以上就准备好 Gulp 项目的基本内容，下面让我们定义文件的目录结构。</p>
+<h3 id="定义文件目录结构"><a href="#定义文件目录结构" class="headerlink" title="定义文件目录结构"></a>定义文件目录结构</h3><p>Gulp 非常的灵活，因此可以用在任何目录结构。本文使用的目录结构如下图所示：</p>
+<p><img src="./img/project-structure.png" alt=""></p>
+<p><code>app</code> 目录用于存放开发环境下的文件，我们开发时所有的代码文件和资源文件都放在 <code>app</code> 目录，<code>dist</code> 目录用于存放将在生成环境下使用的优化过的文件。<code>gulpfile.js</code> 就是 Gulp 的配置文件，接下来我们将在这个配置文件中创建 Gulp 任务。</p>
+<h3 id="创建第一个-Gulp-任务"><a href="#创建第一个-Gulp-任务" class="headerlink" title="创建第一个 Gulp 任务"></a>创建第一个 Gulp 任务</h3><p>首先使用 <code>require</code> 引入 Gulp 依赖，以便在之后的代码中使用。</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> gulp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p><code>require</code> 语句告诉 Node，去 <code>node_modules</code> 目录中搜索名为 <code>gulp</code> 的包。一旦找到了，我们将包导出的内容赋值给变量 <code>gulp</code> 。</p>
+</blockquote>
+<p>接下来用变量 <code>gulp</code> 编写一个 Gulp 任务，结构如下：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'task-name'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment" spellcheck="true">// Stuff here </span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><code>task-name</code> 指定了任务的名称，有了这个名称之后，就可以在命令行中运行该任务，运行的命令为 <code>gulp task-name</code>。</p>
+<p>为了测试，我们创建一个 <code>hello</code> 任务吧，这个任务只是简单的打印 <code>Hello Gulp</code>。</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hello Gulp'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>我们在命令行执行 <code>gulp hello</code> 来测试一下</p>
+<pre class=" language-shell"><code class="language-shell">gulp hello
+</code></pre>
+<p>运行结果如下，命令行中打印了 <code>Hello Gulp</code> 。</p>
+<p><img src="./img/gulp-hello.png" alt=""></p>
+<p>以上只是一个简单的测试，真正的 Gulp 任务比这复杂得多，它常常包含两个额外的 Gulp 方法，以及很多 Gulp 插件。一个真正的 Gulp 任务看起来可能是这样的：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'task-name'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'source-files'</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 利用 gulp.src 获取源文件</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">aGulpPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 将它发送给一个 gulp 插件</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'destination'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 将处理后的文件输出到目标文件夹</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>如你所见，一个真正的 gulp 任务包含两个额外的方法：<code>gulp.src</code> 和 <code>gulp.dest</code> 。<code>gulp.src</code> 告诉 Gulp ，任务所需要的文件从哪里来；而 <code>gulp.dest</code> 告诉 Gulp ，任务完成之后输出文件放到哪去。</p>
+<p>下面让我构建一个将 Sass 文件编译为 CSS 文件的任务吧。</p>
+<h3 id="利用-Gulp-来预编译"><a href="#利用-Gulp-来预编译" class="headerlink" title="利用 Gulp 来预编译"></a>利用 Gulp 来预编译</h3><p>为了将 Sass 编译为 CSS，我们需要借助名为 <code>gulp-sass</code> 的插件，通过以下命令将 <code>gulp-sass</code> 插件安装到项目中。</p>
+<pre class=" language-shell"><code class="language-shell">npm install gulp-sass --save-dev
+</code></pre>
+<p>安装好 <code>gulp-sass</code> 之后，我们修改 <code>gulpfile.js</code> ，首先引入 <code>gulp-sass</code> ：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> sass <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp-sass'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>然后我们穿件一个名为 <code>sass</code> 的 Gulp 任务：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'sass'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/scss/styles.scss'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">sass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 利用 gulp-sass 将 Sass 转为 CSS</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'app/css'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>styles.scss 是我们在 app/scss 新建的测试文件，下面我们在 styles.scss 添加一些 Sass 代码，看看我们这个 Gulp  任务能不能成功转换。在 styles.scss 添加如下代码：</p>
+<pre class=" language-scss"><code class="language-scss"><span class="token comment" spellcheck="true">// styles.scss</span>
+<span class="token selector">.testing </span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token function">percentage</span><span class="token punctuation">(</span><span class="token number">5</span> <span class="token operator">/</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>在命令行中运行 <code>gulp sass</code> 。任务执行完后，你将会发现在 app/css 目录下多了一个 <code>styles.css</code> 文件，其内容如下：</p>
+<pre class=" language-css"><code class="language-css"><span class="token selector"><span class="token class">.testing</span> </span><span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">71.42857%</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre>
+<p>可见我们的 <code>sass</code> 任务成功完成了使命。</p>
+<blockquote>
+<p><code>gulp-sass</code> 使用了 LibSass 将 Sass 转换为 CSS，它比基于 Ruby 的方法更快。不过，如果你仍然想用基础 Ruby 的方法，你可以试试 <code>gulp-ruby-sass</code> 或 <code>gulp-compass</code> 插件。</p>
+</blockquote>
+<p>有时候我们需要同时将多个 <code>.scss</code> 文件编译成 CSS 文件，这个时候我们可以借助 Node globs 来实现。</p>
+<h3 id="Globbing-in-Node"><a href="#Globbing-in-Node" class="headerlink" title="Globbing in Node"></a>Globbing in Node</h3><p>Globs 是一个匹配模型，它允许你将多个文件添加进 <code>gulp.src</code> 。就像正则表达式，但 glob 只能用于文件路径。</p>
+<p>常用的 4 中 globbing 模式有：</p>
+<ul>
+<li><code>*.scss</code> ： <code>*</code> 是一个通配符，表示匹配根目录下所有后缀名为 <code>.scss</code> 的文件。</li>
+<li><code>**/*.scss</code> ： 匹配根目录以其子目录中所有后缀名为 <code>.scss</code> 的文件。</li>
+<li><code>!not-me.scss</code> ：排除指定文件。</li>
+<li><code>*.+(scss|sass)</code> ： 允许多个匹配模式。本例中，匹配根目录下所有后缀名为 <code>.scss</code> 和 <code>.sass</code> 的文件。</li>
+</ul>
+<p>下面我们修改 <code>gulpfile.js</code> 中的 <code>sass</code> 任务：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'sass'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/scss/**/*.scss'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">sass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 利用 gulp-sass 将 Sass 转为 CSS</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'app/css'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>现在，任何位于 app/scss 及其子目录的后缀名为 <code>.scss</code> 的文件，都会自动被添加进 <code>gulp.src</code> 。如我们在 app/scss 目录中额外添加了一个 <code>print.scss</code> 文件。然后执行 <code>gulp sass</code> ，会发现 app/css 目录下多了一个 <code>print.css</code> ，说明该任务同时对多个文件进行了转换。</p>
+<p><img src="./img/gulp-sass.png" alt=""></p>
+<p>现在，我们可以通过运行 <code>gulp sass</code> 同时实现对多个 scss 文件的转换。问题是，每次修改了 scss 文件，都得运行一次 <code>gulp sass</code> 命令来将其转换为 CSS 文件，这个过程非常繁琐的。</p>
+<p>幸运的是，我们可以通过 <code>watch</code> 方法来自动运行 <code>sass</code> 任务。</p>
+<h3 id="观察（Watching）-sass-文件的变化"><a href="#观察（Watching）-sass-文件的变化" class="headerlink" title="观察（Watching） sass 文件的变化"></a>观察（Watching） sass 文件的变化</h3><p>Gulp 提供了一个 <code>watch</code> 方法用来检查文件是否被保存，它的基本语法是这样的：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// Gulp watch syntax</span>
+gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'files-to-watch'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'tasks'</span><span class="token punctuation">,</span> <span class="token string">'to'</span><span class="token punctuation">,</span> <span class="token string">'run'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>对于我们的项目，可以这么写：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">// Gulp watch syntax</span>
+gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/scss/**/*.scss'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'sass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>更多的时候，我们想 watch 不同类型的文件，因此我们可以把多个 watch 封装到一个 <code>watch</code> 任务。</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'watch'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/scss/**/*.scss'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'sass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Other watchers</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>现在运行 <code>gulpt watch</code> ，开启 watch 任务。现在我们修改并保存匹配的文件后，将立即执行指定的任务，如下图所示：</p>
+<p><img src="./img/gulp-watch.gif" alt=""></p>
+<h3 id="通过-Browser-Sync-实现浏览器同步刷新"><a href="#通过-Browser-Sync-实现浏览器同步刷新" class="headerlink" title="通过 Browser Sync 实现浏览器同步刷新"></a>通过 Browser Sync 实现浏览器同步刷新</h3><p>Browser Sync 通过创建一个 web 服务器，使 web 开发更加快捷。</p>
+<p>首先我们将 Browser Sync 安装到项目。</p>
+<pre class=" language-shell"><code class="language-shell">npm install browser-sync --save-dev
+</code></pre>
+<p>安装好后，在 <code>gulpfile.js</code> 引入。</p>
+<pre class=" language-shell"><code class="language-shell">var browserSync = require('browser-sync').create();
+</code></pre>
+<p>接下来，我们创建一个 <code>browserSync</code> 任务，该任务利用 Browser Sync 来让 Gulp 创建一个服务器。</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'browserSync'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    browserSync<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        server<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            baseDir<span class="token punctuation">:</span> <span class="token string">'app'</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>baseDir 指定了 server 的根目录。</p>
+<p>另外我们还需要修改 <code>sass</code> 任务的代码，确保当 <code>sass</code> 任务运行的时候，将更新过的样式注入到浏览器。</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'sass'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/scss/**/*.scss'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">sass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">// 利用 gulp-sass 将 Sass 转为 CSS</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'app/css'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>browserSync<span class="token punctuation">.</span><span class="token function">reload</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            stream<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>为了执行 <code>watch</code> 之前，先执行一次 <code>browserSync</code> 和 <code>sass</code> 任务，我们修改 <code>watch</code> 任务的代码，如下：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'watch'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'sass'</span><span class="token punctuation">,</span> <span class="token string">'browserSync'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/scss/**/*.scss'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'sass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Other watchers</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>这样一来，<code>watch</code> 任务执行之前，会先执行 <code>sass</code> 和 <code>browserSync</code> ，然后通过监听 <code>sass</code> 任务的执行来刷新浏览器视图。效果如下图：</p>
+<p><img src="./img/browser-sync.gif" alt=""></p>
+<p>除了监听 sass 文件的保存之后，我们还可以监听 html 和 js 文件的保存，实现只要文件一保存，就更新浏览器视图。因此，更新 <code>watch</code> 任务代码如下：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'watch'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'sass'</span><span class="token punctuation">,</span> <span class="token string">'browserSync'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/scss/**/*.scss'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'sass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 当 HTML 或 JS 文件发生变化时，重新载入浏览器</span>
+    gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/*.html'</span><span class="token punctuation">,</span> browserSync<span class="token punctuation">.</span>reload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/js/**/*.js'</span><span class="token punctuation">,</span> browserSync<span class="token punctuation">.</span>reload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>到目前为止，我们已经通过 Gulp 实现了三个功能：</p>
+<ul>
+<li>创建一个用于开发的服务器</li>
+<li>使用 Sass 预编译器</li>
+<li>当文件发生变化时，同步刷新浏览器</li>
+</ul>
+<p>以下的部分将会讨论如何通过 Gulp 来优化资源文件，先从优化 CSS 和 JavaScript 文件说起。</p>
+<h3 id="优化-CSS-和-JavaScript-文件"><a href="#优化-CSS-和-JavaScript-文件" class="headerlink" title="优化 CSS 和 JavaScript 文件"></a>优化 CSS 和 JavaScript 文件</h3><p>优化包括两个方面：压缩和拼接。</p>
+<p>开发者常常面临的问题是，很难按正确的顺序拼接脚本文件。</p>
+<p>比如我们在 <code>index.html</code> 中引入了 3 个脚本文件：</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/lib/a-library.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/lib/another-library.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/main.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>这些脚本文件位于不同的目录，我们很难利用传统的插件（如 <code>gulp-concatenate</code>）将它们正确的拼接。</p>
+<p>所幸，一个叫做 <code>gulp-useref</code> 的插件解决了这个问题。</p>
+<p><code>gulp-useref</code> 能将任何数量的 CSS 和 JavaScript 文件拼接成一个单独的文件。它通过查找以 <code>&lt;!--build:</code> 开头，以 <code>&lt;!--endbuild--&gt;</code> 结尾的代码块来实现的。标记语法如下：</p>
+<pre class=" language-html"><code class="language-html"><span class="token comment" spellcheck="true">&lt;!-- build:&lt;type> &lt;path> --></span>
+... HTML Markup, list of script / link tags
+<span class="token comment" spellcheck="true">&lt;!--endbuild--></span>
+</code></pre>
+<p><code>&lt;type&gt;</code> 可以是 <code>js</code>, <code>css</code> , <code>remove</code> 。最好将 <code>&lt;type&gt;</code> 设置为你想拼接文件的类型。如果你把 <code>type</code> 设置为 <code>remove</code> ，Gulp 将会忽略这个 build block。</p>
+<p><code>&lt;path&gt;</code> 是拼接后的文件存放的路径。</p>
+<p>举个例子，比如我们想将以下 3 个 JS 文件拼接，并把拼接好的文件存放到 <code>js</code> 目录，名为 <code>main.min.js</code> 。我们可以这么写：</p>
+<pre class=" language-html"><code class="language-html"><span class="token comment" spellcheck="true">&lt;!-- build:js js/main/min.js --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/lib/a-library.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/lib/another-library.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/main.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token comment" spellcheck="true">&lt;!-- endbuild --></span>
+</code></pre>
+<p>好了，熟悉了 <code>gulp-useref</code> 的基本标记语法，让我们来实战以下吧。先将 <code>gulp-useref</code> 安装到项目目录，并在 <code>gulpfile.js</code> 文件中引入：</p>
+<pre class=" language-shell"><code class="language-shell">npm install gulp-useref --save-dev
+</code></pre>
+<pre class=" language-shell"><code class="language-shell">var useref = require('gulp-useref');
+</code></pre>
+<p>创建 <code>useref</code> 任务：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'useref'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/*.html'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">useref</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>然后在命令行执行 <code>gulp useref</code> ，你会发现三个脚本文件会合并为一个 <code>main.min.js</code> ，并且 html 中引用脚本的代码也自动修改了。</p>
+<p>拼接完之后还需要对 JS 文件进行压缩。我们采用 <code>gulp-uglify</code> 插件来压缩 JS 文件，另外我们还需要一个 <code>gulp-if</code> 插件来保证我们只对 JS 文件进行压缩。</p>
+<p>安装 <code>gulp-uglify</code> 和 <code>gulp-if</code>：</p>
+<pre class=" language-shell"><code class="language-shell">npm install gulp-uglify --save-dev
+npm install gulp-if --save-dev
+</code></pre>
+<p>在 <code>gulpfile.js</code> 中引入 <code>gulp-uglify</code> 和 <code>gulp-if</code> ：</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> uglify <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp-uglify'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> gulpIf <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp-if'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>修改 <code>useref</code> 任务的代码：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'useref'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/*.html'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">useref</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">gulpIf</span><span class="token punctuation">(</span><span class="token string">'*.js'</span><span class="token punctuation">,</span> <span class="token function">uglify</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>再次执行 <code>gulp useref</code>， 发现 <code>main.min.js</code> 中的代码已经是压缩过了的了。</p>
+<p>我们可以用相同的方法拼接 CSS 文件，对样式的引用标签进行标记：</p>
+<pre class=" language-html"><code class="language-html"><span class="token comment" spellcheck="true">&lt;!-- build:css css/styles.min.css --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>css/styles.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>css/another-stylesheet.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token comment" spellcheck="true">&lt;!-- endbuild --></span>
+</code></pre>
+<p>另外，我们再安装一个 CSS 文件的压缩插件，叫做 <code>gulp-cssnano</code> ：</p>
+<pre class=" language-shell"><code class="language-shell">npm install gulp-cssnano --save-dev
+</code></pre>
+<p>引入 <code>gulp-cssnano</code> 并修改 <code>useref</code> 任务：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'useref'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/*.html'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">useref</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">gulpIf</span><span class="token punctuation">(</span><span class="token string">'*.js'</span><span class="token punctuation">,</span> <span class="token function">uglify</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">gulpIf</span><span class="token punctuation">(</span><span class="token string">'*.css'</span><span class="token punctuation">,</span> <span class="token function">cssnano</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>在命令行运行 <code>gulp useref</code> 之后，可以看到 CSS 文件也被拼接和压缩了。</p>
+<p>现在通过 <code>useref</code> 任务，可以同时拼接压缩 CSS 文件和 JS 文件了。接下来让我们看看怎么优化图片吧。</p>
+<h3 id="优化图片"><a href="#优化图片" class="headerlink" title="优化图片"></a>优化图片</h3><p>你可能猜到了，我们又需要安装插件了。没错，这次我们需要安装 <code>gulp-imagemin</code> 插件，专门用来压缩图片的。</p>
+<p>安装并引入：</p>
+<pre class=" language-shell"><code class="language-shell">npm install gulp-imagemin --save-dev
+</code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> imagemin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'gulp-imagemin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>我们将对 <code>png</code> , <code>jpg</code> , <code>gif</code> 和 ·<code>svg</code> 格式的图片都进行压缩，新增 <code>images</code> 任务，代码如下：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'images'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/images/**/*.+(png|jpg|gif|svg)'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">imagemin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'dist/images'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>不同类型的图片可以进行不同的优化，例如，你可以通过将 <code>interlaced</code> 字段设置为 <code>true</code> ，来生成 interlaced GIFs。代码如下：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'images'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/images/**/*.+(png|jpg|gif|svg)'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">imagemin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// Setting interlaced to true</span>
+            interlaced<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'dist/images'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>压缩图片是非常耗时的过程，为了避免没有必要的重复处理，我们使用 <code>gulp-cache</code> 插件，安装并引入：</p>
+<pre class=" language-shell"><code class="language-shell">npm install gulp-cache --save-dev
+</code></pre>
+<pre class=" language-shell"><code class="language-shell">var cache = require('gulp-cache');
+</code></pre>
+<p>改进 <code>images</code> 任务的代码：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'images'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/images/**/*.+(png|jpg|gif|svg)'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">cache</span><span class="token punctuation">(</span><span class="token function">imagemin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// Setting interlaced to true</span>
+            interlaced<span class="token punctuation">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'dist/images'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>以上便是图片的优化过程。接下来我们来处理字体目录。</p>
+<h3 id="复制字体目录到-dist"><a href="#复制字体目录到-dist" class="headerlink" title="复制字体目录到 dist"></a>复制字体目录到 dist</h3><p>因为字体文件已经是优化过了的，因此我们只要将字体文件夹复制到 dist 目录即可，这个非常简单，看一下代码：</p>
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'fonts'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> gulp<span class="token punctuation">.</span><span class="token function">src</span><span class="token punctuation">(</span><span class="token string">'app/fonts/**/*'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>gulp<span class="token punctuation">.</span><span class="token function">dest</span><span class="token punctuation">(</span><span class="token string">'dist/fonts'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>到目前为止，我们一共有 6 个任务，它们分别是：</p>
+<ul>
+<li><code>sass</code> - 将 Sass 转换为 CSS</li>
+<li><code>watch</code> - 监听文件的变化，实时刷新浏览器</li>
+<li><code>browserSync</code> - 创建本地 web 服务器</li>
+<li><code>useref</code> - 拼接并压缩 JS 和 CSS 文件</li>
+<li><code>images</code> - 压缩图片资源</li>
+<li><code>fonts</code> - 复制字体文件夹</li>
+</ul>
+<p>（未完待续…）</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+    <!-- 使用 DISQUS_CLICK -->
+    <div id="disqus-comment">	
+        <div id="disqus_thread"></div>
+<!-- include js -->
+<script src="/js/ripple.js"></script>
+
+<!-- add animation -->
+<style>
+        .ripple-container {
+        }
+        .ripple-container .ripple{
+            background-color: rgba(255,255,255,0.4);
+            animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+		.disqus_click_btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 10px 20px;
+            border:0;
+            font-size: 14px;
+            cursor: pointer
+        }
+</style>
+	
+<!-- add data-ripple attribute -->
+<div class="btn_click_load"> 
+    <button class="disqus_click_btn" data-ripple>阅读评论 「请确保 disq.us &amp; disquscdn.com &amp; disqus.com 可以正常加载」</button>
+</div>
+	
+<script>
+    // add effect to elements
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function(element){
+        // find all elements and attach effect
+        new RippleEffect(element); // element is instance of javascript element node
+    });
+</script>
+
+<script>
+    $('.btn_click_load').click(function() {  //click to load comments
+        var disqus_config = function () {
+            this.page.url = 'http://nightn.com/2018/01/18/gulp-for-beginners/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//nightn.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+  	
+
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/11/28/js-optimize-maptype-demo/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/kaito.png" alt="Nightn's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        nightn.dev@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/nightn" target="_blank" title="Github">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">cloud</i>
+                        
+                        Github
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="Mailto:nightn.dev@gmail.com" target="_blank" title="Email me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Android-Studio/">Android Studio<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Computer-Systems/">Computer Systems<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DSA/">DSA<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Front-End/">Front End<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/JavaScript/">JavaScript<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Mind-Explorer/">Mind Explorer<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/OpenCV/">OpenCV<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Qt/">Qt<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/gallery" title="图库">
+                
+                    <i class="material-icons sidebar-material-icons">insert_photo</i>
+                
+                图库
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">label</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/links" title="友情链接">
+                
+                    <i class="material-icons sidebar-material-icons">touch_app</i>
+                
+                友情链接
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/nightn" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+		
+		<div>
+			<!--Copyright-->
+			<div id="copyright">
+				Copyright&nbsp;©&nbsp;
+				<script type="text/javascript">
+					var fd = new Date();
+					document.write(fd.getFullYear());
+				</script>
+				&nbsp;Nightn's Blog
+			</div>
+			<div>
+
+					<div>
+					<center>
+						本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
+						你是第 <span id="busuanzi_value_site_uv"></span> 个来到的小伙伴
+					</center>
+					</div>
+					<div>
+					<center>
+						本博客采用<a style="text-decoration:none" rel="license" href="http://nightn.com/creative-commons"> 知识共享协议 署名-非商业性使用-相同方式共享 3.0 未本地化版本 </a>进行许可
+					</center>
+					</div>
+			</div>
+		</div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+    <script>
+    var searchFunc = function(path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: 'xml',
+            success: function( xmlResponse ) {
+                // get the contents from search data
+                var datas = $( 'entry', xmlResponse ).map(function() {
+                    return {
+                        title: $( 'title', this ).text(),
+                        content: $('content',this).text(),
+                        url: $( 'url' , this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function() {
+                    var str='<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = '';
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function(data) {
+                        var isMatch = true;
+                        var content_index = [];
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g,'').toLowerCase();
+                        var data_url = data.url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if(data_title !== '' && data_content !== '') {
+                            keywords.forEach(function(keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if( index_title < 0 && index_content < 0 ) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += '<li><a href="'+ data_url +'" class="search-result-title" target="_blank">'+ data_title;
+                            var content = data.content.trim().replace(/<[^>]+>/g, '');
+                            if (first_occur >= 0) {
+                                // cut out characters
+                                var start = first_occur - 6;
+                                var end = first_occur + 6;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 10;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, 'gi');
+                                    match_content = match_content.replace(regS, '<em class="search-keyword">'+keyword+'</em>');
+                                })
+                                str += '<p class="search-result">' + match_content + '...</p>' +'</a>';
+                            }
+                        }
+                    });
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    }
+</script>
+
+
+    <script>
+        var inputArea = document.querySelector('#search');
+        var getSearchFile = function() {
+            var path = 'search.xml';
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        if(inputArea) {
+            inputArea.onfocus = function() {
+                getSearchFile();
+            }
+        }
+    </script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+        </body>
+    
+</html>
