@@ -377,17 +377,18 @@ gulp<span class="token punctuation">.</span><span class="token function">task</s
 </code></pre>
 <p>以上代码确保了 <code>clean:dist</code> 任务首先执行，等它执行完成后，才开始执行后续的任务，后续这些任务的执行顺序无关紧要，所以将它们放到同一个数组中。全部任务执行完之后，调用我们自定义的回调函数 <code>onBuild</code> 。</p>
 <p>为了保证前后一致，我们将前面定义的 <code>watch</code> 任务也用 <code>run-sequence</code> 来实现。</p>
-<pre><code>gulp.task(&#39;watch&#39;, function() {
-    gulp.watch(&#39;app/scss/**/*.scss&#39;, [&#39;sass&#39;]);
-    // 当 HTML 或 JS 文件发生变化时，重新载入浏览器
-    gulp.watch(&#39;app/*.html&#39;, browserSync.reload);
-    gulp.watch(&#39;app/js/**/*.js&#39;, browserSync.reload);
-});
+<pre class=" language-javascript"><code class="language-javascript">gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'watch'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/scss/**/*.scss'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'sass'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 当 HTML 或 JS 文件发生变化时，重新载入浏览器</span>
+    gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/*.html'</span><span class="token punctuation">,</span> browserSync<span class="token punctuation">.</span>reload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    gulp<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span><span class="token string">'app/js/**/*.js'</span><span class="token punctuation">,</span> browserSync<span class="token punctuation">.</span>reload<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-gulp.task(&#39;default&#39;, function() {
-    runSequence([&#39;sass&#39;, &#39;browserSync&#39;, &#39;watch&#39;]);
-});
-</code></pre><p>注意到，我们去掉了 <code>watch</code> 原先的第二个参数，而是把 <code>sass</code> , <code>broserSync</code> 和 <code>watch</code> 任务通过 <code>run-sequence</code> 整合到了一个 <code>default</code> 任务。为什么要命名为 <code>default</code> 呢？因此这样我们只要简单的在命令行运行 <code>gulp</code> ，就可以很方便的执行这个任务了。</p>
+gulp<span class="token punctuation">.</span><span class="token function">task</span><span class="token punctuation">(</span><span class="token string">'default'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">runSequence</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'sass'</span><span class="token punctuation">,</span> <span class="token string">'browserSync'</span><span class="token punctuation">,</span> <span class="token string">'watch'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>注意到，我们去掉了 <code>watch</code> 原先的第二个参数，而是把 <code>sass</code> , <code>broserSync</code> 和 <code>watch</code> 任务通过 <code>run-sequence</code> 整合到了一个 <code>default</code> 任务。为什么要命名为 <code>default</code> 呢？因此这样我们只要简单的在命令行运行 <code>gulp</code> ，就可以很方便的执行这个任务了。</p>
 ]]></content>
       
         <categories>
