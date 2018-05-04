@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    color: #eee;
+}
+
+/* header */
+.header {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    color: #eee;
+    background-color: #333;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.header-body {
+    display: flex;
+    justify-content: space-between;
+    width: 960px;
+    padding: 15px;
+}
+
+.logo {
+    font-size: 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu > li {
+    margin-right: 20px;
+}
+
+.menu > li:last-of-type {
+    margin-right: 0;
+}
+
+.avatar {
+    width: 28px;
+    cursor: pointer;
+}
+
+.avatar img {
+    width: 100%;
+}
+
+
+/* banner */
+.banner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    background-color: #67BB32;
+    /* background-color: #F1CF8A; */
+    margin-top: 56px;
+}
+
+.index {
+    position: absolute;
+    bottom: 10px;
+    right: 200px;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.index > li {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #B3DC93;
+    cursor: pointer;
+}
+
+.index > li:hover {
+    opacity: 0.8;
+}
+
+.index > .active {
+    position: relative;
+    padding-top: 10px;
+    top: -10px;
+    background-color: #E0F1D5;
+}
+
+/* tabs */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #DEDEDE;
+    padding-top: 20px;
+}
+
+.tabs {
+    position: relative;
+    top: 1px;
+    display: flex;
+    width: 960px;
+}
+
+.tabs > li {
+    border-radius: 10px 10px 0 0;
+    padding: 15px 25px;
+    border: 1px solid #DEDEDE;
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.tabs > li:hover {
+    opacity: 0.8;
+}
+
+.tabs > .active {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+/* content */
+.content-container {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    position: relative;
+    width: 960px;
+}
+
+
+.home-row-1,
+.home-row-2,
+.home-row-3 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.home-row-1 > li,
+.home-row-3 > li {
+    width: 32%;
+}
+
+.home-row-2 > li {
+    width: 23%;
+}
+
+.home li > img {
+    width: 100%;
+}
+
+.content-item {
+    display: none;
+}
+
+.content .active {
+    display: block;
+}
+
+
+.profile img,
+.about img {
+    width: 100%;
+}
+
+/* footer */
+footer {
+    display: flex;
+    justify-content: center;
+    color: #eee;
+    height: 60px;
+    background-color: #666;
+    padding: 10px;
+}

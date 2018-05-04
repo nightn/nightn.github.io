@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Layout Demo</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="header-body">
+                <h1 class="logo">Hi, I'm Nightn</h1>
+                <ul class="menu">
+                    <li><a href="https://github.com/nightn" target="_blank">Github</a></li>
+                    <li><a href="javascript:alert('nothing');">Register</a></li>
+                    <li><a href="javascript:alert('nothing at all')">Login</a></li>
+                    <li><a href="http://nightn.com/demo/layout/flexbox.html" target="_blank" style="color: yellow; font-weight: bold;">Layout</a></li>
+                    <li class="avatar">
+                        <a href="http://nightn.com" target="_blank">
+                            <img src="https://avatars2.githubusercontent.com/u/26574213?s=460&v=4">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="banner">
+            <div><img src="images/awesome-logo.svg"/></div>
+            <ul class="index">
+                <li>1</li>
+                <li class="active">2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="tabs-container">
+                <ul class="tabs">
+                    <li id="tab-0" class="tab-item active">HOME</li>
+                    <li id="tab-1" class="tab-item">PROFILE</li>
+                    <li id="tab-2" class="tab-item">ABOUT</li>
+                </ul>
+            </div>
+            <div class="content-container">
+                <div class="content">
+                    <div class="content-item home active">
+                        <ul class="home-row-1">
+                            <li><img src="images/one.svg"/></li>
+                            <li><img src="images/two.svg"/></li>
+                            <li><img src="images/three.svg"/></li>
+                        </ul>
+                        <ul class="home-row-2">
+                            <li><img src="images/four.svg"/></li>
+                            <li><img src="images/three.svg"/></li>
+                            <li><img src="images/two.svg"/></li>
+                            <li><img src="images/one.svg"/></li>
+                        </ul>
+                        <ul class="home-row-3">
+                            <li><img src="images/relative.svg"/></li>
+                            <li><img src="images/absolute.svg"/></li>
+                            <li><img src="images/fixed.svg"/></li>
+                        </ul>
+                    </div>
+                    <div class="content-item profile">
+                        <a href="https://github.com/nightn" target="_blank">
+                            <img src="images/profile.png"/>
+                        </a>
+                    </div>
+                    <div class="content-item about">
+                        <a href="http://nightn.com" target="_blank">
+                            <img src="images/about.png"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <footer>
+            <div>2018 ife.baidu.com & nightn.com</div>
+        </footer>
+
+
+        <script>
+            var tabs = document.querySelector('.tabs');
+            var tabItems = document.querySelectorAll('.tab-item');
+            var contentItems = document.querySelectorAll('.content-item');
+            tabs.addEventListener('click', function (event) {
+                var target = event.target;
+                for (var i = 0; i < tabItems.length; i++) {
+                    tabItems[i].classList.remove('active');
+                }
+                target.classList.add('active');
+
+                for (var i = 0; i < contentItems.length; i++) {
+                    contentItems[i].classList.remove('active');
+                }
+                contentItems[parseInt(target['id'].split('-')[1])].classList.add('active');
+            });
+            console.log(tabItems.length);
+        
+        
+        </script>
+
+    </body>
+</html>
