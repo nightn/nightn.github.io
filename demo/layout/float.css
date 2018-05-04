@@ -1,0 +1,64 @@
+.content {
+    overflow: hidden;  /* clear float */
+}
+
+/* one */
+.one > div:first-child {
+    float: left;
+    width: 30%;
+}
+
+.one > div:last-child {
+    float: left;
+    width: 70%;
+}
+
+/* two */
+.two > div:first-child {
+    float: left;
+    width: 100px;
+}
+
+.two > div:last-child {
+    margin-left: 100px;
+}
+
+/* three */
+.three > div:first-child {
+    float: right;
+    width: 100px;
+}
+
+.three > div:last-child {
+    margin-right: 100px;
+}
+
+/* four */
+.four > div:first-child {
+    float: left;
+    width: 100px;
+}
+
+.four > div:nth-child(2) {
+    float: right;
+    width: 100px;
+}
+
+.four > div:last-child {
+    margin: 0 100px;
+}
+
+/* five */
+.five > div:first-child {
+    float: left;
+    width: 100px;
+}
+
+.five > div:nth-child(2) {
+    float: left;
+    width: 100px;
+}
+
+.five > div:last-child {
+    margin-left: 200px;
+}

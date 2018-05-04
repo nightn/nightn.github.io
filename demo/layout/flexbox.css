@@ -1,0 +1,56 @@
+.content {
+    display: flex;
+}
+
+/* one */
+.one > div:first-child {
+    flex: 3;
+}
+
+.one > div:last-child {
+    flex: 7;
+}
+
+/* two */
+.two > div:first-child {
+    width: 100px;
+}
+
+.two > div:last-child {
+    flex: 1;
+}
+
+/* three */
+.three > div:first-child {
+    flex: 1;
+}
+
+.three > div:last-child {
+    width: 100px;
+}
+
+/* four */
+.four > div:first-child {
+    width: 100px;
+}
+
+.four > div:nth-child(2) {
+    flex: 1;
+}
+
+.four > div:last-child {
+    width: 100px;
+}
+
+/* five */
+.five > div:first-child {
+    width: 100px;
+}
+
+.five > div:nth-child(2) {
+    width: 100px;
+}
+
+.five > div:last-child {
+    flex: 1;
+}

@@ -1,0 +1,87 @@
+
+
+/* 避免 fixed 的标题栏被页面内容覆盖，故设置它们的 z-index */
+.menu-container {
+    z-index: 20;
+}
+
+.page {
+    position: relative;
+    z-index: 10;;
+}
+
+.content {
+    position: relative;
+}
+
+/* one */
+.one > div:first-child {
+    width: 30%;
+}
+
+.one > div:last-child {
+    position: absolute;
+    width: 70%;
+    left: 30%;
+    top: 0;
+}
+
+/* two */
+.two > div:first-child {
+    position: absolute;
+    width: 100px;
+}
+
+.two > div:last-child {
+    margin-left: 100px;
+}
+
+/* three */
+.three > div:first-child {
+    margin-right: 100px;
+}
+
+.three > div:last-child {
+    position: absolute;
+    width: 100px;
+    right: 0;
+    top: 0;
+}
+
+/* four */
+.four > div:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+}
+
+.four > div:nth-child(2) {
+    margin: 0 100px;
+}
+
+.four > div:last-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+}
+
+/* five */
+.five > div:first-child {
+    position: absolute;
+    width: 100px;
+    top: 0;
+    left: 0;
+}
+
+.five > div:nth-child(2) {
+    position: absolute;
+    width: 100px;
+    top: 0;
+    left: 100px;
+}
+
+.five > div:last-child {
+    margin-left: 200px;
+}
