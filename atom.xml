@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://nightn.com/"/>
-  <updated>2018-08-05T14:52:39.171Z</updated>
+  <updated>2018-08-05T14:57:59.706Z</updated>
   <id>http://nightn.com/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://nightn.com/2018/08/05/cpp-object-memory-1/"/>
     <id>http://nightn.com/2018/08/05/cpp-object-memory-1/</id>
     <published>2018-08-05T14:37:56.000Z</published>
-    <updated>2018-08-05T14:52:39.171Z</updated>
+    <updated>2018-08-05T14:57:59.706Z</updated>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;C-对象内存布局初探（1）&quot;&gt;&lt;a href=&quot;#C-对象内存布局初探（1）&quot; class=&quot;headerlink&quot; title=&quot;C++对象内存布局初探（1）&quot;&gt;&lt;/a&gt;C++对象内存布局初探（1）&lt;/h1&gt;&lt;p&gt;C++ 对象内存布局是一个深入而有趣的话题。&lt;code&gt;sizeof&lt;/code&gt; 可以返回对象占用的内存大小，那具体存每个字节的是什么呢？对象的哪些成员会直接放到对象中，哪些不会？每个成员的排布顺序是怎么样的？当发生继承或复合时，子类对象的内存布局又是怎样的？虚函数的实现机制是什么？动态绑定在内存中是怎么体现？如何避免重复继承？「C++对象内存布局初探」系列便尝试着从内存布局的角度去回答这些问题，这是本系列的第一篇。&lt;/p&gt;
+      &lt;p&gt;C++ 对象内存布局是一个深入而有趣的话题。&lt;code&gt;sizeof&lt;/code&gt; 可以返回对象占用的内存大小，那具体存每个字节的是什么呢？对象的哪些成员会直接放到对象中，哪些不会？每个成员的排布顺序是怎么样的？当发生继承或复合时，子类对象的内存布局又是怎样的？虚函数的实现机制是什么？动态绑定在内存中是怎么体现？如何避免重复继承？「C++对象内存布局初探」系列便尝试着从内存布局的角度去回答这些问题，这是本系列的第一篇。&lt;/p&gt;
     
     </summary>
     
