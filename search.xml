@@ -4,6 +4,193 @@
   
     
     <entry>
+      <title><![CDATA[C++对象内存布局初探（1）]]></title>
+      <url>http://nightn.com/2018/08/05/cpp-object-memory-1/</url>
+      <content type="html"><![CDATA[<h1 id="C-对象内存布局初探（1）"><a href="#C-对象内存布局初探（1）" class="headerlink" title="C++对象内存布局初探（1）"></a>C++对象内存布局初探（1）</h1><p>C++ 对象内存布局是一个深入而有趣的话题。<code>sizeof</code> 可以返回对象占用的内存大小，那具体存每个字节的是什么呢？对象的哪些成员会直接放到对象中，哪些不会？每个成员的排布顺序是怎么样的？当发生继承或复合时，子类对象的内存布局又是怎样的？虚函数的实现机制是什么？动态绑定在内存中是怎么体现？如何避免重复继承？「C++对象内存布局初探」系列便尝试着从内存布局的角度去回答这些问题，这是本系列的第一篇。</p>
+<a id="more"></a>
+<p>在本篇文章中，我将对 5 类不同情况下的对象布局进行较为详细的介绍，通过 <strong>代码 + UML 图 + 实际内存布局 + 结论分析</strong> 的流程对每一种情况进行讨论。这 5 种情况包括：</p>
+<ul>
+<li>没有继承的情况</li>
+<li>单一继承（不包含 <code>virtual function</code>）</li>
+<li>单一继承（包含 <code>virtual function</code>）</li>
+<li>多重继承</li>
+<li>虚继承</li>
+</ul>
+<p>示例代码的运行环境：</p>
+<ul>
+<li>操作系统： win10 专业版</li>
+<li>编译器：GCC4.9</li>
+</ul>
+<h2 id="一、-最简单情况：没有继承"><a href="#一、-最简单情况：没有继承" class="headerlink" title="一、 最简单情况：没有继承"></a>一、 最简单情况：没有继承</h2><h3 id="1-代码及-UML-图"><a href="#1-代码及-UML-图" class="headerlink" title="1. 代码及 UML 图"></a>1. 代码及 UML 图</h3><pre class=" language-c++"><code class="language-c++">class Point2d {
+public:
+    // constructor(s)
+    // operators
+    // access functions
+private:
+    long long x = 0x11;
+    long long y = 0x22;
+};
+
+class Point3d {
+public:
+    // constructor(s)
+    // operators
+    // access functions
+private:
+    long long x = 0x1111;
+    long long y = 0x2222;
+    long long z = 0x3333;
+};
+</code></pre>
+<p><img src="/img/uml-no-inheritance.png" alt="1533467905287"></p>
+<h3 id="2-内存布局"><a href="#2-内存布局" class="headerlink" title="2. 内存布局"></a>2. 内存布局</h3><p><img src="/img/model-no-inheritance.png" alt="1533467946831"></p>
+<h3 id="3-结论"><a href="#3-结论" class="headerlink" title="3. 结论"></a>3. 结论</h3><p><code>Point2d</code> 和 <code>Point3d</code> 是两个独立的类，它们实例化出来的对象仅包含 <code>non-static data member</code> 。对于各个数据成员在内存中的排列顺序，C++标准并没有强制规定。但大部分编译器实现中，都<strong>按照数据成员声明顺序来进行对象的内存布局</strong> （如上图所示）。</p>
+<h2 id="二、单一继承不含-virtual-function"><a href="#二、单一继承不含-virtual-function" class="headerlink" title="二、单一继承不含 virtual function"></a>二、单一继承不含 virtual function</h2><p><code>Point3d</code> 公开继承 <code>Point2d</code> ，并且两个类中都没有 <code>virtual function</code> 。</p>
+<p>###1. 代码及 UML 图</p>
+<pre class=" language-c++"><code class="language-c++">class Point2d {
+public:
+    long long get_x() const { return x; }
+    long long get_y() const { return y; }
+private:
+    long long x = 0x11;
+    long long y = 0x22;
+};
+
+class Point3d: public Point2d {
+public:
+    long long get_z() const { return z; }
+private:
+    long long z = 0x3333;
+};
+</code></pre>
+<p><img src="/img/uml-single-inheri-no-virtual.png" alt="1533468789392"></p>
+<h3 id="2-内存布局-1"><a href="#2-内存布局-1" class="headerlink" title="2. 内存布局"></a>2. 内存布局</h3><p><img src="/img/model-single-inheri-no-virtual.png" alt="1533468881218"></p>
+<p>###3. 结论</p>
+<p>在继承体系中，子类对象包含了父类实体部分（subobject），而且 subobject 位于前面，而后是子类中的成员。</p>
+<h2 id="三、单一继承并含-virtual-function"><a href="#三、单一继承并含-virtual-function" class="headerlink" title="三、单一继承并含 virtual function"></a>三、单一继承并含 virtual function</h2><p>假如我们现在要对点进行绘制，显然无论是 <code>Point2d</code> 还是 <code>Point3d</code> 都需要可以绘制，但它们绘制的实现不同。因此，我们在 <code>Point2d</code> 中定义名为 <code>draw</code>  的 <code>virtual function</code> 。另外，我们单独在 <code>Point3d</code> 单独定义一个名为 <code>rotate3d</code> 的 <code>virtual function</code> 。</p>
+<h3 id="1-代码及-UML-图-1"><a href="#1-代码及-UML-图-1" class="headerlink" title="1. 代码及 UML 图"></a>1. 代码及 UML 图</h3><pre class=" language-c++"><code class="language-c++">class Point2d {
+public:
+    long long get_x() const { return x; }
+    long long get_y() const { return y; }
+    virtual void draw() { cout << "Point2d::draw()" << endl; }
+private:
+    long long x = 0x11;
+    long long y = 0x22;
+};
+
+class Point3d: public Point2d {
+public:
+    long long get_z() const { return z; }
+    void draw() override { cout << "Point3d::draw()" << endl; }
+    virtual void rotate3d() { cout << "Point3d::draw()" << endl; }
+private:
+    long long z = 0x3333;
+};
+</code></pre>
+<p><img src="/img/uml-single-inheri-virtual.png" alt="1533471900774"></p>
+<h3 id="2-内存布局-2"><a href="#2-内存布局-2" class="headerlink" title="2. 内存布局"></a>2. 内存布局</h3><p><img src="/img/model-single-inheri-virtual.png" alt=""></p>
+<h3 id="3-结论-1"><a href="#3-结论-1" class="headerlink" title="3. 结论"></a>3. 结论</h3><p>上面的内存布局图咋看之下有点复杂，不用怕，容我慢慢道来。上图分为上下两部分，上半部分是与 <code>p2</code> 对象相关的内存布局，下半部分是与 <code>p3</code> 对象相关的内存布局。每个部分又包括了对象本身和 <code>vtbl</code> 。什么是 <code>vtbl</code> ，什么又是 <code>vptr</code> ，为什么多了虚函数，对象的内存布局就变得这么复杂了呢。我先简单的解释一下。</p>
+<p>考虑一个简单的继承体系：<code>Base</code> 为父类，<code>Derived1</code> 和 <code>Derived2</code> 都公开继承 <code>Base</code> 。且 <code>Base</code> 类中定义了虚函数，子类们可以重写（override）父类定义的虚函数。虚函数是 C++ 用来支持多态的一种函数，所谓多态，是通过动态绑定实现的。当我们通过一个父类指针（如 <code>Base* pb</code>）或引用去调用虚函数时，便会发生动态绑定，即静态类型为 <code>Base</code> ，动态类型由运行时 <code>pb</code> 所绑定的对象决定，绑定不同类型的对象，所调用的虚函数版本也不同，看起来父类指针具有多种状态，具体是什么状态需要等到运行时进行动态绑定，这就是多态。多态就是通过虚函数表 <code>vtbl</code> 实现的。</p>
+<p>每一个带有虚函数的类，它所实例出来的对象，除了包含自身的 <code>data member</code> 外，还有一个指针 <code>vptr</code> ，全称是 <code>virtual function table pointer</code> ，即虚函数表指针，顾名思义，它里面存放了这个类的虚函数表的地址。如上图所示，<code>p2</code> 对象的内存布局中，除了包含 <code>p2.x</code> 和 <code>p2.y</code> ，还包含了一个 <code>vptr</code> ，其值为 <code>00 00 00 00 00 49 15 b0</code> ，它是 <code>Point2d</code> 虚函数表的地址，我们顺着这个地址找到了对应的虚函数表，即图中的 <code>vptr of Point2d</code> ，这个虚表存放的便是 <code>Point2d</code> 所有的虚函数。同理，<code>p3</code> 对象的内存布局也是类似的，不同的是，<code>Point3d</code> 的虚函数表包含了两个虚函数：<code>draw()</code> 和 <code>rotate3d()</code> 。非常重要的一点，<code>Point3d</code> 虚函数表中的第一个虚函数是 <code>Point3d::draw()</code> ，而不是父类版本的 <code>draw()</code> ，这是由于子类重写了父类的虚函数。关于虚函数表，还有几个细节值得注意：</p>
+<ul>
+<li><strong>虚函数表的结尾标志</strong>。从上图可以看到，虚函数表的结尾标志是一个值为 0，大小为 8 bytes 的一个块。GCC 是这样的，但是，并不是每一个编译器都是如此。</li>
+<li><strong>虚表的 -1 位置</strong>。细心的读者可能会发现，虚表第一个虚函数的上面还有一个地址，它其实指向的是这个类的 <code>type_info</code> 对象，<code>type_info</code> 对象描述了类的简要信息（如 name, hash_code 等），用以支持 <code>RTTI(runtime type identification)</code> 。我们使用的 <code>typeid</code> 运算符，应该就是通过访问 <code>type_info</code> 对象实现的。</li>
+<li><strong>虚表是类层面上的，而不是对象层面上的</strong>。即同一个类的不同对象，共享同一个虚表。</li>
+</ul>
+<p>以下通过一个简单的例子，结合上面的内存布局图，解释对象是如何与虚表进行交互，实现多态的。</p>
+<pre class=" language-c++"><code class="language-c++">Point2d p2;
+Point3d p3;
+Point2d* ptr = &p2;
+ptr->draw();   // 调用 Point2d::draw()
+ptr = &p3;
+ptr->draw();   // 调用 Point3d::draw()
+</code></pre>
+<p>同样是 <code>ptr-&gt;draw()</code> ，为什么每次调用的版本不一样呢？首先，定义了 <code>p2</code> 和 <code>p3</code> 对象，如上图所示，这两个对象的地址分别为 <code>0x6ffe30</code> 和 <code>0x6ffe10</code> 。<code>ptr</code> 是一个指向父类 <code>Point2d</code> 的指针。一开始，将 <code>p2</code> 的地址初始化 <code>ptr</code> ，即当前 <code>ptr</code> 指向 <code>p2</code> 对象，当执行到 <code>ptr-&gt;draw()</code> 时，由于 <code>draw()</code> 是虚函数，因此会去 <code>p2</code> 对象中的 <code>vptr</code> 所指的虚表中查找，虚表地址为 <code>0x4915b0</code> ，所以调用的是父类的虚函数。然后，将 <code>ptr</code> 重新赋值为 <code>p3</code> 的地址，此时再执行 <code>ptr-&gt;draw()</code> 时，会去 <code>p3</code> 对象中的 <code>vptr</code> 所指虚表中查找，虚表地址为 <code>0x4915d0</code>，所以调用的是子类的虚函数。</p>
+<p>虚函数表的引入实现了高弹性的多态，但也引入了额外的负担。</p>
+<ul>
+<li>对象要增加一个 slot 作为 <code>vtpr</code> ，这样才能确保对象能够找到 <code>vtbl</code> 。</li>
+<li>带有虚函数的类都需要有一个关联的 <code>vtbl</code> ，存放了所有虚函数的指针，以及再提供必要的 slot 作为分隔符，以及支持 <code>RTTI</code> 。</li>
+<li>构造函数需要扩展。对象新增了一个 <code>vptr</code> 隐式成员，显然，它也需要初始化，编译器在合成默认构造函数或扩展现有构造函数的时候，必定会添加初始化 <code>vptr</code> 的代码。</li>
+<li>析构函数需要扩展。也是为了处理额外的 <code>vptr</code> 隐式成员。</li>
+</ul>
+<h2 id="四、多重继承"><a href="#四、多重继承" class="headerlink" title="四、多重继承"></a>四、多重继承</h2><h3 id="1-代码及-UML-图-2"><a href="#1-代码及-UML-图-2" class="headerlink" title="1. 代码及 UML 图"></a>1. 代码及 UML 图</h3><pre class=" language-c++"><code class="language-c++">class Base1 {
+public:
+    long long x = 0x1111;
+    virtual void f1() { cout << "Base1::f1()" << endl; }
+    virtual void g1() { cout << "Base1::g1()" << endl; }
+};
+
+class Base2 {
+    long long x = 0x2222;
+    void f2() { cout << "Base2::f2()" << endl; }
+};
+
+class Base3 {
+    long long x = 0x3333;
+    virtual void f3() { cout << "Base3::f3()" << endl; }
+};
+
+class Derived: public Base1, public Base2, public Base3 {
+    long long x = 0x8888;
+    void f1() override { cout << "Derived::f1()" << endl; }
+    virtual hello() { cout << "Derived::hello()" << endl; }
+    virtual bye() { cout << "Derived::hello()" << endl; }
+};
+</code></pre>
+<p><img src="/img/uml-multi-inheritance.png" alt="1533477298831"></p>
+<h3 id="2-内存布局-3"><a href="#2-内存布局-3" class="headerlink" title="2. 内存布局"></a>2. 内存布局</h3><p><img src="/img/model-multi-inheritance.png" alt=""></p>
+<h3 id="3-结论-2"><a href="#3-结论-2" class="headerlink" title="3. 结论"></a>3. 结论</h3><p>由内存布局图，可以得出以下结论：</p>
+<ul>
+<li>多重继承体系中的子类，每多继承一个带有虚函数的父类，就会在子类对象中多一个 <code>vptr</code> 。上图中，<code>Base1</code> 和 <code>Base3</code> 都带有虚函数，因此在子类的 <code>Base1 subobject</code> 和 <code>Base3 subobject</code> 各有一个 <code>vptr</code> ，为了后面叙述方便，我将它们分别记作 <code>vptr1</code> 和 <code>vptr2</code> ，它们所指向的虚函数表分别记作 <code>vtbl1</code> 和 <code>vtbl2</code> 。由于 <code>Base2</code> 不带有虚函数，所以 <code>Base2 subobject</code> 仅包含数据成员 <code>Base2::x</code> 。 </li>
+<li>多重继承体系中的子类，其对象中各个 subobject 中的顺序与继承声明列表的顺序一致。上图中子类对象的内存布局从上到下分别为：<code>Base1 subobject</code>, <code>Base2 subobject</code>, <code>Base3 subobject</code> 以及 <code>Derived self part</code>。</li>
+<li>如果子类继承了多个带有虚函数的父类，且子类中也有专属于自己的虚函数（如 <code>Derived::hello()</code> 和 <code>Derived::bye()</code>），那么，专属子类的虚函数会附加在继承列表中第一个带有虚函数父类的虚函数表中。如图中所示，<code>Derived::hello()</code> 和 <code>Derived::bye()</code> 都位于 <code>vtbl1</code> 中。</li>
+<li>如果子类重写了父类的虚函数，则子类版本的虚函数会将虚表中父类版本的虚函数替换掉。如图所示，<code>vtbl1</code> 中的虚函数顺序，一开始我们可以想象成这样：<code>Base1::f1()</code>, <code>Base1::g1()</code>, <code>Derived::hello()</code>, <code>Derived::bye()</code> 。子类定义了重写了 <code>f1()</code> ，所以 <code>vtbl1</code> 的顺序变成了现在这样：<code>Derived::f1()</code>, <code>Base1::g1()</code>, <code>Derived::hello()</code>, <code>Derived::bye()</code> 。这便是子类重写父类虚函数的内在原理。</li>
+<li>每一个虚表的 -1 位置都带有 <code>type_info</code> 对象的指针，GCC 中，多个父类的虚表是连续存储的，最后一个虚表末尾是 <code>0</code> ，倒数第二个虚表末尾是 <code>-8</code> ，然后是 <code>-16</code> , <code>-24</code> … 以此类推。</li>
+</ul>
+<blockquote>
+<p>TODO: 虚继承</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> C++ </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> 对象模型 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>http://nightn.com/2018/06/24/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. <a id="more"></a>Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Gulp for beginners(译)]]></title>
       <url>http://nightn.com/2018/01/18/gulp-for-beginners/</url>
       <content type="html"><![CDATA[<p>Gulp 是优化项目、提高开发效率的一个非常有用的工具，尤其适用于前端领域。它有非常多的插件，可以实现很多自动化的功能，如创建本地 web 服务器、开发过程中文件修改实时刷新浏览器、对 Sass 或 LESS 进行实时编译、优化资源文件（如拼接压缩 CSS, JS 文件，压缩图片等）。本文翻译自 Zell Liew 的 <a href="https://css-tricks.com/gulp-for-beginners/" target="_blank" rel="external">Gulp for Beginners</a> 一文，原文为英文，采用意译，部分有改动。文章略长，但对快速了解如何使用 Gulp 非常有帮助。</p>
@@ -2075,27 +2262,6 @@ Marker locationMarker <span class="token operator">=</span> null<span class="tok
     </entry>
     
     <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>http://nightn.com/2017/03/21/hello-world/</url>
-      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. <a id="more"></a>Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-      
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Android Device Monitor 文件管理的常见问题]]></title>
       <url>http://nightn.com/2017/03/19/Android-Device-Monitor-common-problems/</url>
       <content type="html"><![CDATA[<p>Android Device Monitor 是 Android Studio 中用于监测模拟器或真机运行状态的一款开发者工具。但开发者在使用它的过程中往往会遇到很多问题，尤其对于新手。本文分析了实际学习中遇到的问题，包括：1. File Explorer 不显示文件；2. 无权访问 data 等文件; 3. 无权下载文件等，涉及到 Monitor 的基本操作以及 adb shell 和命令行的操作等。<br><a id="more"></a></p>
@@ -2740,9 +2906,9 @@ Dialog<span class="token operator">::</span><span class="token operator">~</span
         
         <tags>
             
-            <tag> Qt </tag>
-            
             <tag> C++ </tag>
+            
+            <tag> Qt </tag>
             
         </tags>
         

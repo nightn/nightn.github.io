@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://nightn.com/"/>
-  <updated>2018-01-19T03:13:30.557Z</updated>
+  <updated>2018-08-05T14:39:46.855Z</updated>
   <id>http://nightn.com/</id>
   
   <author>
@@ -16,11 +16,49 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>C++对象内存布局初探（1）</title>
+    <link href="http://nightn.com/2018/08/05/cpp-object-memory-1/"/>
+    <id>http://nightn.com/2018/08/05/cpp-object-memory-1/</id>
+    <published>2018-08-05T14:37:56.000Z</published>
+    <updated>2018-08-05T14:39:46.855Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;C-对象内存布局初探（1）&quot;&gt;&lt;a href=&quot;#C-对象内存布局初探（1）&quot; class=&quot;headerlink&quot; title=&quot;C++对象内存布局初探（1）&quot;&gt;&lt;/a&gt;C++对象内存布局初探（1）&lt;/h1&gt;&lt;p&gt;C++ 对象内存布局是一个深入而有趣的话题。&lt;code&gt;sizeof&lt;/code&gt; 可以返回对象占用的内存大小，那具体存每个字节的是什么呢？对象的哪些成员会直接放到对象中，哪些不会？每个成员的排布顺序是怎么样的？当发生继承或复合时，子类对象的内存布局又是怎样的？虚函数的实现机制是什么？动态绑定在内存中是怎么体现？如何避免重复继承？「C++对象内存布局初探」系列便尝试着从内存布局的角度去回答这些问题，这是本系列的第一篇。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="C++" scheme="http://nightn.com/categories/C/"/>
+    
+    
+      <category term="C++" scheme="http://nightn.com/tags/C/"/>
+    
+      <category term="对象模型" scheme="http://nightn.com/tags/%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://nightn.com/2018/06/24/hello-world/"/>
+    <id>http://nightn.com/2018/06/24/hello-world/</id>
+    <published>2018-06-24T15:26:33.068Z</published>
+    <updated>2017-03-22T10:08:49.115Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post.
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Gulp for beginners(译)</title>
     <link href="http://nightn.com/2018/01/18/gulp-for-beginners/"/>
     <id>http://nightn.com/2018/01/18/gulp-for-beginners/</id>
     <published>2018-01-18T11:14:56.000Z</published>
-    <updated>2018-01-19T03:13:30.557Z</updated>
+    <updated>2018-01-19T03:13:30.558Z</updated>
     
     <summary type="html">
     
@@ -92,7 +130,7 @@
     <link href="http://nightn.com/2017/05/09/DSA-disjoint-set/"/>
     <id>http://nightn.com/2017/05/09/DSA-disjoint-set/</id>
     <published>2017-05-09T12:21:24.000Z</published>
-    <updated>2017-05-10T13:30:29.753Z</updated>
+    <updated>2017-05-10T13:30:29.754Z</updated>
     
     <summary type="html">
     
@@ -114,7 +152,7 @@
     <link href="http://nightn.com/2017/04/15/cloudviewer/"/>
     <id>http://nightn.com/2017/04/15/cloudviewer/</id>
     <published>2017-04-15T14:39:25.000Z</published>
-    <updated>2018-01-18T12:56:01.735Z</updated>
+    <updated>2018-01-18T12:56:01.736Z</updated>
     
     <summary type="html">
     
@@ -140,7 +178,7 @@
     <link href="http://nightn.com/2017/04/02/Android-develop-minofo-2/"/>
     <id>http://nightn.com/2017/04/02/Android-develop-minofo-2/</id>
     <published>2017-04-02T01:42:22.000Z</published>
-    <updated>2017-04-05T01:56:02.449Z</updated>
+    <updated>2017-04-05T01:56:02.450Z</updated>
     
     <summary type="html">
     
@@ -164,7 +202,7 @@
     <link href="http://nightn.com/2017/04/01/Android-develop-minofo-1/"/>
     <id>http://nightn.com/2017/04/01/Android-develop-minofo-1/</id>
     <published>2017-04-01T04:35:59.000Z</published>
-    <updated>2017-04-17T06:32:31.517Z</updated>
+    <updated>2017-04-17T06:32:31.518Z</updated>
     
     <summary type="html">
     
@@ -186,7 +224,7 @@
     <link href="http://nightn.com/2017/03/25/how-to-create-wealth/"/>
     <id>http://nightn.com/2017/03/25/how-to-create-wealth/</id>
     <published>2017-03-25T06:31:30.000Z</published>
-    <updated>2017-04-02T14:33:25.214Z</updated>
+    <updated>2017-04-02T14:33:25.215Z</updated>
     
     <summary type="html">
     
@@ -200,22 +238,6 @@
       <category term="《黑客与画家》" scheme="http://nightn.com/tags/%E3%80%8A%E9%BB%91%E5%AE%A2%E4%B8%8E%E7%94%BB%E5%AE%B6%E3%80%8B/"/>
     
       <category term="创业" scheme="http://nightn.com/tags/%E5%88%9B%E4%B8%9A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://nightn.com/2017/03/21/hello-world/"/>
-    <id>http://nightn.com/2017/03/21/hello-world/</id>
-    <published>2017-03-21T15:28:53.590Z</published>
-    <updated>2017-03-22T10:08:49.114Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post.
-    
-    </summary>
-    
     
   </entry>
   
@@ -290,7 +312,7 @@
     <link href="http://nightn.com/2017/01/21/OpenCV-Mat-introduction/"/>
     <id>http://nightn.com/2017/01/21/OpenCV-Mat-introduction/</id>
     <published>2017-01-21T08:19:00.000Z</published>
-    <updated>2017-04-02T14:34:15.932Z</updated>
+    <updated>2017-04-02T14:34:15.933Z</updated>
     
     <summary type="html">
     
@@ -345,9 +367,9 @@
       <category term="Qt" scheme="http://nightn.com/categories/Qt/"/>
     
     
-      <category term="Qt" scheme="http://nightn.com/tags/Qt/"/>
-    
       <category term="C++" scheme="http://nightn.com/tags/C/"/>
+    
+      <category term="Qt" scheme="http://nightn.com/tags/Qt/"/>
     
   </entry>
   
