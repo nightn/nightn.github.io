@@ -38,22 +38,6 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://nightn.com/2018/06/24/hello-world/"/>
-    <id>http://nightn.com/2018/06/24/hello-world/</id>
-    <published>2018-06-24T15:26:33.068Z</published>
-    <updated>2017-03-22T10:08:49.115Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post.
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Gulp for beginners(译)</title>
     <link href="http://nightn.com/2018/01/18/gulp-for-beginners/"/>
     <id>http://nightn.com/2018/01/18/gulp-for-beginners/</id>
@@ -370,6 +354,22 @@
       <category term="C++" scheme="http://nightn.com/tags/C/"/>
     
       <category term="Qt" scheme="http://nightn.com/tags/Qt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://nightn.com/2016/01/01/hello-world/"/>
+    <id>http://nightn.com/2016/01/01/hello-world/</id>
+    <published>2016-01-01T14:00:00.000Z</published>
+    <updated>2018-08-05T14:49:23.262Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post.
+    
+    </summary>
+    
     
   </entry>
   
