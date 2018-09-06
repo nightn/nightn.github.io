@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>geo2svg demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .page {
+            height: 100%;
+            display: flex;
+        }
+
+        .left,
+        .right {
+            flex: 1;
+            border-right: 1px solid #ccc;
+            padding-left: 10px;
+        }
+
+        .right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        textarea {
+            font-size: 14px;
+        }
+
+        #btn-convert {
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        #svg-container {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="left">
+            <h1>geo2svg demo</h1>
+            <a href="https://github.com/nightn/geo2svg" target="blank">see code</a>
+            <div class="sub-title">Put geojson string here (support Polygon only yet)</div>
+            <textarea id="geojson-text" cols="100" rows="20"></textarea>
+            <div class="sub-title">option</div>
+            <textarea id="option-text" cols="100" rows="12"></textarea>
+            <div>
+                <button id="btn-convert">Convert</button>
+            </div>
+        </div>
+        
+        <div class="right">
+            <div id="svg-container"></div>
+        </div>
+
+    </div>
+
+    <script src="./geo2svg.js"></script>
+    <script>
+
+        var geojsonText = document.getElementById('geojson-text');
+        var optionText = document.getElementById('option-text');
+        var btnConvert = document.getElementById('btn-convert');
+        var svgContainer = document.getElementById('svg-container');
+
+        var g = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [120.12159347534178, 30.260105112263386],
+                                [120.12639999389648, 30.23178108955747],
+                                [120.15111923217772, 30.231632774762375],
+                                [120.16056060791016, 30.25194981710498],
+                                [120.14373779296875, 30.266480598629396],
+                                [120.12159347534178, 30.260105112263386]
+                            ]
+                        ]
+                    }
+                }
+            ]
+        };
+
+        geojsonText.value = JSON.stringify(g);
+        
+        var option = {
+            size: [500, 500],
+            padding: [10, 10, 10, 10],
+            fill: 'green',
+            fillOpacity: 0.5,
+            stroke: 'blue',
+            strokeWidth: 3,
+            background: '#ccc',
+            precision: 6,
+            output: 'element'
+        };
+
+        optionText.value = JSON.stringify(option);
+
+        convert();
+
+        btnConvert.addEventListener('click', convert);
+
+        function convert() {
+            svgContainer.innerHTML = '';
+            var geojsonStr = geojsonText.value;
+            var optionStr = optionText.value;
+            var geojson = JSON.parse(removeSpace(geojsonStr));
+            var option = JSON.parse(removeSpace(optionStr));
+            console.log(geojson);
+            console.log(option);
+            svgContainer.appendChild(geo2svg(geojson, option));
+        }
+
+        function removeSpace(str) {
+            return str.split('').filter(function(item) {
+                return (item != ' ' && item != '\n');
+            }).join('');
+        }
+        
+          
+        
+
+    </script>
+</body>
+</html>
