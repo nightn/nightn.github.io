@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +35,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         textarea {
             font-size: 14px;
         }
@@ -54,11 +55,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="page">
         <div class="left">
             <h1>geo2svg demo</h1>
             <a href="https://github.com/nightn/geo2svg" target="blank">see code</a>
+            <br>
+            you can get geojson data from <a href="http://geojson.io/">geojson.io</a>
             <div class="sub-title">Put geojson string here (support Polygon only yet)</div>
             <textarea id="geojson-text" cols="100" rows="20"></textarea>
             <div class="sub-title">option</div>
@@ -67,7 +71,7 @@
                 <button id="btn-convert">Convert</button>
             </div>
         </div>
-        
+
         <div class="right">
             <div id="svg-container"></div>
         </div>
@@ -89,15 +93,245 @@
                     "type": "Feature",
                     "properties": {},
                     "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [
+                                87.978515625,
+                                39.977120098439634
+                            ],
+                            [
+                                100.37109375,
+                                31.052933985705163
+                            ],
+                            [
+                                104.94140625,
+                                43.51668853502906
+                            ],
+                            [
+                                92.10937499999999,
+                                48.16608541901253
+                            ],
+                            [
+                                95.2734375,
+                                50.62507306341435
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
                         "type": "Polygon",
                         "coordinates": [
                             [
-                                [120.12159347534178, 30.260105112263386],
-                                [120.12639999389648, 30.23178108955747],
-                                [120.15111923217772, 30.231632774762375],
-                                [120.16056060791016, 30.25194981710498],
-                                [120.14373779296875, 30.266480598629396],
-                                [120.12159347534178, 30.260105112263386]
+                                [
+                                    108.017578125,
+                                    40.78054143186033
+                                ],
+                                [
+                                    112.763671875,
+                                    32.10118973232094
+                                ],
+                                [
+                                    125.41992187499999,
+                                    35.10193405724606
+                                ],
+                                [
+                                    120.58593749999999,
+                                    45.460130637921004
+                                ],
+                                [
+                                    111.796875,
+                                    50.45750402042058
+                                ],
+                                [
+                                    108.017578125,
+                                    40.78054143186033
+                                ]
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            79.453125,
+                            47.27922900257082
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            87.71484375,
+                            41.77131167976407
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            88.330078125,
+                            30.44867367928756
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [
+                                    80.33203125,
+                                    41.376808565702355
+                                ],
+                                [
+                                    73.037109375,
+                                    35.67514743608467
+                                ],
+                                [
+                                    87.71484375,
+                                    36.66841891894786
+                                ],
+                                [
+                                    84.111328125,
+                                    44.465151013519616
+                                ],
+                                [
+                                    80.33203125,
+                                    41.376808565702355
+                                ]
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [
+                                124.1015625,
+                                42.61779143282346
+                            ],
+                            [
+                                128.935546875,
+                                47.39834920035926
+                            ],
+                            [
+                                116.01562499999999,
+                                53.69670647530323
+                            ],
+                            [
+                                98.87695312499999,
+                                56.511017504952136
+                            ],
+                            [
+                                89.56054687499999,
+                                52.696361078274485
+                            ],
+                            [
+                                72.24609375,
+                                53.85252660044951
+                            ],
+                            [
+                                67.412109375,
+                                42.61779143282346
+                            ],
+                            [
+                                62.57812500000001,
+                                47.15984001304432
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            105.732421875,
+                            34.45221847282654
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            63.984375,
+                            37.996162679728116
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [
+                                    68.115234375,
+                                    24.686952411999155
+                                ],
+                                [
+                                    78.134765625,
+                                    24.686952411999155
+                                ],
+                                [
+                                    78.134765625,
+                                    34.45221847282654
+                                ],
+                                [
+                                    68.115234375,
+                                    34.45221847282654
+                                ],
+                                [
+                                    68.115234375,
+                                    24.686952411999155
+                                ]
+                            ]
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [
+                            [
+                                96.767578125,
+                                29.22889003019423
+                            ],
+                            [
+                                100.634765625,
+                                18.646245142670608
+                            ],
+                            [
+                                110.74218749999999,
+                                27.68352808378776
+                            ],
+                            [
+                                104.58984375,
+                                30.29701788337205
                             ]
                         ]
                     }
@@ -105,18 +339,20 @@
             ]
         };
 
+
         geojsonText.value = JSON.stringify(g);
-        
+
         var option = {
-            size: [500, 500],
-            padding: [10, 10, 10, 10],
-            fill: 'green',
-            fillOpacity: 0.5,
-            stroke: 'blue',
-            strokeWidth: 3,
-            background: '#ccc',
-            precision: 6,
-            output: 'element'
+            size: [512, 512],           // size[0] is svg width, size[1] is svg height
+            padding: [10, 10, 10, 10],  // paddingTop, paddingRight, paddingBottom, paddingLeft, respectively
+            output: 'element',           // output type: 'string' | 'element'(only supported in browser)
+            precision: 3,               // svg coordinates precision
+            stroke: 'red',              // stroke color
+            strokeWidth: '2px',         // stroke width
+            background: '#ccc',         // svg background color, and as the fill color of polygon hole
+            fill: 'green',               // fill color
+            fillOpacity: 0.5,             // fill opacity
+            radius: 5                   // only for `Point`, `MultiPoint`
         };
 
         optionText.value = JSON.stringify(option);
@@ -137,14 +373,15 @@
         }
 
         function removeSpace(str) {
-            return str.split('').filter(function(item) {
+            return str.split('').filter(function (item) {
                 return (item != ' ' && item != '\n');
             }).join('');
         }
-        
-          
-        
+
+
+
 
     </script>
 </body>
+
 </html>
