@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            CloudViewer | 
+        
+        Nightn
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Nightn">
+    <meta name="description" content="It always seems impossible until it&#39;s done">
+    <meta name="keywords" content="null,CloudViewer,Qt,PCL,点云">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Nightn">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://nightn.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CloudViewer | Nightn">
+    <meta property="og:description" content="It always seems impossible until it&#39;s done">
+    <meta property="og:article:tag" content="CloudViewer"> <meta property="og:article:tag" content="Qt"> <meta property="og:article:tag" content="PCL"> <meta property="og:article:tag" content="点云"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "PingFang SC", "Helvetica Neue", Helvetice, "Source Sans Pro", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F2F2F2;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+<link rel="stylesheet" href="/css/prism-coy.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CloudViewer-简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">CloudViewer 简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CloudViewer-下载及声明"><span class="post-toc-number">2.</span> <span class="post-toc-text">CloudViewer 下载及声明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CloudViewer-使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">CloudViewer 使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-点云-IO"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. 点云 IO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1-打开点云"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">1.1 打开点云</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-添加点云"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">1.2 添加点云</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-保存点云"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">1.3 保存点云</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4-清空点云"><span class="post-toc-number">3.1.4.</span> <span class="post-toc-text">1.4 清空点云</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5-点云格式转换"><span class="post-toc-number">3.1.5.</span> <span class="post-toc-text">1.5 点云格式转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-点云基本操作"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. 点云基本操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1-改变点云颜色"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">2.1 改变点云颜色</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2-点云格式转换"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">2.2 点云格式转换</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3-合并点云"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">2.3 合并点云</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-可视化基本操作"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3. 可视化基本操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-设置背景颜色"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">3.1 设置背景颜色</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2-设置点云可视化尺寸"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">3.2 设置点云可视化尺寸</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-设置视图方位"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">3.3 设置视图方位</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-网格面片显示及网格线框显示"><span class="post-toc-number">3.3.4.</span> <span class="post-toc-text">3.4 网格面片显示及网格线框显示</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-模型生成"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. 模型生成</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-1-立方点云生成"><span class="post-toc-number">3.4.1.</span> <span class="post-toc-text">4.1 立方点云生成</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-2-基本三维模型生成"><span class="post-toc-number">3.4.2.</span> <span class="post-toc-text">4.2 基本三维模型生成</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-其他功能"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5. 其他功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-1-停靠窗口的显示与隐藏"><span class="post-toc-number">3.5.1.</span> <span class="post-toc-text">5.1 停靠窗口的显示与隐藏</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-2-Console-窗口"><span class="post-toc-number">3.5.2.</span> <span class="post-toc-text">5.2 Console 窗口</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-3-资源管理树"><span class="post-toc-number">3.5.3.</span> <span class="post-toc-text">5.3 资源管理树</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-4-属性管理器"><span class="post-toc-number">3.5.4.</span> <span class="post-toc-text">5.4 属性管理器</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-5-关于"><span class="post-toc-number">3.5.5.</span> <span class="post-toc-text">5.5 关于</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CloudViewer-总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">CloudViewer 总结</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                CloudViewer
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/kaito.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Nightn</strong>
+        <span>4月 15, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACYklEQVR42u3aQW4DMQgF0Nz/0u22UlXnAxMyjd6somnq+LEwFvD4+ujngYeHh4eHh4eHdzPeI37+XK74159vfn/+602+Nzw8PLwd3pOj9rjF85sEc/5OeW94eHh4i7z8J6vH/Xlz+ZrnveHh4eHdmVdNLedvVsOKh4eH93955wP9XMjoJRs8PDy8u/GSA/1cSM0x8+s4Hh4e3nt5eZNp//Nqfw8PDw8v4JVHmorDBL0L92iHeHh4eC/m5QdxPlKQkOaJAQ8PD+9dvGo5IC8lTAq7efiiKzUeHh7eOi//mVenluRaj4eHh7fDq/7AvFWWN8zy1fDw8PD2efmiyaZ7hdok5TwJDR4eHt4Kr1eMqLbBquNWvfSAh4eH92re/OjPV6smhioeDw8Pb4fXuwr3glI+4uOw4uHh4d2Nlw9FVUOQDASUQ4CHh4f3Yt5VyaBaqO2NEVxQjMDDw8Mb86pHfz5KVWhZtb5z8UwZHh4eXovXO/Tzg37SYCuUmPHw8PBWeNUDvceuJpL8eo2Hh4e3yRsVTIMQVN/3yhN4eHh47+JVr7Z5kkjWzC/lT/4LDw8Pb5FXbfBXj/skCVULxKO8h4eHh3cRb9Ie6xWI58OveHh4eJu86tNLHvkVvBdiPDw8vE3etYdy3tZKQpMXRPDw8PD2edXya5Ie8vDlZYgoteDh4eEt8vLtVi/Z1RGESTjw8PDw7smLGlFBIPLLdGF4Cw8PD++WvN6m50XhaE08PDy8RV7elOo1uvKxg0lZGQ8PD2+HVy0B9FpZvSSRX9nx8PDwdnif9+Dh4eHh4eHh4d3g+QZwSzUA1oTHJQAAAABJRU5ErkJggg==">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/CloudViewer/">CloudViewer</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/PCL/">PCL</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Qt/">Qt</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/点云/">点云</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+        
+            <!-- Busuanzi Views -->
+            <a class="post_share-link" href="#">
+                <li class="mdl-menu__item">
+                    <span id="busuanzi_container_page_pv">
+                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
+                    </span>
+                </li>
+            </a>
+        
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=CloudViewer&url=http://nightn.com//2017/04/15/cloudviewer/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=CloudViewer&url=http://nightn.com//2017/04/15/cloudviewer/index.html&via=Nightn" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://nightn.com//2017/04/15/cloudviewer/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://nightn.com//2017/04/15/cloudviewer/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Nightn&title=CloudViewer&summary=It always seems impossible until it&#39;s done&pics=http://nightn.com/img/favicon.png&url=http://nightn.com/2017/04/15/cloudviewer/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="CloudViewer-简介"><a href="#CloudViewer-简介" class="headerlink" title="CloudViewer 简介"></a>CloudViewer 简介</h2><p>CloudViewer （点云可视化软件）是一款面向三维点云数据处理、点云开发专业人员及爱好者的三维点云可视化软件，该软件具备以下功能：</p>
+<a id="more"></a>
+<ol>
+<li><p><strong>点云 IO</strong>。常见点云格式文件（如 ply, pcd 和 obj）的读取、保存、删除清空及可视化。</p>
+</li>
+<li><p><strong>点云的基本操作</strong>。设置点云颜色，合并多个点云，点云格式转换等。</p>
+</li>
+<li><p><strong>可视化的基本操作</strong>。设置视图窗口背景颜色，设置点云的可视化尺寸，设置坐标系的显示，设置视图方位（Main view, Left view, Top view），网格面片显示，网格线框显示等。</p>
+</li>
+<li><p><strong>模型生成</strong>。生成简单立方排布的点云以及基本三维模型，该功能主要用于测试。</p>
+</li>
+<li><p><strong>软件界面基本功能</strong>。软件由: [1] 菜单栏、[2] 工具栏、[3] 资源管理树、[4] 属性管理器、[5] 输出窗口、[6] 状态栏、[7] 视图窗口以及 [8] RGB 窗口组成。其中部分都是停靠窗口，可以在菜单栏的视图选项设置是否显示，方便用户自定义软件界面。软件还提供 Windows 和 Darcula 两大主题，其中 Darcula 主题为默认主题，仿照 Visual Studio 和 Android Studio 相应暗系主题设计，极具极客风范。不过为了适应大部分用户，本手册中的示例都是在 Windows 主题下操作的。</p>
+<p><img src="img/界面介绍带标号.png" width="750"></p>
+</li>
+</ol>
+<h2 id="CloudViewer-下载及声明"><a href="#CloudViewer-下载及声明" class="headerlink" title="CloudViewer 下载及声明"></a>CloudViewer 下载及声明</h2><ol>
+<li><strong>软件下载</strong>：<a href="http://on2kkr82s.bkt.clouddn.com/CloudViewer.rar" target="_blank" rel="external">CloudViewer 下载</a> （软件大小 23.7 MB，目前仅支持 Windows 系统)。</li>
+<li><strong>Github 源码</strong>：<a href="https://github.com/nightn/CloudViewer" target="_blank" rel="external">https://github.com/nightn/CloudViewer</a> （欢迎 Star 和 Fork）</li>
+<li><strong>使用手册</strong>：<a href="http://nightn.com/2017/04/15/cloudviewer">http://nightn.com/2017/04/15/cloudviewer</a></li>
+<li><strong>开发环境</strong>：CloudViewer 是用 Windows 10 (64 位) 系统下的 Mircosoft Visual Studio Professional 2013，结合使用 Qt 5.7.0 (64 位) 及 PCL 1.8.0 (64 位) 等开源库进行开发的。</li>
+<li><strong>资源使用</strong>：软件所使用的图片资源均来源于 <a href="http://www.easyicon.net" target="_blank" rel="external">www.easyicon.net</a>。</li>
+<li><strong>声明</strong>：本软件用作分享与学习，若转载请注明出处，勿作任何商业用途。</li>
+</ol>
+<h2 id="CloudViewer-使用"><a href="#CloudViewer-使用" class="headerlink" title="CloudViewer 使用"></a>CloudViewer 使用</h2><h3 id="1-点云-IO"><a href="#1-点云-IO" class="headerlink" title="1. 点云 IO"></a>1. 点云 IO</h3><p>点云 IO 操作主要包括 <code>Open</code>, <code>Add</code>, <code>Save</code>, <code>Clear</code> 和 <code>Change</code> 等。</p>
+<h4 id="1-1-打开点云"><a href="#1-1-打开点云" class="headerlink" title="1.1 打开点云"></a>1.1 打开点云</h4><p><strong>[重要说明] 点云存放路径不能有中文字符，否则点云不能正常打开！</strong></p>
+<p>点云是由很多个具有三维坐标 x, y, z 的点组成的数据格式，除了位置信息外，点云还可以包含颜色信息（点云的 RGB 值）、透明信息、法线信息等。目前常用的点云格式有 pcd, ply 以及 obj 格式。打开这三种格式的点云主要通过 Qt 库的文件对话框和 PCL 库中载入点云数据的相关 API 实现。</p>
+<p>点云 IO 的常用操作可以在 <code>File</code> 菜单及工具栏中找到：</p>
+<p><img src="img/File 菜单和工具栏.png" width="500"></p>
+<p>打开动作 <code>Open</code> 的实现效果如下图，支持多选进行批量打开。</p>
+<p><img src="img/打开点云NEW.png" width="650"></p>
+<h4 id="1-2-添加点云"><a href="#1-2-添加点云" class="headerlink" title="1.2 添加点云"></a>1.2 添加点云</h4><p>点云处理中，有时需要同时对多个点云在同一视图窗口进行可视化和处理。添加点云 <code>Add</code> 每次可以添加一个或多个点云文件，而不会清空后台已经缓存的点云数据，也不会清空视图窗口已经显示的点云模型。理论上，添加点云的数量没有限制。<code>Add</code> 实现效果如下图（为了便于区分，将点云设置成了不同颜色）：</p>
+<p><img src="img/打开多个点云NEW.png" width="650"></p>
+<h4 id="1-3-保存点云"><a href="#1-3-保存点云" class="headerlink" title="1.3 保存点云"></a>1.3 保存点云</h4><p>保存点云 <code>Save</code> 有两个特点：</p>
+<ul>
+<li><p><strong>多类型保存</strong>。<code>Open</code> 可以实现对 pcd, ply 和 obj 等格式文件的多类型打开，<code>Save</code> 也可以将文件保存成 pcd, ply 等多种类型，这样也就实现了点云的格式转换功能：</p>
+<p><img src="img/open_save.png" width="300"></p>
+</li>
+</ul>
+<ul>
+<li><strong>多文件保存</strong>。CloudViewer 还能将视图窗口显示的所有点云保存为同一个文件，实现了多文件的合并保存。</li>
+</ul>
+<h4 id="1-4-清空点云"><a href="#1-4-清空点云" class="headerlink" title="1.4 清空点云"></a>1.4 清空点云</h4><p>清空点云 <code>Clear</code> 可将视图窗口中的所有点云模型及后台缓存数据清空。</p>
+<h4 id="1-5-点云格式转换"><a href="#1-5-点云格式转换" class="headerlink" title="1.5 点云格式转换"></a>1.5 点云格式转换</h4><p>格式转换 <code>Change</code>  暂时未做实现。因为通过 <code>Open</code> 和 <code>Save</code> 就可以完成点云格式转换。  </p>
+<h3 id="2-点云基本操作"><a href="#2-点云基本操作" class="headerlink" title="2. 点云基本操作"></a>2. 点云基本操作</h3><p>点云基本操作会直接影响点云文件的内容，基本功能包括<strong>改变点云颜色</strong>、<strong>点云格式转换</strong>、<strong>点云合并</strong>等。</p>
+<h4 id="2-1-改变点云颜色"><a href="#2-1-改变点云颜色" class="headerlink" title="2.1 改变点云颜色"></a>2.1 改变点云颜色</h4><p>点云中的点不但具有三维信息（x, y, z 坐标），还具有颜色信息（R, G, B），为了更形象地描述点云模型，抑或是为了区分不同点云模型，出于这样的目的，我们需要对点云模型的颜色进行修改。具体包括的功能为：</p>
+<ul>
+<li><p>调整RGB值改变单一点云文件颜色。</p>
+<p><img src="img/改变点云颜色-演示.png" width="600"></p>
+</li>
+<li><p>在多个点云同时显示时，通过在资源管理树的item进行选择，实现对某一个选定的点云进行颜色变换。</p>
+</li>
+<li><p>既可以通过滑块控件设置RGB，又可以通过颜色对话框来选择具体颜色。</p>
+</li>
+<li><p>随机上色功能。</p>
+<p><img src="img/随机颜色-演示.png" width="600"></p>
+</li>
+</ul>
+<h4 id="2-2-点云格式转换"><a href="#2-2-点云格式转换" class="headerlink" title="2.2 点云格式转换"></a>2.2 点云格式转换</h4><p>点云文件的格式种类非常多，常见的能用 PCL 库直接处理的包括 ply, pcd 等，三维扫描仪保存的 wrl 格式。我们往往需要对点云格式进行转换，但是目前存在的主流点云软件，如 Geomagic Studio，Rapidform，MeshLab 等对点云格式转换的支持并不令人满意（比如 Geomagic Studio 能够导入ply文件并对其进行操作，但却不能保存为 ply，只能保存为 wrl。然后需要利用 MeshLab 将 wrl 转换为 ply，最后还需要利用自己写的程序将 ply 转为 pcd，过程非常麻烦！）</p>
+<p>CloudViewer 目前实现了多种点云格式的相互转换（wrl文件的转换还有待进一步开发），通过打开并另存为即可实现三种不同点云格式之间的相互转换，打开和保存的实现可以参见上述部分。如下图：</p>
+<p><img src="img/open_save.png" width="300"></p>
+<h4 id="2-3-合并点云"><a href="#2-3-合并点云" class="headerlink" title="2.3 合并点云"></a>2.3 合并点云</h4><p>点云合并 = “多点云打开” + “多点云保存”。上述打开和保存功能已经实现了点云合并功能，在此不再赘述。</p>
+<h3 id="3-可视化基本操作"><a href="#3-可视化基本操作" class="headerlink" title="3. 可视化基本操作"></a>3. 可视化基本操作</h3><p>可视化基本操作主要包括<strong>设置背景颜色</strong>，<strong>设置点云的可视化尺寸</strong>，<strong>设置视图方位</strong>（Main view, Left view, Top view），<strong>网格面片显示</strong>以及<strong>网格线框显示</strong>等。</p>
+<h4 id="3-1-设置背景颜色"><a href="#3-1-设置背景颜色" class="headerlink" title="3.1 设置背景颜色"></a>3.1 设置背景颜色</h4><p>视图窗口中的点云颜色可以更改，背景颜色亦然，效果如下：</p>
+<p><img src="img/设置背景颜色-演示.png" width="600"></p>
+<h4 id="3-2-设置点云可视化尺寸"><a href="#3-2-设置点云可视化尺寸" class="headerlink" title="3.2 设置点云可视化尺寸"></a>3.2 设置点云可视化尺寸</h4><p>点云由很多点构成，每个点本身具有颜色信息，但是没有尺寸大小的信息。但需要以不同大小进行显示，这是可视化的任务，不涉及对点云本身的修改。设置点云可视化尺寸功能效果如下，分别对应size = 1, 2, 3时点云的大小，为了不影响点云操作，允许的最大尺寸为10（因为点的尺寸越大，渲染速度越慢，对点云的操作也不方便）。</p>
+<p><img src="img/尺寸设置-演示2.png" width="600"></p>
+<h4 id="3-3-设置视图方位"><a href="#3-3-设置视图方位" class="headerlink" title="3.3 设置视图方位"></a>3.3 设置视图方位</h4><p>设置可视化的视图方位提供了三种不同的视图，主视图（Main View），左视图（Left View）和俯视图（Top View），通过选择相应的视图方位，实现对点云更加快捷的操作。设置视图方位效果如下：</p>
+<p><img src="img/设置视图方位.png"></p>
+<h4 id="3-4-网格面片显示及网格线框显示"><a href="#3-4-网格面片显示及网格线框显示" class="headerlink" title="3.4 网格面片显示及网格线框显示"></a>3.4 网格面片显示及网格线框显示</h4><p>PCL库中提供了非常强大的点云处理功能。在CloudViewer中，实现了点云的网格面片显示和网格线框显示，实现分为三步：点云法线估计，曲面重建和网格显示。显示效果如下：</p>
+<ul>
+<li><p>网格面片显示：</p>
+<p><img src="img/网格面片显示.png" width="600"></p>
+</li>
+<li><p>网格线框显示：</p>
+<p><img src="img/网格线框显示.png" width="600"></p>
+</li>
+</ul>
+<h3 id="4-模型生成"><a href="#4-模型生成" class="headerlink" title="4. 模型生成"></a>4. 模型生成</h3><h4 id="4-1-立方点云生成"><a href="#4-1-立方点云生成" class="headerlink" title="4.1 立方点云生成"></a>4.1 立方点云生成</h4><p>这是一个非常简单但很实用的功能，当你没有点云数据时，可以通过这个功能，生成一个由50000个点随机排布成的立方，如下图所示：</p>
+<p><img src="img/cube生成.png" width="600"></p>
+<h4 id="4-2-基本三维模型生成"><a href="#4-2-基本三维模型生成" class="headerlink" title="4.2 基本三维模型生成"></a>4.2 基本三维模型生成</h4><p>仅实现了球体的生成。球体生成效果如下图所示：</p>
+<p><img src="img/创建球体.png" width="600"></p>
+<h3 id="5-其他功能"><a href="#5-其他功能" class="headerlink" title="5. 其他功能"></a>5. 其他功能</h3><h4 id="5-1-停靠窗口的显示与隐藏"><a href="#5-1-停靠窗口的显示与隐藏" class="headerlink" title="5.1 停靠窗口的显示与隐藏"></a>5.1 停靠窗口的显示与隐藏</h4><p>CloudViewer 包含四个停靠窗口：资源管理树（Data Manager）、属性管理器（Property Manager）、输出窗口（Console）以及RGB窗口（RGB Manager）。通过 View 菜单的选项可以实现停靠窗口的显示及隐藏。</p>
+<p><img src="img/停靠.png" width="300"></p>
+<h4 id="5-2-Console-窗口"><a href="#5-2-Console-窗口" class="headerlink" title="5.2 Console 窗口"></a>5.2 Console 窗口</h4><p>输出窗口提供了记录你的操作日志，方便查看，通过右击选择 <code>Clear</code> 可以进行清空，如果你觉得输出窗口没有必要，也可以通过右击选择 <code>Disable console</code> 和 <code>Enable console</code> 来禁用或使用输出窗口。</p>
+<p><img src="img/console.png" width="700"></p>
+<h4 id="5-3-资源管理树"><a href="#5-3-资源管理树" class="headerlink" title="5.3 资源管理树"></a>5.3 资源管理树</h4><p>资源管理树显示了当前打开的所有点云，可以通过单选或多选，然后右键，进行点云的隐藏、显示、删除设置颜色等操作，非常快捷。</p>
+<p><img src="img/资源管理树.png"></p>
+<h4 id="5-4-属性管理器"><a href="#5-4-属性管理器" class="headerlink" title="5.4 属性管理器"></a>5.4 属性管理器</h4><p>属性管理器记录了选中点云的一些属性：选中点云的点的数量、RGB 信息，还包括打开的点云的总个数，及所有点云点的数量等。</p>
+<p><img src="img/属性管理器.png"></p>
+<h4 id="5-5-关于"><a href="#5-5-关于" class="headerlink" title="5.5 关于"></a>5.5 关于</h4><p>通过 <code>Help</code> 可以访问我的博客，查看 CloudViewer 的使用手册（后续会出开发手册）。<code>About</code> 界面记录了 CloudViewer 的版本信息和开发者信息。</p>
+<p><img src="img/关于窗口.png" width="350"></p>
+<h2 id="CloudViewer-总结"><a href="#CloudViewer-总结" class="headerlink" title="CloudViewer 总结"></a>CloudViewer 总结</h2><p>CloudViewer 作为一款点云可视化软件，提供了多点云类型，多文件的读取和写入，并实现了点云类型的转换及点云模型的合并。在此基础上，还提供了丰富的可视化操作，如设置点云颜色及尺寸，设置显示背景颜色，点云的网格面片显示，点云的网格线框显示等；此外，还提供了简单的模型生成及绘制功能，如生成立方随机排布的点云模型，绘制基本三维模型如球体和圆柱体等。在界面上，综合运用了 VTK 显示窗口，停靠窗口，文件树窗口，列表窗口，菜单栏，工具栏，状态栏等一系列 Qt 控件，并建立了功能丰富的多种信号槽联系。</p>
+<p>在实际测试中，点云的读取和处理速度也非常快，在本机打开包含 50000 个点的点云文件，耗时不超过1秒，打开包含 170000 个点的点云文件，耗时 3 秒左右。而且在程序设计中，综合考虑了各种用户可能会执行的违规操作，为了防止软件崩溃，对多种错误操作进行了合理反馈。</p>
+<p>CloudViewer 还有进一步提升的空间。作为一款点云可视化软件，在后期开发中应该会加入少量三维点云处理的功能，如多角度拍摄的点云进行拼接，点云三角化及光学渲染等。最后，比较重要的一点是，软硬件结合，由于实验室常用微软的 Kinect2.0 获取点云数据，但是微软自带的 SDK 采集到的数据不能很好的反应点云的颜色信息（颜色是根据深度信息来确定的，而不是物体的实际颜色），因此，还可以考虑增加 CloudViewer 与 Kinect 连接及实时可视化的功能。相信随着更多功能的添加，CloudViewer 能够更加胜任在实际实验中的点云获取，点云可视化和点云处理的方方面面。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+    <!-- 使用 DISQUS_CLICK -->
+    <div id="disqus-comment">	
+        <div id="disqus_thread"></div>
+<!-- include js -->
+<script src="/js/ripple.js"></script>
+
+<!-- add animation -->
+<style>
+        .ripple-container {
+        }
+        .ripple-container .ripple{
+            background-color: rgba(255,255,255,0.4);
+            animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+		.disqus_click_btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 10px 20px;
+            border:0;
+            font-size: 14px;
+            cursor: pointer
+        }
+</style>
+	
+<!-- add data-ripple attribute -->
+<div class="btn_click_load"> 
+    <button class="disqus_click_btn" data-ripple>阅读评论 「请确保 disq.us &amp; disquscdn.com &amp; disqus.com 可以正常加载」</button>
+</div>
+	
+<script>
+    // add effect to elements
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function(element){
+        // find all elements and attach effect
+        new RippleEffect(element); // element is instance of javascript element node
+    });
+</script>
+
+<script>
+    $('.btn_click_load').click(function() {  //click to load comments
+        var disqus_config = function () {
+            this.page.url = 'http://nightn.com/2017/04/15/cloudviewer/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//nightn.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+  	
+
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/05/09/DSA-disjoint-set/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/04/02/Android-develop-minofo-2/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/kaito.png" alt="Nightn's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        nightn.dev@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/nightn" target="_blank" title="Github">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">cloud</i>
+                        
+                        Github
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="Mailto:nightn.dev@gmail.com" target="_blank" title="Email me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Android/">Android<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Android-Studio/">Android Studio<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/C/">C++<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Computer-Systems/">Computer Systems<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/DSA/">DSA<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Front-End/">Front End<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/JavaScript/">JavaScript<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Mind-Explorer/">Mind Explorer<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/OpenCV/">OpenCV<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/Qt/">Qt<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/gallery" title="图库">
+                
+                    <i class="material-icons sidebar-material-icons">insert_photo</i>
+                
+                图库
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">label</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/links" title="友情链接">
+                
+                    <i class="material-icons sidebar-material-icons">touch_app</i>
+                
+                友情链接
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/nightn" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+		
+		<div>
+			<!--Copyright-->
+			<div id="copyright">
+				Copyright&nbsp;©&nbsp;
+				<script type="text/javascript">
+					var fd = new Date();
+					document.write(fd.getFullYear());
+				</script>
+				&nbsp;Nightn's Blog
+			</div>
+			<div>
+
+					<div>
+					<center>
+						本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
+						你是第 <span id="busuanzi_value_site_uv"></span> 个来到的小伙伴
+					</center>
+					</div>
+					<div>
+					<center>
+						本博客采用<a style="text-decoration:none" rel="license" href="http://nightn.com/creative-commons"> 知识共享协议 署名-非商业性使用-相同方式共享 3.0 未本地化版本 </a>进行许可
+					</center>
+					</div>
+			</div>
+		</div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+    <!-- Busuanzi -->
+    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+    <script>
+    var searchFunc = function(path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: 'xml',
+            success: function( xmlResponse ) {
+                // get the contents from search data
+                var datas = $( 'entry', xmlResponse ).map(function() {
+                    return {
+                        title: $( 'title', this ).text(),
+                        content: $('content',this).text(),
+                        url: $( 'url' , this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function() {
+                    var str='<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = '';
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function(data) {
+                        var isMatch = true;
+                        var content_index = [];
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g,'').toLowerCase();
+                        var data_url = data.url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if(data_title !== '' && data_content !== '') {
+                            keywords.forEach(function(keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if( index_title < 0 && index_content < 0 ) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += '<li><a href="'+ data_url +'" class="search-result-title" target="_blank">'+ data_title;
+                            var content = data.content.trim().replace(/<[^>]+>/g, '');
+                            if (first_occur >= 0) {
+                                // cut out characters
+                                var start = first_occur - 6;
+                                var end = first_occur + 6;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 10;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, 'gi');
+                                    match_content = match_content.replace(regS, '<em class="search-keyword">'+keyword+'</em>');
+                                })
+                                str += '<p class="search-result">' + match_content + '...</p>' +'</a>';
+                            }
+                        }
+                    });
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    }
+</script>
+
+
+    <script>
+        var inputArea = document.querySelector('#search');
+        var getSearchFile = function() {
+            var path = 'search.xml';
+            searchFunc(path, 'search', 'local-search-result');
+        }
+
+        if(inputArea) {
+            inputArea.onfocus = function() {
+                getSearchFile();
+            }
+        }
+    </script>
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+        </body>
+    
+</html>
