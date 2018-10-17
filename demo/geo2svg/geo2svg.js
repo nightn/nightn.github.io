@@ -56,9 +56,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
     svg.createPath = function (points, option) {
         var p = option.precision;
+        // firefox cannot use common as splitor, so use space
         var pathd = points.map(function (pt, index) {
             return '' + (index === 0 ? 'M' : 'L') + pt[0].toFixed(p) + ' ' + pt[1].toFixed(p);
-        }).join(',');
+        }).join(' ');
         var svgStr = '<path d="' + pathd + '" />';
         return svg.style(svgStr, option);
     };
@@ -346,7 +347,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
     };
 
     var geo2svg = function geo2svg(geojson, option) {
-        var funcName = 'convert' + geojson.type;
+        var type = geojson.type;
+        var funcName = 'convert' + type;
         if (!converter[funcName]) {
             throw new Error('The type of input object is not supported.');
         }
@@ -357,7 +359,32 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
             option[key] = option[key] || defaultOption[key];
         }
         var fullSvgStr = '<svg xmlns="http://www.w3.org/2000/svg" style="background:' + option.background + '" width="' + option.size[0] + '" height="' + option.size[1] + '" >';
-        var svgContent = converter[funcName](geojson, option, commonOpt);
+        var convert = converter[funcName];
+
+        // handle one point
+        // TODO more complicated situation
+        if (type === 'Point' || type === 'GeometryCollection' && geojson.geometries.length === 1 && geojson.geometries[0].type === 'Point' || type === 'FeatureCollection' && geojson.features.length === 1 && geojson.features[0].geometry.type === 'Point') {
+            convert = function convert(geojson, option, commonOpt) {
+                var xRes = commonOpt.xRes;
+                var yRes = commonOpt.yRes;
+                var res = commonOpt.res;
+                var extent = commonOpt.extent;
+                var origin = commonOpt.origin;
+                var geometrySize = commonOpt.geometrySize;
+
+                var _option$padding2 = _slicedToArray(option.padding, 4);
+
+                var paddingTop = _option$padding2[0];
+                var paddingRight = _option$padding2[1];
+                var paddingBottom = _option$padding2[2];
+                var paddingLeft = _option$padding2[3];
+
+                var center = [paddingLeft + geometrySize[0] / 2, paddingTop + geometrySize[1] / 2];
+                return svg.createCircle(center, option);
+            };
+        }
+
+        var svgContent = convert(geojson, option, commonOpt);
         fullSvgStr += svgContent;
         fullSvgStr += '</svg>';
         var fullSvg = fullSvgStr;
